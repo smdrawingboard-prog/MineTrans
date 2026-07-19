@@ -330,7 +330,7 @@ footer b{color:var(--platinum);font-weight:500}
  <div class="wrap">
   <p class="eyebrow rv">Daily mining intelligence</p>
   <h2 class="rv d1">Mining news, <em>filtered for risk.</em></h2>
-  <p class="lede rv d2">An AI agent scans seven Sub-Saharan mining publications every day and surfaces the stories that matter to mining CFOs and Operations Directors — business interruption, machinery failure, tailings, power, logistics, regulation and safety.</p>
+  <p class="lede rv d2">An AI agent scans seven Sub-Saharan mining publications every day and surfaces the stories that matter to mining leadership — business interruption, machinery failure, tailings, power, logistics, regulation and safety.</p>
 
   <div class="newsbar rv d3">
    <input id="newsq" type="text" placeholder="Filter by topic — e.g. tailings, power, machinery breakdown, platinum…">
@@ -442,7 +442,7 @@ Search the web for CURRENT news articles relevant to: "${q}"
 Prioritise these publications:
 ${SOURCES.map(s=>'- https://www.'+s.u).join('\n')}
 
-Return the 6 most relevant recent articles. Focus on stories that matter to mining CFOs and Operations Directors: business interruption, machinery breakdown, tailings, fires, power, logistics, regulation, safety, insurance and risk.
+Return the 6 most relevant recent articles. Focus on stories that matter to mining leadership: business interruption, machinery breakdown, tailings, fires, power, logistics, regulation, safety, insurance and risk.
 
 Respond with ONLY a JSON array, no preamble, no markdown fences:
 [{"source":"publication name","title":"headline","summary":"2 sentence relevance summary for a mining insurance audience","url":"https://..."}]`;
