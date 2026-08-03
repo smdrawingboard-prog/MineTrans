@@ -1,37 +1,43 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import CertificationDashboard from "./pages/CertificationDashboard";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
-import StudentPortal from "./pages/StudentPortal";
-import FinalExam from "./pages/FinalExam";
-import AnalyticsDashboard from "./pages/AnalyticsDashboard";
-import CourseViewer from "./pages/CourseViewer";
-import QuizInterface from "./pages/QuizInterface";
-import CoursePlayer from "./pages/CoursePlayer";
+
+// Route-level code splitting: each page ships as its own chunk, fetched
+// only when its route is visited, instead of one ~1MB bundle up front
+// (recharts in AnalyticsDashboard is the single biggest contributor).
+const Home = lazy(() => import("./pages/Home"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const StudentPortal = lazy(() => import("./pages/StudentPortal"));
+const FinalExam = lazy(() => import("./pages/FinalExam"));
+const AnalyticsDashboard = lazy(() => import("./pages/AnalyticsDashboard"));
+const CourseViewer = lazy(() => import("./pages/CourseViewer"));
+const QuizInterface = lazy(() => import("./pages/QuizInterface"));
+const CoursePlayer = lazy(() => import("./pages/CoursePlayer"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 function Router() {
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
+    <Suspense fallback={null}>
+      <Switch>
+        <Route path={"/"} component={Home} />
 
-      <Route path={"/certification/admin/login"} component={AdminLogin} />
-      <Route path={"/certification/admin/dashboard"} component={AdminDashboard} />
-      <Route path={"/certification/dashboard"} component={StudentPortal} />
-      <Route path={"/certification/exam/:courseId"} component={FinalExam} />
-      <Route path={"/certification/analytics"} component={AnalyticsDashboard} />
-      <Route path={"/certification/course/:courseId"} component={CourseViewer} />
-      <Route path={"/certification/quiz/:courseId"} component={QuizInterface} />
-      <Route path={"/certification/course"} component={CoursePlayer} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+        <Route path={"/certification/admin/login"} component={AdminLogin} />
+        <Route path={"/certification/admin/dashboard"} component={AdminDashboard} />
+        <Route path={"/certification/dashboard"} component={StudentPortal} />
+        <Route path={"/certification/exam/:courseId"} component={FinalExam} />
+        <Route path={"/certification/analytics"} component={AnalyticsDashboard} />
+        <Route path={"/certification/course/:courseId"} component={CourseViewer} />
+        <Route path={"/certification/quiz/:courseId"} component={QuizInterface} />
+        <Route path={"/certification/course"} component={CoursePlayer} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 
