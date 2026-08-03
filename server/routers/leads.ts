@@ -11,7 +11,7 @@ export const leadsRouter = router({
         contactName: z.string().min(1, "Contact name required"),
         email: z.string().email("Valid email required"),
         phone: z.string().min(1, "Phone number required"),
-        position: z.enum(["CFO", "COO", "Risk", "Insurance", "Other"]),
+        position: z.enum(["Finance", "Operations", "Risk", "Insurance", "Other"]),
         miningSector: z.string().min(1, "Mining sector required"),
         riskArea: z.enum(["BI", "Tailings", "Machinery", "Supply", "Multiple"]),
         message: z.string().optional(),

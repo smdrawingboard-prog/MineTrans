@@ -60,7 +60,7 @@ export default function Home() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-12">
-        {/* CFO-Focused Intro Section */}
+        {/* Intro Section */}
         <section className="mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -68,7 +68,7 @@ export default function Home() {
                 Quantify Your <span className="text-amber-600">Mining Risk</span>
               </h2>
               <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                As a CFO, you need precise visibility into business interruption exposure. MineTrans specializes in quantifying operational risk—from tailings management to machinery failure—so you can structure insurance that protects your balance sheet when the plant stops.
+                You need precise visibility into business interruption exposure. MineTrans specializes in quantifying operational risk—from tailings management to machinery failure—so you can structure insurance that protects your balance sheet when the plant stops.
               </p>
               <p className="text-slate-400 mb-8">
                 We map single points of failure, calculate downtime costs, and design cover that reflects your actual risk profile. No guesswork. Just data-driven protection.
@@ -111,7 +111,7 @@ export default function Home() {
         <section>
           <div className="mb-8">
             <h3 className="text-3xl font-bold mb-2">Latest News</h3>
-            <p className="text-slate-400">Industry insights for mining CFOs and operations directors</p>
+            <p className="text-slate-400">Industry insights for mining operations and risk teams</p>
           </div>
 
           {loading ? (
