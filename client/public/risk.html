@@ -389,6 +389,42 @@ footer b{color:var(--platinum);font-weight:500}
     <h3>Emergency readiness</h3><p>Response plans, drills, workforce capability and stakeholder communication — shortening the interruption.</p>
     <p class="qkpi">Output: continuity playbook</p></div>
   </div>
+
+  <div class="flowbox rv" id="flowbox">
+   <h3>Watch what one failure does</h3>
+   <p class="sub">The sequence below runs on a loop: normal production → a mill failure → downstream stoppage → recovery under a properly structured programme. This is the exposure a critical-asset survey maps before it happens.</p>
+   <span class="shock"></span>
+   <div class="flow" id="flow">
+    <span class="pulse p1"></span><span class="pulse p2"></span><span class="pulse p3"></span>
+    <div class="node">
+     <div class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg></div>
+     <div class="nm">Pit / Shaft</div>
+     <div class="st" data-ok="RUNNING" data-fail="RUNNING" data-rec="RUNNING">RUNNING</div>
+    </div>
+    <div class="node mill">
+     <div class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="7"/><path d="M12 5v3M12 16v3M5 12h3M16 12h3"/></svg></div>
+     <div class="nm">Primary Mill</div>
+     <div class="st" data-ok="RUNNING" data-fail="FAILED" data-rec="REBUILDING · COVERED">RUNNING</div>
+    </div>
+    <div class="node down">
+     <div class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 17l5-5 4 4 7-8"/><path d="M20 8v4h-4"/></svg></div>
+     <div class="nm">Plant / Process</div>
+     <div class="st" data-ok="RUNNING" data-fail="STOPPED" data-rec="CASH FLOW PROTECTED">RUNNING</div>
+    </div>
+    <div class="node down">
+     <div class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 18h13l5-6-5-6H3"/><path d="M3 6v12"/></svg></div>
+     <div class="nm">Rail / Port</div>
+     <div class="st" data-ok="SHIPPING" data-fail="IDLE" data-rec="CASH FLOW PROTECTED">SHIPPING</div>
+    </div>
+   </div>
+   <div class="flowlegend">
+    <span><i class="dot ok"></i>Production flowing</span>
+    <span><i class="dot bad"></i>Single point of failure</span>
+    <span><i class="dot cov"></i>BI cover carries fixed costs &amp; payroll</span>
+   </div>
+   <div class="impact" id="impact"></div>
+  </div>
+
   <div class="btnrow rv" style="margin-top:44px"><a class="btn solid" href="contact.html">Request a critical-asset survey</a></div>
  </div>
 </section>
@@ -420,6 +456,29 @@ document.querySelectorAll('.navlinks a').forEach(a=>a.onclick=()=>links.classLis
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.16});
 document.querySelectorAll('.rv,.qcell,.step,.stat,.lrow,.flowbox,.ph,.donut,.crit').forEach(el=>io.observe(el));
+
+/* failure-flow demo (Roger req #2) — normal -> mill failure -> downstream stoppage -> recovery, on a loop */
+(function(){
+  const flow=document.getElementById('flow'),flowbox=document.getElementById('flowbox'),impact=document.getElementById('impact');
+  if(!flow)return;
+  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ss(k){document.querySelectorAll('#flow .st').forEach(s=>s.textContent=s.dataset[k])}
+  function si(m){
+    if(!impact)return;
+    if(m==='fail'){impact.className='impact show';impact.innerHTML='<span class="ihead">Impact — uninsured</span><span class="ifig">Production halted</span><span class="ifig">Fixed costs continue</span><span class="ifig">Payroll continues</span>'}
+    else if(m==='rec'){impact.className='impact covered show';impact.innerHTML='<span class="ihead">Impact — covered</span><span class="ifig">Rebuild funded</span><span class="ifig">Fixed costs paid</span><span class="ifig">Cash flow protected</span>'}
+    else impact.className='impact';
+  }
+  function cyc(){
+    flow.className='flow run';flowbox.classList.remove('failing');ss('ok');si('ok');
+    setTimeout(()=>{flow.className='flow fail';flowbox.classList.add('failing');ss('fail');si('fail')},5000);
+    setTimeout(()=>{flow.className='flow recover';flowbox.classList.remove('failing');ss('rec');si('rec')},9600);
+    setTimeout(cyc,14600);
+  }
+  if(reducedMotion){flow.classList.add('run');ss('ok');return}
+  const fio=new IntersectionObserver(es=>{if(es[0].isIntersecting){cyc();fio.disconnect()}},{threshold:.35});
+  fio.observe(flow);
+})();
 
 /* ---------- ODOMETER ROLLING NUMBERS (Roger req #3) ---------- */
 function buildOdo(el){
