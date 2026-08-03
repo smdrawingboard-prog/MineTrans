@@ -1,6 +1,7 @@
 import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
 import { sendLeadNotificationEmail } from "../services/emailService";
+import { appendBIReviewLead } from "../services/googleSheetsSync";
 
 export const leadsRouter = router({
   submitBIReview: publicProcedure
@@ -17,19 +18,29 @@ export const leadsRouter = router({
       })
     )
     .mutation(async ({ input }) => {
+      const lead = {
+        companyName: input.companyName,
+        contactName: input.contactName,
+        email: input.email,
+        phone: input.phone,
+        position: input.position,
+        miningSector: input.miningSector,
+        riskArea: input.riskArea,
+        message: input.message || "",
+        submittedAt: new Date().toISOString(),
+      };
+
+      // Google Sheets is a best-effort side-channel: log a lead there
+      // without letting a Sheets outage or missing config fail the
+      // submission — email notification remains the source of truth.
+      const sheetsSync = appendBIReviewLead(lead).catch((error) => {
+        console.error("[Leads] Google Sheets sync failed for BI review lead:", error);
+        return false;
+      });
+
       try {
-        // Send email notification to sales team
-        await sendLeadNotificationEmail({
-          companyName: input.companyName,
-          contactName: input.contactName,
-          email: input.email,
-          phone: input.phone,
-          position: input.position,
-          miningSector: input.miningSector,
-          riskArea: input.riskArea,
-          message: input.message || "",
-          submittedAt: new Date().toISOString(),
-        });
+        await sendLeadNotificationEmail(lead);
+        await sheetsSync;
 
         return {
           success: true,

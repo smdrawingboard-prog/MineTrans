@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import BIReviewDialog from "@/components/BIReviewDialog";
 
 export default function Home() {
   const [news, setNews] = useState<any[]>([]);
@@ -73,9 +74,13 @@ export default function Home() {
                 We map single points of failure, calculate downtime costs, and design cover that reflects your actual risk profile. No guesswork. Just data-driven protection.
               </p>
               <div className="flex gap-4 flex-wrap">
-                <Button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3">
-                  Request a BI Review
-                </Button>
+                <BIReviewDialog
+                  trigger={
+                    <Button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3">
+                      Request a BI Review
+                    </Button>
+                  }
+                />
                 <Button variant="outline" className="border-amber-600 text-amber-600 hover:bg-amber-600/10 px-8 py-3">
                   Explore Mining Risk
                 </Button>

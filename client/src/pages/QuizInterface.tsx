@@ -4,6 +4,7 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import CriticalFailureAnimation from "@/components/CriticalFailureAnimation";
 
 interface Student {
   id: number;
@@ -34,6 +35,7 @@ export default function QuizInterface() {
   const [transitionDirection, setTransitionDirection] = useState<"forward" | "backward">("forward");
   const [answerFeedback, setAnswerFeedback] = useState<AnswerFeedback | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [failureAnimationDone, setFailureAnimationDone] = useState(false);
 
   const quizQuery = trpc.certification.getFinalExam.useQuery(
     { courseId: courseId || 0 },
@@ -135,6 +137,12 @@ export default function QuizInterface() {
     );
   }
 
+  if (submitted && result && !result.passed && !failureAnimationDone) {
+    return (
+      <CriticalFailureAnimation onComplete={() => setFailureAnimationDone(true)} />
+    );
+  }
+
   if (submitted && result) {
     return (
       <div className="min-h-screen bg-slate-900 text-white p-6">
@@ -185,6 +193,7 @@ export default function QuizInterface() {
                     setAnswers({});
                     setCurrentQuestion(0);
                     setAnswerFeedback(null);
+                    setFailureAnimationDone(false);
                   }}
                   className="bg-amber-600 hover:bg-amber-700"
                 >

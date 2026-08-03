@@ -47,6 +47,22 @@ auth, integrations) — see `server/_core/env.ts` for the full list
 committed to the repo; set them via your hosting provider or a local
 `.env` file (already gitignored).
 
+### Google Sheets
+
+The "Request a BI Review" form (home page) logs each submission to a
+Google Sheet in addition to emailing the sales team. This is optional and
+best-effort — the form still works and still emails the lead if these
+aren't set, it just skips the sheet:
+
+- `GOOGLE_SHEETS_CREDENTIALS` — a Google service-account JSON key (as a
+  single-line string), shared with edit access on the target spreadsheet
+- `GOOGLE_SHEETS_BI_REVIEW_ID` — the spreadsheet ID, with a `Leads` tab
+
+The separate `server/services/googleSheetsSync.ts` admin sync (student
+progress → Sheets) and `server/services/blogService.ts` content sourcing
+(blog posts from a public Sheet via `GOOGLE_SHEETS_BLOG_ID`) are unrelated,
+pre-existing pieces of scaffolding — neither is wired into any UI yet.
+
 ## Brand
 
 - Palette: Onyx `#0A0A0B` · Graphite `#1E1D20` · Platinum `#C9CACE` ·

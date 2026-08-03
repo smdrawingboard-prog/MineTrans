@@ -4,6 +4,7 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import CriticalFailureAnimation from "@/components/CriticalFailureAnimation";
 
 interface Question {
   id: number;
@@ -46,6 +47,7 @@ export default function FinalExam() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [student, setStudent] = useState<any>(null);
+  const [failureAnimationDone, setFailureAnimationDone] = useState(false);
 
   const getFinalExamQuery = trpc.certification.getFinalExam.useQuery(
     { courseId: courseId || 0 },
@@ -226,6 +228,12 @@ export default function FinalExam() {
           </Button>
         </Card>
       </div>
+    );
+  }
+
+  if (exam.submitted && exam.results && !exam.results.passed && !failureAnimationDone) {
+    return (
+      <CriticalFailureAnimation onComplete={() => setFailureAnimationDone(true)} />
     );
   }
 

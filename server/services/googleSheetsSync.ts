@@ -23,6 +23,91 @@ interface GoogleSheetsConfig {
 }
 
 let sheetsClient: any = null;
+let leadsSheetsClient: any = null;
+
+export interface BIReviewLead {
+  companyName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  position: string;
+  miningSector: string;
+  riskArea: string;
+  message: string;
+  submittedAt: string;
+}
+
+/**
+ * Lazily builds a Sheets client from GOOGLE_SHEETS_CREDENTIALS (a service
+ * account JSON string), independent of the admin-triggered sync client
+ * above, so public lead submissions can log to Sheets without an admin
+ * having called initializeGoogleSheets first.
+ */
+function getLeadsSheetsClient() {
+  if (leadsSheetsClient) return leadsSheetsClient;
+
+  const rawCredentials = process.env.GOOGLE_SHEETS_CREDENTIALS;
+  if (!rawCredentials) return null;
+
+  try {
+    const credentials = JSON.parse(rawCredentials);
+    const auth = new google.auth.GoogleAuth({
+      credentials,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+    leadsSheetsClient = google.sheets({ version: "v4", auth });
+    return leadsSheetsClient;
+  } catch (error) {
+    console.error("[Google Sheets] Failed to initialize leads client:", error);
+    return null;
+  }
+}
+
+/**
+ * Append a BI Review lead submission as a new row.
+ * Requires GOOGLE_SHEETS_CREDENTIALS and GOOGLE_SHEETS_BI_REVIEW_ID env vars;
+ * returns false (without throwing) if either is missing or the call fails,
+ * so this is safe to call as a best-effort side-channel to email delivery.
+ */
+export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
+  const spreadsheetId = process.env.GOOGLE_SHEETS_BI_REVIEW_ID;
+  const client = getLeadsSheetsClient();
+
+  if (!client || !spreadsheetId) {
+    console.warn(
+      "[Google Sheets] BI Review sync not configured (set GOOGLE_SHEETS_CREDENTIALS and GOOGLE_SHEETS_BI_REVIEW_ID to enable)"
+    );
+    return false;
+  }
+
+  try {
+    await client.spreadsheets.values.append({
+      spreadsheetId,
+      range: "Leads!A:I",
+      valueInputOption: "RAW",
+      insertDataOption: "INSERT_ROWS",
+      requestBody: {
+        values: [
+          [
+            lead.submittedAt,
+            lead.companyName,
+            lead.contactName,
+            lead.email,
+            lead.phone,
+            lead.position,
+            lead.miningSector,
+            lead.riskArea,
+            lead.message,
+          ],
+        ],
+      },
+    });
+    return true;
+  } catch (error) {
+    console.error("[Google Sheets] Failed to append BI review lead:", error);
+    return false;
+  }
+}
 
 /**
  * Initialize Google Sheets client with credentials
