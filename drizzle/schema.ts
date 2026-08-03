@@ -1,4 +1,11 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import {
+  int,
+  mysqlEnum,
+  mysqlTable,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -53,7 +60,9 @@ export const newsletterSubscribers = mysqlTable("newsletter_subscribers", {
   id: int("id").autoincrement().primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: text("name"),
-  subscribed: mysqlEnum("subscribed", ["true", "false"]).default("true").notNull(),
+  subscribed: mysqlEnum("subscribed", ["true", "false"])
+    .default("true")
+    .notNull(),
   categories: text("categories"), // JSON array of interested categories
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -61,7 +70,8 @@ export const newsletterSubscribers = mysqlTable("newsletter_subscribers", {
 });
 
 export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
-export type InsertNewsletterSubscriber = typeof newsletterSubscribers.$inferInsert;
+export type InsertNewsletterSubscriber =
+  typeof newsletterSubscribers.$inferInsert;
 
 /**
  * Email log for tracking sent newsletters
@@ -123,11 +133,14 @@ export const certificationStudents = mysqlTable("certification_students", {
   passwordHash: text("passwordHash").notNull(),
   enrolledAt: timestamp("enrolledAt").defaultNow().notNull(),
   completedAt: timestamp("completedAt"),
-  status: mysqlEnum("status", ["active", "completed", "suspended"]).default("active").notNull(),
+  status: mysqlEnum("status", ["active", "completed", "suspended"])
+    .default("active")
+    .notNull(),
 });
 
 export type CertificationStudent = typeof certificationStudents.$inferSelect;
-export type InsertCertificationStudent = typeof certificationStudents.$inferInsert;
+export type InsertCertificationStudent =
+  typeof certificationStudents.$inferInsert;
 
 /**
  * Certification courses table
@@ -143,7 +156,8 @@ export const certificationCourses = mysqlTable("certification_courses", {
 });
 
 export type CertificationCourse = typeof certificationCourses.$inferSelect;
-export type InsertCertificationCourse = typeof certificationCourses.$inferInsert;
+export type InsertCertificationCourse =
+  typeof certificationCourses.$inferInsert;
 
 /**
  * Course sections table
@@ -189,7 +203,12 @@ export const quizQuestions = mysqlTable("quiz_questions", {
   id: int("id").autoincrement().primaryKey(),
   quizId: int("quizId").notNull(),
   questionText: text("questionText").notNull(),
-  questionType: mysqlEnum("questionType", ["multiple_choice", "true_false", "short_answer", "calculation"]).notNull(),
+  questionType: mysqlEnum("questionType", [
+    "multiple_choice",
+    "true_false",
+    "short_answer",
+    "calculation",
+  ]).notNull(),
   options: text("options"), // JSON array for multiple choice/true false
   correctAnswer: text("correctAnswer").notNull(),
   explanation: text("explanation"),
@@ -210,7 +229,9 @@ export const studentProgress = mysqlTable("student_progress", {
   studentId: int("studentId").notNull(),
   courseId: int("courseId").notNull(),
   sectionId: int("sectionId"),
-  completed: mysqlEnum("completed", ["true", "false"]).default("false").notNull(),
+  completed: mysqlEnum("completed", ["true", "false"])
+    .default("false")
+    .notNull(),
   score: int("score"),
   attemptCount: int("attemptCount").default(0).notNull(),
   lastAttemptAt: timestamp("lastAttemptAt"),
@@ -248,7 +269,9 @@ export const certificates = mysqlTable("certificates", {
   id: int("id").autoincrement().primaryKey(),
   studentId: int("studentId").notNull(),
   courseId: int("courseId").notNull(),
-  certificateNumber: varchar("certificateNumber", { length: 64 }).unique().notNull(),
+  certificateNumber: varchar("certificateNumber", { length: 64 })
+    .unique()
+    .notNull(),
   issuedDate: timestamp("issuedDate").defaultNow().notNull(),
   certificateUrl: varchar("certificateUrl", { length: 2048 }),
   finalScore: int("finalScore").notNull(),

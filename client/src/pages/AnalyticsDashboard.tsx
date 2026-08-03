@@ -2,7 +2,21 @@ import { useEffect, useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 interface AnalyticsData {
   totalStudents: number;
@@ -40,29 +54,35 @@ export default function AnalyticsDashboard() {
 
       // Calculate basic stats
       const totalStudents = students.length;
-      const activeStudents = students.filter((s) => s.status === "active").length;
-      const completedStudents = students.filter((s) => s.status === "completed").length;
-      const averageProgress = Math.round((completedStudents / totalStudents) * 100) || 0;
+      const activeStudents = students.filter(s => s.status === "active").length;
+      const completedStudents = students.filter(
+        s => s.status === "completed"
+      ).length;
+      const averageProgress =
+        Math.round((completedStudents / totalStudents) * 100) || 0;
 
       // Generate enrollment trend (mock data for demo)
       const enrollmentTrend = Array.from({ length: 30 }, (_, i) => {
         const date = new Date();
         date.setDate(date.getDate() - (29 - i));
         return {
-          date: date.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+          date: date.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          }),
           count: Math.floor(Math.random() * 10) + 2,
         };
       });
 
       // Generate course completion data
-      const courseCompletion = courses.map((course) => ({
+      const courseCompletion = courses.map(course => ({
         name: course.title.substring(0, 20),
         completed: Math.floor(Math.random() * completedStudents) + 1,
         total: totalStudents,
       }));
 
       // Generate quiz performance data
-      const quizPerformance = courses.map((course) => ({
+      const quizPerformance = courses.map(course => ({
         name: course.title.substring(0, 20),
         average: Math.floor(Math.random() * 30) + 60,
       }));
@@ -96,13 +116,17 @@ export default function AnalyticsDashboard() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-amber-600 mb-2">Analytics Dashboard</h1>
-          <p className="text-slate-400">Track certification program metrics and student engagement</p>
+          <h1 className="text-4xl font-bold text-amber-600 mb-2">
+            Analytics Dashboard
+          </h1>
+          <p className="text-slate-400">
+            Track certification program metrics and student engagement
+          </p>
         </div>
 
         {/* Time Range Filter */}
         <div className="mb-6 flex gap-2">
-          {(["week", "month", "all"] as const).map((range) => (
+          {(["week", "month", "all"] as const).map(range => (
             <Button
               key={range}
               onClick={() => setTimeRange(range)}
@@ -121,22 +145,30 @@ export default function AnalyticsDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="bg-slate-800 border-amber-600/30 p-6">
             <p className="text-slate-400 text-sm mb-2">Total Students</p>
-            <p className="text-4xl font-bold text-amber-600">{analytics.totalStudents}</p>
+            <p className="text-4xl font-bold text-amber-600">
+              {analytics.totalStudents}
+            </p>
           </Card>
 
           <Card className="bg-slate-800 border-amber-600/30 p-6">
             <p className="text-slate-400 text-sm mb-2">Active Students</p>
-            <p className="text-4xl font-bold text-blue-500">{analytics.activeStudents}</p>
+            <p className="text-4xl font-bold text-blue-500">
+              {analytics.activeStudents}
+            </p>
           </Card>
 
           <Card className="bg-slate-800 border-amber-600/30 p-6">
             <p className="text-slate-400 text-sm mb-2">Completed</p>
-            <p className="text-4xl font-bold text-green-500">{analytics.completedStudents}</p>
+            <p className="text-4xl font-bold text-green-500">
+              {analytics.completedStudents}
+            </p>
           </Card>
 
           <Card className="bg-slate-800 border-amber-600/30 p-6">
             <p className="text-slate-400 text-sm mb-2">Completion Rate</p>
-            <p className="text-4xl font-bold text-purple-500">{analytics.averageProgress}%</p>
+            <p className="text-4xl font-bold text-purple-500">
+              {analytics.averageProgress}%
+            </p>
           </Card>
         </div>
 
@@ -144,7 +176,9 @@ export default function AnalyticsDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Enrollment Trend */}
           <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <h2 className="text-xl font-bold text-amber-600 mb-4">Enrollment Trend</h2>
+            <h2 className="text-xl font-bold text-amber-600 mb-4">
+              Enrollment Trend
+            </h2>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={analytics.enrollmentTrend}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
@@ -169,7 +203,9 @@ export default function AnalyticsDashboard() {
 
           {/* Course Completion */}
           <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <h2 className="text-xl font-bold text-amber-600 mb-4">Course Completion</h2>
+            <h2 className="text-xl font-bold text-amber-600 mb-4">
+              Course Completion
+            </h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={analytics.courseCompletion}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
@@ -190,7 +226,9 @@ export default function AnalyticsDashboard() {
 
         {/* Quiz Performance */}
         <Card className="bg-slate-800 border-amber-600/30 p-6 mb-8">
-          <h2 className="text-xl font-bold text-amber-600 mb-4">Average Quiz Performance by Course</h2>
+          <h2 className="text-xl font-bold text-amber-600 mb-4">
+            Average Quiz Performance by Course
+          </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={analytics.quizPerformance}>
               <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
@@ -209,17 +247,30 @@ export default function AnalyticsDashboard() {
 
         {/* Student Status Distribution */}
         <Card className="bg-slate-800 border-amber-600/30 p-6">
-          <h2 className="text-xl font-bold text-amber-600 mb-4">Student Status Distribution</h2>
+          <h2 className="text-xl font-bold text-amber-600 mb-4">
+            Student Status Distribution
+          </h2>
           <div className="flex justify-center">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
                   data={[
-                    { name: "Active", value: analytics.activeStudents, fill: "#3b82f6" },
-                    { name: "Completed", value: analytics.completedStudents, fill: "#10b981" },
+                    {
+                      name: "Active",
+                      value: analytics.activeStudents,
+                      fill: "#3b82f6",
+                    },
+                    {
+                      name: "Completed",
+                      value: analytics.completedStudents,
+                      fill: "#10b981",
+                    },
                     {
                       name: "Suspended",
-                      value: analytics.totalStudents - analytics.activeStudents - analytics.completedStudents,
+                      value:
+                        analytics.totalStudents -
+                        analytics.activeStudents -
+                        analytics.completedStudents,
                       fill: "#ef4444",
                     },
                   ]}

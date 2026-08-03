@@ -1,5 +1,10 @@
 import { getDb } from "./db.ts";
-import { courses, courseSections, quizzes, quizQuestions } from "../drizzle/schema.ts";
+import {
+  courses,
+  courseSections,
+  quizzes,
+  quizQuestions,
+} from "../drizzle/schema.ts";
 
 const db = await getDb();
 
@@ -11,7 +16,8 @@ if (!db) {
 // Create a sample course
 const courseData = {
   title: "Mining Insurance Underwriting Certification",
-  description: "Master the 12-step Business Interruption methodology and mining insurance underwriting",
+  description:
+    "Master the 12-step Business Interruption methodology and mining insurance underwriting",
   totalSections: 3,
 };
 
@@ -135,7 +141,8 @@ const questionsData = [
   },
   {
     quizId,
-    questionText: "In a mining operation with $10M revenue and $6M variable costs, what is the gross profit?",
+    questionText:
+      "In a mining operation with $10M revenue and $6M variable costs, what is the gross profit?",
     questionType: "calculation",
     options: JSON.stringify(["$4M", "$6M", "$10M", "$16M"]),
     correctAnswer: "$4M",

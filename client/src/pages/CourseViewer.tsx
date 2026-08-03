@@ -78,7 +78,9 @@ export default function CourseViewer() {
           <div className="lg:col-span-1">
             <Card className="bg-slate-800 border-slate-700 sticky top-6">
               <div className="p-4">
-                <h3 className="font-bold text-amber-600 mb-4">Course Sections</h3>
+                <h3 className="font-bold text-amber-600 mb-4">
+                  Course Sections
+                </h3>
                 <div className="space-y-2">
                   {sections.map((s, idx) => (
                     <button
@@ -90,7 +92,9 @@ export default function CourseViewer() {
                           : "bg-slate-700 text-slate-300 hover:bg-slate-600"
                       }`}
                     >
-                      <div className="text-sm font-medium">Section {s.sectionNumber}</div>
+                      <div className="text-sm font-medium">
+                        Section {s.sectionNumber}
+                      </div>
                       <div className="text-xs opacity-75">{s.title}</div>
                     </button>
                   ))}
@@ -114,7 +118,9 @@ export default function CourseViewer() {
                 {/* Navigation */}
                 <div className="flex justify-between mt-8 pt-6 border-t border-slate-700">
                   <Button
-                    onClick={() => setCurrentSection(Math.max(0, currentSection - 1))}
+                    onClick={() =>
+                      setCurrentSection(Math.max(0, currentSection - 1))
+                    }
                     disabled={currentSection === 0}
                     variant="outline"
                     className="border-amber-600 text-amber-600"
@@ -133,7 +139,9 @@ export default function CourseViewer() {
                     }}
                     className="bg-amber-600 hover:bg-amber-700"
                   >
-                    {currentSection === sections.length - 1 ? "Take Quiz →" : "Next →"}
+                    {currentSection === sections.length - 1
+                      ? "Take Quiz →"
+                      : "Next →"}
                   </Button>
                 </div>
               </Card>

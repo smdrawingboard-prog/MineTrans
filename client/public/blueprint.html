@@ -1,71 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Employee Access | MineTrans Insurance Brokers</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --onyx:#0A0A0B; --charcoal:#1E1D20; --platinum:#C9CACE;
-  --copper:#AD6A3D; --copper-bright:#C9854F; --bone:#F7F5F1;
-  --line:rgba(201,202,206,.14);
-  --sf:'Jost',sans-serif; --bf:'Inter',sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--onyx);color:var(--bone);font-family:var(--bf);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.gate{width:min(380px,100%);padding:40px 36px;border:1px solid var(--line);background:var(--charcoal)}
-.gate .brand{font-family:var(--sf);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-bright);margin-bottom:6px}
-.gate h1{font-family:var(--sf);font-size:19px;font-weight:600;color:var(--bone);margin:0 0 22px}
-.gate label{display:block;font-family:var(--sf);font-size:12px;letter-spacing:.05em;color:var(--platinum);margin-bottom:6px}
-.gate input{width:100%;padding:12px 14px;margin-bottom:16px;background:var(--onyx);border:1px solid rgba(201,202,206,.2);color:var(--bone);font-size:14px;font-family:var(--bf)}
-.gate input:focus{outline:none;border-color:var(--copper)}
-.gate .err{display:none;color:#e04b4b;font-size:12.5px;margin-bottom:14px}
-.gate button{width:100%;padding:13px;background:var(--copper);color:var(--onyx);border:0;font-family:var(--sf);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-weight:600}
-.gate button:hover{background:var(--copper-bright)}
-.gate .note{margin:16px 0 0;font-size:11px;color:#6b6a6e;line-height:1.5}
-.gate .back{display:block;margin-top:18px;font-family:var(--sf);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--platinum);text-decoration:none}
-.gate .back:hover{color:var(--bone)}
-</style>
-</head>
-<body>
-<div class="gate">
-  <div class="brand">MineTrans</div>
-  <h1>Employee Access &mdash; Blueprint</h1>
-  <form id="mt-gate-form">
-    <label for="mt-gate-user">Email</label>
-    <input id="mt-gate-user" type="email" autocomplete="username" required>
-    <label for="mt-gate-pass">Password</label>
-    <input id="mt-gate-pass" type="password" autocomplete="current-password" required>
-    <div class="err" id="mt-gate-err">Incorrect email or password.</div>
-    <button type="submit">Sign In</button>
-  </form>
-  <p class="note">Internal MineTrans access only. Testing credentials &mdash; not for production use.</p>
-  <a class="back" href="index.html">&larr; Back to MineTrans</a>
-</div>
-<script>
-(function(){
-  var TEST_USER='roger@daginsure.co.za', TEST_PASS='admin';
-  var DEST='blueprint-content.html';
-  if(sessionStorage.getItem('mt_blueprint_auth')==='1'){
-    window.location.replace(DEST);
-    return;
-  }
-  document.getElementById('mt-gate-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    var u=document.getElementById('mt-gate-user').value.trim().toLowerCase();
-    var p=document.getElementById('mt-gate-pass').value;
-    if(u===TEST_USER && p===TEST_PASS){
-      sessionStorage.setItem('mt_blueprint_auth','1');
-      window.location.replace(DEST);
-    } else {
-      document.getElementById('mt-gate-err').style.display='block';
-    }
-  });
-})();
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Employee Access | MineTrans Insurance Brokers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --onyx: #0a0a0b;
+        --charcoal: #1e1d20;
+        --platinum: #c9cace;
+        --copper: #ad6a3d;
+        --copper-bright: #c9854f;
+        --bone: #f7f5f1;
+        --line: rgba(201, 202, 206, 0.14);
+        --sf: "Jost", sans-serif;
+        --bf: "Inter", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--onyx);
+        color: var(--bone);
+        font-family: var(--bf);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .gate {
+        width: min(380px, 100%);
+        padding: 40px 36px;
+        border: 1px solid var(--line);
+        background: var(--charcoal);
+      }
+      .gate .brand {
+        font-family: var(--sf);
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--copper-bright);
+        margin-bottom: 6px;
+      }
+      .gate h1 {
+        font-family: var(--sf);
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--bone);
+        margin: 0 0 22px;
+      }
+      .gate label {
+        display: block;
+        font-family: var(--sf);
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        color: var(--platinum);
+        margin-bottom: 6px;
+      }
+      .gate input {
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        background: var(--onyx);
+        border: 1px solid rgba(201, 202, 206, 0.2);
+        color: var(--bone);
+        font-size: 14px;
+        font-family: var(--bf);
+      }
+      .gate input:focus {
+        outline: none;
+        border-color: var(--copper);
+      }
+      .gate .err {
+        display: none;
+        color: #e04b4b;
+        font-size: 12.5px;
+        margin-bottom: 14px;
+      }
+      .gate button {
+        width: 100%;
+        padding: 13px;
+        background: var(--copper);
+        color: var(--onyx);
+        border: 0;
+        font-family: var(--sf);
+        font-size: 12.5px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .gate button:hover {
+        background: var(--copper-bright);
+      }
+      .gate .note {
+        margin: 16px 0 0;
+        font-size: 11px;
+        color: #6b6a6e;
+        line-height: 1.5;
+      }
+      .gate .back {
+        display: block;
+        margin-top: 18px;
+        font-family: var(--sf);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--platinum);
+        text-decoration: none;
+      }
+      .gate .back:hover {
+        color: var(--bone);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gate">
+      <div class="brand">MineTrans</div>
+      <h1>Employee Access &mdash; Blueprint</h1>
+      <form id="mt-gate-form">
+        <label for="mt-gate-user">Email</label>
+        <input
+          id="mt-gate-user"
+          type="email"
+          autocomplete="username"
+          required
+        />
+        <label for="mt-gate-pass">Password</label>
+        <input
+          id="mt-gate-pass"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+        <div class="err" id="mt-gate-err">Incorrect email or password.</div>
+        <button type="submit">Sign In</button>
+      </form>
+      <p class="note">
+        Internal MineTrans access only. Testing credentials &mdash; not for
+        production use.
+      </p>
+      <a class="back" href="index.html">&larr; Back to MineTrans</a>
+    </div>
+    <script>
+      (function () {
+        var TEST_USER = "roger@daginsure.co.za",
+          TEST_PASS = "admin";
+        var DEST = "blueprint-content.html";
+        if (sessionStorage.getItem("mt_blueprint_auth") === "1") {
+          window.location.replace(DEST);
+          return;
+        }
+        document
+          .getElementById("mt-gate-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            var u = document
+              .getElementById("mt-gate-user")
+              .value.trim()
+              .toLowerCase();
+            var p = document.getElementById("mt-gate-pass").value;
+            if (u === TEST_USER && p === TEST_PASS) {
+              sessionStorage.setItem("mt_blueprint_auth", "1");
+              window.location.replace(DEST);
+            } else {
+              document.getElementById("mt-gate-err").style.display = "block";
+            }
+          });
+      })();
+    </script>
+  </body>
 </html>

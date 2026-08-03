@@ -64,9 +64,7 @@
       "compositePrimaryKeys": {
         "email_log_id": {
           "name": "email_log_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -138,9 +136,7 @@
       "compositePrimaryKeys": {
         "mining_news_id": {
           "name": "mining_news_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -198,9 +194,7 @@
       "compositePrimaryKeys": {
         "news_engagement_id": {
           "name": "news_engagement_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -275,23 +269,17 @@
       "compositePrimaryKeys": {
         "newsletter_subscribers_id": {
           "name": "newsletter_subscribers_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "newsletter_subscribers_email_unique": {
           "name": "newsletter_subscribers_email_unique",
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         },
         "newsletter_subscribers_unsubscribeToken_unique": {
           "name": "newsletter_subscribers_unsubscribeToken_unique",
-          "columns": [
-            "unsubscribeToken"
-          ]
+          "columns": ["unsubscribeToken"]
         }
       },
       "checkConstraint": {}
@@ -348,9 +336,7 @@
       "compositePrimaryKeys": {
         "page_views_id": {
           "name": "page_views_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -433,17 +419,13 @@
       "compositePrimaryKeys": {
         "users_id": {
           "name": "users_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "users_openId_unique": {
           "name": "users_openId_unique",
-          "columns": [
-            "openId"
-          ]
+          "columns": ["openId"]
         }
       },
       "checkConstraint": {}

@@ -1,7 +1,12 @@
 import { eq, desc, lt, or, like, gte, lte, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, InsertMiningNews, users, miningNews } from "../drizzle/schema";
-import { ENV } from './_core/env';
+import {
+  InsertUser,
+  InsertMiningNews,
+  users,
+  miningNews,
+} from "../drizzle/schema";
+import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -56,8 +61,8 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       values.role = user.role;
       updateSet.role = user.role;
     } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
+      values.role = "admin";
+      updateSet.role = "admin";
     }
 
     if (!values.lastSignedIn) {
@@ -84,7 +89,11 @@ export async function getUserByOpenId(openId: string) {
     return undefined;
   }
 
-  const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+  const result = await db
+    .select()
+    .from(users)
+    .where(eq(users.openId, openId))
+    .limit(1);
 
   return result.length > 0 ? result[0] : undefined;
 }
@@ -121,7 +130,9 @@ export async function getLatestMiningNews(limit: number = 20) {
 export async function insertMiningNews(article: InsertMiningNews) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot insert mining news: database not available");
+    console.warn(
+      "[Database] Cannot insert mining news: database not available"
+    );
     return null;
   }
 
@@ -140,7 +151,9 @@ export async function insertMiningNews(article: InsertMiningNews) {
 export async function insertMiningNewsBatch(articles: InsertMiningNews[]) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot insert mining news: database not available");
+    console.warn(
+      "[Database] Cannot insert mining news: database not available"
+    );
     return null;
   }
 
@@ -159,7 +172,9 @@ export async function insertMiningNewsBatch(articles: InsertMiningNews[]) {
 export async function deleteOldMiningNews(daysOld: number = 90) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot delete old mining news: database not available");
+    console.warn(
+      "[Database] Cannot delete old mining news: database not available"
+    );
     return null;
   }
 
@@ -177,15 +192,30 @@ export async function deleteOldMiningNews(daysOld: number = 90) {
 
 // ============ NEWSLETTER SUBSCRIBERS ============
 
-import { newsletterSubscribers, emailLog, pageViews, newsEngagement, InsertNewsletterSubscriber, InsertEmailLog, InsertPageView, InsertNewsEngagement } from "../drizzle/schema";
+import {
+  newsletterSubscribers,
+  emailLog,
+  pageViews,
+  newsEngagement,
+  InsertNewsletterSubscriber,
+  InsertEmailLog,
+  InsertPageView,
+  InsertNewsEngagement,
+} from "../drizzle/schema";
 
 /**
  * Subscribe a user to the newsletter
  */
-export async function subscribeToNewsletter(email: string, name?: string, categories?: string[]) {
+export async function subscribeToNewsletter(
+  email: string,
+  name?: string,
+  categories?: string[]
+) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot subscribe to newsletter: database not available");
+    console.warn(
+      "[Database] Cannot subscribe to newsletter: database not available"
+    );
     return null;
   }
 
@@ -251,7 +281,13 @@ export async function unsubscribeFromNewsletter(token: string) {
 /**
  * Log a sent email
  */
-export async function logEmail(subscriberId: number, subject: string, articleCount: number, status: string = "sent", errorMessage?: string) {
+export async function logEmail(
+  subscriberId: number,
+  subject: string,
+  articleCount: number,
+  status: string = "sent",
+  errorMessage?: string
+) {
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot log email: database not available");
@@ -281,7 +317,9 @@ export async function logEmail(subscriberId: number, subject: string, articleCou
 export async function searchMiningNews(query: string, limit: number = 20) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot search mining news: database not available");
+    console.warn(
+      "[Database] Cannot search mining news: database not available"
+    );
     return [];
   }
 
@@ -308,10 +346,15 @@ export async function searchMiningNews(query: string, limit: number = 20) {
 /**
  * Filter mining news by category
  */
-export async function getMiningNewsByCategory(category: string, limit: number = 20) {
+export async function getMiningNewsByCategory(
+  category: string,
+  limit: number = 20
+) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get news by category: database not available");
+    console.warn(
+      "[Database] Cannot get news by category: database not available"
+    );
     return [];
   }
 
@@ -332,10 +375,16 @@ export async function getMiningNewsByCategory(category: string, limit: number = 
 /**
  * Get mining news by date range
  */
-export async function getMiningNewsByDateRange(startDate: Date, endDate: Date, limit: number = 50) {
+export async function getMiningNewsByDateRange(
+  startDate: Date,
+  endDate: Date,
+  limit: number = 50
+) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get news by date range: database not available");
+    console.warn(
+      "[Database] Cannot get news by date range: database not available"
+    );
     return [];
   }
 
@@ -384,7 +433,12 @@ export async function getAllCategories() {
 /**
  * Log a page view
  */
-export async function logPageView(page: string, referrer?: string, userAgent?: string, sessionId?: string) {
+export async function logPageView(
+  page: string,
+  referrer?: string,
+  userAgent?: string,
+  sessionId?: string
+) {
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot log page view: database not available");
@@ -408,7 +462,12 @@ export async function logPageView(page: string, referrer?: string, userAgent?: s
 /**
  * Log news engagement (view, click, share)
  */
-export async function logNewsEngagement(articleId: number, action: string, category?: string, sessionId?: string) {
+export async function logNewsEngagement(
+  articleId: number,
+  action: string,
+  category?: string,
+  sessionId?: string
+) {
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot log engagement: database not available");
@@ -444,8 +503,10 @@ export async function getPageViewStats(page: string, days: number = 30) {
     const views = await db
       .select()
       .from(pageViews)
-      .where(and(eq(pageViews.page, page), gte(pageViews.timestamp, startDate)));
-    
+      .where(
+        and(eq(pageViews.page, page), gte(pageViews.timestamp, startDate))
+      );
+
     const uniqueSessions = new Set(views.map(v => v.sessionId)).size;
     return { totalViews: views.length, uniqueSessions };
   } catch (error) {
@@ -460,7 +521,9 @@ export async function getPageViewStats(page: string, days: number = 30) {
 export async function getNewsEngagementStats(days: number = 30) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get engagement stats: database not available");
+    console.warn(
+      "[Database] Cannot get engagement stats: database not available"
+    );
     return [];
   }
 
@@ -474,7 +537,7 @@ export async function getNewsEngagementStats(days: number = 30) {
       })
       .from(newsEngagement)
       .where(gte(newsEngagement.timestamp, startDate));
-    
+
     return result;
   } catch (error) {
     console.error("[Database] Failed to get engagement stats:", error);
@@ -488,7 +551,9 @@ export async function getNewsEngagementStats(days: number = 30) {
 export async function getTopCategories(days: number = 30, limit: number = 10) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get top categories: database not available");
+    console.warn(
+      "[Database] Cannot get top categories: database not available"
+    );
     return [];
   }
 
@@ -499,12 +564,10 @@ export async function getTopCategories(days: number = 30, limit: number = 10) {
       .from(newsEngagement)
       .where(gte(newsEngagement.timestamp, startDate))
       .limit(limit);
-    
+
     return result;
   } catch (error) {
     console.error("[Database] Failed to get top categories:", error);
     return [];
   }
 }
-
-

@@ -16,12 +16,16 @@ export async function refreshMiningNewsHandler(req: Request, res: Response) {
 
     // Fetch new articles from sources
     const articles = await fetchAllMiningNews();
-    console.log(`[Mining News Refresh] Fetched ${articles.length} new articles`);
+    console.log(
+      `[Mining News Refresh] Fetched ${articles.length} new articles`
+    );
 
     // Insert into database
     if (articles.length > 0) {
       await insertMiningNewsBatch(articles);
-      console.log(`[Mining News Refresh] Inserted ${articles.length} articles into database`);
+      console.log(
+        `[Mining News Refresh] Inserted ${articles.length} articles into database`
+      );
     }
 
     // Return success response
@@ -32,7 +36,8 @@ export async function refreshMiningNewsHandler(req: Request, res: Response) {
     });
   } catch (error) {
     console.error("[Mining News Refresh] Error:", error);
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     const errorStack = error instanceof Error ? error.stack : "";
 
     res.status(500).json({

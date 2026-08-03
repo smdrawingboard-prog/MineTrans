@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
+import { Analytics } from "@vercel/analytics/react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -26,12 +27,24 @@ function Router() {
         <Route path={"/"} component={Home} />
 
         <Route path={"/certification/admin/login"} component={AdminLogin} />
-        <Route path={"/certification/admin/dashboard"} component={AdminDashboard} />
+        <Route
+          path={"/certification/admin/dashboard"}
+          component={AdminDashboard}
+        />
         <Route path={"/certification/dashboard"} component={StudentPortal} />
         <Route path={"/certification/exam/:courseId"} component={FinalExam} />
-        <Route path={"/certification/analytics"} component={AnalyticsDashboard} />
-        <Route path={"/certification/course/:courseId"} component={CourseViewer} />
-        <Route path={"/certification/quiz/:courseId"} component={QuizInterface} />
+        <Route
+          path={"/certification/analytics"}
+          component={AnalyticsDashboard}
+        />
+        <Route
+          path={"/certification/course/:courseId"}
+          component={CourseViewer}
+        />
+        <Route
+          path={"/certification/quiz/:courseId"}
+          component={QuizInterface}
+        />
         <Route path={"/certification/course"} component={CoursePlayer} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
@@ -56,6 +69,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <Analytics />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

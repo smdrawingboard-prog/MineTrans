@@ -47,7 +47,9 @@ export default function CriticalFailureAnimation({
 
       <div
         className={`relative text-center px-6 transition-all duration-500 ${
-          stage === "resolve" ? "opacity-0 scale-95" : "opacity-100 scale-100 cf-shake"
+          stage === "resolve"
+            ? "opacity-0 scale-95"
+            : "opacity-100 scale-100 cf-shake"
         }`}
       >
         <div className="text-red-500 text-7xl mb-4 cf-pulse">⚠</div>

@@ -71,17 +71,13 @@
       "compositePrimaryKeys": {
         "certificates_id": {
           "name": "certificates_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "certificates_certificateNumber_unique": {
           "name": "certificates_certificateNumber_unique",
-          "columns": [
-            "certificateNumber"
-          ]
+          "columns": ["certificateNumber"]
         }
       },
       "checkConstraint": {}
@@ -139,9 +135,7 @@
       "compositePrimaryKeys": {
         "certification_courses_id": {
           "name": "certification_courses_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -207,17 +201,13 @@
       "compositePrimaryKeys": {
         "certification_students_id": {
           "name": "certification_students_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "certification_students_email_unique": {
           "name": "certification_students_email_unique",
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "checkConstraint": {}
@@ -281,9 +271,7 @@
       "compositePrimaryKeys": {
         "course_sections_id": {
           "name": "course_sections_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -349,9 +337,7 @@
       "compositePrimaryKeys": {
         "email_log_id": {
           "name": "email_log_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -423,9 +409,7 @@
       "compositePrimaryKeys": {
         "mining_news_id": {
           "name": "mining_news_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -483,9 +467,7 @@
       "compositePrimaryKeys": {
         "news_engagement_id": {
           "name": "news_engagement_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -560,23 +542,17 @@
       "compositePrimaryKeys": {
         "newsletter_subscribers_id": {
           "name": "newsletter_subscribers_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "newsletter_subscribers_email_unique": {
           "name": "newsletter_subscribers_email_unique",
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         },
         "newsletter_subscribers_unsubscribeToken_unique": {
           "name": "newsletter_subscribers_unsubscribeToken_unique",
-          "columns": [
-            "unsubscribeToken"
-          ]
+          "columns": ["unsubscribeToken"]
         }
       },
       "checkConstraint": {}
@@ -633,9 +609,7 @@
       "compositePrimaryKeys": {
         "page_views_id": {
           "name": "page_views_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -714,9 +688,7 @@
       "compositePrimaryKeys": {
         "quiz_attempts_id": {
           "name": "quiz_attempts_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -803,9 +775,7 @@
       "compositePrimaryKeys": {
         "quiz_questions_id": {
           "name": "quiz_questions_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -886,9 +856,7 @@
       "compositePrimaryKeys": {
         "quizzes_id": {
           "name": "quizzes_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -976,9 +944,7 @@
       "compositePrimaryKeys": {
         "student_progress_id": {
           "name": "student_progress_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -1061,17 +1027,13 @@
       "compositePrimaryKeys": {
         "users_id": {
           "name": "users_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "users_openId_unique": {
           "name": "users_openId_unique",
-          "columns": [
-            "openId"
-          ]
+          "columns": ["openId"]
         }
       },
       "checkConstraint": {}

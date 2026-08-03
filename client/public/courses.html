@@ -1,132 +1,226 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mining Insurance Courses - MineTrans</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .course-hero { background: linear-gradient(135deg, #0a0a0b 0%, #1a1a1f 100%); padding: 60px 20px; text-align: center; }
-    .course-hero h1 { font-size: 3em; color: #f7f5f1; margin: 20px 0; }
-    .course-hero p { font-size: 1.2em; color: #ad6a3d; max-width: 600px; margin: 0 auto 30px; }
-    .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
-    .course-card { background: #1a1a1f; border: 1px solid #ad6a3d; border-radius: 8px; padding: 30px; transition: all 0.3s ease; }
-    .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(173, 106, 61, 0.2); }
-    .course-card h3 { color: #ad6a3d; font-size: 1.5em; margin: 0 0 15px; }
-    .course-card p { color: #b0b0b0; line-height: 1.6; margin: 10px 0; }
-    .course-stats { display: flex; justify-content: space-around; margin: 20px 0; padding: 20px 0; border-top: 1px solid #333; border-bottom: 1px solid #333; }
-    .stat { text-align: center; }
-    .stat-number { font-size: 2em; color: #ad6a3d; font-weight: bold; }
-    .stat-label { color: #888; font-size: 0.9em; }
-    .enroll-btn { background: #ad6a3d; color: #f7f5f1; border: none; padding: 12px 30px; border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 20px; transition: background 0.3s; }
-    .enroll-btn:hover { background: #8b5a2f; }
-  </style>
-</head>
-<body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="navmark">
-        <img src="/manus-storage/minetrans_logo_transparent.png" alt="MineTrans">
-        <span>MINETRANS</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mining Insurance Courses - MineTrans</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .course-hero {
+        background: linear-gradient(135deg, #0a0a0b 0%, #1a1a1f 100%);
+        padding: 60px 20px;
+        text-align: center;
+      }
+      .course-hero h1 {
+        font-size: 3em;
+        color: #f7f5f1;
+        margin: 20px 0;
+      }
+      .course-hero p {
+        font-size: 1.2em;
+        color: #ad6a3d;
+        max-width: 600px;
+        margin: 0 auto 30px;
+      }
+      .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .course-card {
+        background: #1a1a1f;
+        border: 1px solid #ad6a3d;
+        border-radius: 8px;
+        padding: 30px;
+        transition: all 0.3s ease;
+      }
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(173, 106, 61, 0.2);
+      }
+      .course-card h3 {
+        color: #ad6a3d;
+        font-size: 1.5em;
+        margin: 0 0 15px;
+      }
+      .course-card p {
+        color: #b0b0b0;
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+      .course-stats {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        padding: 20px 0;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 2em;
+        color: #ad6a3d;
+        font-weight: bold;
+      }
+      .stat-label {
+        color: #888;
+        font-size: 0.9em;
+      }
+      .enroll-btn {
+        background: #ad6a3d;
+        color: #f7f5f1;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        margin-top: 20px;
+        transition: background 0.3s;
+      }
+      .enroll-btn:hover {
+        background: #8b5a2f;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="navmark">
+          <img
+            src="/manus-storage/minetrans_logo_transparent.png"
+            alt="MineTrans"
+          />
+          <span>MINETRANS</span>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="risk.html">MINING RISK</a></li>
+          <li><a href="insights.html">INSIGHTS</a></li>
+          <li><a href="news.html">NEWS</a></li>
+          <li><a href="courses.html">COURSES</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+        <button class="request-review-btn" onclick="openBIReviewModal()">
+          REQUEST A REVIEW
+        </button>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-      <ul class="nav-menu">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="risk.html">MINING RISK</a></li>
-        <li><a href="insights.html">INSIGHTS</a></li>
-        <li><a href="news.html">NEWS</a></li>
-        <li><a href="courses.html">COURSES</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-      </ul>
-      <button class="request-review-btn" onclick="openBIReviewModal()">REQUEST A REVIEW</button>
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+    </nav>
+
+    <section class="course-hero">
+      <h1>Professional Mining Insurance Certification</h1>
+      <p>
+        Master business interruption risk quantification and underwriting
+        frameworks through our comprehensive online certification program.
+      </p>
+      <button class="enroll-btn" onclick="scrollToCourses()">
+        EXPLORE COURSES
+      </button>
+    </section>
+
+    <section class="courses-grid">
+      <div class="course-card">
+        <h3>Business Interruption Mastery</h3>
+        <p>
+          Learn the 12-step BI methodology for calculating replacement lead
+          times, indemnity periods, and coverage gaps.
+        </p>
+        <div class="course-stats">
+          <div class="stat">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Modules</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Hours</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Online</div>
+          </div>
+        </div>
+        <button class="enroll-btn" onclick="enrollCourse('BI Mastery')">
+          ENROLL NOW
+        </button>
       </div>
-    </div>
-  </nav>
 
-  <section class="course-hero">
-    <h1>Professional Mining Insurance Certification</h1>
-    <p>Master business interruption risk quantification and underwriting frameworks through our comprehensive online certification program.</p>
-    <button class="enroll-btn" onclick="scrollToCourses()">EXPLORE COURSES</button>
-  </section>
-
-  <section class="courses-grid">
-    <div class="course-card">
-      <h3>Business Interruption Mastery</h3>
-      <p>Learn the 12-step BI methodology for calculating replacement lead times, indemnity periods, and coverage gaps.</p>
-      <div class="course-stats">
-        <div class="stat">
-          <div class="stat-number">12</div>
-          <div class="stat-label">Modules</div>
+      <div class="course-card">
+        <h3>Mining Risk Underwriting</h3>
+        <p>
+          Understand the 18-category underwriting framework covering tailings,
+          machinery, power, and operational risks.
+        </p>
+        <div class="course-stats">
+          <div class="stat">
+            <div class="stat-number">18</div>
+            <div class="stat-label">Categories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">10</div>
+            <div class="stat-label">Hours</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Online</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-number">8</div>
-          <div class="stat-label">Hours</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Online</div>
-        </div>
+        <button class="enroll-btn" onclick="enrollCourse('Mining Risk')">
+          ENROLL NOW
+        </button>
       </div>
-      <button class="enroll-btn" onclick="enrollCourse('BI Mastery')">ENROLL NOW</button>
-    </div>
 
-    <div class="course-card">
-      <h3>Mining Risk Underwriting</h3>
-      <p>Understand the 18-category underwriting framework covering tailings, machinery, power, and operational risks.</p>
-      <div class="course-stats">
-        <div class="stat">
-          <div class="stat-number">18</div>
-          <div class="stat-label">Categories</div>
+      <div class="course-card">
+        <h3>Advanced Risk Assessment</h3>
+        <p>
+          Deep dive into critical asset surveys, single points of failure
+          mapping, and criticality registers.
+        </p>
+        <div class="course-stats">
+          <div class="stat">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Modules</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Hours</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Online</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-number">10</div>
-          <div class="stat-label">Hours</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Online</div>
-        </div>
+        <button class="enroll-btn" onclick="enrollCourse('Advanced Risk')">
+          ENROLL NOW
+        </button>
       </div>
-      <button class="enroll-btn" onclick="enrollCourse('Mining Risk')">ENROLL NOW</button>
-    </div>
+    </section>
 
-    <div class="course-card">
-      <h3>Advanced Risk Assessment</h3>
-      <p>Deep dive into critical asset surveys, single points of failure mapping, and criticality registers.</p>
-      <div class="course-stats">
-        <div class="stat">
-          <div class="stat-number">8</div>
-          <div class="stat-label">Modules</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">6</div>
-          <div class="stat-label">Hours</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Online</div>
-        </div>
-      </div>
-      <button class="enroll-btn" onclick="enrollCourse('Advanced Risk')">ENROLL NOW</button>
-    </div>
-  </section>
+    <script>
+      function scrollToCourses() {
+        document
+          .querySelector(".courses-grid")
+          .scrollIntoView({ behavior: "smooth" });
+      }
 
-  <script>
-    function scrollToCourses() {
-      document.querySelector('.courses-grid').scrollIntoView({ behavior: 'smooth' });
-    }
+      function enrollCourse(courseName) {
+        alert(
+          `Enrollment for ${courseName} course initiated. Please log in or create an account to continue.`
+        );
+      }
 
-    function enrollCourse(courseName) {
-      alert(`Enrollment for ${courseName} course initiated. Please log in or create an account to continue.`);
-    }
-
-    function openBIReviewModal() {
-      document.getElementById('biReviewModal').style.display = 'block';
-    }
-  </script>
-</body>
+      function openBIReviewModal() {
+        document.getElementById("biReviewModal").style.display = "block";
+      }
+    </script>
+  </body>
 </html>

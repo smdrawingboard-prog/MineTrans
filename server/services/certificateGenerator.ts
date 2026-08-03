@@ -12,7 +12,9 @@ interface CertificateData {
 /**
  * Generate a professional PDF certificate with MineTrans branding
  */
-export async function generateCertificatePDF(data: CertificateData): Promise<Buffer> {
+export async function generateCertificatePDF(
+  data: CertificateData
+): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({
       size: "A4",
@@ -137,7 +139,11 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
       .fontSize(11)
       .fillColor("#C9CACE")
       .text(`Date: ${dateStr}`, 80, 510)
-      .text(`Certificate No: ${data.certificateNumber}`, doc.page.width - 280, 510);
+      .text(
+        `Certificate No: ${data.certificateNumber}`,
+        doc.page.width - 280,
+        510
+      );
 
     // Footer
     doc
@@ -153,10 +159,15 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
       .font("Helvetica")
       .fontSize(9)
       .fillColor("#C9CACE")
-      .text("Specialist mining and marine insurance broking for Sub-Saharan Africa", 0, doc.page.height - 40, {
-        align: "center",
-        width: doc.page.width,
-      });
+      .text(
+        "Specialist mining and marine insurance broking for Sub-Saharan Africa",
+        0,
+        doc.page.height - 40,
+        {
+          align: "center",
+          width: doc.page.width,
+        }
+      );
 
     doc.end();
   });

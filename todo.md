@@ -1,6 +1,7 @@
 # MineTrans Certification System TODO
 
 ## Phase 1: Database Schema
+
 - [x] Create students table (id, email, name, password_hash, role, created_at, updated_at)
 - [x] Create courses table (id, title, description, total_sections, created_at)
 - [x] Create course_sections table (id, course_id, section_number, title, content, order)
@@ -12,6 +13,7 @@
 - [x] Generate and execute migrations
 
 ## Phase 2: Authentication
+
 - [x] Create admin login page (/certification/admin/login) - Backend ready, frontend pending
 - [x] Implement admin session management - Backend ready
 - [x] Create student signup/login page (/certification/login) - Backend ready, frontend pending
@@ -19,6 +21,7 @@
 - [x] Add password hashing and validation - Implemented with bcrypt
 
 ## Phase 3: Admin Dashboard
+
 - [x] Create admin dashboard layout (/certification/admin/dashboard)
 - [x] Display student list with enrollment dates
 - [x] Show student progress by course/section
@@ -28,6 +31,7 @@
 - [x] Create reports export functionality
 
 ## Phase 4: Student Portal
+
 - [x] Create student dashboard (/certification/dashboard)
 - [x] Display enrolled courses
 - [x] Show progress per section
@@ -38,6 +42,7 @@
 - [x] Allow quiz retakes
 
 ## Phase 5: Final Exam & Certificates
+
 - [x] Create final exam interface
 - [x] Implement exam logic (all questions, time limit, no retakes until completion)
 - [x] Build PDF certificate generator with MineTrans branding
@@ -45,6 +50,7 @@
 - [x] Store certificate URLs in database
 
 ## Phase 6: Certification Page
+
 - [x] Create /certification page with overview
 - [x] Add course description and benefits
 - [x] Display login/signup buttons
@@ -53,6 +59,7 @@
 - [x] Create training showcase webpage with course overview and features
 
 ## Phase 7: Google Sheets Integration
+
 - [x] Create Google Sheets sync service
 - [x] Implement student data sync
 - [x] Implement progress data sync
@@ -62,6 +69,7 @@
 - [x] Add manual sync trigger in admin dashboard
 
 ## Phase 8: Analytics Dashboard
+
 - [x] Create analytics dashboard UI
 - [x] Display visitor metrics
 - [x] Show engagement statistics
@@ -69,6 +77,7 @@
 - [x] Show student progress charts
 
 ## Phase 9: Testing & Deployment
+
 - [x] Test admin login and dashboard
 - [x] Test student signup/login
 - [x] Test course viewing and quizzes
@@ -77,6 +86,7 @@
 - [x] Deploy to production
 
 ## Phase 10: Insurance Page Implementation
+
 - [x] Create insurance.html page with three dropdown categories
 - [x] Populate Mining Insurance section with BI, Tailings, and Plant & Machinery content
 - [x] Populate Machinery Insurance section with equipment coverage details
