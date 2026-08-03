@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1784455041094,
+      "tag": "0000_complete_puppet_master",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1784875049970,
+      "tag": "0001_damp_harpoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1784876376055,
+      "tag": "0002_organic_gorilla_man",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+import { google } from "googleapis";
+import * as certDb from "./certificationDb";
+
+/**
+ * Google Sheets integration for syncing student data
+ * Requires GOOGLE_SHEETS_CREDENTIALS and GOOGLE_SHEETS_ID env variables
+ */
+
+interface GoogleSheetsConfig {
+  spreadsheetId: string;
+  credentials: {
+    type: string;
+    project_id: string;
+    private_key_id: string;
+    private_key: string;
+    client_email: string;
+    client_id: string;
+    auth_uri: string;
+    token_uri: string;
+    auth_provider_x509_cert_url: string;
+    client_x509_cert_url: string;
+  };
+}
+
+let sheetsClient: any = null;
+
+/**
+ * Initialize Google Sheets client with credentials
+ */
+export async function initializeGoogleSheets(config: GoogleSheetsConfig) {
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: config.credentials,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+
+    sheetsClient = google.sheets({ version: "v4", auth });
+    console.log("[Google Sheets] Initialized successfully");
+    return true;
+  } catch (error) {
+    console.error("[Google Sheets] Initialization failed:", error);
+    return false;
+  }
+}
+
+/**
+ * Create or update a sheet with student data
+ */
+export async function syncStudentDataToSheets(spreadsheetId: string, sheetName: string = "Students") {
+  if (!sheetsClient) {
+    console.error("[Google Sheets] Client not initialized");
+    return false;
+  }
+
+  try {
+    // Get all students
+    const students = await certDb.getAllStudents();
+
+    // Prepare data for sheets
+    const headers = ["ID", "Name", "Email", "Status", "Enrolled Date", "Completed Date"];
+    const rows = students.map((s) => [
+      s.id,
+      s.name,
+      s.email,
+      s.status,
+      new Date(s.enrolledAt).toLocaleDateString(),
+      s.completedAt ? new Date(s.completedAt).toLocaleDateString() : "",
+    ]);
+
+    // Clear existing data
+    await sheetsClient.spreadsheets.values.clear({
+      spreadsheetId,
+      range: `${sheetName}!A1:Z1000`,
+    });
+
+    // Write headers and data
+    await sheetsClient.spreadsheets.values.update({
+      spreadsheetId,
+      range: `${sheetName}!A1`,
+      valueInputOption: "RAW",
+      requestBody: {
+        values: [headers, ...rows],
+      },
+    });
+
+    console.log(`[Google Sheets] Synced ${students.length} students to sheet "${sheetName}"`);
+    return true;
+  } catch (error) {
+    console.error("[Google Sheets] Sync failed:", error);
+    return false;
+  }
+}
+
+/**
+ * Sync student progress data to a separate sheet
+ */
+export async function syncProgressDataToSheets(spreadsheetId: string, sheetName: string = "Progress") {
+  if (!sheetsClient) {
+    console.error("[Google Sheets] Client not initialized");
+    return false;
+  }
+
+  try {
+    const students = await certDb.getAllStudents();
+    const courses = await certDb.getAllCourses();
+
+    // Prepare data for sheets
+    const headers = [
+      "Student Name",
+      "Email",
+      ...courses.map((c) => `${c.title} (%)`.substring(0, 30)), // Limit header length
+    ];
+
+    const rows = await Promise.all(
+      students.map(async (s) => {
+        const progressData: (string | number)[] = [s.name, s.email];
+
+        for (const course of courses) {
+          const progress = await certDb.getStudentCourseProgress(s.id, course.id);
+          const percentage = progress && progress.progress && progress.progress.length > 0
+            ? Math.round((progress.progress.filter((p) => p.completed).length / progress.progress.length) * 100)
+            : 0;
+          progressData.push(String(percentage));
+        }
+
+        return progressData;
+      })
+    );
+
+    // Clear existing data
+    await sheetsClient.spreadsheets.values.clear({
+      spreadsheetId,
+      range: `${sheetName}!A1:Z1000`,
+    });
+
+    // Write headers and data
+    await sheetsClient.spreadsheets.values.update({
+      spreadsheetId,
+      range: `${sheetName}!A1`,
+      valueInputOption: "RAW",
+      requestBody: {
+        values: [headers, ...rows],
+      },
+    });
+
+    console.log(`[Google Sheets] Synced progress data for ${students.length} students`);
+    return true;
+  } catch (error) {
+    console.error("[Google Sheets] Progress sync failed:", error);
+    return false;
+  }
+}
+
+/**
+ * Sync quiz attempt data to a separate sheet
+ */
+export async function syncQuizAttemptsToSheets(spreadsheetId: string, sheetName: string = "Quiz Attempts") {
+  if (!sheetsClient) {
+    console.error("[Google Sheets] Client not initialized");
+    return false;
+  }
+
+  try {
+    // Note: This would require a method to get all quiz attempts from the database
+    // For now, we'll create a template sheet
+
+    const headers = [
+      "Student Name",
+      "Quiz ID",
+      "Score",
+      "Total Points",
+      "Percentage",
+      "Passed",
+      "Attempt Date",
+    ];
+
+    // Clear existing data
+    await sheetsClient.spreadsheets.values.clear({
+      spreadsheetId,
+      range: `${sheetName}!A1:Z1000`,
+    });
+
+    // Write headers
+    await sheetsClient.spreadsheets.values.update({
+      spreadsheetId,
+      range: `${sheetName}!A1`,
+      valueInputOption: "RAW",
+      requestBody: {
+        values: [headers],
+      },
+    });
+
+    console.log(`[Google Sheets] Created quiz attempts sheet`);
+    return true;
+  } catch (error) {
+    console.error("[Google Sheets] Quiz attempts sheet creation failed:", error);
+    return false;
+  }
+}
+
+/**
+ * Create a new spreadsheet for certification data
+ */
+export async function createCertificationSpreadsheet(title: string) {
+  if (!sheetsClient) {
+    console.error("[Google Sheets] Client not initialized");
+    return null;
+  }
+
+  try {
+    const response = await sheetsClient.spreadsheets.create({
+      requestBody: {
+        properties: {
+          title,
+        },
+        sheets: [
+          { properties: { title: "Students" } },
+          { properties: { title: "Progress" } },
+          { properties: { title: "Quiz Attempts" } },
+          { properties: { title: "Certificates" } },
+        ],
+      },
+    });
+
+    const spreadsheetId = response.data.spreadsheetId;
+    console.log(`[Google Sheets] Created spreadsheet: ${spreadsheetId}`);
+
+    // Sync initial data
+    await syncStudentDataToSheets(spreadsheetId, "Students");
+    await syncProgressDataToSheets(spreadsheetId, "Progress");
+    await syncQuizAttemptsToSheets(spreadsheetId, "Quiz Attempts");
+
+    return spreadsheetId;
+  } catch (error) {
+    console.error("[Google Sheets] Spreadsheet creation failed:", error);
+    return null;
+  }
+}

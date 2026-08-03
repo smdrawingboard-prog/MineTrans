@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mining Insurance | MineTrans Insurance Brokers</title>
+<meta name="description" content="Mining insurance solutions including business interruption, plant & machinery, and tailings dam liability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onyx:#0A0A0B; --graphite:#3A383D; --charcoal:#1E1D20; --platinum:#C9CACE;
+  --copper:#AD6A3D; --copper-bright:#C9854F; --bone:#F7F5F1;
+  --line:rgba(201,202,206,.14); --line-copper:rgba(173,106,61,.35);
+  --df:'Playfair Display',serif; --sf:'Jost',sans-serif; --bf:'Inter',sans-serif; --mf:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--onyx);color:var(--bone);font-family:var(--bf);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--copper);color:var(--onyx)}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+section{padding:clamp(64px,10vh,120px) 0;position:relative}
+.eyebrow{font-family:var(--sf);font-weight:400;font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--copper-bright);display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--copper)}
+h1,h2,h3{font-family:var(--df);font-weight:500;color:var(--bone)}
+h2{font-size:clamp(28px,4.2vw,50px);line-height:1.15;letter-spacing:-.01em;max-width:20ch}
+h2 em{font-style:italic;color:var(--copper-bright)}
+h3{font-size:20px}
+.lede{font-size:clamp(15px,1.6vw,19px);color:var(--platinum);max-width:66ch;margin-top:20px}
+.lede strong{color:var(--bone);font-weight:500}
+.mono{font-family:var(--mf)}
+
+/* ---------- NAV ---------- */
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--copper),var(--copper-bright));z-index:200}
+nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;justify-content:space-between;align-items:center;
+ padding:14px clamp(20px,5vw,64px);background:rgba(10,10,11,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.navmark{display:flex;align-items:center;gap:11px;font-family:var(--sf);letter-spacing:.28em;font-size:12px;text-transform:uppercase;color:var(--bone);text-decoration:none}
+.navmark img{width:28px;height:auto}
+.navlinks{display:flex;gap:clamp(14px,2.2vw,30px);align-items:center}
+.navlinks a{font-family:var(--sf);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--platinum);text-decoration:none;transition:color .3s;padding:6px 0;position:relative}
+.navlinks a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--copper-bright);transition:width .3s}
+.navlinks a:hover,.navlinks a.active{color:var(--bone)}
+.navlinks a:hover::after,.navlinks a.active::after{width:100%}
+.navlinks a.btn-nav{border:1px solid var(--line-copper);padding:9px 18px;color:var(--copper-bright)}
+.navlinks a.btn-nav::after{display:none}
+.navlinks a.btn-nav:hover{background:var(--copper);color:var(--onyx);border-color:var(--copper)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px}
+.burger span{width:24px;height:1.5px;background:var(--bone);transition:.3s}
+@media(max-width:900px){
+ .burger{display:flex}
+ .navlinks{position:fixed;inset:57px 0 auto 0;background:rgba(10,10,11,.98);flex-direction:column;gap:0;padding:16px 0 28px;
+  border-bottom:1px solid var(--line);transform:translateY(-120%);transition:transform .4s cubic-bezier(.3,.9,.3,1)}
+ .navlinks.open{transform:none}
+ .navlinks a{padding:14px 28px;width:100%;font-size:13px}
+ .navlinks a.btn-nav{margin:10px 28px;text-align:center}
+}
+
+/* ---------- PAGE HEADER ---------- */
+.page-header{min-height:60vh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;
+ background:radial-gradient(1100px 520px at 18% 12%,rgba(173,106,61,.14),transparent 62%),
+            radial-gradient(760px 460px at 88% 88%,rgba(58,56,61,.5),transparent 60%),var(--onyx)}
+.page-header h1{font-size:clamp(38px,6.6vw,86px);line-height:1.05;letter-spacing:-.015em;max-width:20ch}
+.page-header h1 em{font-style:italic;color:var(--copper-bright)}
+.page-header p{margin-top:26px;font-size:clamp(15px,1.7vw,20px);color:var(--platinum);max-width:58ch}
+
+/* ---------- CONTENT ---------- */
+.content-section{margin-top:48px}
+.content-section h2{margin-bottom:24px}
+.content-section p{margin-bottom:16px;font-size:15px}
+.content-section ul{margin-left:24px;margin-bottom:20px}
+.content-section li{margin-bottom:10px;font-size:15px;color:var(--platinum)}
+.content-section h3{font-size:18px;margin-top:32px;margin-bottom:12px;color:var(--bone)}
+
+/* ---------- LEDGER ---------- */
+.ledger{margin-top:48px;border-top:1px solid var(--line)}
+.lrow{display:grid;grid-template-columns:70px 1fr 1.15fr;gap:clamp(16px,3vw,44px);padding:24px 0;border-bottom:1px solid rgba(201,202,206,.12);align-items:baseline}
+@media(max-width:760px){.lrow{grid-template-columns:52px 1fr}.lrow .ldesc{grid-column:2}}
+.lno{font-family:var(--mf);font-size:14px;color:var(--copper);letter-spacing:.1em}
+.lname{font-family:var(--df);font-size:clamp(18px,2vw,23px);color:var(--bone)}
+.ldesc{font-size:14.5px;color:var(--platinum)}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);padding:clamp(40px,8vh,80px) 0;margin-top:clamp(64px,10vh,120px)}
+.footer-content{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,64px);margin-bottom:32px}
+@media(max-width:760px){.footer-content{grid-template-columns:1fr}}
+.footer-col h4{font-family:var(--sf);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper-bright);margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:var(--platinum);text-decoration:none;margin-bottom:10px;transition:color .3s}
+.footer-col a:hover{color:var(--copper-bright)}
+.footer-bottom{border-top:1px solid var(--line);padding-top:24px;text-align:center;font-size:12px;color:var(--platinum)}
+.footer-bottom p{margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav>
+ <a class="navmark" href="index.html"><img src="/manus-storage/MineTranslogov3_04e8651e.png" alt="MineTrans">MineTrans</a>
+ <button class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+ <div class="navlinks">
+  <a href="index.html">Home</a>
+  <a href="insurance.html" class="active">Insurance</a>
+  <a href="risk.html">Mining Risk</a>
+  <a href="insights.html">Insights</a>
+  <a href="news.html">News</a>
+  <a href="blueprint.html">Blueprint</a>
+  <a href="bi-methodology.html">BI Methodology</a>
+  <a href="marketing.html">Marketing</a>
+  <a href="faq.html">FAQ</a>
+  <a class="btn-nav" href="contact.html">Request a Review</a>
+ </div>
+</nav>
+
+<section class="page-header">
+ <div class="wrap">
+  <h1>Mining <em>Insurance</em></h1>
+  <p>Commercial assets, liabilities and business interruption. Plant & machinery insurance, BI coverage, and tailings dam liability.</p>
+ </div>
+</section>
+
+<section>
+ <div class="wrap">
+  <div class="content-section">
+   <h2>Plant & Machinery Insurance</h2>
+   <p>Customised risk solutions for the equipment that drives your output — from fixed processing infrastructure to the haulage fleet moving ore off site.</p>
+   <p>How a machine is valued determines how a claim is settled. Get this wrong, and a single loss lands on your P&L harder than it should.</p>
+   
+   <h3>Valuation Basis Options</h3>
+   <ul>
+    <li>New Replacement Value (NRV)</li>
+    <li>Market Value</li>
+    <li>Agreed Value</li>
+   </ul>
+
+   <h3>Machinery Cover Extensions</h3>
+   <p>Our Plant All Risk policy is built around your fleet, with extensions selected machine by machine. Each sits outside the base premium and must be explicitly selected.</p>
+   <ul>
+    <li>Excess buy-down option for individual machines or fleet-wide</li>
+    <li>Linked to own damage, third-party damage, or total loss claims</li>
+    <li>Reduces retained risk on highest-value assets</li>
+   </ul>
+  </div>
+
+  <div class="content-section">
+   <h2>Business Interruption Coverage</h2>
+   <p>Downtime doesn't pause your obligations. Wages, debt service and fixed costs continue whether the shaft is producing or not — business interruption cover is how that gap gets funded.</p>
+   
+   <h3>Why BI Dominates Mining Losses</h3>
+   <p>Business interruption at mining facilities has steadily increased, consistently accounting for about 80% of total gross mining losses. Driven by operational incidents — including fires, machinery breakdowns and geotechnical failures rather than natural disasters — these losses have worsened due to rising commodity prices and ageing global supply chains.</p>
+
+   <h3>BI Assessment Deliverables</h3>
+   <p>A robust business interruption insurance assessment for a mining facility includes:</p>
+   <ul>
+    <li>Description of the mining process and critical operations</li>
+    <li>Asset criticality ranking and production bottlenecks</li>
+    <li>Maximum Foreseeable Loss (MFL) scenario</li>
+    <li>Gross Profit calculation based on policy wording</li>
+    <li>Production interruption and recovery model</li>
+    <li>Increased Cost of Working assessment</li>
+    <li>Supply chain and utility dependency analysis</li>
+    <li>Recommended indemnity period with justification</li>
+    <li>Recommended Business Interruption sum insured</li>
+    <li>Scenario-based BI loss estimates</li>
+    <li>Key assumptions, exclusions and sensitivity analysis</li>
+   </ul>
+  </div>
+
+  <div class="content-section">
+   <h2>Tailings Dam Liability</h2>
+   <p>Tailings storage facility (TSF) failures carry environmental, social and balance-sheet consequences that standard liability cover doesn't reach.</p>
+   <p>Coverage is structured through specialised liability, property and environmental policies, underpinned by detailed risk assessment and strict adherence to compliance frameworks.</p>
+   
+   <h3>Why a TSF Loss is Never a Single-Line Claim</h3>
+   <p>TSF failure → property damage, third-party injury, environmental contamination, production shutdown, business interruption, rehabilitation liability — one incident, six consequence categories.</p>
+
+   <h3>Tailings Risk Assessment Factors</h3>
+   <ul>
+    <li>Dam breach assessments for improved understanding of catastrophic risk exposure</li>
+    <li>Enhanced protection of downstream communities and the environment</li>
+    <li>Better-informed underwriting decisions and more accurate pricing</li>
+    <li>Stronger organisational governance and accountability</li>
+    <li>Early detection of deteriorating dam conditions</li>
+    <li>Reduced likelihood and severity of catastrophic tailings failures</li>
+   </ul>
+
+   <h3>Types of Tailings Storage Facilities</h3>
+   <p>Tailings are the finely ground waste left after minerals are extracted from ore. How a facility is raised and confined materially changes its stability, cost, water demand and failure consequence.</p>
+   <p><strong>Typical Information Requested for Each Facility:</strong></p>
+   <ul>
+    <li>As-built drawings and original design basis</li>
+    <li>Construction method and raise history</li>
+    <li>Deposition rates and water balance records</li>
+    <li>Independent stability and inspection reports</li>
+    <li>Downstream consequence classification</li>
+    <li>Emergency preparedness and response plan</li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div class="wrap">
+  <div class="footer-content">
+   <div class="footer-col">
+    <h4>Solutions</h4>
+    <a href="insurance.html">Insurance</a>
+    <a href="insurance-mining.html">Mining Insurance</a>
+    <a href="insurance-machinery.html">Machinery Insurance</a>
+    <a href="insurance-transit.html">Transit Insurance</a>
+   </div>
+   <div class="footer-col">
+    <h4>Company</h4>
+    <a href="index.html">Home</a>
+    <a href="bi-methodology.html">BI Methodology</a>
+    <a href="blueprint.html">Blueprint</a>
+    <a href="contact.html">Contact</a>
+   </div>
+  </div>
+  <div class="footer-bottom">
+   <p>A Juristic Representative of Donaldson Group (Pty) Ltd · FSP No. 53166 · VAT 4950316028</p>
+   <p>&copy; 2026 MineTrans Insurance Brokers. All rights reserved.</p>
+  </div>
+ </div>
+</footer>
+
+<script>
+function toggleMenu(){const n=document.querySelector('.navlinks');n.classList.toggle('open')}
+document.querySelectorAll('.navlinks a').forEach(e=>{e.addEventListener('click',()=>{document.querySelector('.navlinks').classList.remove('open')})});
+const bar=document.getElementById('bar');window.addEventListener('scroll',()=>{const e=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);bar.style.width=100*e+'%'});
+</script>
+</body>
+</html>
