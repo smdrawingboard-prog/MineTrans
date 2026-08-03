@@ -47,10 +47,10 @@ h3{font-size:20px}
 #bar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--copper),var(--copper-bright));z-index:200}
 nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;justify-content:space-between;align-items:center;
  padding:14px clamp(20px,5vw,64px);background:rgba(10,10,11,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.navmark{display:flex;align-items:center;gap:11px;font-family:var(--sf);letter-spacing:.28em;font-size:12px;text-transform:uppercase;color:var(--bone);text-decoration:none}
+.navmark{display:flex;align-items:center;gap:10px;font-family:var(--sf);letter-spacing:.05em;font-size:13px;color:var(--bone);text-decoration:none;font-weight:500}
 .navmark img{width:28px;height:auto}
-.navlinks{display:flex;gap:clamp(14px,2.2vw,30px);align-items:center}
-.navlinks a{font-family:var(--sf);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--platinum);text-decoration:none;transition:color .3s;padding:6px 0;position:relative}
+.navlinks{display:flex;gap:clamp(8px,1.4vw,18px);align-items:center}
+.navlinks a{font-family:var(--sf);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--platinum);text-decoration:none;transition:color .3s;padding:6px 0;position:relative;white-space:nowrap}
 .navlinks a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--copper-bright);transition:width .3s}
 .navlinks a:hover,.navlinks a.active{color:var(--bone)}
 .navlinks a:hover::after,.navlinks a.active::after{width:100%}
@@ -242,6 +242,25 @@ footer b{color:var(--platinum);font-weight:500}
  .rv{opacity:1;transform:none}
 }
 
+/* ---------- BI REVIEW FORM ---------- */
+.bform{margin-top:48px;border:1px solid var(--line);padding:clamp(24px,4vw,44px);background:var(--charcoal)}
+.bform h3{margin-bottom:6px}
+.bform .sub{font-size:13.5px;color:var(--platinum);margin-bottom:8px;max-width:70ch}
+.bform .section-label{font-family:var(--sf);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper-bright);margin:28px 0 14px;padding-top:20px;border-top:1px solid var(--line)}
+.bform .section-label:first-of-type{margin-top:22px}
+.bform .frow{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px}
+@media(max-width:640px){.bform .frow{grid-template-columns:1fr}}
+.bform>form>div:not(.frow){margin-bottom:16px}
+.bform label{display:block;font-family:var(--sf);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--platinum);margin-bottom:7px}
+.bform input,.bform select,.bform textarea{width:100%;background:var(--onyx);border:1px solid var(--line);color:var(--bone);
+ padding:13px 15px;font-family:var(--bf);font-size:14px;outline:none;transition:border-color .3s;box-sizing:border-box}
+.bform input:focus,.bform select:focus,.bform textarea:focus{border-color:var(--line-copper)}
+.bform textarea{resize:vertical;min-height:80px}
+.bform .fmsg{margin-top:18px;font-family:var(--sf);font-size:12.5px;letter-spacing:.04em;display:none}
+.bform .fmsg.show{display:block}
+.bform .fmsg.ok{color:var(--copper-bright)}
+.bform .fmsg.err{color:#e04b4b}
+
 #line{background:linear-gradient(180deg,#0A0A0B,#0D0C0E 55%,#0A0A0B)}
 .flowbox{margin-top:60px;border:1px solid var(--line);padding:clamp(26px,4vw,52px);background:linear-gradient(180deg,rgba(58,56,61,.18),transparent);overflow:hidden}
 .flowbox h3{font-size:21px;margin-bottom:4px}
@@ -308,23 +327,51 @@ footer b{color:var(--platinum);font-weight:500}
 .impact .ifig{font-family:var(--mf);font-size:clamp(17px,2.2vw,24px);color:var(--bone)}
 .impact.covered{border-color:var(--line-copper);background:rgba(173,106,61,.09)}
 .impact.covered .ihead{color:var(--copper-bright)}
+
+.navmark .mk{width:32px;height:32px;border:1px solid var(--copper);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--copper-bright);font-family:var(--df);font-weight:700;font-size:14px}
+.hasdrop{position:relative}
+.dropbtn{display:flex;align-items:center;gap:6px;background:none;border:0;font-family:var(--sf);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--platinum);cursor:pointer;padding:8px 0}
+.dropbtn:hover,.hasdrop:focus-within .dropbtn{color:var(--bone)}
+.dropbtn .car{width:8px;height:8px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-3px}
+.hasdrop:hover .dropbtn .car,.hasdrop:focus-within .dropbtn .car{transform:rotate(225deg);margin-top:3px}
+.dropmenu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:280px;background:var(--charcoal);border:1px solid var(--line);border-top:2px solid var(--copper);border-radius:2px;padding:8px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s;box-shadow:0 24px 48px rgba(0,0,0,.5)}
+.hasdrop:hover .dropmenu,.hasdrop:focus-within .dropmenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.dropmenu a{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:2px;text-decoration:none;color:var(--bone);transition:background .15s}
+.dropmenu a:hover{background:rgba(173,106,61,.14)}
+.dropmenu a .dt{font-family:var(--sf);font-size:12.5px;letter-spacing:.04em;font-weight:500}
+.dropmenu a .dd{font-family:var(--bf);font-size:11.5px;color:var(--platinum);font-weight:300}
+.dropmenu .divider{height:1px;background:var(--line);margin:6px 4px}
+@media(max-width:900px){
+ .navlinks>a,.hasdrop{width:100%;padding:16px 0;border-bottom:1px solid var(--line)}
+ .dropbtn{width:100%;justify-content:space-between;padding:0}
+ .dropmenu{position:static;transform:none;opacity:1;visibility:visible;display:none;box-shadow:none;border:0;border-left:2px solid var(--copper);margin-top:10px;background:none}
+ .hasdrop.open .dropmenu{display:block}
+}
 </style>
 </head>
 <body>
 <div id="bar"></div>
 <nav>
- <a class="navmark" href="index.html"><img src="/manus-storage/MineTranslogov3_04e8651e.png" alt="MineTrans hexagon mark">MineTrans</a>
- <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+ <a class="navmark" href="index.html"><span class="mk">MT</span>MineTrans</a>
+ <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
  <div class="navlinks">
-  <a href="index.html" class="active">Home</a>
-  <a href="insurance.html">Insurance</a>
+  <a href="index.html">Home</a>
+  <div class="hasdrop">
+   <button class="dropbtn" type="button" aria-expanded="false">Insurance<span class="car"></span></button>
+   <div class="dropmenu" role="menu">
+    <a href="insurance-mine.html" role="menuitem"><span class="dt">The Mine</span><span class="dd">Commercial assets, liability &amp; business interruption</span></a>
+    <a href="insurance-machinery.html" role="menuitem"><span class="dt">Yellow Metal &amp; Machinery</span><span class="dd">Plant, mobile equipment &amp; heavy machinery cover</span></a>
+    <a href="insurance-transit.html" role="menuitem"><span class="dt">Transit of Valuable Metals</span><span class="dd">Land, air &amp; sea movement of precious cargo</span></a>
+    <div class="divider"></div>
+    <a href="insurance.html" role="menuitem"><span class="dt">All Insurance Solutions →</span></a>
+   </div>
+  </div>
   <a href="risk.html">Mining Risk</a>
   <a href="insights.html">Insights</a>
   <a href="news.html">News</a>
-  <a href="blueprint.html">Blueprint</a>
   <a href="bi-methodology.html">BI Methodology</a>
-  <a href="marketing.html">Marketing</a>
   <a href="faq.html">FAQ</a>
+  <a href="blueprint.html">Blueprint</a>
   <a class="btn-nav" href="contact.html">Request a Review</a></div>
 </nav>
 
@@ -349,10 +396,67 @@ footer b{color:var(--platinum);font-weight:500}
     <h3>Critical-asset survey</h3><p>One site visit with your engineering team. We map single points of failure and hand you the criticality register.</p></div>
   </div>
 
+  <div class="bform rv">
+   <h3>Book a BI Review</h3>
+   <p class="sub">Tell us about your operation below. A MineTrans advisor will be in touch within 24 hours — these details help Roger scope the review before the call.</p>
+   <form id="bi-review-form">
+    <div class="frow">
+     <div><label for="bf-company">Company name</label><input id="bf-company" name="companyName" required></div>
+     <div><label for="bf-contact">Contact name</label><input id="bf-contact" name="contactName" required></div>
+    </div>
+    <div class="frow">
+     <div><label for="bf-email">Email</label><input id="bf-email" name="email" type="email" required></div>
+     <div><label for="bf-phone">Phone</label><input id="bf-phone" name="phone" type="tel" required></div>
+    </div>
+    <div class="frow">
+     <div><label for="bf-position">Position</label>
+      <select id="bf-position" name="position">
+       <option>Finance</option><option>Operations</option><option>Risk</option><option>Insurance</option><option>Other</option>
+      </select>
+     </div>
+     <div><label for="bf-sector">Mining sector</label><input id="bf-sector" name="miningSector" placeholder="e.g. Copper, Gold, Coal, PGMs" required></div>
+    </div>
+    <div>
+     <label for="bf-riskarea">Primary risk area</label>
+     <select id="bf-riskarea" name="riskArea">
+      <option value="BI">Business Interruption</option>
+      <option value="Tailings">Tailings</option>
+      <option value="Machinery">Machinery</option>
+      <option value="Supply">Supply Chain</option>
+      <option value="Multiple">Multiple</option>
+     </select>
+    </div>
+
+    <div class="section-label">Operational details for the review</div>
+    <div><label for="bf-site">Site / operation name &amp; location</label><input id="bf-site" name="siteLocation" placeholder="e.g. Blesbok Colliery, Mpumalanga"></div>
+    <div class="frow">
+     <div><label for="bf-turnover">Annual turnover / gross profit</label><input id="bf-turnover" name="annualTurnover" placeholder="e.g. R450m"></div>
+     <div><label for="bf-bisum">Estimated BI sum insured</label><input id="bf-bisum" name="biSumInsured" placeholder="e.g. R300m"></div>
+    </div>
+    <div class="frow">
+     <div><label for="bf-indemnity">Indemnity period required</label>
+      <select id="bf-indemnity" name="indemnityPeriod">
+       <option>12 months</option><option>18 months</option><option>24 months</option><option>36 months</option><option selected>Not sure</option>
+      </select>
+     </div>
+     <div><label for="bf-insurer">Current insurer / broker (if any)</label><input id="bf-insurer" name="currentInsurer"></div>
+    </div>
+    <div><label for="bf-facility">Key production facility / single point of failure</label><input id="bf-facility" name="keyFacility" placeholder="e.g. primary mill, shaft, plant"></div>
+    <div class="frow">
+     <div><label for="bf-claims">Previous BI claims (if any)</label><input id="bf-claims" name="previousClaims" placeholder="None, or brief details"></div>
+     <div><label for="bf-visit">Preferred site visit availability</label><input id="bf-visit" name="siteVisitAvailability" placeholder="e.g. weekday mornings"></div>
+    </div>
+    <div><label for="bf-message">Message (optional)</label><textarea id="bf-message" name="message" rows="3"></textarea></div>
+
+    <button type="submit" class="btn solid" style="margin-top:22px">Submit Request</button>
+    <div class="fmsg" id="bf-msg"></div>
+   </form>
+  </div>
+
   <p class="lede rv" style="margin-top:36px;font-size:13px">By contacting us you consent to us processing your business contact details to respond to your enquiry, in line with POPIA. You may opt out at any time.</p>
 
   <div class="btnrow rv">
-   <a class="btn solid" href="mailto:jp@daginsure.co.za?subject=Business%20Interruption%20Review%20Request">Email the team</a>
+   <a class="btn ghost" href="mailto:jp@daginsure.co.za?subject=Business%20Interruption%20Review%20Request">Email the team directly</a>
    <a class="btn ghost" href="tel:+27115688472">Call +27 11 568 8472</a>
   </div>
  </div>
@@ -361,7 +465,7 @@ footer b{color:var(--platinum);font-weight:500}
 <footer>
  <div class="wrap fgrid">
   <div>
-   <img class="flogo" src="/manus-storage/MineTranslogov3_04e8651e.png" alt="">
+   <div class="mk" style="width:26px;height:26px;margin-bottom:14px;font-size:11px;">MT</div>
    <p><b>MineTrans Insurance Brokers</b> — mining and marine insurance solutions across Sub-Saharan Africa.</p>
    <p style="margin-top:12px">MineTrans Insurance Brokers is a juristic representative of <b>Donaldson Group (Pty) Ltd</b>, an authorised financial services provider (<b>FSP No. 53166</b>) in terms of the Financial Advisory and Intermediary Services Act 37 of 2002. Donaldson Group (Pty) Ltd accepts responsibility for the activities of its representatives performed within the scope of their mandate.</p>
   </div>
@@ -377,10 +481,18 @@ const bar=document.getElementById('bar');
 if(bar)addEventListener('scroll',()=>{const h=document.documentElement;
  bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
 
-/* mobile nav */
-const burger=document.querySelector('.burger'),links=document.querySelector('.navlinks');
-if(burger)burger.onclick=()=>links.classList.toggle('open');
-document.querySelectorAll('.navlinks a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
+/* mobile nav + dropdown */
+document.addEventListener('DOMContentLoaded',function(){
+  var burger=document.querySelector('.burger');
+  var links=document.querySelector('.navlinks');
+  if(burger){burger.addEventListener('click',function(){links.classList.toggle('open')});}
+  document.querySelectorAll('.hasdrop > .dropbtn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      if(window.innerWidth<=900){e.preventDefault();btn.parentElement.classList.toggle('open');}
+    });
+  });
+  document.querySelectorAll('.navlinks a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open')})});
+});
 
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.16});
@@ -417,6 +529,33 @@ const bio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)retur
  e.target.querySelectorAll('.bfill').forEach((f,i)=>setTimeout(()=>{f.style.width=f.dataset.w},i*180))}),{threshold:.4});
 document.querySelectorAll('.barchart').forEach(el=>bio.observe(el));
 
+/* ---------- BI REVIEW FORM ----------
+   Set SHEET_ENDPOINT to a Google Form "formResponse" URL (or other webhook)
+   once one exists, so submissions land in a Google Sheet with zero backend.
+   Until then, submissions are sent as a pre-filled email to jp@daginsure.co.za. */
+(function(){
+  const form=document.getElementById('bi-review-form');
+  if(!form)return;
+  const SHEET_ENDPOINT='';
+  const msg=document.getElementById('bf-msg');
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const data=Object.fromEntries(new FormData(form).entries());
+    if(SHEET_ENDPOINT){
+      try{
+        await fetch(SHEET_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)});
+        msg.className='fmsg show ok';
+        msg.textContent='Thank you — your request has been submitted. We will contact you within 24 hours.';
+        form.reset();
+        return;
+      }catch(err){ /* fall through to email */ }
+    }
+    const body=Object.entries(data).map(([k,v])=>k+': '+v).join('\n');
+    window.location.href='mailto:jp@daginsure.co.za?subject='+encodeURIComponent('BI Review Request - '+(data.companyName||''))+'&body='+encodeURIComponent(body);
+    msg.className='fmsg show ok';
+    msg.textContent='Opening your email client to send the request to jp@daginsure.co.za…';
+  });
+})();
 </script>
 </body>
 </html>

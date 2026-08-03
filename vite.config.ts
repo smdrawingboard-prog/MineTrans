@@ -212,7 +212,7 @@ function vitePluginCopyHtmlFiles(): Plugin {
     apply: "build",
     async generateBundle() {
       const publicDir = path.join(PROJECT_ROOT, "client/public");
-      const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "marketing.html", "faq.html", "contact.html", "favicon.ico"];
+      const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "courses.html", "student-portal.html", "training-showcase.html", "favicon.ico"];
       
       for (const file of htmlFiles) {
         const filePath = path.join(publicDir, file);
@@ -242,7 +242,7 @@ function vitePluginStaticHtmlServer(): Plugin {
         const url = req.url?.split("?")[0] || "/";
         
         // List of HTML files to serve
-        const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "marketing.html", "faq.html", "contact.html"];
+        const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "courses.html", "student-portal.html", "training-showcase.html"];
         
         // If URL is root, serve index.html
         if (url === "/") {

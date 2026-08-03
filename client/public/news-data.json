@@ -1,0 +1,45 @@
+{
+  "updatedAt": "2026-08-03T13:25:35.601Z",
+  "articles": [
+    {
+      "headline": "South African Mining Output Faces Disruption Risk from Power Crisis",
+      "excerpt": "Load shedding continues to impact mining operations across South Africa, with major producers reporting production losses. Business interruption insurance claims surge as operators seek coverage for extended downtime.",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/south-africa-power-crisis",
+      "publishedAt": "2026-08-02T13:25:35.600Z",
+      "category": "Power & Water"
+    },
+    {
+      "headline": "Zimbabwe Tailings Dam Safety Standards Tightened",
+      "excerpt": "Regulatory authorities in Zimbabwe implement new tailings management protocols following recent environmental incidents. Mining operators must comply with stricter monitoring and reporting requirements.",
+      "publication": "Engineering News",
+      "sourceUrl": "https://www.engineeringnews.co.za/zimbabwe-tailings",
+      "publishedAt": "2026-08-01T13:25:35.600Z",
+      "category": "Tailings Risk"
+    },
+    {
+      "headline": "Zambia Mining Sector Faces New Safety Regulations",
+      "excerpt": "The Zambian government announces enhanced safety protocols for underground mining operations. The regulations aim to reduce workplace accidents and improve operational compliance across the sector.",
+      "publication": "Mining Journal",
+      "sourceUrl": "https://www.mining-journal.com/zambia-safety",
+      "publishedAt": "2026-07-31T13:25:35.600Z",
+      "category": "Safety"
+    },
+    {
+      "headline": "Supply Chain Disruptions Hit Sub-Saharan Mining Operations",
+      "excerpt": "Logistics challenges in Sub-Saharan Africa continue to disrupt mining supply chains. Operators report delays in equipment delivery and spare parts availability, impacting production schedules.",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/supply-chain-africa",
+      "publishedAt": "2026-07-30T13:25:35.600Z",
+      "category": "Supply Chain"
+    },
+    {
+      "headline": "Gold Prices Surge Amid Global Economic Uncertainty",
+      "excerpt": "Gold prices reach three-month highs as investors seek safe-haven assets. Sub-Saharan mining operations benefit from improved commodity pricing, though operational challenges persist.",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/gold-prices-surge",
+      "publishedAt": "2026-07-29T13:25:35.600Z",
+      "category": "Commodity Prices"
+    }
+  ]
+}

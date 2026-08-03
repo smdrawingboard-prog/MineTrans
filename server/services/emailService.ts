@@ -6,6 +6,14 @@ interface LeadData {
   position: string;
   miningSector: string;
   riskArea: string;
+  siteLocation: string;
+  annualTurnover: string;
+  biSumInsured: string;
+  indemnityPeriod: string;
+  keyFacility: string;
+  previousClaims: string;
+  currentInsurer: string;
+  siteVisitAvailability: string;
   message: string;
   submittedAt: string;
 }
@@ -22,6 +30,14 @@ export async function sendLeadNotificationEmail(lead: LeadData): Promise<void> {
       position: lead.position,
       miningSector: lead.miningSector,
       riskArea: lead.riskArea,
+      siteLocation: lead.siteLocation,
+      annualTurnover: lead.annualTurnover,
+      biSumInsured: lead.biSumInsured,
+      indemnityPeriod: lead.indemnityPeriod,
+      keyFacility: lead.keyFacility,
+      previousClaims: lead.previousClaims,
+      currentInsurer: lead.currentInsurer,
+      siteVisitAvailability: lead.siteVisitAvailability,
       message: lead.message,
     });
 

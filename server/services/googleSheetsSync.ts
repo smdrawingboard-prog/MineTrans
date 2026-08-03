@@ -33,6 +33,14 @@ export interface BIReviewLead {
   position: string;
   miningSector: string;
   riskArea: string;
+  siteLocation: string;
+  annualTurnover: string;
+  biSumInsured: string;
+  indemnityPeriod: string;
+  keyFacility: string;
+  previousClaims: string;
+  currentInsurer: string;
+  siteVisitAvailability: string;
   message: string;
   submittedAt: string;
 }
@@ -83,7 +91,7 @@ export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
   try {
     await client.spreadsheets.values.append({
       spreadsheetId,
-      range: "Leads!A:I",
+      range: "Leads!A:Q",
       valueInputOption: "RAW",
       insertDataOption: "INSERT_ROWS",
       requestBody: {
@@ -97,6 +105,14 @@ export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
             lead.position,
             lead.miningSector,
             lead.riskArea,
+            lead.siteLocation,
+            lead.annualTurnover,
+            lead.biSumInsured,
+            lead.indemnityPeriod,
+            lead.keyFacility,
+            lead.previousClaims,
+            lead.currentInsurer,
+            lead.siteVisitAvailability,
             lead.message,
           ],
         ],
