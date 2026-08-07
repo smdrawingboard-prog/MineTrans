@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-07T07:23:18.073Z",
+  "updatedAt": "2026-08-07T13:14:07.958Z",
   "articles": [
     {
       "headline": "registration@miningindaba.com",
       "excerpt": "Latest from Mining Indaba: registration@miningindaba.com...",
       "publication": "Mining Indaba",
       "sourceUrl": "https://miningindaba.commailto:registration@miningindaba.com",
-      "publishedAt": "2026-08-07T07:23:11.332Z",
+      "publishedAt": "2026-08-07T13:14:01.297Z",
       "category": "General"
     },
     {
@@ -14,7 +14,7 @@
       "excerpt": "",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/",
-      "publishedAt": "2026-08-07T07:23:10.673Z",
+      "publishedAt": "2026-08-07T13:14:00.042Z",
       "category": "General"
     },
     {
@@ -22,7 +22,7 @@
       "excerpt": "If you look at an open-pit mine as a business, you quickly see how much has to work together at the same time. Excavators, trucks, haul roads, dispatchers, maintenance teams,&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/tag/technology/",
-      "publishedAt": "2026-08-07T07:23:10.673Z",
+      "publishedAt": "2026-08-07T13:14:00.042Z",
       "category": "Machinery Breakdown"
     },
     {
@@ -30,7 +30,7 @@
       "excerpt": "Mining operations across Africa are under increasing pressure to do more with less. Rising input costs, constrained capital investment, ageing fleets and increasing ESG (environmental, social &amp; governance) expectations are&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/technology/how-real-time-tyre-data-is-cutting-costs-in-african-mines/",
-      "publishedAt": "2026-08-07T07:23:10.673Z",
+      "publishedAt": "2026-08-07T13:14:00.042Z",
       "category": "Tailings Risk"
     },
     {
@@ -38,7 +38,7 @@
       "excerpt": "Paratus Botswana and Eutelsat showcased resilient, integrated connectivity solutions for mining during the Future of Mining Summit 2026, as southern Africa’s mining sector continues to embrace digital transformation. Paratus Botswana&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/paratus-botswana-and-eutelsat-redefine-how-mining-connects-in-southern-africa/",
-      "publishedAt": "2026-08-07T07:23:10.673Z",
+      "publishedAt": "2026-08-07T13:14:00.042Z",
       "category": "General"
     },
     {
@@ -46,15 +46,7 @@
       "excerpt": "Solar Group, the parent company of Solar Mining Services South Africa, continues to strengthen its position as a global leader in industrial explosives and blasting solutions through strategic investments across&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/solar-group-expands-its-african-footprint-through-strategic-investments-and-enhanced-regional-capability/",
-      "publishedAt": "2026-08-07T07:23:10.673Z",
-      "category": "General"
-    },
-    {
-      "headline": "LINKEDIN",
-      "excerpt": "Latest news from Mining Journal about LINKEDIN...",
-      "publication": "Mining Journal",
-      "sourceUrl": "https://www.linkedin.com/company/mining-journal/",
-      "publishedAt": "2026-08-07T07:23:09.441Z",
+      "publishedAt": "2026-08-07T13:14:00.042Z",
       "category": "General"
     },
     {
@@ -62,7 +54,7 @@
       "excerpt": "Note: When you select a default region you will be directed to the MiningWeekly.com home page of your choice whenever you visit miningweekly.com. This setting is controlled by cookies and should your cookies be re-set you will then be directed to the regional edition associated with the geographic l",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.comjavascript:void(0);",
-      "publishedAt": "2026-08-07T07:23:09.236Z",
+      "publishedAt": "2026-08-07T13:13:58.882Z",
       "category": "General"
     },
     {
@@ -70,7 +62,7 @@
       "excerpt": "sponsored by&nbsp;&nbsp;",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/cookie-policy",
-      "publishedAt": "2026-08-07T07:23:09.236Z",
+      "publishedAt": "2026-08-07T13:13:58.882Z",
       "category": "Regulation"
     },
     {
@@ -78,8 +70,16 @@
       "excerpt": "Research Reports",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/africa-edition/page:1",
-      "publishedAt": "2026-08-07T07:23:09.236Z",
+      "publishedAt": "2026-08-07T13:13:58.882Z",
       "category": "General"
+    },
+    {
+      "headline": "Pumps",
+      "excerpt": "Sulzer South Africa, established in 1922, partners with critical industries like power, oil & gas, water, mining, and chemicals to boost...",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6485",
+      "publishedAt": "2026-08-07T13:13:58.882Z",
+      "category": "Power & Water"
     }
   ]
 }
