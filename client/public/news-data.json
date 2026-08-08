@@ -1,52 +1,20 @@
 {
-  "updatedAt": "2026-08-08T12:57:09.671Z",
+  "updatedAt": "2026-08-08T18:43:36.681Z",
   "articles": [
     {
       "headline": "registration@miningindaba.com",
       "excerpt": "Latest from Mining Indaba: registration@miningindaba.com...",
       "publication": "Mining Indaba",
       "sourceUrl": "https://miningindaba.commailto:registration@miningindaba.com",
-      "publishedAt": "2026-08-08T12:57:03.081Z",
+      "publishedAt": "2026-08-08T18:43:29.726Z",
       "category": "General"
     },
     {
-      "headline": "African Mining News",
-      "excerpt": "",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/",
-      "publishedAt": "2026-08-08T12:57:02.165Z",
-      "category": "General"
-    },
-    {
-      "headline": "technology",
-      "excerpt": "If you look at an open-pit mine as a business, you quickly see how much has to work together at the same time. Excavators, trucks, haul roads, dispatchers, maintenance teams,&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/tag/technology/",
-      "publishedAt": "2026-08-08T12:57:02.165Z",
-      "category": "Machinery Breakdown"
-    },
-    {
-      "headline": "How real-time tyre data is cutting costs in African mines",
-      "excerpt": "Mining operations across Africa are under increasing pressure to do more with less. Rising input costs, constrained capital investment, ageing fleets and increasing ESG (environmental, social &amp; governance) expectations are&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/technology/how-real-time-tyre-data-is-cutting-costs-in-african-mines/",
-      "publishedAt": "2026-08-08T12:57:02.165Z",
-      "category": "Tailings Risk"
-    },
-    {
-      "headline": "Paratus Botswana and Eutelsat redefine how mining connects in southern Africa",
-      "excerpt": "Paratus Botswana and Eutelsat showcased resilient, integrated connectivity solutions for mining during the Future of Mining Summit 2026, as southern Africa’s mining sector continues to embrace digital transformation. Paratus Botswana&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/paratus-botswana-and-eutelsat-redefine-how-mining-connects-in-southern-africa/",
-      "publishedAt": "2026-08-08T12:57:02.165Z",
-      "category": "General"
-    },
-    {
-      "headline": "Solar Group expands its African footprint through strategic investments and enhanced regional capability",
-      "excerpt": "Solar Group, the parent company of Solar Mining Services South Africa, continues to strengthen its position as a global leader in industrial explosives and blasting solutions through strategic investments across&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/solar-group-expands-its-african-footprint-through-strategic-investments-and-enhanced-regional-capability/",
-      "publishedAt": "2026-08-08T12:57:02.165Z",
+      "headline": "LINKEDIN",
+      "excerpt": "Latest news from Mining Journal about LINKEDIN...",
+      "publication": "Mining Journal",
+      "sourceUrl": "https://www.linkedin.com/company/mining-journal/",
+      "publishedAt": "2026-08-08T18:43:28.133Z",
       "category": "General"
     },
     {
@@ -54,7 +22,7 @@
       "excerpt": "Sponsored by&nbsp;&nbsp;&nbsp;",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.comjavascript:clearSearch();",
-      "publishedAt": "2026-08-08T12:57:01.470Z",
+      "publishedAt": "2026-08-08T18:43:27.887Z",
       "category": "General"
     },
     {
@@ -62,7 +30,7 @@
       "excerpt": "Note: When you select a default region you will be directed to the MiningWeekly.com home page of your choice whenever you visit miningweekly.com. This setting is controlled by cookies and should your cookies be re-set you will then be directed to the regional edition associated with the geographic l",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.comjavascript:void(0);",
-      "publishedAt": "2026-08-08T12:57:01.470Z",
+      "publishedAt": "2026-08-08T18:43:27.887Z",
       "category": "General"
     },
     {
@@ -70,7 +38,7 @@
       "excerpt": "sponsored by&nbsp;&nbsp;",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/cookie-policy",
-      "publishedAt": "2026-08-08T12:57:01.470Z",
+      "publishedAt": "2026-08-08T18:43:27.887Z",
       "category": "Regulation"
     },
     {
@@ -78,7 +46,39 @@
       "excerpt": "Research Reports",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/africa-edition/page:1",
-      "publishedAt": "2026-08-08T12:57:01.470Z",
+      "publishedAt": "2026-08-08T18:43:27.887Z",
+      "category": "General"
+    },
+    {
+      "headline": "Mining",
+      "excerpt": "Axiom Hydraulics is a trusted leader in South Africa’s hydraulic industry, delivering world-class components, systems, and engineering expertise...",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6465",
+      "publishedAt": "2026-08-08T18:43:27.887Z",
+      "category": "General"
+    },
+    {
+      "headline": "Lithium mining for green power triggers eco-outcry from South African farmers",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/lithium-mining-for-green-power-triggers-eco-outcry-from-south-african-farmers/",
+      "publishedAt": "2026-08-04T12:10:00.000Z",
+      "category": "Power & Water"
+    },
+    {
+      "headline": "US enters China&#8217;s Africa turf with new rare earth bet",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/us-enters-chinas-africa-turf-with-new-rare-earth-bet/",
+      "publishedAt": "2026-07-28T16:04:57.000Z",
+      "category": "General"
+    },
+    {
+      "headline": "Zambia bets on pan-Africa metals exchange to boost mining wealth",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/zambia-bets-on-pan-africa-metals-exchange-to-boost-mining-wealth/",
+      "publishedAt": "2026-07-28T14:32:29.000Z",
       "category": "General"
     }
   ]
