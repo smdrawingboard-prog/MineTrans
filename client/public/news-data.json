@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-09T18:48:45.268Z",
+  "updatedAt": "2026-08-10T02:07:58.994Z",
   "articles": [
     {
       "headline": "registration@miningindaba.com",
       "excerpt": "Latest from Mining Indaba: registration@miningindaba.com...",
       "publication": "Mining Indaba",
       "sourceUrl": "https://miningindaba.commailto:registration@miningindaba.com",
-      "publishedAt": "2026-08-09T18:48:39.195Z",
+      "publishedAt": "2026-08-10T02:07:53.040Z",
       "category": "General"
     },
     {
@@ -14,7 +14,7 @@
       "excerpt": "",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/",
-      "publishedAt": "2026-08-09T18:48:37.899Z",
+      "publishedAt": "2026-08-10T02:07:51.630Z",
       "category": "General"
     },
     {
@@ -22,7 +22,7 @@
       "excerpt": "Earlier this year, more than 60 professionals from across the SRK Consulting global network gathered in Sandton at the Contaminated Land Environmental Rehabilitation (CLER) Workshop to exchange specialist knowledge on&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/tag/technology/",
-      "publishedAt": "2026-08-09T18:48:37.899Z",
+      "publishedAt": "2026-08-10T02:07:51.630Z",
       "category": "Tailings Risk"
     },
     {
@@ -30,7 +30,7 @@
       "excerpt": "Over more than 20 years in mining, I have learnt that succeeding in this industry is not about becoming ‘one of the boys’. It is about bringing your own female&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/women-in-mining-bringing-a-different-perspective-to-address-complex-client-needs-at-bme/",
-      "publishedAt": "2026-08-09T18:48:37.899Z",
+      "publishedAt": "2026-08-10T02:07:51.630Z",
       "category": "General"
     },
     {
@@ -38,7 +38,7 @@
       "excerpt": "Namibia&#8217;s mining industry continues to attract investment across uranium, gold, copper and other critical minerals, positioning the sector for another period of growth. As mining operations expand, however, success will&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/minerals/water-stewardship-and-integrated-mining-solutions-for-namibias-next-phase-of-growth/",
-      "publishedAt": "2026-08-09T18:48:37.899Z",
+      "publishedAt": "2026-08-10T02:07:51.630Z",
       "category": "Commodity Prices"
     },
     {
@@ -46,15 +46,23 @@
       "excerpt": "In many mine-wide water balances, the tailings storage facility (TSF) still appears as a single line item: a convenient ‘black box’ where water goes in, something comes out and the&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/from-black-box-to-blue-box-in-tailings-storage-facility-water-management/",
-      "publishedAt": "2026-08-09T18:48:37.899Z",
+      "publishedAt": "2026-08-10T02:07:51.630Z",
       "category": "Tailings Risk"
+    },
+    {
+      "headline": "Clear Search",
+      "excerpt": "Sponsored by&nbsp;&nbsp;&nbsp;",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.miningweekly.comjavascript:clearSearch();",
+      "publishedAt": "2026-08-10T02:07:50.245Z",
+      "category": "General"
     },
     {
       "headline": "Set Now",
       "excerpt": "Note: When you select a default region you will be directed to the MiningWeekly.com home page of your choice whenever you visit miningweekly.com. This setting is controlled by cookies and should your cookies be re-set you will then be directed to the regional edition associated with the geographic l",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.comjavascript:void(0);",
-      "publishedAt": "2026-08-09T18:48:36.361Z",
+      "publishedAt": "2026-08-10T02:07:50.245Z",
       "category": "General"
     },
     {
@@ -62,7 +70,7 @@
       "excerpt": "sponsored by&nbsp;&nbsp;",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/cookie-policy",
-      "publishedAt": "2026-08-09T18:48:36.361Z",
+      "publishedAt": "2026-08-10T02:07:50.245Z",
       "category": "Regulation"
     },
     {
@@ -70,15 +78,7 @@
       "excerpt": "Research Reports",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/africa-edition/page:1",
-      "publishedAt": "2026-08-09T18:48:36.361Z",
-      "category": "General"
-    },
-    {
-      "headline": "Mining",
-      "excerpt": "Axiom Hydraulics is a trusted leader in South Africa’s hydraulic industry, delivering world-class components, systems, and engineering expertise...",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6465",
-      "publishedAt": "2026-08-09T18:48:36.361Z",
+      "publishedAt": "2026-08-10T02:07:50.245Z",
       "category": "General"
     }
   ]
