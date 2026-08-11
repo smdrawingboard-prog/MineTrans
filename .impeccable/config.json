@@ -14,6 +14,111 @@
         "value": "rgba(173,106,61,.25)",
         "createdAt": "2026-08-11T10:22:00.013Z",
         "reason": "Same confirmed Raised-Ore Rule elevation shadow as rgba(173, 106, 61, 0.25) — compact rgba formatting matches this file's existing minified-CSS convention."
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-08-11T10:24:01.588Z",
+        "reason": "Inter is the confirmed body font in DESIGN.md typography (established brand choice, predates this session)."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/index.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.479Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insurance-machinery.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.559Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insurance-mine.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.642Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insurance-transit.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.726Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insurance.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.804Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/contact.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.886Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/faq.html"
+        ],
+        "createdAt": "2026-08-11T10:24:05.966Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insights.html"
+        ],
+        "createdAt": "2026-08-11T10:24:06.048Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/news.html"
+        ],
+        "createdAt": "2026-08-11T10:24:06.124Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/risk.html"
+        ],
+        "createdAt": "2026-08-11T10:24:06.205Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/training-showcase.html"
+        ],
+        "createdAt": "2026-08-11T10:24:06.288Z",
+        "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
       }
     ]
   }
