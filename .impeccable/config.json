@@ -119,6 +119,24 @@
         ],
         "createdAt": "2026-08-11T10:24:06.288Z",
         "reason": "The 2-4px copper left-edge border on .block/.pullquote/.dropmenu is DESIGN.md's documented signature 'flagged item' treatment (Shapes section), not AI-generated slop. Predates this session."
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "client/src/pages/QuizInterface.tsx"
+        ],
+        "createdAt": "2026-08-11T10:47:53.595Z",
+        "reason": "L133 is a CSS loading spinner (rounded-full animate-spin with one colored edge), not a card — the detector's card+radius heuristic misfires on this standard spinner technique."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/src/pages/QuizInterface.tsx"
+        ],
+        "createdAt": "2026-08-11T10:47:53.675Z",
+        "reason": "L305 border-l-4 is a functional correct/incorrect answer-feedback alert banner, not a decorative card accent."
       }
     ]
   }
