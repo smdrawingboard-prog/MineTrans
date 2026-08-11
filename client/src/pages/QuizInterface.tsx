@@ -32,8 +32,12 @@ export default function QuizInterface() {
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [transitionDirection, setTransitionDirection] = useState<"forward" | "backward">("forward");
-  const [answerFeedback, setAnswerFeedback] = useState<AnswerFeedback | null>(null);
+  const [transitionDirection, setTransitionDirection] = useState<
+    "forward" | "backward"
+  >("forward");
+  const [answerFeedback, setAnswerFeedback] = useState<AnswerFeedback | null>(
+    null
+  );
   const [showFeedback, setShowFeedback] = useState(false);
   const [failureAnimationDone, setFailureAnimationDone] = useState(false);
 
@@ -71,7 +75,7 @@ export default function QuizInterface() {
   }, [questionsQuery.data]);
 
   const handleAnswerChange = (questionId: number, value: string) => {
-    const question = questions.find((q) => q.id === questionId);
+    const question = questions.find(q => q.id === questionId);
     if (!question) return;
 
     setAnswers({
@@ -139,7 +143,9 @@ export default function QuizInterface() {
 
   if (submitted && result && !result.passed && !failureAnimationDone) {
     return (
-      <CriticalFailureAnimation onComplete={() => setFailureAnimationDone(true)} />
+      <CriticalFailureAnimation
+        onComplete={() => setFailureAnimationDone(true)}
+      />
     );
   }
 
@@ -149,7 +155,9 @@ export default function QuizInterface() {
         <div className="max-w-2xl mx-auto animate-fadeIn">
           <Card className="bg-slate-800 border-amber-600/30 p-8 text-center">
             <div className="mb-6">
-              <div className={`text-6xl font-bold mb-4 ${result.passed ? "text-green-500" : "text-red-500"}`}>
+              <div
+                className={`text-6xl font-bold mb-4 ${result.passed ? "text-green-500" : "text-red-500"}`}
+              >
                 {result.passed ? "✓" : "✗"}
               </div>
               <h1 className="text-3xl font-bold text-amber-600 mb-2">
@@ -158,7 +166,9 @@ export default function QuizInterface() {
             </div>
 
             <div className="mb-6">
-              <div className="text-5xl font-bold text-amber-600 mb-2">{result.percentage}%</div>
+              <div className="text-5xl font-bold text-amber-600 mb-2">
+                {result.percentage}%
+              </div>
               <p className="text-slate-300">
                 You scored {result.score} out of {result.totalPoints} points
               </p>
@@ -180,7 +190,9 @@ export default function QuizInterface() {
 
             <div className="flex gap-4 justify-center">
               <Button
-                onClick={() => (window.location.href = "/certification/dashboard")}
+                onClick={() =>
+                  (window.location.href = "/certification/dashboard")
+                }
                 variant="outline"
                 className="border-amber-600 text-amber-600"
               >
@@ -250,12 +262,14 @@ export default function QuizInterface() {
 
               {/* Answer Options */}
               <div className="space-y-3 mb-8">
-                {question.questionType === "multiple_choice" && question.options ? (
+                {question.questionType === "multiple_choice" &&
+                question.options ? (
                   question.options.map((option: string, idx: number) => {
                     const isSelected = answers[question.id] === option;
                     const isCorrectOption = option === question.correctAnswer;
                     const showCorrect = showFeedback && isCorrectOption;
-                    const showIncorrect = showFeedback && isSelected && !isCorrectOption;
+                    const showIncorrect =
+                      showFeedback && isSelected && !isCorrectOption;
 
                     return (
                       <label
@@ -264,10 +278,10 @@ export default function QuizInterface() {
                           showCorrect
                             ? "border-green-500 bg-green-900/20 scale-105"
                             : showIncorrect
-                            ? "border-red-500 bg-red-900/20 scale-105"
-                            : isSelected
-                            ? "border-amber-600 bg-amber-600/10"
-                            : "border-slate-600 hover:border-slate-500 hover:bg-slate-700/30"
+                              ? "border-red-500 bg-red-900/20 scale-105"
+                              : isSelected
+                                ? "border-amber-600 bg-amber-600/10"
+                                : "border-slate-600 hover:border-slate-500 hover:bg-slate-700/30"
                         }`}
                       >
                         <input
@@ -275,15 +289,21 @@ export default function QuizInterface() {
                           name={`question-${question.id}`}
                           value={option}
                           checked={isSelected}
-                          onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                          onChange={e =>
+                            handleAnswerChange(question.id, e.target.value)
+                          }
                           className="mr-3 w-4 h-4 cursor-pointer"
                         />
                         <span className="text-slate-300 flex-1">{option}</span>
                         {showCorrect && (
-                          <span className="text-green-400 font-bold ml-2 animate-pulse">✓</span>
+                          <span className="text-green-400 font-bold ml-2 animate-pulse">
+                            ✓
+                          </span>
                         )}
                         {showIncorrect && (
-                          <span className="text-red-400 font-bold ml-2 animate-pulse">✗</span>
+                          <span className="text-red-400 font-bold ml-2 animate-pulse">
+                            ✗
+                          </span>
                         )}
                       </label>
                     );
@@ -293,7 +313,9 @@ export default function QuizInterface() {
                     <input
                       type="text"
                       value={answers[question.id] || ""}
-                      onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                      onChange={e =>
+                        handleAnswerChange(question.id, e.target.value)
+                      }
                       placeholder="Enter your answer"
                       className="w-full px-4 py-3 bg-slate-700 border-2 border-slate-600 rounded text-white placeholder:text-slate-500 focus:border-amber-600 focus:outline-none transition-colors"
                     />
@@ -315,11 +337,16 @@ export default function QuizInterface() {
                   </p>
                   {!answerFeedback.isCorrect && (
                     <p className="text-sm opacity-90">
-                      Correct answer: <span className="font-semibold">{answerFeedback.correctAnswer}</span>
+                      Correct answer:{" "}
+                      <span className="font-semibold">
+                        {answerFeedback.correctAnswer}
+                      </span>
                     </p>
                   )}
                   {answerFeedback.explanation && (
-                    <p className="text-sm mt-2 opacity-90">{answerFeedback.explanation}</p>
+                    <p className="text-sm mt-2 opacity-90">
+                      {answerFeedback.explanation}
+                    </p>
                   )}
                 </div>
               )}
@@ -330,7 +357,9 @@ export default function QuizInterface() {
                   <button
                     key={idx}
                     onClick={() => {
-                      setTransitionDirection(idx > currentQuestion ? "forward" : "backward");
+                      setTransitionDirection(
+                        idx > currentQuestion ? "forward" : "backward"
+                      );
                       setCurrentQuestion(idx);
                       setShowFeedback(false);
                     }}
@@ -338,8 +367,8 @@ export default function QuizInterface() {
                       idx === currentQuestion
                         ? "bg-amber-600 text-white ring-2 ring-amber-400"
                         : answers[questions[idx].id] !== undefined
-                        ? "bg-green-600 text-white hover:bg-green-700"
-                        : "bg-slate-700 text-slate-400 hover:bg-slate-600"
+                          ? "bg-green-600 text-white hover:bg-green-700"
+                          : "bg-slate-700 text-slate-400 hover:bg-slate-600"
                     }`}
                   >
                     {idx + 1}

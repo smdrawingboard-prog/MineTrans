@@ -25,7 +25,7 @@ export default function CertificationDashboard() {
       return;
     }
     setStudent(JSON.parse(stored));
-    
+
     // Load courses
     if (coursesQuery.data) {
       setCourses(coursesQuery.data);
@@ -52,7 +52,9 @@ export default function CertificationDashboard() {
       <div className="bg-slate-800 border-b border-amber-600/30 p-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-amber-600 mb-1">MineTrans Certification</h1>
+            <h1 className="text-3xl font-bold text-amber-600 mb-1">
+              MineTrans Certification
+            </h1>
             <p className="text-slate-400">Welcome, {student?.name}</p>
           </div>
           <Button
@@ -75,13 +77,15 @@ export default function CertificationDashboard() {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {courses.map((course) => (
+              {courses.map(course => (
                 <Card
                   key={course.id}
                   className="bg-slate-800 border-amber-600/30 hover:border-amber-600/60 transition cursor-pointer"
                 >
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-amber-600 mb-2">{course.title}</h3>
+                    <h3 className="text-xl font-bold text-amber-600 mb-2">
+                      {course.title}
+                    </h3>
                     <p className="text-slate-400 mb-4">{course.description}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-slate-500">
@@ -107,7 +111,9 @@ export default function CertificationDashboard() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Your Progress</h2>
           <Card className="bg-slate-800 border-slate-700 p-6">
-            <p className="text-slate-400">Complete courses to track your progress here.</p>
+            <p className="text-slate-400">
+              Complete courses to track your progress here.
+            </p>
           </Card>
         </div>
       </div>

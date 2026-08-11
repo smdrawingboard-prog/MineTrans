@@ -34,9 +34,13 @@ interface StudentProgress {
 export default function StudentPortal() {
   const [student, setStudent] = useState<Student | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
-  const [progress, setProgress] = useState<Map<number, StudentProgress>>(new Map());
+  const [progress, setProgress] = useState<Map<number, StudentProgress>>(
+    new Map()
+  );
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"dashboard" | "courses" | "certificates">("dashboard");
+  const [activeTab, setActiveTab] = useState<
+    "dashboard" | "courses" | "certificates"
+  >("dashboard");
 
   const coursesQuery = trpc.certification.getCourses.useQuery();
 
@@ -71,7 +75,9 @@ export default function StudentPortal() {
   const getProgressPercentage = (courseId: number): number => {
     const courseProgress = progress.get(courseId);
     if (!courseProgress) return 0;
-    return Math.round((courseProgress.completedSections / courseProgress.totalSections) * 100);
+    return Math.round(
+      (courseProgress.completedSections / courseProgress.totalSections) * 100
+    );
   };
 
   if (loading) {
@@ -92,7 +98,9 @@ export default function StudentPortal() {
       <div className="bg-slate-800 border-b border-amber-600/30 p-6 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-amber-600 mb-1">My Learning Dashboard</h1>
+            <h1 className="text-3xl font-bold text-amber-600 mb-1">
+              My Learning Dashboard
+            </h1>
             <p className="text-slate-400">Welcome back, {student.name}!</p>
           </div>
           <Button
@@ -150,19 +158,31 @@ export default function StudentPortal() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="bg-slate-800 border-amber-600/30 p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Courses Enrolled</p>
-                  <p className="text-4xl font-bold text-amber-600">{courses.length}</p>
+                  <p className="text-slate-400 text-sm mb-2">
+                    Courses Enrolled
+                  </p>
+                  <p className="text-4xl font-bold text-amber-600">
+                    {courses.length}
+                  </p>
                 </div>
               </Card>
 
               <Card className="bg-slate-800 border-amber-600/30 p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Overall Progress</p>
+                  <p className="text-slate-400 text-sm mb-2">
+                    Overall Progress
+                  </p>
                   <p className="text-4xl font-bold text-amber-600">
                     {courses.length > 0
                       ? Math.round(
-                          Array.from(progress.values()).reduce((sum, p) => sum + p.completedSections, 0) /
-                            Array.from(progress.values()).reduce((sum, p) => sum + p.totalSections, 0) *
+                          (Array.from(progress.values()).reduce(
+                            (sum, p) => sum + p.completedSections,
+                            0
+                          ) /
+                            Array.from(progress.values()).reduce(
+                              (sum, p) => sum + p.totalSections,
+                              0
+                            )) *
                             100
                         )
                       : 0}
@@ -183,21 +203,35 @@ export default function StudentPortal() {
 
             {/* Recent Activity */}
             <Card className="bg-slate-800 border-amber-600/30 p-6">
-              <h2 className="text-xl font-bold text-amber-600 mb-4">Your Learning Path</h2>
+              <h2 className="text-xl font-bold text-amber-600 mb-4">
+                Your Learning Path
+              </h2>
               <div className="space-y-4">
                 {courses.length === 0 ? (
                   <p className="text-slate-400">No courses available yet.</p>
                 ) : (
-                  courses.map((course) => (
-                    <div key={course.id} className="bg-slate-700/50 p-4 rounded">
+                  courses.map(course => (
+                    <div
+                      key={course.id}
+                      className="bg-slate-700/50 p-4 rounded"
+                    >
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h3 className="font-semibold text-white">{course.title}</h3>
-                          <p className="text-sm text-slate-400">{course.totalSections} sections</p>
+                          <h3 className="font-semibold text-white">
+                            {course.title}
+                          </h3>
+                          <p className="text-sm text-slate-400">
+                            {course.totalSections} sections
+                          </p>
                         </div>
-                        <span className="text-amber-600 font-semibold">{getProgressPercentage(course.id)}%</span>
+                        <span className="text-amber-600 font-semibold">
+                          {getProgressPercentage(course.id)}%
+                        </span>
                       </div>
-                      <Progress value={getProgressPercentage(course.id)} className="h-2" />
+                      <Progress
+                        value={getProgressPercentage(course.id)}
+                        className="h-2"
+                      />
                     </div>
                   ))
                 )}
@@ -223,21 +257,32 @@ export default function StudentPortal() {
               </Card>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {courses.map((course) => (
+                {courses.map(course => (
                   <Card
                     key={course.id}
                     className="bg-slate-800 border-amber-600/30 hover:border-amber-600/60 transition overflow-hidden"
                   >
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-amber-600 mb-2">{course.title}</h3>
-                      <p className="text-slate-400 mb-4 text-sm">{course.description}</p>
+                      <h3 className="text-xl font-bold text-amber-600 mb-2">
+                        {course.title}
+                      </h3>
+                      <p className="text-slate-400 mb-4 text-sm">
+                        {course.description}
+                      </p>
 
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm text-slate-400">Progress</span>
-                          <span className="text-amber-600 font-semibold">{getProgressPercentage(course.id)}%</span>
+                          <span className="text-sm text-slate-400">
+                            Progress
+                          </span>
+                          <span className="text-amber-600 font-semibold">
+                            {getProgressPercentage(course.id)}%
+                          </span>
                         </div>
-                        <Progress value={getProgressPercentage(course.id)} className="h-2" />
+                        <Progress
+                          value={getProgressPercentage(course.id)}
+                          className="h-2"
+                        />
                       </div>
 
                       <div className="flex justify-between items-center">
@@ -267,9 +312,12 @@ export default function StudentPortal() {
             <Card className="bg-slate-800 border-amber-600/30 p-8 text-center">
               <div className="mb-4">
                 <div className="text-5xl mb-4">📜</div>
-                <h3 className="text-xl font-bold text-white mb-2">No Certificates Yet</h3>
+                <h3 className="text-xl font-bold text-white mb-2">
+                  No Certificates Yet
+                </h3>
                 <p className="text-slate-400 mb-6">
-                  Complete a course and pass the final exam to earn your certificate.
+                  Complete a course and pass the final exam to earn your
+                  certificate.
                 </p>
               </div>
 
@@ -280,7 +328,10 @@ export default function StudentPortal() {
                 <ul className="text-sm text-slate-400 space-y-2">
                   <li>✓ Complete all course sections</li>
                   <li>✓ Pass all section quizzes</li>
-                  <li>✓ Score {courses.length > 0 ? courses[0].passingScore : 70}% or higher on the final exam</li>
+                  <li>
+                    ✓ Score {courses.length > 0 ? courses[0].passingScore : 70}%
+                    or higher on the final exam
+                  </li>
                   <li>✓ Download your digital certificate</li>
                 </ul>
               </div>

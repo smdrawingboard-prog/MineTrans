@@ -99,7 +99,7 @@ function categorizeArticle(headline: string, excerpt: string): string {
   const text = `${headline} ${excerpt}`.toLowerCase();
 
   for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
-    if (keywords.some((keyword) => text.includes(keyword.toLowerCase()))) {
+    if (keywords.some(keyword => text.includes(keyword.toLowerCase()))) {
       return category;
     }
   }
@@ -142,9 +142,7 @@ function isRelevantToSubSaharanAfrica(
   // (mining articles are often relevant to all regions unless explicitly global)
   const hasMiningFocus =
     text.includes("mining") || text.includes("mine") || text.includes("ore");
-  const hasRegionFocus = regionKeywords.some((keyword) =>
-    text.includes(keyword)
-  );
+  const hasRegionFocus = regionKeywords.some(keyword => text.includes(keyword));
 
   return hasRegionFocus || (hasMiningFocus && !text.includes("global"));
 }
@@ -271,16 +269,13 @@ async function fetchFromMiningWeekly(): Promise<InsertMiningNews[]> {
  */
 async function fetchFromMiningReview(): Promise<InsertMiningNews[]> {
   try {
-    const response = await axios.get(
-      "https://www.miningreview.com/",
-      {
-        timeout: 10000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        },
-      }
-    );
+    const response = await axios.get("https://www.miningreview.com/", {
+      timeout: 10000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
 
     const articles: InsertMiningNews[] = [];
     const text = response.data;
@@ -323,16 +318,13 @@ async function fetchFromMiningReview(): Promise<InsertMiningNews[]> {
  */
 async function fetchFromAfricanMiningNews(): Promise<InsertMiningNews[]> {
   try {
-    const response = await axios.get(
-      "https://www.africanminingnews.co.za/",
-      {
-        timeout: 10000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        },
-      }
-    );
+    const response = await axios.get("https://www.africanminingnews.co.za/", {
+      timeout: 10000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
 
     const articles: InsertMiningNews[] = [];
     const text = response.data;
@@ -379,16 +371,13 @@ async function fetchFromAfricanMiningNews(): Promise<InsertMiningNews[]> {
  */
 async function fetchFromAfricanMining(): Promise<InsertMiningNews[]> {
   try {
-    const response = await axios.get(
-      "https://www.africanmining.co.za/",
-      {
-        timeout: 10000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        },
-      }
-    );
+    const response = await axios.get("https://www.africanmining.co.za/", {
+      timeout: 10000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
 
     const articles: InsertMiningNews[] = [];
     const text = response.data;
@@ -435,16 +424,13 @@ async function fetchFromAfricanMining(): Promise<InsertMiningNews[]> {
  */
 async function fetchFromSubSaharaMining(): Promise<InsertMiningNews[]> {
   try {
-    const response = await axios.get(
-      "https://subsaharamining.com/home/",
-      {
-        timeout: 10000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        },
-      }
-    );
+    const response = await axios.get("https://subsaharamining.com/home/", {
+      timeout: 10000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
 
     const articles: InsertMiningNews[] = [];
     const text = response.data;
@@ -491,16 +477,13 @@ async function fetchFromSubSaharaMining(): Promise<InsertMiningNews[]> {
  */
 async function fetchFromMiningIndaba(): Promise<InsertMiningNews[]> {
   try {
-    const response = await axios.get(
-      "https://miningindaba.com/articles",
-      {
-        timeout: 10000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        },
-      }
-    );
+    const response = await axios.get("https://miningindaba.com/articles", {
+      timeout: 10000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
 
     const articles: InsertMiningNews[] = [];
     const text = response.data;
@@ -573,7 +556,7 @@ function isRelevantToMiningInsurance(
     "ore",
   ];
 
-  return relevantKeywords.some((keyword) => text.includes(keyword));
+  return relevantKeywords.some(keyword => text.includes(keyword));
 }
 
 /**
@@ -581,16 +564,13 @@ function isRelevantToMiningInsurance(
  */
 async function fetchFromMiningCom(): Promise<InsertMiningNews[]> {
   try {
-    const response = await axios.get(
-      "https://www.mining.com/feed/?s=africa",
-      {
-        timeout: 10000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        },
-      }
-    );
+    const response = await axios.get("https://www.mining.com/feed/?s=africa", {
+      timeout: 10000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
 
     // Parse RSS feed (simplified - in production use xml2js or similar)
     const articles: InsertMiningNews[] = [];
@@ -605,9 +585,7 @@ async function fetchFromMiningCom(): Promise<InsertMiningNews[]> {
       const itemText = match[1];
 
       const titleMatch = /<title>([\s\S]*?)<\/title>/.exec(itemText);
-      const descMatch = /<description>([\s\S]*?)<\/description>/.exec(
-        itemText
-      );
+      const descMatch = /<description>([\s\S]*?)<\/description>/.exec(itemText);
       const linkMatch = /<link>([\s\S]*?)<\/link>/.exec(itemText);
       const pubDateMatch = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(itemText);
 
@@ -628,9 +606,7 @@ async function fetchFromMiningCom(): Promise<InsertMiningNews[]> {
             excerpt,
             publication: "Mining.com",
             sourceUrl,
-            publishedAt: pubDateMatch
-              ? new Date(pubDateMatch[1])
-              : new Date(),
+            publishedAt: pubDateMatch ? new Date(pubDateMatch[1]) : new Date(),
             category: categorizeArticle(headline, excerpt),
           });
           count++;
@@ -858,7 +834,7 @@ export async function fetchAllMiningNews(): Promise<InsertMiningNews[]> {
 
     // Remove duplicates based on headline
     const uniqueArticles = Array.from(
-      new Map(allArticles.map((a) => [a.headline, a])).values()
+      new Map(allArticles.map(a => [a.headline, a])).values()
     );
 
     // Sort by publication date (newest first)

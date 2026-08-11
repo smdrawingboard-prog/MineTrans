@@ -1,6 +1,12 @@
 import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
-import { searchMiningNews, getMiningNewsByCategory, getMiningNewsByDateRange, getAllCategories, getLatestMiningNews } from "../db";
+import {
+  searchMiningNews,
+  getMiningNewsByCategory,
+  getMiningNewsByDateRange,
+  getAllCategories,
+  getLatestMiningNews,
+} from "../db";
 
 export const newsSearchRouter = router({
   /**
@@ -35,7 +41,10 @@ export const newsSearchRouter = router({
     )
     .query(async ({ input }) => {
       try {
-        const results = await getMiningNewsByCategory(input.category, input.limit);
+        const results = await getMiningNewsByCategory(
+          input.category,
+          input.limit
+        );
         return { success: true, results, count: results.length };
       } catch (error) {
         console.error("[NewsSearch] Category filter error:", error);
@@ -56,7 +65,11 @@ export const newsSearchRouter = router({
     )
     .query(async ({ input }) => {
       try {
-        const results = await getMiningNewsByDateRange(input.startDate, input.endDate, input.limit);
+        const results = await getMiningNewsByDateRange(
+          input.startDate,
+          input.endDate,
+          input.limit
+        );
         return { success: true, results, count: results.length };
       } catch (error) {
         console.error("[NewsSearch] Date range filter error:", error);

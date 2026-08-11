@@ -1,6 +1,12 @@
 import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
-import { logPageView, logNewsEngagement, getPageViewStats, getNewsEngagementStats, getTopCategories } from "../db";
+import {
+  logPageView,
+  logNewsEngagement,
+  getPageViewStats,
+  getNewsEngagementStats,
+  getTopCategories,
+} from "../db";
 
 export const analyticsRouter = router({
   /**
@@ -17,7 +23,12 @@ export const analyticsRouter = router({
     )
     .mutation(async ({ input }) => {
       try {
-        await logPageView(input.page, input.referrer, input.userAgent, input.sessionId);
+        await logPageView(
+          input.page,
+          input.referrer,
+          input.userAgent,
+          input.sessionId
+        );
         return { success: true };
       } catch (error) {
         console.error("[Analytics] Page view log error:", error);
@@ -39,7 +50,12 @@ export const analyticsRouter = router({
     )
     .mutation(async ({ input }) => {
       try {
-        await logNewsEngagement(input.articleId, input.action, input.category, input.sessionId);
+        await logNewsEngagement(
+          input.articleId,
+          input.action,
+          input.category,
+          input.sessionId
+        );
         return { success: true };
       } catch (error) {
         console.error("[Analytics] Engagement log error:", error);
@@ -127,7 +143,10 @@ export const analyticsRouter = router({
         console.error("[Analytics] Get dashboard stats error:", error);
         return {
           success: false,
-          pages: { home: { totalViews: 0, uniqueSessions: 0 }, news: { totalViews: 0, uniqueSessions: 0 } },
+          pages: {
+            home: { totalViews: 0, uniqueSessions: 0 },
+            news: { totalViews: 0, uniqueSessions: 0 },
+          },
           engagement: [],
           topCategories: [],
         };

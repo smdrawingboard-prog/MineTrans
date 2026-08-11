@@ -19,7 +19,11 @@ export default function MiningNews() {
   const [error, setError] = useState<string | null>(null);
 
   // Fetch latest mining news from the backend
-  const { data: newsData, isLoading, error: queryError } = trpc.miningNews.getLatest.useQuery();
+  const {
+    data: newsData,
+    isLoading,
+    error: queryError,
+  } = trpc.miningNews.getLatest.useQuery();
 
   // Refresh news mutation
   const refreshMutation = trpc.miningNews.refreshNews.useMutation();
@@ -49,7 +53,8 @@ export default function MiningNews() {
   };
 
   const formatDate = (dateValue: Date | string) => {
-    const date = typeof dateValue === 'string' ? new Date(dateValue) : dateValue;
+    const date =
+      typeof dateValue === "string" ? new Date(dateValue) : dateValue;
     return date.toLocaleDateString("en-ZA", {
       year: "numeric",
       month: "short",
@@ -76,10 +81,11 @@ export default function MiningNews() {
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Mining News</h1>
           <p className="text-lg text-gray-400 max-w-2xl mb-6">
-            Weekly curated mining news from major publications, focused on business interruption, 
-            tailings, machinery, power, regulation, and safety in Sub-Saharan Africa.
+            Weekly curated mining news from major publications, focused on
+            business interruption, tailings, machinery, power, regulation, and
+            safety in Sub-Saharan Africa.
           </p>
-          
+
           {/* Refresh Button */}
           <button
             onClick={handleRefresh}
@@ -122,22 +128,28 @@ export default function MiningNews() {
         {/* Empty State */}
         {!isLoading && articles.length === 0 && !error && (
           <div className="text-center py-16">
-            <p className="text-gray-400 text-lg">No mining news articles available yet.</p>
-            <p className="text-gray-500 text-sm mt-2">Check back soon or click Refresh to fetch the latest news.</p>
+            <p className="text-gray-400 text-lg">
+              No mining news articles available yet.
+            </p>
+            <p className="text-gray-500 text-sm mt-2">
+              Check back soon or click Refresh to fetch the latest news.
+            </p>
           </div>
         )}
 
         {/* News Grid */}
         {!isLoading && articles.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {articles.map((article) => (
+            {articles.map(article => (
               <article
                 key={article.id}
                 className="bg-slate-800/50 border border-slate-700 rounded-lg p-6 hover:border-amber-600/50 transition-colors group"
               >
                 {/* Category Badge */}
                 {article.category && (
-                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${getCategoryColor(article.category)}`}>
+                  <div
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${getCategoryColor(article.category)}`}
+                  >
                     {article.category}
                   </div>
                 )}

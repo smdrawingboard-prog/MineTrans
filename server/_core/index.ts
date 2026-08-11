@@ -37,10 +37,10 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
   registerOAuthRoutes(app);
-  
+
   // Scheduled handlers (must be before tRPC middleware)
   app.post("/api/scheduled/refreshMiningNews", refreshMiningNewsHandler);
-  
+
   // tRPC API
   app.use(
     "/api/trpc",

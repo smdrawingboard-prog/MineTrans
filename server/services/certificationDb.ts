@@ -45,7 +45,7 @@ export async function createStudent(
       name,
       passwordHash,
     });
-    
+
     return await getStudentByEmail(email);
   } catch (error) {
     console.error("[Certification DB] Failed to create student:", error);
@@ -53,7 +53,9 @@ export async function createStudent(
   }
 }
 
-export async function getStudentByEmail(email: string): Promise<CertificationStudent | null> {
+export async function getStudentByEmail(
+  email: string
+): Promise<CertificationStudent | null> {
   const db = await getDb();
   if (!db) return null;
 
@@ -63,7 +65,7 @@ export async function getStudentByEmail(email: string): Promise<CertificationStu
       .from(certificationStudents)
       .where(eq(certificationStudents.email, email))
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get student:", error);
@@ -71,7 +73,9 @@ export async function getStudentByEmail(email: string): Promise<CertificationStu
   }
 }
 
-export async function getStudentById(id: number): Promise<CertificationStudent | null> {
+export async function getStudentById(
+  id: number
+): Promise<CertificationStudent | null> {
   const db = await getDb();
   if (!db) return null;
 
@@ -81,7 +85,7 @@ export async function getStudentById(id: number): Promise<CertificationStudent |
       .from(certificationStudents)
       .where(eq(certificationStudents.id, id))
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get student by ID:", error);
@@ -89,10 +93,13 @@ export async function getStudentById(id: number): Promise<CertificationStudent |
   }
 }
 
-export async function verifyStudentPassword(email: string, password: string): Promise<boolean> {
+export async function verifyStudentPassword(
+  email: string,
+  password: string
+): Promise<boolean> {
   const student = await getStudentByEmail(email);
   if (!student) return false;
-  
+
   try {
     return await bcrypt.compare(password, student.passwordHash);
   } catch (error) {
@@ -112,7 +119,7 @@ export async function getCourseById(courseId: number) {
       .from(certificationCourses)
       .where(eq(certificationCourses.id, courseId))
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get course:", error);
@@ -159,7 +166,7 @@ export async function getSectionById(sectionId: number) {
       .from(courseSections)
       .where(eq(courseSections.id, sectionId))
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get section:", error);
@@ -193,7 +200,7 @@ export async function getQuizById(quizId: number) {
       .from(quizzes)
       .where(eq(quizzes.id, quizId))
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get quiz:", error);
@@ -211,7 +218,7 @@ export async function getFinalExamByCourseId(courseId: number) {
       .from(quizzes)
       .where(and(eq(quizzes.courseId, courseId), eq(quizzes.isExam, "true")))
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get final exam:", error);
@@ -245,7 +252,12 @@ export async function getStudentProgress(studentId: number, courseId: number) {
     return await db
       .select()
       .from(studentProgress)
-      .where(and(eq(studentProgress.studentId, studentId), eq(studentProgress.courseId, courseId)));
+      .where(
+        and(
+          eq(studentProgress.studentId, studentId),
+          eq(studentProgress.courseId, courseId)
+        )
+      );
   } catch (error) {
     console.error("[Certification DB] Failed to get student progress:", error);
     return [];
@@ -337,7 +349,10 @@ export async function recordQuizAttempt(
   }
 }
 
-export async function getStudentQuizAttempts(studentId: number, quizId: number) {
+export async function getStudentQuizAttempts(
+  studentId: number,
+  quizId: number
+) {
   const db = await getDb();
   if (!db) return [];
 
@@ -345,7 +360,12 @@ export async function getStudentQuizAttempts(studentId: number, quizId: number) 
     return await db
       .select()
       .from(quizAttempts)
-      .where(and(eq(quizAttempts.studentId, studentId), eq(quizAttempts.quizId, quizId)))
+      .where(
+        and(
+          eq(quizAttempts.studentId, studentId),
+          eq(quizAttempts.quizId, quizId)
+        )
+      )
       .orderBy(quizAttempts.createdAt);
   } catch (error) {
     console.error("[Certification DB] Failed to get quiz attempts:", error);
@@ -364,7 +384,7 @@ export async function issueCertificate(
 
   try {
     const certificateNumber = `CERT-${Date.now()}-${studentId}`;
-    
+
     await db.insert(certificates).values({
       studentId,
       courseId,
@@ -379,7 +399,10 @@ export async function issueCertificate(
   }
 }
 
-export async function getCertificateByStudent(studentId: number, courseId: number) {
+export async function getCertificateByStudent(
+  studentId: number,
+  courseId: number
+) {
   const db = await getDb();
   if (!db) return null;
 
@@ -387,9 +410,14 @@ export async function getCertificateByStudent(studentId: number, courseId: numbe
     const result = await db
       .select()
       .from(certificates)
-      .where(and(eq(certificates.studentId, studentId), eq(certificates.courseId, courseId)))
+      .where(
+        and(
+          eq(certificates.studentId, studentId),
+          eq(certificates.courseId, courseId)
+        )
+      )
       .limit(1);
-    
+
     return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.error("[Certification DB] Failed to get certificate:", error);
@@ -410,7 +438,10 @@ export async function getAllStudents() {
   }
 }
 
-export async function getStudentCourseProgress(studentId: number, courseId: number) {
+export async function getStudentCourseProgress(
+  studentId: number,
+  courseId: number
+) {
   const db = await getDb();
   if (!db) return null;
 
@@ -429,7 +460,10 @@ export async function getStudentCourseProgress(studentId: number, courseId: numb
       quizAttempts: attempts,
     };
   } catch (error) {
-    console.error("[Certification DB] Failed to get student course progress:", error);
+    console.error(
+      "[Certification DB] Failed to get student course progress:",
+      error
+    );
     return null;
   }
 }

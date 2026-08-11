@@ -147,7 +147,10 @@ export async function initializeGoogleSheets(config: GoogleSheetsConfig) {
 /**
  * Create or update a sheet with student data
  */
-export async function syncStudentDataToSheets(spreadsheetId: string, sheetName: string = "Students") {
+export async function syncStudentDataToSheets(
+  spreadsheetId: string,
+  sheetName: string = "Students"
+) {
   if (!sheetsClient) {
     console.error("[Google Sheets] Client not initialized");
     return false;
@@ -158,8 +161,15 @@ export async function syncStudentDataToSheets(spreadsheetId: string, sheetName: 
     const students = await certDb.getAllStudents();
 
     // Prepare data for sheets
-    const headers = ["ID", "Name", "Email", "Status", "Enrolled Date", "Completed Date"];
-    const rows = students.map((s) => [
+    const headers = [
+      "ID",
+      "Name",
+      "Email",
+      "Status",
+      "Enrolled Date",
+      "Completed Date",
+    ];
+    const rows = students.map(s => [
       s.id,
       s.name,
       s.email,
@@ -184,7 +194,9 @@ export async function syncStudentDataToSheets(spreadsheetId: string, sheetName: 
       },
     });
 
-    console.log(`[Google Sheets] Synced ${students.length} students to sheet "${sheetName}"`);
+    console.log(
+      `[Google Sheets] Synced ${students.length} students to sheet "${sheetName}"`
+    );
     return true;
   } catch (error) {
     console.error("[Google Sheets] Sync failed:", error);
@@ -195,7 +207,10 @@ export async function syncStudentDataToSheets(spreadsheetId: string, sheetName: 
 /**
  * Sync student progress data to a separate sheet
  */
-export async function syncProgressDataToSheets(spreadsheetId: string, sheetName: string = "Progress") {
+export async function syncProgressDataToSheets(
+  spreadsheetId: string,
+  sheetName: string = "Progress"
+) {
   if (!sheetsClient) {
     console.error("[Google Sheets] Client not initialized");
     return false;
@@ -209,18 +224,26 @@ export async function syncProgressDataToSheets(spreadsheetId: string, sheetName:
     const headers = [
       "Student Name",
       "Email",
-      ...courses.map((c) => `${c.title} (%)`.substring(0, 30)), // Limit header length
+      ...courses.map(c => `${c.title} (%)`.substring(0, 30)), // Limit header length
     ];
 
     const rows = await Promise.all(
-      students.map(async (s) => {
+      students.map(async s => {
         const progressData: (string | number)[] = [s.name, s.email];
 
         for (const course of courses) {
-          const progress = await certDb.getStudentCourseProgress(s.id, course.id);
-          const percentage = progress && progress.progress && progress.progress.length > 0
-            ? Math.round((progress.progress.filter((p) => p.completed).length / progress.progress.length) * 100)
-            : 0;
+          const progress = await certDb.getStudentCourseProgress(
+            s.id,
+            course.id
+          );
+          const percentage =
+            progress && progress.progress && progress.progress.length > 0
+              ? Math.round(
+                  (progress.progress.filter(p => p.completed).length /
+                    progress.progress.length) *
+                    100
+                )
+              : 0;
           progressData.push(String(percentage));
         }
 
@@ -244,7 +267,9 @@ export async function syncProgressDataToSheets(spreadsheetId: string, sheetName:
       },
     });
 
-    console.log(`[Google Sheets] Synced progress data for ${students.length} students`);
+    console.log(
+      `[Google Sheets] Synced progress data for ${students.length} students`
+    );
     return true;
   } catch (error) {
     console.error("[Google Sheets] Progress sync failed:", error);
@@ -255,7 +280,10 @@ export async function syncProgressDataToSheets(spreadsheetId: string, sheetName:
 /**
  * Sync quiz attempt data to a separate sheet
  */
-export async function syncQuizAttemptsToSheets(spreadsheetId: string, sheetName: string = "Quiz Attempts") {
+export async function syncQuizAttemptsToSheets(
+  spreadsheetId: string,
+  sheetName: string = "Quiz Attempts"
+) {
   if (!sheetsClient) {
     console.error("[Google Sheets] Client not initialized");
     return false;
@@ -294,7 +322,10 @@ export async function syncQuizAttemptsToSheets(spreadsheetId: string, sheetName:
     console.log(`[Google Sheets] Created quiz attempts sheet`);
     return true;
   } catch (error) {
-    console.error("[Google Sheets] Quiz attempts sheet creation failed:", error);
+    console.error(
+      "[Google Sheets] Quiz attempts sheet creation failed:",
+      error
+    );
     return false;
   }
 }

@@ -26,7 +26,11 @@ export default function CertificationAuth() {
         toast.success("Login successful!");
         window.location.href = "/certification/dashboard";
       } else {
-        const result = await signupMutation.mutateAsync({ email, name, password });
+        const result = await signupMutation.mutateAsync({
+          email,
+          name,
+          password,
+        });
         localStorage.setItem("certStudent", JSON.stringify(result));
         toast.success("Account created! Welcome to the certification program.");
         window.location.href = "/certification/dashboard";
@@ -44,7 +48,9 @@ export default function CertificationAuth() {
         <div className="p-8">
           {/* Logo */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-amber-600 mb-2">MineTrans</h1>
+            <h1 className="text-3xl font-bold text-amber-600 mb-2">
+              MineTrans
+            </h1>
             <p className="text-slate-400">Certification Program</p>
           </div>
 
@@ -82,7 +88,7 @@ export default function CertificationAuth() {
                 <Input
                   type="text"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={e => setName(e.target.value)}
                   placeholder="John Doe"
                   className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
                   required
@@ -97,7 +103,7 @@ export default function CertificationAuth() {
               <Input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
                 required
@@ -111,7 +117,7 @@ export default function CertificationAuth() {
               <Input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
                 required
@@ -123,7 +129,11 @@ export default function CertificationAuth() {
               disabled={loading}
               className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2"
             >
-              {loading ? "Loading..." : mode === "login" ? "Login" : "Create Account"}
+              {loading
+                ? "Loading..."
+                : mode === "login"
+                  ? "Login"
+                  : "Create Account"}
             </Button>
           </form>
 

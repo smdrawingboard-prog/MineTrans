@@ -11,13 +11,25 @@ export const leadsRouter = router({
         contactName: z.string().min(1, "Contact name required"),
         email: z.string().email("Valid email required"),
         phone: z.string().min(1, "Phone number required"),
-        position: z.enum(["Finance", "Operations", "Risk", "Insurance", "Other"]),
+        position: z.enum([
+          "Finance",
+          "Operations",
+          "Risk",
+          "Insurance",
+          "Other",
+        ]),
         miningSector: z.string().min(1, "Mining sector required"),
         riskArea: z.enum(["BI", "Tailings", "Machinery", "Supply", "Multiple"]),
         siteLocation: z.string().optional(),
         annualTurnover: z.string().optional(),
         biSumInsured: z.string().optional(),
-        indemnityPeriod: z.enum(["12 months", "18 months", "24 months", "36 months", "Not sure"]),
+        indemnityPeriod: z.enum([
+          "12 months",
+          "18 months",
+          "24 months",
+          "36 months",
+          "Not sure",
+        ]),
         keyFacility: z.string().optional(),
         previousClaims: z.string().optional(),
         currentInsurer: z.string().optional(),
@@ -49,8 +61,11 @@ export const leadsRouter = router({
       // Google Sheets is a best-effort side-channel: log a lead there
       // without letting a Sheets outage or missing config fail the
       // submission — email notification remains the source of truth.
-      const sheetsSync = appendBIReviewLead(lead).catch((error) => {
-        console.error("[Leads] Google Sheets sync failed for BI review lead:", error);
+      const sheetsSync = appendBIReviewLead(lead).catch(error => {
+        console.error(
+          "[Leads] Google Sheets sync failed for BI review lead:",
+          error
+        );
         return false;
       });
 
@@ -60,7 +75,8 @@ export const leadsRouter = router({
 
         return {
           success: true,
-          message: "Your request has been submitted successfully. We will contact you within 24 hours.",
+          message:
+            "Your request has been submitted successfully. We will contact you within 24 hours.",
         };
       } catch (error) {
         console.error("Error submitting BI review request:", error);

@@ -1,6 +1,11 @@
 import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
-import { subscribeToNewsletter, getActiveSubscribers, unsubscribeFromNewsletter, logEmail } from "../db";
+import {
+  subscribeToNewsletter,
+  getActiveSubscribers,
+  unsubscribeFromNewsletter,
+  logEmail,
+} from "../db";
 
 export const newsletterRouter = router({
   /**
@@ -17,7 +22,10 @@ export const newsletterRouter = router({
     .mutation(async ({ input }) => {
       try {
         await subscribeToNewsletter(input.email, input.name, input.categories);
-        return { success: true, message: "Successfully subscribed to newsletter" };
+        return {
+          success: true,
+          message: "Successfully subscribed to newsletter",
+        };
       } catch (error) {
         console.error("[Newsletter] Subscription error:", error);
         return { success: false, message: "Failed to subscribe" };

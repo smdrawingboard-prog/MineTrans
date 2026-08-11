@@ -1,131 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Portal - MineTrans Courses</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .portal-container { display: flex; min-height: 100vh; background: #0a0a0b; }
-    .portal-sidebar { width: 250px; background: #1a1a1f; border-right: 1px solid #ad6a3d; padding: 20px; }
-    .portal-main { flex: 1; padding: 40px; }
-    .portal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; }
-    .portal-header h1 { color: #f7f5f1; margin: 0; }
-    .logout-btn { background: #ad6a3d; color: #f7f5f1; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
-    .tab-buttons { display: flex; gap: 10px; margin-bottom: 30px; }
-    .tab-btn { background: transparent; border: 1px solid #ad6a3d; color: #ad6a3d; padding: 10px 20px; cursor: pointer; border-radius: 4px; transition: all 0.3s; }
-    .tab-btn.active { background: #ad6a3d; color: #f7f5f1; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .course-item { background: #1a1a1f; border: 1px solid #ad6a3d; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-    .progress-bar { background: #333; height: 8px; border-radius: 4px; overflow: hidden; margin: 10px 0; }
-    .progress-fill { background: #ad6a3d; height: 100%; transition: width 0.3s; }
-    .course-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
-    .stat-box { background: #0a0a0b; padding: 15px; border-radius: 4px; text-align: center; }
-    .stat-value { color: #ad6a3d; font-size: 1.5em; font-weight: bold; }
-    .stat-label { color: #888; font-size: 0.9em; }
-    .certificate-btn { background: #ad6a3d; color: #f7f5f1; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
-  </style>
-</head>
-<body>
-  <div class="portal-container">
-    <div class="portal-sidebar">
-      <h3 style="color: #ad6a3d; margin-top: 0;">Student Portal</h3>
-      <nav style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="index.html" style="color: #b0b0b0; text-decoration: none;">← Back to Home</a>
-        <a href="courses.html" style="color: #b0b0b0; text-decoration: none;">Browse Courses</a>
-      </nav>
-    </div>
-
-    <div class="portal-main">
-      <div class="portal-header">
-        <h1>My Learning Dashboard</h1>
-        <button class="logout-btn" onclick="logout()">LOGOUT</button>
-      </div>
-
-      <div class="tab-buttons">
-        <button class="tab-btn active" onclick="switchTab('dashboard')">DASHBOARD</button>
-        <button class="tab-btn" onclick="switchTab('courses')">MY COURSES</button>
-        <button class="tab-btn" onclick="switchTab('certificates')">CERTIFICATES</button>
-      </div>
-
-      <div id="dashboard" class="tab-content active">
-        <h2 style="color: #f7f5f1; margin-top: 0;">Welcome Back!</h2>
-        <div class="course-stats">
-          <div class="stat-box">
-            <div class="stat-value">2</div>
-            <div class="stat-label">Enrolled Courses</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-value">65%</div>
-            <div class="stat-label">Average Progress</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-value">1</div>
-            <div class="stat-label">Certificates Earned</div>
-          </div>
-        </div>
-      </div>
-
-      <div id="courses" class="tab-content">
-        <h2 style="color: #f7f5f1; margin-top: 0;">My Courses</h2>
-        
-        <div class="course-item">
-          <h3 style="color: #ad6a3d; margin-top: 0;">Business Interruption Mastery</h3>
-          <p style="color: #b0b0b0; margin: 10px 0;">Progress: 8 of 12 modules completed</p>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 67%;"></div>
-          </div>
-          <button class="certificate-btn" onclick="continueCourse('BI')">CONTINUE LEARNING</button>
-        </div>
-
-        <div class="course-item">
-          <h3 style="color: #ad6a3d; margin-top: 0;">Mining Risk Underwriting</h3>
-          <p style="color: #b0b0b0; margin: 10px 0;">Progress: 12 of 18 categories completed</p>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 67%;"></div>
-          </div>
-          <button class="certificate-btn" onclick="continueCourse('Mining')">CONTINUE LEARNING</button>
-        </div>
-      </div>
-
-      <div id="certificates" class="tab-content">
-        <h2 style="color: #f7f5f1; margin-top: 0;">My Certificates</h2>
-        
-        <div class="course-item">
-          <h3 style="color: #ad6a3d; margin-top: 0;">✓ Advanced Risk Assessment - Completed</h3>
-          <p style="color: #b0b0b0; margin: 10px 0;">Completed on: July 15, 2026</p>
-          <p style="color: #888; font-size: 0.9em; margin: 10px 0;">Certificate ID: ARA-2026-07-15-001</p>
-          <button class="certificate-btn" onclick="downloadCertificate('ARA')">DOWNLOAD CERTIFICATE</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function switchTab(tabName) {
-      // Hide all tabs
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
-      // Show selected tab
-      document.getElementById(tabName).classList.add('active');
-      event.target.classList.add('active');
-    }
-
-    function continueCourse(courseName) {
-      alert(`Continuing ${courseName} course. Redirecting to course content...`);
-    }
-
-    function downloadCertificate(certId) {
-      alert(`Downloading certificate ${certId}...`);
-    }
-
-    function logout() {
-      if (confirm('Are you sure you want to logout?')) {
-        window.location.href = 'index.html';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Portal - MineTrans Courses</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .portal-container {
+        display: flex;
+        min-height: 100vh;
+        background: #0a0a0b;
       }
-    }
-  </script>
-</body>
+      .portal-sidebar {
+        width: 250px;
+        background: #1a1a1f;
+        border-right: 1px solid #ad6a3d;
+        padding: 20px;
+      }
+      .portal-main {
+        flex: 1;
+        padding: 40px;
+      }
+      .portal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 20px;
+      }
+      .portal-header h1 {
+        color: #f7f5f1;
+        margin: 0;
+      }
+      .logout-btn {
+        background: #ad6a3d;
+        color: #f7f5f1;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .tab-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      .tab-btn {
+        background: transparent;
+        border: 1px solid #ad6a3d;
+        color: #ad6a3d;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+      .tab-btn.active {
+        background: #ad6a3d;
+        color: #f7f5f1;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .course-item {
+        background: #1a1a1f;
+        border: 1px solid #ad6a3d;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .progress-bar {
+        background: #333;
+        height: 8px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      .progress-fill {
+        background: #ad6a3d;
+        height: 100%;
+        transition: width 0.3s;
+      }
+      .course-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .stat-box {
+        background: #0a0a0b;
+        padding: 15px;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .stat-value {
+        color: #ad6a3d;
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      .stat-label {
+        color: #888;
+        font-size: 0.9em;
+      }
+      .certificate-btn {
+        background: #ad6a3d;
+        color: #f7f5f1;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="portal-container">
+      <div class="portal-sidebar">
+        <h3 style="color: #ad6a3d; margin-top: 0">Student Portal</h3>
+        <nav style="display: flex; flex-direction: column; gap: 10px">
+          <a href="index.html" style="color: #b0b0b0; text-decoration: none"
+            >← Back to Home</a
+          >
+          <a href="courses.html" style="color: #b0b0b0; text-decoration: none"
+            >Browse Courses</a
+          >
+        </nav>
+      </div>
+
+      <div class="portal-main">
+        <div class="portal-header">
+          <h1>My Learning Dashboard</h1>
+          <button class="logout-btn" onclick="logout()">LOGOUT</button>
+        </div>
+
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="switchTab('dashboard')">
+            DASHBOARD
+          </button>
+          <button class="tab-btn" onclick="switchTab('courses')">
+            MY COURSES
+          </button>
+          <button class="tab-btn" onclick="switchTab('certificates')">
+            CERTIFICATES
+          </button>
+        </div>
+
+        <div id="dashboard" class="tab-content active">
+          <h2 style="color: #f7f5f1; margin-top: 0">Welcome Back!</h2>
+          <div class="course-stats">
+            <div class="stat-box">
+              <div class="stat-value">2</div>
+              <div class="stat-label">Enrolled Courses</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">65%</div>
+              <div class="stat-label">Average Progress</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">1</div>
+              <div class="stat-label">Certificates Earned</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="courses" class="tab-content">
+          <h2 style="color: #f7f5f1; margin-top: 0">My Courses</h2>
+
+          <div class="course-item">
+            <h3 style="color: #ad6a3d; margin-top: 0">
+              Business Interruption Mastery
+            </h3>
+            <p style="color: #b0b0b0; margin: 10px 0">
+              Progress: 8 of 12 modules completed
+            </p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 67%"></div>
+            </div>
+            <button class="certificate-btn" onclick="continueCourse('BI')">
+              CONTINUE LEARNING
+            </button>
+          </div>
+
+          <div class="course-item">
+            <h3 style="color: #ad6a3d; margin-top: 0">
+              Mining Risk Underwriting
+            </h3>
+            <p style="color: #b0b0b0; margin: 10px 0">
+              Progress: 12 of 18 categories completed
+            </p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 67%"></div>
+            </div>
+            <button class="certificate-btn" onclick="continueCourse('Mining')">
+              CONTINUE LEARNING
+            </button>
+          </div>
+        </div>
+
+        <div id="certificates" class="tab-content">
+          <h2 style="color: #f7f5f1; margin-top: 0">My Certificates</h2>
+
+          <div class="course-item">
+            <h3 style="color: #ad6a3d; margin-top: 0">
+              ✓ Advanced Risk Assessment - Completed
+            </h3>
+            <p style="color: #b0b0b0; margin: 10px 0">
+              Completed on: July 15, 2026
+            </p>
+            <p style="color: #888; font-size: 0.9em; margin: 10px 0">
+              Certificate ID: ARA-2026-07-15-001
+            </p>
+            <button
+              class="certificate-btn"
+              onclick="downloadCertificate('ARA')"
+            >
+              DOWNLOAD CERTIFICATE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchTab(tabName) {
+        // Hide all tabs
+        document
+          .querySelectorAll(".tab-content")
+          .forEach(tab => tab.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach(btn => btn.classList.remove("active"));
+
+        // Show selected tab
+        document.getElementById(tabName).classList.add("active");
+        event.target.classList.add("active");
+      }
+
+      function continueCourse(courseName) {
+        alert(
+          `Continuing ${courseName} course. Redirecting to course content...`
+        );
+      }
+
+      function downloadCertificate(certId) {
+        alert(`Downloading certificate ${certId}...`);
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          window.location.href = "index.html";
+        }
+      }
+    </script>
+  </body>
 </html>

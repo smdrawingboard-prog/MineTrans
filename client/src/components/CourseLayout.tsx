@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { CourseSidebar } from './CourseSidebar';
-import { CourseContent } from './CourseContent';
+import React, { useState } from "react";
+import { CourseSidebar } from "./CourseSidebar";
+import { CourseContent } from "./CourseContent";
 
 interface CourseModule {
   id: string;
@@ -16,22 +16,22 @@ interface CourseLayoutProps {
 }
 
 const C = {
-  onyx: '#0A0A0B',
-  graphite: '#1E1D20',
-  graphite2: '#3A383D',
-  platinum: '#C9CACE',
-  copper: '#AD6A3D',
-  bone: '#F7F5F1',
+  onyx: "#0A0A0B",
+  graphite: "#1E1D20",
+  graphite2: "#3A383D",
+  platinum: "#C9CACE",
+  copper: "#AD6A3D",
+  bone: "#F7F5F1",
 };
 
 export const CourseLayout: React.FC<CourseLayoutProps> = ({
   modules,
   title,
 }) => {
-  const [activeModuleId, setActiveModuleId] = useState(modules[0]?.id || '');
-  const activeModule = modules.find((m) => m.id === activeModuleId);
+  const [activeModuleId, setActiveModuleId] = useState(modules[0]?.id || "");
+  const activeModule = modules.find(m => m.id === activeModuleId);
 
-  const sidebarItems = modules.map((m) => ({
+  const sidebarItems = modules.map(m => ({
     id: m.id,
     title: `${m.n}. ${m.title}`,
     section: m.section,
@@ -40,8 +40,8 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
   return (
     <div
       style={{
-        display: 'flex',
-        minHeight: '100vh',
+        display: "flex",
+        minHeight: "100vh",
         backgroundColor: C.onyx,
       }}
     >
@@ -54,19 +54,19 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
       <main
         style={{
           flex: 1,
-          padding: '3rem',
+          padding: "3rem",
           backgroundColor: C.onyx,
           color: C.platinum,
-          overflowY: 'auto',
-          maxHeight: '100vh',
+          overflowY: "auto",
+          maxHeight: "100vh",
         }}
       >
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <h1
             style={{
-              fontSize: '2.5rem',
+              fontSize: "2.5rem",
               color: C.bone,
-              marginBottom: '0.5rem',
+              marginBottom: "0.5rem",
               fontWeight: 600,
             }}
           >
@@ -75,42 +75,40 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
           <p
             style={{
               color: C.platinum,
-              marginBottom: '3rem',
-              fontSize: '1rem',
+              marginBottom: "3rem",
+              fontSize: "1rem",
             }}
           >
             {activeModule?.section}
           </p>
 
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: "2rem" }}>
             <h2
               style={{
-                fontSize: '2rem',
+                fontSize: "2rem",
                 color: C.copper,
-                marginBottom: '1.5rem',
+                marginBottom: "1.5rem",
               }}
             >
               {activeModule?.n}. {activeModule?.title}
             </h2>
           </div>
 
-          {activeModule && (
-            <CourseContent blocks={activeModule.blocks} />
-          )}
+          {activeModule && <CourseContent blocks={activeModule.blocks} />}
 
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '3rem',
-              paddingTop: '2rem',
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "3rem",
+              paddingTop: "2rem",
               borderTop: `1px solid ${C.graphite2}`,
             }}
           >
             <button
               onClick={() => {
                 const currentIndex = modules.findIndex(
-                  (m) => m.id === activeModuleId
+                  m => m.id === activeModuleId
                 );
                 if (currentIndex > 0) {
                   setActiveModuleId(modules[currentIndex - 1].id);
@@ -118,15 +116,15 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
               }}
               disabled={modules[0].id === activeModuleId}
               style={{
-                padding: '0.75rem 1.5rem',
+                padding: "0.75rem 1.5rem",
                 backgroundColor:
                   modules[0].id === activeModuleId ? C.graphite2 : C.copper,
                 color: C.onyx,
-                border: 'none',
-                borderRadius: '4px',
+                border: "none",
+                borderRadius: "4px",
                 cursor:
-                  modules[0].id === activeModuleId ? 'not-allowed' : 'pointer',
-                fontSize: '1rem',
+                  modules[0].id === activeModuleId ? "not-allowed" : "pointer",
+                fontSize: "1rem",
                 fontWeight: 600,
                 opacity: modules[0].id === activeModuleId ? 0.5 : 1,
               }}
@@ -137,7 +135,7 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
             <button
               onClick={() => {
                 const currentIndex = modules.findIndex(
-                  (m) => m.id === activeModuleId
+                  m => m.id === activeModuleId
                 );
                 if (currentIndex < modules.length - 1) {
                   setActiveModuleId(modules[currentIndex + 1].id);
@@ -145,19 +143,19 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
               }}
               disabled={modules[modules.length - 1].id === activeModuleId}
               style={{
-                padding: '0.75rem 1.5rem',
+                padding: "0.75rem 1.5rem",
                 backgroundColor:
                   modules[modules.length - 1].id === activeModuleId
                     ? C.graphite2
                     : C.copper,
                 color: C.onyx,
-                border: 'none',
-                borderRadius: '4px',
+                border: "none",
+                borderRadius: "4px",
                 cursor:
                   modules[modules.length - 1].id === activeModuleId
-                    ? 'not-allowed'
-                    : 'pointer',
-                fontSize: '1rem',
+                    ? "not-allowed"
+                    : "pointer",
+                fontSize: "1rem",
                 fontWeight: 600,
                 opacity:
                   modules[modules.length - 1].id === activeModuleId ? 0.5 : 1,

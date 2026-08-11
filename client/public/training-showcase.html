@@ -1,613 +1,686 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MineTrans Advanced Mining Insurance Training Course</title>
-    <link rel="icon" href="/manus-storage/MineTranslogov3_04e8651e.png" type="image/png">
+    <link
+      rel="icon"
+      href="/manus-storage/MineTranslogov3_04e8651e.png"
+      type="image/png"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --onyx: #0A0A0B;
-            --graphite: #1E1D20;
-            --graphite2: #3A383D;
-            --platinum: #C9CACE;
-            --copper: #AD6A3D;
-            --bone: #F7F5F1;
-        }
+      :root {
+        --onyx: #0a0a0b;
+        --graphite: #1e1d20;
+        --graphite2: #3a383d;
+        --platinum: #c9cace;
+        --copper: #ad6a3d;
+        --bone: #f7f5f1;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--onyx);
-            color: var(--platinum);
-            line-height: 1.6;
-        }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background-color: var(--onyx);
+        color: var(--platinum);
+        line-height: 1.6;
+      }
 
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: rgba(10, 10, 11, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--graphite2);
-            padding: 1rem 2rem;
-        }
+      /* Navigation */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: rgba(10, 10, 11, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--graphite2);
+        padding: 1rem 2rem;
+      }
 
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      nav .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        nav .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            color: var(--bone);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
+      nav .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--bone);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
 
-        nav .logo img {
-            height: 40px;
-            width: auto;
-        }
+      nav .logo img {
+        height: 40px;
+        width: auto;
+      }
 
-        nav a {
-            color: var(--platinum);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
+      nav a {
+        color: var(--platinum);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
 
-        nav a:hover {
-            color: var(--copper);
-        }
+      nav a:hover {
+        color: var(--copper);
+      }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--graphite) 0%, var(--onyx) 100%);
-            padding: 6rem 2rem;
-            text-align: center;
-            border-bottom: 2px solid var(--copper);
-        }
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--graphite) 0%,
+          var(--onyx) 100%
+        );
+        padding: 6rem 2rem;
+        text-align: center;
+        border-bottom: 2px solid var(--copper);
+      }
 
-        .hero .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+      .hero .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
 
+      .hero h1 {
+        font-size: 3.5rem;
+        color: var(--bone);
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .hero .subtitle {
+        font-size: 1.3rem;
+        color: var(--copper);
+        margin-bottom: 2rem;
+        font-weight: 500;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--platinum);
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background-color: var(--copper);
+        color: var(--onyx);
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: 2px solid var(--copper);
+      }
+
+      .cta-button:hover {
+        background-color: transparent;
+        color: var(--copper);
+      }
+
+      /* Stats Section */
+      .stats {
+        background-color: var(--graphite);
+        padding: 4rem 2rem;
+        border-bottom: 1px solid var(--graphite2);
+      }
+
+      .stats .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--graphite2);
+        border-left: 4px solid var(--copper);
+        border-radius: 4px;
+      }
+
+      .stat-card .number {
+        font-size: 3rem;
+        color: var(--copper);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-card .label {
+        font-size: 1.1rem;
+        color: var(--bone);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-card p {
+        font-size: 0.95rem;
+        color: var(--platinum);
+      }
+
+      /* Course Structure Section */
+      .course-structure {
+        padding: 6rem 2rem;
+        background-color: var(--onyx);
+      }
+
+      .course-structure .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: var(--bone);
+        text-align: center;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: var(--copper);
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+      }
+
+      .parts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 3rem;
+        margin-bottom: 4rem;
+      }
+
+      .part-card {
+        background-color: var(--graphite);
+        border: 2px solid var(--graphite2);
+        border-radius: 8px;
+        padding: 2.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .part-card:hover {
+        border-color: var(--copper);
+        transform: translateY(-5px);
+      }
+
+      .part-card h3 {
+        color: var(--copper);
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .part-card .number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: var(--copper);
+        color: var(--onyx);
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      .part-card p {
+        color: var(--platinum);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .modules-list {
+        list-style: none;
+      }
+
+      .modules-list li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--graphite2);
+        color: var(--platinum);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .modules-list li:last-child {
+        border-bottom: none;
+      }
+
+      .modules-list li:before {
+        content: "▸";
+        color: var(--copper);
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      /* Features Section */
+      .features {
+        background-color: var(--graphite);
+        padding: 6rem 2rem;
+        border-top: 1px solid var(--graphite2);
+        border-bottom: 1px solid var(--graphite2);
+      }
+
+      .features .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background-color: var(--onyx);
+        padding: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--graphite2);
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover {
+        border-color: var(--copper);
+        background-color: var(--graphite2);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .feature-card h4 {
+        color: var(--copper);
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .feature-card p {
+        color: var(--platinum);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* Learning Outcomes */
+      .outcomes {
+        padding: 6rem 2rem;
+        background-color: var(--onyx);
+      }
+
+      .outcomes .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .outcomes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .outcome-item {
+        background-color: var(--graphite);
+        padding: 2rem;
+        border-radius: 8px;
+        border-left: 4px solid var(--copper);
+      }
+
+      .outcome-item h4 {
+        color: var(--copper);
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .outcome-item p {
+        color: var(--platinum);
+        font-size: 0.95rem;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(
+          135deg,
+          var(--graphite) 0%,
+          var(--graphite2) 100%
+        );
+        padding: 5rem 2rem;
+        text-align: center;
+        border-top: 2px solid var(--copper);
+      }
+
+      .cta-section h2 {
+        font-size: 2.5rem;
+        color: var(--bone);
+        margin-bottom: 1rem;
+      }
+
+      .cta-section p {
+        font-size: 1.1rem;
+        color: var(--platinum);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--graphite2);
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid var(--graphite);
+        color: var(--platinum);
+        font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
         .hero h1 {
-            font-size: 3.5rem;
-            color: var(--bone);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: var(--copper);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--platinum);
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background-color: var(--copper);
-            color: var(--onyx);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid var(--copper);
-        }
-
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--copper);
-        }
-
-        /* Stats Section */
-        .stats {
-            background-color: var(--graphite);
-            padding: 4rem 2rem;
-            border-bottom: 1px solid var(--graphite2);
-        }
-
-        .stats .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--graphite2);
-            border-left: 4px solid var(--copper);
-            border-radius: 4px;
-        }
-
-        .stat-card .number {
-            font-size: 3rem;
-            color: var(--copper);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .label {
-            font-size: 1.1rem;
-            color: var(--bone);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card p {
-            font-size: 0.95rem;
-            color: var(--platinum);
-        }
-
-        /* Course Structure Section */
-        .course-structure {
-            padding: 6rem 2rem;
-            background-color: var(--onyx);
-        }
-
-        .course-structure .container {
-            max-width: 1200px;
-            margin: 0 auto;
+          font-size: 2rem;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            color: var(--bone);
-            text-align: center;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--copper);
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
+          font-size: 1.8rem;
         }
 
         .parts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
+          grid-template-columns: 1fr;
         }
 
-        .part-card {
-            background-color: var(--graphite);
-            border: 2px solid var(--graphite2);
-            border-radius: 8px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
+        nav .container {
+          flex-direction: column;
+          gap: 1rem;
         }
-
-        .part-card:hover {
-            border-color: var(--copper);
-            transform: translateY(-5px);
-        }
-
-        .part-card h3 {
-            color: var(--copper);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .part-card .number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--copper);
-            color: var(--onyx);
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .part-card p {
-            color: var(--platinum);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .modules-list {
-            list-style: none;
-        }
-
-        .modules-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--graphite2);
-            color: var(--platinum);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .modules-list li:last-child {
-            border-bottom: none;
-        }
-
-        .modules-list li:before {
-            content: "▸";
-            color: var(--copper);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* Features Section */
-        .features {
-            background-color: var(--graphite);
-            padding: 6rem 2rem;
-            border-top: 1px solid var(--graphite2);
-            border-bottom: 1px solid var(--graphite2);
-        }
-
-        .features .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: var(--onyx);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--graphite2);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            border-color: var(--copper);
-            background-color: var(--graphite2);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h4 {
-            color: var(--copper);
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-card p {
-            color: var(--platinum);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* Learning Outcomes */
-        .outcomes {
-            padding: 6rem 2rem;
-            background-color: var(--onyx);
-        }
-
-        .outcomes .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .outcomes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .outcome-item {
-            background-color: var(--graphite);
-            padding: 2rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--copper);
-        }
-
-        .outcome-item h4 {
-            color: var(--copper);
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .outcome-item p {
-            color: var(--platinum);
-            font-size: 0.95rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--graphite) 0%, var(--graphite2) 100%);
-            padding: 5rem 2rem;
-            text-align: center;
-            border-top: 2px solid var(--copper);
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            color: var(--bone);
-            margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-            font-size: 1.1rem;
-            color: var(--platinum);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--graphite2);
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid var(--graphite);
-            color: var(--platinum);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .parts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav .container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav>
-        <div class="container">
-            <a href="/" class="logo">
-                <img src="/manus-storage/MineTranslogov3_04e8651e.png" alt="MineTrans Logo">
-                MineTrans
-            </a>
-            <a href="/">Back to Website</a>
-        </div>
+      <div class="container">
+        <a href="/" class="logo">
+          <img
+            src="/manus-storage/MineTranslogov3_04e8651e.png"
+            alt="MineTrans Logo"
+          />
+          MineTrans
+        </a>
+        <a href="/">Back to Website</a>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1>Advanced Mining Insurance Training</h1>
-            <p class="subtitle">Master the Art of Mining Insurance Underwriting</p>
-            <p>Comprehensive certification course covering the 12-step Business Interruption methodology and 18-category mining underwriting questionnaire. Become a certified mining insurance professional.</p>
-            <a href="/certification" class="cta-button">Enroll Now</a>
-        </div>
+      <div class="container">
+        <h1>Advanced Mining Insurance Training</h1>
+        <p class="subtitle">Master the Art of Mining Insurance Underwriting</p>
+        <p>
+          Comprehensive certification course covering the 12-step Business
+          Interruption methodology and 18-category mining underwriting
+          questionnaire. Become a certified mining insurance professional.
+        </p>
+        <a href="/certification" class="cta-button">Enroll Now</a>
+      </div>
     </section>
 
     <!-- Stats Section -->
     <section class="stats">
-        <div class="container">
-            <div class="stat-card">
-                <div class="number">12</div>
-                <div class="label">Core Modules</div>
-                <p>Comprehensive coverage of the Business Interruption methodology</p>
-            </div>
-            <div class="stat-card">
-                <div class="number">18</div>
-                <div class="label">Categories</div>
-                <p>Deep dive into mining underwriting questionnaire categories</p>
-            </div>
-            <div class="stat-card">
-                <div class="number">100%</div>
-                <div class="label">Online</div>
-                <p>Learn at your own pace with interactive content</p>
-            </div>
+      <div class="container">
+        <div class="stat-card">
+          <div class="number">12</div>
+          <div class="label">Core Modules</div>
+          <p>Comprehensive coverage of the Business Interruption methodology</p>
         </div>
+        <div class="stat-card">
+          <div class="number">18</div>
+          <div class="label">Categories</div>
+          <p>Deep dive into mining underwriting questionnaire categories</p>
+        </div>
+        <div class="stat-card">
+          <div class="number">100%</div>
+          <div class="label">Online</div>
+          <p>Learn at your own pace with interactive content</p>
+        </div>
+      </div>
     </section>
 
     <!-- Course Structure -->
     <section class="course-structure">
-        <div class="container">
-            <h2 class="section-title">Course Structure</h2>
-            <p class="section-subtitle">Two comprehensive parts covering all aspects of mining insurance</p>
+      <div class="container">
+        <h2 class="section-title">Course Structure</h2>
+        <p class="section-subtitle">
+          Two comprehensive parts covering all aspects of mining insurance
+        </p>
 
-            <div class="parts-grid">
-                <!-- Part I -->
-                <div class="part-card">
-                    <h3>
-                        <span class="number">I</span>
-                        12-Step BI Methodology
-                    </h3>
-                    <p>Master the complete Business Interruption calculation process used by leading mining insurance professionals.</p>
-                    <ul class="modules-list">
-                        <li>Understand the Mining Operation</li>
-                        <li>Identify BI Triggers</li>
-                        <li>Identify Critical Assets</li>
-                        <li>Determine Maximum Foreseeable Loss</li>
-                        <li>Calculate Gross Profit at Risk</li>
-                        <li>Determine Maximum Downtime</li>
-                        <li>Estimate Reduction in Turnover</li>
-                        <li>Calculate Increased Cost of Working</li>
-                        <li>Consider Supply Chain Dependencies</li>
-                        <li>Assess Risk Mitigation Measures</li>
-                        <li>Select Indemnity Period</li>
-                        <li>Calculate BI Sum Insured</li>
-                    </ul>
-                </div>
+        <div class="parts-grid">
+          <!-- Part I -->
+          <div class="part-card">
+            <h3>
+              <span class="number">I</span>
+              12-Step BI Methodology
+            </h3>
+            <p>
+              Master the complete Business Interruption calculation process used
+              by leading mining insurance professionals.
+            </p>
+            <ul class="modules-list">
+              <li>Understand the Mining Operation</li>
+              <li>Identify BI Triggers</li>
+              <li>Identify Critical Assets</li>
+              <li>Determine Maximum Foreseeable Loss</li>
+              <li>Calculate Gross Profit at Risk</li>
+              <li>Determine Maximum Downtime</li>
+              <li>Estimate Reduction in Turnover</li>
+              <li>Calculate Increased Cost of Working</li>
+              <li>Consider Supply Chain Dependencies</li>
+              <li>Assess Risk Mitigation Measures</li>
+              <li>Select Indemnity Period</li>
+              <li>Calculate BI Sum Insured</li>
+            </ul>
+          </div>
 
-                <!-- Part II -->
-                <div class="part-card">
-                    <h3>
-                        <span class="number">II</span>
-                        18-Category Underwriting
-                    </h3>
-                    <p>Comprehensive assessment framework covering all critical mining insurance underwriting categories.</p>
-                    <ul class="modules-list">
-                        <li>Mining Operation Overview</li>
-                        <li>Critical Equipment & Infrastructure</li>
-                        <li>Maintenance & Reliability</li>
-                        <li>Fire & Explosion Risk</li>
-                        <li>Geotechnical & Slope Stability</li>
-                        <li>Tailings Management</li>
-                        <li>Water & Environmental</li>
-                        <li>Power & Utilities</li>
-                        <li>Transportation & Logistics</li>
-                        <li>Supply Chain & Suppliers</li>
-                        <li>Safety & Occupational Health</li>
-                        <li>Management & Governance</li>
-                        <li>Regulatory & Compliance</li>
-                        <li>Financial Performance</li>
-                        <li>Insurance & Risk Transfer</li>
-                        <li>Contingency & Business Continuity</li>
-                        <li>Community & Stakeholder Relations</li>
-                        <li>Emerging Risks & Future Outlook</li>
-                    </ul>
-                </div>
-            </div>
+          <!-- Part II -->
+          <div class="part-card">
+            <h3>
+              <span class="number">II</span>
+              18-Category Underwriting
+            </h3>
+            <p>
+              Comprehensive assessment framework covering all critical mining
+              insurance underwriting categories.
+            </p>
+            <ul class="modules-list">
+              <li>Mining Operation Overview</li>
+              <li>Critical Equipment & Infrastructure</li>
+              <li>Maintenance & Reliability</li>
+              <li>Fire & Explosion Risk</li>
+              <li>Geotechnical & Slope Stability</li>
+              <li>Tailings Management</li>
+              <li>Water & Environmental</li>
+              <li>Power & Utilities</li>
+              <li>Transportation & Logistics</li>
+              <li>Supply Chain & Suppliers</li>
+              <li>Safety & Occupational Health</li>
+              <li>Management & Governance</li>
+              <li>Regulatory & Compliance</li>
+              <li>Financial Performance</li>
+              <li>Insurance & Risk Transfer</li>
+              <li>Contingency & Business Continuity</li>
+              <li>Community & Stakeholder Relations</li>
+              <li>Emerging Risks & Future Outlook</li>
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Features Section -->
     <section class="features">
-        <div class="container">
-            <h2 class="section-title">Course Features</h2>
-            <p class="section-subtitle">Everything you need to succeed</p>
+      <div class="container">
+        <h2 class="section-title">Course Features</h2>
+        <p class="section-subtitle">Everything you need to succeed</p>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h4>Comprehensive Content</h4>
-                    <p>30 detailed modules covering every aspect of mining insurance underwriting with real-world examples.</p>
-                </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h4>Comprehensive Content</h4>
+            <p>
+              30 detailed modules covering every aspect of mining insurance
+              underwriting with real-world examples.
+            </p>
+          </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h4>Interactive Quizzes</h4>
-                    <p>Test your knowledge with section quizzes featuring multiple choice, calculations, and true/false questions.</p>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h4>Interactive Quizzes</h4>
+            <p>
+              Test your knowledge with section quizzes featuring multiple
+              choice, calculations, and true/false questions.
+            </p>
+          </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h4>Progress Tracking</h4>
-                    <p>Monitor your learning progress with detailed dashboards showing completion rates and scores.</p>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h4>Progress Tracking</h4>
+            <p>
+              Monitor your learning progress with detailed dashboards showing
+              completion rates and scores.
+            </p>
+          </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h4>Certification</h4>
-                    <p>Earn a digital certificate upon completion, downloadable and shareable with your network.</p>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h4>Certification</h4>
+            <p>
+              Earn a digital certificate upon completion, downloadable and
+              shareable with your network.
+            </p>
+          </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">⏱️</div>
-                    <h4>Self-Paced Learning</h4>
-                    <p>Study at your own pace with 24/7 access to all course materials and resources.</p>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <h4>Self-Paced Learning</h4>
+            <p>
+              Study at your own pace with 24/7 access to all course materials
+              and resources.
+            </p>
+          </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h4>Responsive Design</h4>
-                    <p>Access the course on any device - desktop, tablet, or mobile for seamless learning.</p>
-                </div>
-            </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h4>Responsive Design</h4>
+            <p>
+              Access the course on any device - desktop, tablet, or mobile for
+              seamless learning.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Learning Outcomes -->
     <section class="outcomes">
-        <div class="container">
-            <h2 class="section-title">What You'll Learn</h2>
-            <p class="section-subtitle">Key competencies developed through this course</p>
+      <div class="container">
+        <h2 class="section-title">What You'll Learn</h2>
+        <p class="section-subtitle">
+          Key competencies developed through this course
+        </p>
 
-            <div class="outcomes-grid">
-                <div class="outcome-item">
-                    <h4>✓ BI Calculation Mastery</h4>
-                    <p>Complete understanding of the 12-step Business Interruption methodology and how to apply it to mining operations.</p>
-                </div>
+        <div class="outcomes-grid">
+          <div class="outcome-item">
+            <h4>✓ BI Calculation Mastery</h4>
+            <p>
+              Complete understanding of the 12-step Business Interruption
+              methodology and how to apply it to mining operations.
+            </p>
+          </div>
 
-                <div class="outcome-item">
-                    <h4>✓ Risk Assessment</h4>
-                    <p>Ability to identify and evaluate mining-specific risks across 18 comprehensive underwriting categories.</p>
-                </div>
+          <div class="outcome-item">
+            <h4>✓ Risk Assessment</h4>
+            <p>
+              Ability to identify and evaluate mining-specific risks across 18
+              comprehensive underwriting categories.
+            </p>
+          </div>
 
-                <div class="outcome-item">
-                    <h4>✓ Insurance Structuring</h4>
-                    <p>Skills to structure appropriate insurance solutions that protect mining operations from business interruption.</p>
-                </div>
+          <div class="outcome-item">
+            <h4>✓ Insurance Structuring</h4>
+            <p>
+              Skills to structure appropriate insurance solutions that protect
+              mining operations from business interruption.
+            </p>
+          </div>
 
-                <div class="outcome-item">
-                    <h4>✓ Due Diligence</h4>
-                    <p>Comprehensive framework for conducting mining insurance due diligence and risk analysis.</p>
-                </div>
+          <div class="outcome-item">
+            <h4>✓ Due Diligence</h4>
+            <p>
+              Comprehensive framework for conducting mining insurance due
+              diligence and risk analysis.
+            </p>
+          </div>
 
-                <div class="outcome-item">
-                    <h4>✓ Professional Credibility</h4>
-                    <p>Recognized certification demonstrating expertise in mining insurance underwriting.</p>
-                </div>
+          <div class="outcome-item">
+            <h4>✓ Professional Credibility</h4>
+            <p>
+              Recognized certification demonstrating expertise in mining
+              insurance underwriting.
+            </p>
+          </div>
 
-                <div class="outcome-item">
-                    <h4>✓ Industry Standards</h4>
-                    <p>Deep knowledge of industry best practices and standards for mining insurance in Sub-Saharan Africa.</p>
-                </div>
-            </div>
+          <div class="outcome-item">
+            <h4>✓ Industry Standards</h4>
+            <p>
+              Deep knowledge of industry best practices and standards for mining
+              insurance in Sub-Saharan Africa.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Become a Certified Mining Insurance Professional?</h2>
-            <p>Join our comprehensive training program and master the art of mining insurance underwriting.</p>
-            <a href="/certification" class="cta-button">Start Your Journey</a>
-        </div>
+      <div class="container">
+        <h2>Ready to Become a Certified Mining Insurance Professional?</h2>
+        <p>
+          Join our comprehensive training program and master the art of mining
+          insurance underwriting.
+        </p>
+        <a href="/certification" class="cta-button">Start Your Journey</a>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 MineTrans Insurance Brokers. All rights reserved. | Advanced Mining Insurance Training Course</p>
+      <p>
+        &copy; 2026 MineTrans Insurance Brokers. All rights reserved. | Advanced
+        Mining Insurance Training Course
+      </p>
     </footer>
-</body>
+  </body>
 </html>

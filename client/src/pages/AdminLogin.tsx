@@ -19,10 +19,13 @@ export default function AdminLogin() {
     // Validate credentials
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
       // Store admin session
-      localStorage.setItem("adminSession", JSON.stringify({
-        username,
-        loginTime: new Date().toISOString(),
-      }));
+      localStorage.setItem(
+        "adminSession",
+        JSON.stringify({
+          username,
+          loginTime: new Date().toISOString(),
+        })
+      );
       toast.success("Admin login successful!");
       window.location.href = "/certification/admin/dashboard";
     } else {
@@ -52,7 +55,7 @@ export default function AdminLogin() {
               <Input
                 type="text"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
                 placeholder="Enter admin username"
                 className="bg-slate-700 border-slate-600 text-white placeholder-slate-500"
                 disabled={loading}
@@ -67,7 +70,7 @@ export default function AdminLogin() {
               <Input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 placeholder="Enter admin password"
                 className="bg-slate-700 border-slate-600 text-white placeholder-slate-500"
                 disabled={loading}
@@ -86,15 +89,28 @@ export default function AdminLogin() {
 
           {/* Info Message */}
           <div className="mt-6 p-4 bg-slate-700/50 border border-slate-600 rounded text-sm text-slate-300">
-            <p className="font-semibold text-amber-600 mb-1">Demo Credentials:</p>
-            <p>Username: <code className="bg-slate-800 px-2 py-1 rounded">admin</code></p>
-            <p>Password: <code className="bg-slate-800 px-2 py-1 rounded">Roger@daginsure</code></p>
+            <p className="font-semibold text-amber-600 mb-1">
+              Demo Credentials:
+            </p>
+            <p>
+              Username:{" "}
+              <code className="bg-slate-800 px-2 py-1 rounded">admin</code>
+            </p>
+            <p>
+              Password:{" "}
+              <code className="bg-slate-800 px-2 py-1 rounded">
+                Roger@daginsure
+              </code>
+            </p>
           </div>
         </Card>
 
         {/* Back Link */}
         <div className="text-center mt-6">
-          <a href="/certification" className="text-amber-600 hover:text-amber-500 text-sm">
+          <a
+            href="/certification"
+            className="text-amber-600 hover:text-amber-500 text-sm"
+          >
             ← Back to Certification
           </a>
         </div>

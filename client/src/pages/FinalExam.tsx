@@ -82,7 +82,7 @@ export default function FinalExam() {
     if (!exam.started || exam.submitted) return;
 
     const timer = setInterval(() => {
-      setExam((prev) => {
+      setExam(prev => {
         if (prev.timeRemaining <= 1) {
           handleSubmitExam();
           return { ...prev, timeRemaining: 0 };
@@ -96,7 +96,7 @@ export default function FinalExam() {
 
   const startExam = () => {
     const timeLimit = getFinalExamQuery.data?.timeLimit || 120; // 2 hours in minutes
-    setExam((prev) => ({
+    setExam(prev => ({
       ...prev,
       started: true,
       timeRemaining: timeLimit * 60, // Convert to seconds
@@ -104,7 +104,7 @@ export default function FinalExam() {
   };
 
   const handleAnswerChange = (questionId: number, answer: string) => {
-    setExam((prev) => ({
+    setExam(prev => ({
       ...prev,
       answers: {
         ...prev.answers,
@@ -115,7 +115,7 @@ export default function FinalExam() {
 
   const goToNextQuestion = () => {
     if (exam.currentQuestion < questions.length - 1) {
-      setExam((prev) => ({
+      setExam(prev => ({
         ...prev,
         currentQuestion: prev.currentQuestion + 1,
       }));
@@ -124,7 +124,7 @@ export default function FinalExam() {
 
   const goToPreviousQuestion = () => {
     if (exam.currentQuestion > 0) {
-      setExam((prev) => ({
+      setExam(prev => ({
         ...prev,
         currentQuestion: prev.currentQuestion - 1,
       }));
@@ -139,10 +139,11 @@ export default function FinalExam() {
         studentId: student.id,
         quizId: getFinalExamQuery.data?.id || 0,
         answers: exam.answers,
-        timeSpent: (getFinalExamQuery.data?.timeLimit || 120) * 60 - exam.timeRemaining,
+        timeSpent:
+          (getFinalExamQuery.data?.timeLimit || 120) * 60 - exam.timeRemaining,
       });
 
-      setExam((prev) => ({
+      setExam(prev => ({
         ...prev,
         submitted: true,
         results: result,
@@ -178,8 +179,12 @@ export default function FinalExam() {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <Card className="bg-slate-800 border-amber-600/30 p-8 max-w-md text-center">
-          <h2 className="text-2xl font-bold text-amber-600 mb-4">Exam Not Found</h2>
-          <p className="text-slate-400 mb-6">The final exam for this course is not available.</p>
+          <h2 className="text-2xl font-bold text-amber-600 mb-4">
+            Exam Not Found
+          </h2>
+          <p className="text-slate-400 mb-6">
+            The final exam for this course is not available.
+          </p>
           <Button
             onClick={() => (window.location.href = "/certification/dashboard")}
             className="bg-amber-600 hover:bg-amber-700"
@@ -202,20 +207,27 @@ export default function FinalExam() {
                 <strong>Total Questions:</strong> {questions.length}
               </p>
               <p className="text-slate-400 mb-2">
-                <strong>Time Limit:</strong> {getFinalExamQuery.data?.timeLimit || 120} minutes
+                <strong>Time Limit:</strong>{" "}
+                {getFinalExamQuery.data?.timeLimit || 120} minutes
               </p>
               <p className="text-slate-400 mb-2">
-                <strong>Passing Score:</strong> {getFinalExamQuery.data?.passingScore || 70}%
+                <strong>Passing Score:</strong>{" "}
+                {getFinalExamQuery.data?.passingScore || 70}%
               </p>
             </div>
 
             <div className="bg-slate-700/50 p-4 rounded">
               <p className="text-amber-600 font-semibold mb-2">Important:</p>
               <ul className="text-slate-300 text-sm space-y-1">
-                <li>✓ You can review and change your answers before submitting</li>
+                <li>
+                  ✓ You can review and change your answers before submitting
+                </li>
                 <li>✓ The timer will count down - manage your time wisely</li>
                 <li>✓ You cannot retake the exam after submission</li>
-                <li>✓ You must score {getFinalExamQuery.data?.passingScore || 70}% or higher to pass</li>
+                <li>
+                  ✓ You must score {getFinalExamQuery.data?.passingScore || 70}%
+                  or higher to pass
+                </li>
               </ul>
             </div>
           </div>
@@ -231,9 +243,16 @@ export default function FinalExam() {
     );
   }
 
-  if (exam.submitted && exam.results && !exam.results.passed && !failureAnimationDone) {
+  if (
+    exam.submitted &&
+    exam.results &&
+    !exam.results.passed &&
+    !failureAnimationDone
+  ) {
     return (
-      <CriticalFailureAnimation onComplete={() => setFailureAnimationDone(true)} />
+      <CriticalFailureAnimation
+        onComplete={() => setFailureAnimationDone(true)}
+      />
     );
   }
 
@@ -243,8 +262,12 @@ export default function FinalExam() {
         <div className="max-w-4xl mx-auto">
           <Card className="bg-slate-800 border-amber-600/30 p-8 text-center mb-6">
             <div className="mb-6">
-              <div className="text-6xl mb-4">{exam.results.passed ? "✓" : "✗"}</div>
-              <h1 className={`text-4xl font-bold mb-2 ${exam.results.passed ? "text-green-500" : "text-red-500"}`}>
+              <div className="text-6xl mb-4">
+                {exam.results.passed ? "✓" : "✗"}
+              </div>
+              <h1
+                className={`text-4xl font-bold mb-2 ${exam.results.passed ? "text-green-500" : "text-red-500"}`}
+              >
                 {exam.results.passed ? "Exam Passed!" : "Exam Not Passed"}
               </h1>
               <p className="text-2xl font-semibold text-amber-600">
@@ -256,11 +279,15 @@ export default function FinalExam() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-slate-400 text-sm">Your Score</p>
-                  <p className="text-2xl font-bold text-white">{exam.results.score} points</p>
+                  <p className="text-2xl font-bold text-white">
+                    {exam.results.score} points
+                  </p>
                 </div>
                 <div>
                   <p className="text-slate-400 text-sm">Total Points</p>
-                  <p className="text-2xl font-bold text-white">{exam.results.totalPoints}</p>
+                  <p className="text-2xl font-bold text-white">
+                    {exam.results.totalPoints}
+                  </p>
                 </div>
               </div>
             </div>
@@ -275,14 +302,18 @@ export default function FinalExam() {
 
             <div className="flex gap-3 justify-center">
               <Button
-                onClick={() => (window.location.href = "/certification/dashboard")}
+                onClick={() =>
+                  (window.location.href = "/certification/dashboard")
+                }
                 className="bg-amber-600 hover:bg-amber-700"
               >
                 Back to Dashboard
               </Button>
               {exam.results.passed && (
                 <Button
-                  onClick={() => (window.location.href = `/certification/certificate/${courseId}`)}
+                  onClick={() =>
+                    (window.location.href = `/certification/certificate/${courseId}`)
+                  }
                   className="bg-green-600 hover:bg-green-700"
                 >
                   Download Certificate
@@ -293,7 +324,9 @@ export default function FinalExam() {
 
           {/* Detailed Results */}
           <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <h2 className="text-2xl font-bold text-amber-600 mb-4">Detailed Results</h2>
+            <h2 className="text-2xl font-bold text-amber-600 mb-4">
+              Detailed Results
+            </h2>
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {questions.map((q, idx) => {
                 const feedback = exam.results?.feedback[q.id.toString()];
@@ -308,7 +341,9 @@ export default function FinalExam() {
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`text-xl font-bold ${isCorrect ? "text-green-400" : "text-red-400"}`}>
+                      <div
+                        className={`text-xl font-bold ${isCorrect ? "text-green-400" : "text-red-400"}`}
+                      >
                         {isCorrect ? "✓" : "✗"}
                       </div>
                       <div className="flex-1">
@@ -356,7 +391,9 @@ export default function FinalExam() {
           </div>
           <div className="text-center">
             <p className="text-slate-400 text-sm mb-1">Time Remaining</p>
-            <p className={`text-3xl font-bold ${exam.timeRemaining < 300 ? "text-red-500" : "text-amber-600"}`}>
+            <p
+              className={`text-3xl font-bold ${exam.timeRemaining < 300 ? "text-red-500" : "text-amber-600"}`}
+            >
               {formatTime(exam.timeRemaining)}
             </p>
           </div>
@@ -381,34 +418,41 @@ export default function FinalExam() {
         {/* Question */}
         {currentQuestion && (
           <Card className="bg-slate-800 border-amber-600/30 p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-6">{currentQuestion.questionText}</h2>
+            <h2 className="text-xl font-semibold text-white mb-6">
+              {currentQuestion.questionText}
+            </h2>
 
-            {currentQuestion.questionType === "multiple-choice" && currentQuestion.options && (
-              <div className="space-y-3">
-                {currentQuestion.options.map((option, idx) => (
-                  <label
-                    key={idx}
-                    className="flex items-center p-4 border border-slate-600 rounded cursor-pointer hover:bg-slate-700/50 transition"
-                  >
-                    <input
-                      type="radio"
-                      name={`question-${currentQuestion.id}`}
-                      value={option}
-                      checked={exam.answers[currentQuestion.id] === option}
-                      onChange={(e) => handleAnswerChange(currentQuestion.id, e.target.value)}
-                      className="mr-3"
-                    />
-                    <span className="text-white">{option}</span>
-                  </label>
-                ))}
-              </div>
-            )}
+            {currentQuestion.questionType === "multiple-choice" &&
+              currentQuestion.options && (
+                <div className="space-y-3">
+                  {currentQuestion.options.map((option, idx) => (
+                    <label
+                      key={idx}
+                      className="flex items-center p-4 border border-slate-600 rounded cursor-pointer hover:bg-slate-700/50 transition"
+                    >
+                      <input
+                        type="radio"
+                        name={`question-${currentQuestion.id}`}
+                        value={option}
+                        checked={exam.answers[currentQuestion.id] === option}
+                        onChange={e =>
+                          handleAnswerChange(currentQuestion.id, e.target.value)
+                        }
+                        className="mr-3"
+                      />
+                      <span className="text-white">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
 
             {currentQuestion.questionType === "short-answer" && (
               <input
                 type="text"
                 value={exam.answers[currentQuestion.id] || ""}
-                onChange={(e) => handleAnswerChange(currentQuestion.id, e.target.value)}
+                onChange={e =>
+                  handleAnswerChange(currentQuestion.id, e.target.value)
+                }
                 placeholder="Type your answer here..."
                 className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white placeholder-slate-500 focus:outline-none focus:border-amber-600"
               />
@@ -431,13 +475,15 @@ export default function FinalExam() {
             {questions.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setExam((prev) => ({ ...prev, currentQuestion: idx }))}
+                onClick={() =>
+                  setExam(prev => ({ ...prev, currentQuestion: idx }))
+                }
                 className={`w-10 h-10 rounded font-semibold transition ${
                   idx === exam.currentQuestion
                     ? "bg-amber-600 text-white"
                     : exam.answers[questions[idx].id]
-                    ? "bg-green-600 text-white"
-                    : "bg-slate-700 text-slate-400 hover:bg-slate-600"
+                      ? "bg-green-600 text-white"
+                      : "bg-slate-700 text-slate-400 hover:bg-slate-600"
                 }`}
               >
                 {idx + 1}

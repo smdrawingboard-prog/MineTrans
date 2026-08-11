@@ -35,9 +35,13 @@ interface QuizAttempt {
 export default function AdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [students, setStudents] = useState<Student[]>([]);
-  const [studentProgress, setStudentProgress] = useState<Map<number, StudentProgress>>(new Map());
+  const [studentProgress, setStudentProgress] = useState<
+    Map<number, StudentProgress>
+  >(new Map());
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"overview" | "students" | "reports">("overview");
+  const [activeTab, setActiveTab] = useState<
+    "overview" | "students" | "reports"
+  >("overview");
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
   const studentsQuery = trpc.certification.getAllStudents.useQuery();
@@ -65,8 +69,14 @@ export default function AdminDashboard() {
 
   const handleExportReport = () => {
     // Create CSV export
-    const headers = ["Student ID", "Name", "Email", "Joined Date", "Courses Enrolled"];
-    const rows = students.map((s) => [
+    const headers = [
+      "Student ID",
+      "Name",
+      "Email",
+      "Joined Date",
+      "Courses Enrolled",
+    ];
+    const rows = students.map(s => [
       s.id,
       s.name,
       s.email,
@@ -76,7 +86,7 @@ export default function AdminDashboard() {
 
     const csvContent = [
       headers.join(","),
-      ...rows.map((row) => row.map((cell) => `"${cell}"`).join(",")),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(",")),
     ].join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv" });
@@ -110,7 +120,9 @@ export default function AdminDashboard() {
       <div className="bg-slate-800 border-b border-amber-600/30 p-6 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-amber-600 mb-1">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-amber-600 mb-1">
+              Admin Dashboard
+            </h1>
             <p className="text-slate-400">MineTrans Certification Management</p>
           </div>
           <Button
@@ -169,13 +181,17 @@ export default function AdminDashboard() {
               <Card className="bg-slate-800 border-amber-600/30 p-6">
                 <div className="text-center">
                   <p className="text-slate-400 text-sm mb-2">Total Students</p>
-                  <p className="text-4xl font-bold text-amber-600">{students.length}</p>
+                  <p className="text-4xl font-bold text-amber-600">
+                    {students.length}
+                  </p>
                 </div>
               </Card>
 
               <Card className="bg-slate-800 border-amber-600/30 p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Active This Week</p>
+                  <p className="text-slate-400 text-sm mb-2">
+                    Active This Week
+                  </p>
                   <p className="text-4xl font-bold text-amber-600">
                     {students.length > 0 ? Math.ceil(students.length * 0.6) : 0}
                   </p>
@@ -192,19 +208,25 @@ export default function AdminDashboard() {
 
             {/* Recent Activity */}
             <Card className="bg-slate-800 border-amber-600/30 p-6">
-              <h2 className="text-xl font-bold text-amber-600 mb-4">Recent Enrollments</h2>
+              <h2 className="text-xl font-bold text-amber-600 mb-4">
+                Recent Enrollments
+              </h2>
               {students.length === 0 ? (
                 <p className="text-slate-400">No students enrolled yet.</p>
               ) : (
                 <div className="space-y-3">
-                  {students.slice(0, 5).map((student) => (
+                  {students.slice(0, 5).map(student => (
                     <div
                       key={student.id}
                       className="flex justify-between items-center p-3 bg-slate-700/50 rounded"
                     >
                       <div>
-                        <p className="font-semibold text-white">{student.name}</p>
-                        <p className="text-sm text-slate-400">{student.email}</p>
+                        <p className="font-semibold text-white">
+                          {student.name}
+                        </p>
+                        <p className="text-sm text-slate-400">
+                          {student.email}
+                        </p>
                       </div>
                       <p className="text-sm text-slate-400">
                         {new Date(student.enrolledAt).toLocaleDateString()}
@@ -235,7 +257,9 @@ export default function AdminDashboard() {
               <Card className="bg-slate-800 border-amber-600/30 p-6">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-amber-600">{selectedStudent.name}</h3>
+                    <h3 className="text-2xl font-bold text-amber-600">
+                      {selectedStudent.name}
+                    </h3>
                     <p className="text-slate-400">{selectedStudent.email}</p>
                   </div>
                   <Button
@@ -250,12 +274,16 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="bg-slate-700/50 p-4 rounded">
                     <p className="text-slate-400 text-sm">Student ID</p>
-                    <p className="text-lg font-semibold text-white">{selectedStudent.id}</p>
+                    <p className="text-lg font-semibold text-white">
+                      {selectedStudent.id}
+                    </p>
                   </div>
                   <div className="bg-slate-700/50 p-4 rounded">
                     <p className="text-slate-400 text-sm">Joined</p>
                     <p className="text-lg font-semibold text-white">
-                      {new Date(selectedStudent.enrolledAt).toLocaleDateString()}
+                      {new Date(
+                        selectedStudent.enrolledAt
+                      ).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
@@ -264,11 +292,16 @@ export default function AdminDashboard() {
                   <p className="text-slate-400 text-sm mb-3">Course Progress</p>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-white">Mining Insurance Fundamentals</span>
+                      <span className="text-white">
+                        Mining Insurance Fundamentals
+                      </span>
                       <span className="text-amber-600 font-semibold">65%</span>
                     </div>
                     <div className="w-full bg-slate-600 rounded-full h-2">
-                      <div className="bg-amber-600 h-2 rounded-full" style={{ width: "65%" }}></div>
+                      <div
+                        className="bg-amber-600 h-2 rounded-full"
+                        style={{ width: "65%" }}
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -295,10 +328,17 @@ export default function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-700">
-                      {students.map((student) => (
-                        <tr key={student.id} className="hover:bg-slate-700/50 transition">
-                          <td className="px-6 py-4 text-white">{student.name}</td>
-                          <td className="px-6 py-4 text-slate-400">{student.email}</td>
+                      {students.map(student => (
+                        <tr
+                          key={student.id}
+                          className="hover:bg-slate-700/50 transition"
+                        >
+                          <td className="px-6 py-4 text-white">
+                            {student.name}
+                          </td>
+                          <td className="px-6 py-4 text-slate-400">
+                            {student.email}
+                          </td>
                           <td className="px-6 py-4 text-slate-400">
                             {new Date(student.enrolledAt).toLocaleDateString()}
                           </td>
@@ -329,7 +369,9 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Enrollment Trends */}
               <Card className="bg-slate-800 border-amber-600/30 p-6">
-                <h3 className="text-lg font-bold text-amber-600 mb-4">Enrollment Trends</h3>
+                <h3 className="text-lg font-bold text-amber-600 mb-4">
+                  Enrollment Trends
+                </h3>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between mb-1">
@@ -364,7 +406,9 @@ export default function AdminDashboard() {
 
               {/* Completion Stats */}
               <Card className="bg-slate-800 border-amber-600/30 p-6">
-                <h3 className="text-lg font-bold text-amber-600 mb-4">Completion Status</h3>
+                <h3 className="text-lg font-bold text-amber-600 mb-4">
+                  Completion Status
+                </h3>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between mb-1">
@@ -416,7 +460,9 @@ export default function AdminDashboard() {
             <Card className="bg-slate-800 border-amber-600/30 p-6">
               <div className="flex justify-between items-center">
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1">Export Student Data</h3>
+                  <h3 className="text-lg font-bold text-white mb-1">
+                    Export Student Data
+                  </h3>
                   <p className="text-slate-400 text-sm">
                     Download a CSV report of all enrolled students
                   </p>

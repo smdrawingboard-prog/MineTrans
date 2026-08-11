@@ -1,22 +1,41 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../_core/trpc";
 import * as certDb from "../services/certificationDb";
-import { generateCertificatePDF, generateCertificateNumber } from "../services/certificateGenerator";
+import {
+  generateCertificatePDF,
+  generateCertificateNumber,
+} from "../services/certificateGenerator";
 import { TRPCError } from "@trpc/server";
 
 export const certificationRouter = router({
   // Authentication
   signup: publicProcedure
-    .input(z.object({ email: z.string().email(), name: z.string(), password: z.string().min(6) }))
+    .input(
+      z.object({
+        email: z.string().email(),
+        name: z.string(),
+        password: z.string().min(6),
+      })
+    )
     .mutation(async ({ input }) => {
       const existing = await certDb.getStudentByEmail(input.email);
       if (existing) {
-        throw new TRPCError({ code: "CONFLICT", message: "Email already registered" });
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "Email already registered",
+        });
       }
 
-      const student = await certDb.createStudent(input.email, input.name, input.password);
+      const student = await certDb.createStudent(
+        input.email,
+        input.name,
+        input.password
+      );
       if (!student) {
-        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create student" });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to create student",
+        });
       }
 
       return { id: student.id, email: student.email, name: student.name };
@@ -25,14 +44,23 @@ export const certificationRouter = router({
   login: publicProcedure
     .input(z.object({ email: z.string().email(), password: z.string() }))
     .mutation(async ({ input }) => {
-      const valid = await certDb.verifyStudentPassword(input.email, input.password);
+      const valid = await certDb.verifyStudentPassword(
+        input.email,
+        input.password
+      );
       if (!valid) {
-        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid credentials" });
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Invalid credentials",
+        });
       }
 
       const student = await certDb.getStudentByEmail(input.email);
       if (!student) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Student not found" });
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Student not found",
+        });
       }
 
       return { id: student.id, email: student.email, name: student.name };
@@ -65,7 +93,10 @@ export const certificationRouter = router({
     .query(async ({ input }) => {
       const section = await certDb.getSectionById(input.sectionId);
       if (!section) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Section not found" });
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Section not found",
+        });
       }
       return section;
     }),
@@ -122,11 +153,16 @@ export const certificationRouter = router({
       const questions = await certDb.getQuestionsByQuizId(input.quizId);
       let score = 0;
       let totalPoints = 0;
-      const feedback: Record<string | number, { correct: boolean; explanation: string }> = {};
+      const feedback: Record<
+        string | number,
+        { correct: boolean; explanation: string }
+      > = {};
 
       for (const question of questions) {
         totalPoints += question.points;
-        const studentAnswer = String(input.answers[question.id.toString()] || "");
+        const studentAnswer = String(
+          input.answers[question.id.toString()] || ""
+        );
 
         // Simple answer checking (can be enhanced for different question types)
         const isCorrect = studentAnswer === String(question.correctAnswer);
@@ -161,7 +197,8 @@ export const certificationRouter = router({
       return {
         score,
         totalPoints,
-        percentage: totalPoints > 0 ? Math.round((score / totalPoints) * 100) : 0,
+        percentage:
+          totalPoints > 0 ? Math.round((score / totalPoints) * 100) : 0,
         passed,
         feedback,
       };
@@ -194,7 +231,10 @@ export const certificationRouter = router({
       );
 
       if (!result) {
-        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to update progress" });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to update progress",
+        });
       }
 
       return { success: true };
@@ -202,7 +242,13 @@ export const certificationRouter = router({
 
   // Certificates
   issueCertificate: publicProcedure
-    .input(z.object({ studentId: z.number(), courseId: z.number(), finalScore: z.number() }))
+    .input(
+      z.object({
+        studentId: z.number(),
+        courseId: z.number(),
+        finalScore: z.number(),
+      })
+    )
     .mutation(async ({ input }) => {
       const certificateNumber = await certDb.issueCertificate(
         input.studentId,
@@ -211,7 +257,10 @@ export const certificationRouter = router({
       );
 
       if (!certificateNumber) {
-        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to issue certificate" });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to issue certificate",
+        });
       }
 
       return { certificateNumber };
@@ -220,7 +269,10 @@ export const certificationRouter = router({
   getCertificate: publicProcedure
     .input(z.object({ studentId: z.number(), courseId: z.number() }))
     .query(async ({ input }) => {
-      return await certDb.getCertificateByStudent(input.studentId, input.courseId);
+      return await certDb.getCertificateByStudent(
+        input.studentId,
+        input.courseId
+      );
     }),
 
   // Admin functions
@@ -231,7 +283,10 @@ export const certificationRouter = router({
   getStudentCourseProgress: publicProcedure
     .input(z.object({ studentId: z.number(), courseId: z.number() }))
     .query(async ({ input }) => {
-      return await certDb.getStudentCourseProgress(input.studentId, input.courseId);
+      return await certDb.getStudentCourseProgress(
+        input.studentId,
+        input.courseId
+      );
     }),
 
   // Certificate generation
