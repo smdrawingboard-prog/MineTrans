@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-11T10:14:43.027Z",
+  "title": "Design System: MineTrans",
+  "extensions": {
+    "colorMeta": {
+      "onyx": {
+        "role": "neutral",
+        "displayName": "Onyx",
+        "canonical": "oklch(0.06 0.002 65)",
+        "tonalRamp": [
+          "oklch(0.06 0.002 65)",
+          "oklch(0.13 0.006 65)",
+          "oklch(0.21 0.008 65)",
+          "oklch(0.30 0.010 65)",
+          "oklch(0.45 0.010 65)",
+          "oklch(0.62 0.008 65)",
+          "oklch(0.80 0.006 65)",
+          "oklch(0.95 0.003 65)"
+        ]
+      },
+      "charcoal": {
+        "role": "neutral",
+        "displayName": "Deep Charcoal",
+        "canonical": "oklch(0.21 0.006 65)",
+        "tonalRamp": [
+          "oklch(0.08 0.003 65)",
+          "oklch(0.15 0.005 65)",
+          "oklch(0.21 0.006 65)",
+          "oklch(0.30 0.007 65)",
+          "oklch(0.46 0.007 65)",
+          "oklch(0.63 0.006 65)",
+          "oklch(0.81 0.004 65)",
+          "oklch(0.96 0.002 65)"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "oklch(0.30 0.008 65)",
+        "tonalRamp": [
+          "oklch(0.10 0.004 65)",
+          "oklch(0.18 0.006 65)",
+          "oklch(0.30 0.008 65)",
+          "oklch(0.38 0.009 65)",
+          "oklch(0.50 0.008 65)",
+          "oklch(0.66 0.006 65)",
+          "oklch(0.83 0.004 65)",
+          "oklch(0.97 0.002 65)"
+        ]
+      },
+      "survey-grey": {
+        "role": "neutral",
+        "displayName": "Survey Grey",
+        "canonical": "oklch(0.83 0.005 285)",
+        "tonalRamp": [
+          "oklch(0.20 0.003 285)",
+          "oklch(0.35 0.004 285)",
+          "oklch(0.50 0.005 285)",
+          "oklch(0.65 0.005 285)",
+          "oklch(0.75 0.005 285)",
+          "oklch(0.83 0.005 285)",
+          "oklch(0.90 0.004 285)",
+          "oklch(0.97 0.002 285)"
+        ]
+      },
+      "ledger-white": {
+        "role": "neutral",
+        "displayName": "Ledger White",
+        "canonical": "oklch(0.97 0.003 65)",
+        "tonalRamp": [
+          "oklch(0.25 0.004 65)",
+          "oklch(0.40 0.004 65)",
+          "oklch(0.55 0.004 65)",
+          "oklch(0.70 0.004 65)",
+          "oklch(0.83 0.003 65)",
+          "oklch(0.90 0.003 65)",
+          "oklch(0.94 0.003 65)",
+          "oklch(0.97 0.003 65)"
+        ]
+      },
+      "assay-copper": {
+        "role": "primary",
+        "displayName": "Assay Copper",
+        "canonical": "oklch(0.55 0.10 50)",
+        "tonalRamp": [
+          "oklch(0.18 0.04 50)",
+          "oklch(0.30 0.07 50)",
+          "oklch(0.42 0.09 50)",
+          "oklch(0.55 0.10 50)",
+          "oklch(0.65 0.11 55)",
+          "oklch(0.75 0.10 58)",
+          "oklch(0.85 0.07 60)",
+          "oklch(0.94 0.04 62)"
+        ]
+      },
+      "assay-copper-bright": {
+        "role": "primary",
+        "displayName": "Assay Copper Bright",
+        "canonical": "oklch(0.65 0.11 55)",
+        "tonalRamp": [
+          "oklch(0.22 0.05 52)",
+          "oklch(0.35 0.08 53)",
+          "oklch(0.48 0.10 54)",
+          "oklch(0.65 0.11 55)",
+          "oklch(0.73 0.11 56)",
+          "oklch(0.80 0.09 58)",
+          "oklch(0.88 0.06 60)",
+          "oklch(0.95 0.03 62)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page-level h1 headlines; italic spans carry the Assay Copper Bright emphasis color." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2 headlines, max-width 22ch." },
+      "body": { "displayName": "Body / Lede", "purpose": "Intro paragraphs and body copy; max-width 66ch." },
+      "label": { "displayName": "Label", "purpose": "Nav links, buttons, footer headings, breadcrumbs — anything functioning as metadata or navigation." },
+      "eyebrow": { "displayName": "Eyebrow", "purpose": "Signature small-caps kicker above headlines, preceded by a 34px hairline." }
+    },
+    "shadows": [
+      { "name": "card-rest", "value": "0 2px 12px rgba(10,10,11,0.45)", "purpose": "Default ambient elevation for primary buttons and cards at rest (The Raised-Ore Rule)." },
+      { "name": "card-hover", "value": "0 10px 30px rgba(173,106,61,0.25)", "purpose": "Copper-tinted lift on hover/focus for primary buttons and cards, paired with translateY(-4px)." },
+      { "name": "error-glow", "value": "0 0 0 8px rgba(224,75,75,0.14), 0 0 34px 6px rgba(224,75,75,0.45)", "purpose": "Semantic-only invalid form field state; never used decoratively." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "0.2s ease (border-color, transform)", "purpose": "Default transition for hover/focus state changes on cards, nav, and links." },
+      { "name": "ease-panel", "value": "0.3s ease (transform)", "purpose": "Mobile nav overlay slide-in/out." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "640px" },
+      { "name": "tablet", "value": "800px" },
+      { "name": "nav-collapse", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA button — copper fill, onyx text, ambient shadow at rest with a copper-glow lift on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Request a BI Review</a>",
+      "css": ".ds-btn-primary { display: inline-block; font-family: 'Jost', sans-serif; font-size: 12.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0B; background: #C9854F; padding: 15px 34px; border-radius: 2px; text-decoration: none; box-shadow: 0 2px 12px rgba(10,10,11,0.45); transition: background 0.2s, box-shadow 0.2s, transform 0.2s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #F7F5F1; box-shadow: 0 10px 30px rgba(173,106,61,0.25); transform: translateY(-2px); }"
+    },
+    {
+      "name": "Nav Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Smaller header CTA variant, same color logic as the primary button, flat (no shadow).",
+      "html": "<a class=\"ds-btn-nav\" href=\"#\">Contact</a>",
+      "css": ".ds-btn-nav { font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0B; background: #C9854F; padding: 11px 22px; border-radius: 2px; text-decoration: none; transition: background 0.2s; } .ds-btn-nav:hover { background: #F7F5F1; }"
+    },
+    {
+      "name": "Facet Card",
+      "kind": "card",
+      "refersTo": "card-facet",
+      "description": "Insurance-category card used in the marketing site's facet grid — charcoal surface, hairline border, ambient shadow at rest, copper border + lift + glow on hover.",
+      "html": "<a class=\"ds-card-facet\" href=\"#\"><span class=\"ds-card-facet__num\">01</span><h3>Commercial Assets</h3><p>Structured cover for the mine's fixed and mobile assets.</p><span class=\"ds-card-facet__go\">Explore &rarr;</span></a>",
+      "css": ".ds-card-facet { display: flex; flex-direction: column; gap: 14px; background: #1E1D20; border: 1px solid rgba(201,202,206,0.14); border-radius: 4px; padding: 34px 28px; text-decoration: none; box-shadow: 0 2px 12px rgba(10,10,11,0.45); transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; } .ds-card-facet:hover, .ds-card-facet:focus-visible { border-color: #AD6A3D; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(173,106,61,0.25); } .ds-card-facet__num { font-family: 'Playfair Display', serif; font-size: 13px; color: #C9854F; letter-spacing: 0.1em; } .ds-card-facet h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 22px; color: #F7F5F1; } .ds-card-facet p { color: #C9CACE; font-size: 14.5px; font-weight: 300; flex: 1; } .ds-card-facet__go { font-family: 'Jost', sans-serif; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9854F; margin-top: auto; }"
+    },
+    {
+      "name": "Content Block",
+      "kind": "card",
+      "refersTo": "card-facet",
+      "description": "Flagged-note content block with a copper left edge — stays flat by design, outside the elevation upgrade.",
+      "html": "<div class=\"ds-block\"><h3>FSP Disclosure</h3><p>MineTrans Insurance Brokers is a Juristic Representative of Donaldson Group (Pty) Ltd — FSP No. 53166.</p></div>",
+      "css": ".ds-block { background: #1E1D20; border: 1px solid rgba(201,202,206,0.14); border-left: 2px solid #AD6A3D; border-radius: 2px; padding: 26px 24px; } .ds-block h3 { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 10px; color: #F7F5F1; } .ds-block p { color: #C9CACE; font-size: 14px; font-weight: 300; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": null,
+      "description": "Form input/textarea/select — onyx fill, hairline border, copper focus ring, semantic red error glow.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-example\">Company Name</label><input class=\"ds-field\" id=\"ds-example\" type=\"text\" placeholder=\"e.g. Kopano Mining Group\" />",
+      "css": ".ds-field-label { display: block; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9CACE; margin-bottom: 7px; } .ds-field { width: 100%; background: #0A0A0B; border: 1px solid rgba(201,202,206,0.14); color: #F7F5F1; padding: 13px 15px; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; box-sizing: border-box; transition: border-color 0.3s; } .ds-field:focus { border-color: rgba(173,106,61,0.4); } .ds-field.is-invalid { border-color: rgba(224,75,75,0.6); box-shadow: 0 0 0 8px rgba(224,75,75,0.14), 0 0 34px 6px rgba(224,75,75,0.45); }"
+    },
+    {
+      "name": "Eyebrow",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Signature small-caps kicker above headlines — the system's most distinctive typographic signature.",
+      "html": "<span class=\"ds-eyebrow\">Business Interruption</span>",
+      "css": ".ds-eyebrow { display: flex; align-items: center; gap: 16px; font-family: 'Jost', sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 0.38em; text-transform: uppercase; color: #C9854F; } .ds-eyebrow::before { content: ''; width: 34px; height: 1px; background: #AD6A3D; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Assay Report",
+    "overview": "MineTrans's marketing and training surfaces read like a certified assay report on a valuable metal: dark, precise, evidentiary. The onyx-black canvas and thin hairline rules are the paper of a technical document; Playfair Display headlines are the authoritative typeset title; Jost's uppercase, wide-tracked small-caps labels are the stamped, measured annotations along the margin; Inter body copy is the plain explanatory prose underneath. Assay Copper is the one warm material in the system — it appears sparingly, the way a seal or a highlighted figure would on a real report, never as decoration.\n\nThis is a Persuade surface (the marketing site) built with the discipline of an Operate surface: nothing performs looseness or informality. The system currently exists fully realized only in client/public/*.html (the static marketing pages). The certification portal and the shadcn/ui component library run an unrelated generic blue-on-white / slate-amber theme — this is confirmed drift, not a second intentional world. Do not treat the portal's current look as a design reference; it is the thing that needs to converge onto this system.",
+    "keyCharacteristics": [
+      "Onyx-black canvas with a single warm accent (copper), never a busy palette.",
+      "Editorial serif display type over engraved small-caps labels; body text stays quiet.",
+      "Flat, hairline-bordered surfaces as the base language — with one confirmed exception: primary buttons and cards now carry real shadow/lift, not just a border.",
+      "Near-square geometry (2-4px radii) throughout; nothing rounded or soft.",
+      "Numbers and named steps (12-step methodology, 18-category questionnaire) are treated as first-class content, not buried in prose."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Copper is the only saturated color in the system. If a second accent hue is needed for a state, it must be semantic, never decorative.", "section": "colors" },
+      { "name": "The Semantic Red Exception", "body": "Validation/error states use a separate red glow — this is a state color, not a palette option; it never appears outside form validation.", "section": "colors" },
+      { "name": "The Stamped Label Rule", "body": "Anything that reads as metadata or navigation is Jost, uppercase, letter-spaced. Any Playfair Display text is a title, never a label.", "section": "typography" },
+      { "name": "The Raised-Ore Rule", "body": "Primary buttons and cards are never perfectly flat. A hairline border alone is no longer sufficient — they carry ambient shadow at rest and a copper-tinted lift on interaction. Every other surface stays flat by design.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep copper to eyebrows, CTAs, hover states, and single accent strokes — per The One Accent Rule.",
+      "Do give primary buttons and cards real shadow now (ambient at rest, copper glow on hover) — per The Raised-Ore Rule.",
+      "Do use Jost uppercase small-caps for anything that functions as a label, metadata, or navigation; reserve Playfair Display for titles.",
+      "Do keep nav, footer, content blocks, and section chrome flat with hairline borders — the elevation upgrade is scoped to buttons and cards only.",
+      "Do treat the 12-step BI methodology and 18-category questionnaire as first-class, numbered content."
+    ],
+    "donts": [
+      "Don't introduce a second accent hue outside the confirmed semantic red for validation errors.",
+      "Don't round corners beyond the established 2-4px scale; large/soft radii are off-brand.",
+      "Don't treat the certification portal's current slate/amber shadcn theme as a design reference — it is confirmed drift from this system, not an alternate world.",
+      "Don't add shadow/elevation to nav, footer, or content blocks (.block) — the Raised-Ore Rule is scoped to buttons and cards."
+    ]
+  }
+}
