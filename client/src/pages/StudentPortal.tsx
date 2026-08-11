@@ -76,8 +76,8 @@ export default function StudentPortal() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-slate-300">Loading your dashboard...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading your dashboard...</p>
       </div>
     );
   }
@@ -87,53 +87,49 @@ export default function StudentPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <div className="bg-slate-800 border-b border-amber-600/30 p-6 sticky top-0 z-50">
+      <div className="bg-background/90 backdrop-blur-md border-b border-border p-6 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-amber-600 mb-1">My Learning Dashboard</h1>
-            <p className="text-slate-400">Welcome back, {student.name}!</p>
+            <h1 className="text-3xl text-primary mb-1">My Learning Dashboard</h1>
+            <p className="text-muted-foreground">Welcome back, {student.name}!</p>
           </div>
-          <Button
-            onClick={handleLogout}
-            variant="outline"
-            className="border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white"
-          >
+          <Button onClick={handleLogout} variant="outline">
             Logout
           </Button>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-slate-800 border-b border-slate-700 px-6 py-4">
+      <div className="bg-card border-b border-border px-6 py-4">
         <div className="max-w-7xl mx-auto flex gap-4">
           <button
             onClick={() => setActiveTab("dashboard")}
-            className={`px-4 py-2 rounded transition ${
+            className={`px-4 py-2 rounded font-label text-xs tracking-[0.05em] uppercase transition ${
               activeTab === "dashboard"
-                ? "bg-amber-600 text-white"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-card-rest"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Dashboard
           </button>
           <button
             onClick={() => setActiveTab("courses")}
-            className={`px-4 py-2 rounded transition ${
+            className={`px-4 py-2 rounded font-label text-xs tracking-[0.05em] uppercase transition ${
               activeTab === "courses"
-                ? "bg-amber-600 text-white"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-card-rest"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             My Courses
           </button>
           <button
             onClick={() => setActiveTab("certificates")}
-            className={`px-4 py-2 rounded transition ${
+            className={`px-4 py-2 rounded font-label text-xs tracking-[0.05em] uppercase transition ${
               activeTab === "certificates"
-                ? "bg-amber-600 text-white"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-card-rest"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Certificates
@@ -148,17 +144,17 @@ export default function StudentPortal() {
           <div className="space-y-6">
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Courses Enrolled</p>
-                  <p className="text-4xl font-bold text-amber-600">{courses.length}</p>
+                  <p className="text-muted-foreground text-sm mb-2">Courses Enrolled</p>
+                  <p className="text-4xl text-primary">{courses.length}</p>
                 </div>
               </Card>
 
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Overall Progress</p>
-                  <p className="text-4xl font-bold text-amber-600">
+                  <p className="text-muted-foreground text-sm mb-2">Overall Progress</p>
+                  <p className="text-4xl text-primary">
                     {courses.length > 0
                       ? Math.round(
                           Array.from(progress.values()).reduce((sum, p) => sum + p.completedSections, 0) /
@@ -171,10 +167,10 @@ export default function StudentPortal() {
                 </div>
               </Card>
 
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Member Since</p>
-                  <p className="text-lg font-semibold text-amber-600">
+                  <p className="text-muted-foreground text-sm mb-2">Member Since</p>
+                  <p className="text-lg font-medium text-primary">
                     {new Date(student.enrolledAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -182,20 +178,20 @@ export default function StudentPortal() {
             </div>
 
             {/* Recent Activity */}
-            <Card className="bg-slate-800 border-amber-600/30 p-6">
-              <h2 className="text-xl font-bold text-amber-600 mb-4">Your Learning Path</h2>
+            <Card className="p-6">
+              <h2 className="text-xl text-primary mb-4">Your Learning Path</h2>
               <div className="space-y-4">
                 {courses.length === 0 ? (
-                  <p className="text-slate-400">No courses available yet.</p>
+                  <p className="text-muted-foreground">No courses available yet.</p>
                 ) : (
                   courses.map((course) => (
-                    <div key={course.id} className="bg-slate-700/50 p-4 rounded">
+                    <div key={course.id} className="bg-muted/50 p-4 rounded">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h3 className="font-semibold text-white">{course.title}</h3>
-                          <p className="text-sm text-slate-400">{course.totalSections} sections</p>
+                          <h3 className="font-medium text-foreground">{course.title}</h3>
+                          <p className="text-sm text-muted-foreground">{course.totalSections} sections</p>
                         </div>
-                        <span className="text-amber-600 font-semibold">{getProgressPercentage(course.id)}%</span>
+                        <span className="text-primary font-medium">{getProgressPercentage(course.id)}%</span>
                       </div>
                       <Progress value={getProgressPercentage(course.id)} className="h-2" />
                     </div>
@@ -209,15 +205,12 @@ export default function StudentPortal() {
         {/* Courses Tab */}
         {activeTab === "courses" && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold">My Courses</h2>
+            <h2 className="text-2xl">My Courses</h2>
 
             {courses.length === 0 ? (
-              <Card className="bg-slate-800 border-slate-700 p-8 text-center">
-                <p className="text-slate-400 mb-4">No courses available yet.</p>
-                <Button
-                  onClick={() => (window.location.href = "/certification")}
-                  className="bg-amber-600 hover:bg-amber-700"
-                >
+              <Card className="p-8 text-center">
+                <p className="text-muted-foreground mb-4">No courses available yet.</p>
+                <Button onClick={() => (window.location.href = "/certification")}>
                   Back to Certification
                 </Button>
               </Card>
@@ -226,28 +219,25 @@ export default function StudentPortal() {
                 {courses.map((course) => (
                   <Card
                     key={course.id}
-                    className="bg-slate-800 border-amber-600/30 hover:border-amber-600/60 transition overflow-hidden"
+                    className="hover:border-primary hover:shadow-card-hover hover:-translate-y-1 transition overflow-hidden"
                   >
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-amber-600 mb-2">{course.title}</h3>
-                      <p className="text-slate-400 mb-4 text-sm">{course.description}</p>
+                      <h3 className="text-xl text-primary mb-2">{course.title}</h3>
+                      <p className="text-muted-foreground mb-4 text-sm">{course.description}</p>
 
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm text-slate-400">Progress</span>
-                          <span className="text-amber-600 font-semibold">{getProgressPercentage(course.id)}%</span>
+                          <span className="text-sm text-muted-foreground">Progress</span>
+                          <span className="text-primary font-medium">{getProgressPercentage(course.id)}%</span>
                         </div>
                         <Progress value={getProgressPercentage(course.id)} className="h-2" />
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-slate-500">
+                        <span className="text-sm text-muted-foreground">
                           Passing Score: {course.passingScore}%
                         </span>
-                        <Button
-                          onClick={() => handleStartCourse(course.id)}
-                          className="bg-amber-600 hover:bg-amber-700"
-                        >
+                        <Button onClick={() => handleStartCourse(course.id)}>
                           Continue
                         </Button>
                       </div>
@@ -262,26 +252,25 @@ export default function StudentPortal() {
         {/* Certificates Tab */}
         {activeTab === "certificates" && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold">My Certificates</h2>
+            <h2 className="text-2xl">My Certificates</h2>
 
-            <Card className="bg-slate-800 border-amber-600/30 p-8 text-center">
+            <Card className="p-8 text-center">
               <div className="mb-4">
-                <div className="text-5xl mb-4">📜</div>
-                <h3 className="text-xl font-bold text-white mb-2">No Certificates Yet</h3>
-                <p className="text-slate-400 mb-6">
+                <h3 className="text-xl text-foreground mb-2">No Certificates Yet</h3>
+                <p className="text-muted-foreground mb-6">
                   Complete a course and pass the final exam to earn your certificate.
                 </p>
               </div>
 
-              <div className="bg-slate-700/50 p-4 rounded text-left">
-                <p className="text-sm text-slate-300 mb-3">
+              <div className="bg-muted/50 p-4 rounded text-left">
+                <p className="text-sm text-secondary-foreground mb-3">
                   <strong>How to earn a certificate:</strong>
                 </p>
-                <ul className="text-sm text-slate-400 space-y-2">
-                  <li>✓ Complete all course sections</li>
-                  <li>✓ Pass all section quizzes</li>
-                  <li>✓ Score {courses.length > 0 ? courses[0].passingScore : 70}% or higher on the final exam</li>
-                  <li>✓ Download your digital certificate</li>
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside marker:text-primary">
+                  <li>Complete all course sections</li>
+                  <li>Pass all section quizzes</li>
+                  <li>Score {courses.length > 0 ? courses[0].passingScore : 70}% or higher on the final exam</li>
+                  <li>Download your digital certificate</li>
                 </ul>
               </div>
             </Card>

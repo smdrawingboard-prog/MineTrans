@@ -168,22 +168,19 @@ export default function FinalExam() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-slate-300">Loading final exam...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading final exam...</p>
       </div>
     );
   }
 
   if (!getFinalExamQuery.data) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <Card className="bg-slate-800 border-amber-600/30 p-8 max-w-md text-center">
-          <h2 className="text-2xl font-bold text-amber-600 mb-4">Exam Not Found</h2>
-          <p className="text-slate-400 mb-6">The final exam for this course is not available.</p>
-          <Button
-            onClick={() => (window.location.href = "/certification/dashboard")}
-            className="bg-amber-600 hover:bg-amber-700"
-          >
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="p-8 max-w-md text-center">
+          <h2 className="text-2xl text-primary mb-4">Exam Not Found</h2>
+          <p className="text-muted-foreground mb-6">The final exam for this course is not available.</p>
+          <Button onClick={() => (window.location.href = "/certification/dashboard")}>
             Back to Dashboard
           </Button>
         </Card>
@@ -193,37 +190,34 @@ export default function FinalExam() {
 
   if (!exam.started) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-        <Card className="bg-slate-800 border-amber-600/30 p-8 max-w-2xl">
-          <h1 className="text-3xl font-bold text-amber-600 mb-4">Final Exam</h1>
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="p-8 max-w-2xl">
+          <h1 className="text-3xl text-primary mb-4">Final Exam</h1>
           <div className="space-y-4 mb-6">
             <div>
-              <p className="text-slate-400 mb-2">
-                <strong>Total Questions:</strong> {questions.length}
+              <p className="text-muted-foreground mb-2">
+                <strong className="text-foreground">Total Questions:</strong> {questions.length}
               </p>
-              <p className="text-slate-400 mb-2">
-                <strong>Time Limit:</strong> {getFinalExamQuery.data?.timeLimit || 120} minutes
+              <p className="text-muted-foreground mb-2">
+                <strong className="text-foreground">Time Limit:</strong> {getFinalExamQuery.data?.timeLimit || 120} minutes
               </p>
-              <p className="text-slate-400 mb-2">
-                <strong>Passing Score:</strong> {getFinalExamQuery.data?.passingScore || 70}%
+              <p className="text-muted-foreground mb-2">
+                <strong className="text-foreground">Passing Score:</strong> {getFinalExamQuery.data?.passingScore || 70}%
               </p>
             </div>
 
-            <div className="bg-slate-700/50 p-4 rounded">
-              <p className="text-amber-600 font-semibold mb-2">Important:</p>
-              <ul className="text-slate-300 text-sm space-y-1">
-                <li>✓ You can review and change your answers before submitting</li>
-                <li>✓ The timer will count down - manage your time wisely</li>
-                <li>✓ You cannot retake the exam after submission</li>
-                <li>✓ You must score {getFinalExamQuery.data?.passingScore || 70}% or higher to pass</li>
+            <div className="bg-muted/50 p-4 rounded">
+              <p className="text-primary font-medium mb-2">Important:</p>
+              <ul className="text-muted-foreground text-sm space-y-1 list-disc list-inside marker:text-primary">
+                <li>You can review and change your answers before submitting</li>
+                <li>The timer will count down - manage your time wisely</li>
+                <li>You cannot retake the exam after submission</li>
+                <li>You must score {getFinalExamQuery.data?.passingScore || 70}% or higher to pass</li>
               </ul>
             </div>
           </div>
 
-          <Button
-            onClick={startExam}
-            className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 text-lg"
-          >
+          <Button onClick={startExam} className="w-full py-3 text-lg">
             Start Exam
           </Button>
         </Card>
@@ -239,45 +233,42 @@ export default function FinalExam() {
 
   if (exam.submitted && exam.results) {
     return (
-      <div className="min-h-screen bg-slate-900 p-4">
+      <div className="min-h-screen bg-background p-4">
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-slate-800 border-amber-600/30 p-8 text-center mb-6">
+          <Card className="p-8 text-center mb-6">
             <div className="mb-6">
               <div className="text-6xl mb-4">{exam.results.passed ? "✓" : "✗"}</div>
-              <h1 className={`text-4xl font-bold mb-2 ${exam.results.passed ? "text-green-500" : "text-red-500"}`}>
+              <h1 className={`text-4xl mb-2 ${exam.results.passed ? "text-green-500" : "text-destructive"}`}>
                 {exam.results.passed ? "Exam Passed!" : "Exam Not Passed"}
               </h1>
-              <p className="text-2xl font-semibold text-amber-600">
+              <p className="text-2xl font-medium text-primary">
                 {exam.results.percentage}%
               </p>
             </div>
 
-            <div className="bg-slate-700/50 p-6 rounded mb-6">
+            <div className="bg-muted/50 p-6 rounded mb-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-slate-400 text-sm">Your Score</p>
-                  <p className="text-2xl font-bold text-white">{exam.results.score} points</p>
+                  <p className="text-muted-foreground text-sm">Your Score</p>
+                  <p className="text-2xl font-medium text-foreground">{exam.results.score} points</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm">Total Points</p>
-                  <p className="text-2xl font-bold text-white">{exam.results.totalPoints}</p>
+                  <p className="text-muted-foreground text-sm">Total Points</p>
+                  <p className="text-2xl font-medium text-foreground">{exam.results.totalPoints}</p>
                 </div>
               </div>
             </div>
 
             {exam.results.passed && (
               <div className="bg-green-900/20 border border-green-600/50 p-4 rounded mb-6">
-                <p className="text-green-400 font-semibold">
+                <p className="text-green-400 font-medium">
                   Congratulations! Your certificate is ready for download.
                 </p>
               </div>
             )}
 
             <div className="flex gap-3 justify-center">
-              <Button
-                onClick={() => (window.location.href = "/certification/dashboard")}
-                className="bg-amber-600 hover:bg-amber-700"
-              >
+              <Button onClick={() => (window.location.href = "/certification/dashboard")}>
                 Back to Dashboard
               </Button>
               {exam.results.passed && (
@@ -292,8 +283,8 @@ export default function FinalExam() {
           </Card>
 
           {/* Detailed Results */}
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <h2 className="text-2xl font-bold text-amber-600 mb-4">Detailed Results</h2>
+          <Card className="p-6">
+            <h2 className="text-2xl text-primary mb-4">Detailed Results</h2>
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {questions.map((q, idx) => {
                 const feedback = exam.results?.feedback[q.id.toString()];
@@ -304,27 +295,27 @@ export default function FinalExam() {
                     className={`p-4 rounded border ${
                       isCorrect
                         ? "bg-green-900/20 border-green-600/50"
-                        : "bg-red-900/20 border-red-600/50"
+                        : "bg-destructive/10 border-destructive/40"
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`text-xl font-bold ${isCorrect ? "text-green-400" : "text-red-400"}`}>
+                      <div className={`text-xl font-bold ${isCorrect ? "text-green-400" : "text-destructive"}`}>
                         {isCorrect ? "✓" : "✗"}
                       </div>
                       <div className="flex-1">
-                        <p className="font-semibold text-white mb-1">
+                        <p className="font-medium text-foreground mb-1">
                           Question {idx + 1}: {q.questionText}
                         </p>
-                        <p className="text-sm text-slate-400 mb-2">
+                        <p className="text-sm text-muted-foreground mb-2">
                           Your answer: {exam.answers[q.id] || "Not answered"}
                         </p>
                         {!isCorrect && (
-                          <p className="text-sm text-slate-300">
+                          <p className="text-sm text-secondary-foreground">
                             Correct answer: {q.correctAnswer}
                           </p>
                         )}
                         {feedback?.explanation && (
-                          <p className="text-sm text-slate-300 mt-2 italic">
+                          <p className="text-sm text-secondary-foreground mt-2 italic">
                             {feedback.explanation}
                           </p>
                         )}
@@ -344,19 +335,19 @@ export default function FinalExam() {
   const answeredCount = Object.keys(exam.answers).length;
 
   return (
-    <div className="min-h-screen bg-slate-900 p-4">
+    <div className="min-h-screen bg-background p-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="bg-slate-800 border-b border-amber-600/30 p-4 mb-6 rounded flex justify-between items-center">
+        <div className="bg-card border-b border-border p-4 mb-6 rounded flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-amber-600">Final Exam</h1>
-            <p className="text-slate-400 text-sm">
+            <h1 className="text-2xl text-primary">Final Exam</h1>
+            <p className="text-muted-foreground text-sm">
               Question {exam.currentQuestion + 1} of {questions.length}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-slate-400 text-sm mb-1">Time Remaining</p>
-            <p className={`text-3xl font-bold ${exam.timeRemaining < 300 ? "text-red-500" : "text-amber-600"}`}>
+            <p className="text-muted-foreground text-sm mb-1">Time Remaining</p>
+            <p className={`text-3xl font-medium ${exam.timeRemaining < 300 ? "text-destructive" : "text-primary"}`}>
               {formatTime(exam.timeRemaining)}
             </p>
           </div>
@@ -365,14 +356,14 @@ export default function FinalExam() {
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="flex justify-between mb-2">
-            <span className="text-slate-400 text-sm">Progress</span>
-            <span className="text-amber-600 text-sm">
+            <span className="text-muted-foreground text-sm">Progress</span>
+            <span className="text-primary text-sm">
               {answeredCount} of {questions.length} answered
             </span>
           </div>
-          <div className="w-full bg-slate-700 rounded-full h-2">
+          <div className="w-full bg-muted rounded-full h-2">
             <div
-              className="bg-amber-600 h-2 rounded-full transition-all"
+              className="bg-primary h-2 rounded-full transition-all"
               style={{ width: `${(answeredCount / questions.length) * 100}%` }}
             />
           </div>
@@ -380,15 +371,15 @@ export default function FinalExam() {
 
         {/* Question */}
         {currentQuestion && (
-          <Card className="bg-slate-800 border-amber-600/30 p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-6">{currentQuestion.questionText}</h2>
+          <Card className="p-6 mb-6">
+            <h2 className="text-xl text-foreground mb-6">{currentQuestion.questionText}</h2>
 
             {currentQuestion.questionType === "multiple-choice" && currentQuestion.options && (
               <div className="space-y-3">
                 {currentQuestion.options.map((option, idx) => (
                   <label
                     key={idx}
-                    className="flex items-center p-4 border border-slate-600 rounded cursor-pointer hover:bg-slate-700/50 transition"
+                    className="flex items-center p-4 border border-border rounded cursor-pointer hover:bg-muted/50 transition"
                   >
                     <input
                       type="radio"
@@ -396,9 +387,9 @@ export default function FinalExam() {
                       value={option}
                       checked={exam.answers[currentQuestion.id] === option}
                       onChange={(e) => handleAnswerChange(currentQuestion.id, e.target.value)}
-                      className="mr-3"
+                      className="mr-3 accent-primary"
                     />
-                    <span className="text-white">{option}</span>
+                    <span className="text-foreground">{option}</span>
                   </label>
                 ))}
               </div>
@@ -410,7 +401,7 @@ export default function FinalExam() {
                 value={exam.answers[currentQuestion.id] || ""}
                 onChange={(e) => handleAnswerChange(currentQuestion.id, e.target.value)}
                 placeholder="Type your answer here..."
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white placeholder-slate-500 focus:outline-none focus:border-amber-600"
+                className="w-full px-4 py-2 bg-muted border border-border rounded text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
               />
             )}
           </Card>
@@ -422,7 +413,6 @@ export default function FinalExam() {
             onClick={goToPreviousQuestion}
             disabled={exam.currentQuestion === 0}
             variant="outline"
-            className="border-slate-600 text-slate-300"
           >
             ← Previous
           </Button>
@@ -434,10 +424,10 @@ export default function FinalExam() {
                 onClick={() => setExam((prev) => ({ ...prev, currentQuestion: idx }))}
                 className={`w-10 h-10 rounded font-semibold transition ${
                   idx === exam.currentQuestion
-                    ? "bg-amber-600 text-white"
+                    ? "bg-primary text-primary-foreground"
                     : exam.answers[questions[idx].id]
                     ? "bg-green-600 text-white"
-                    : "bg-slate-700 text-slate-400 hover:bg-slate-600"
+                    : "bg-muted text-muted-foreground hover:bg-accent"
                 }`}
               >
                 {idx + 1}
@@ -453,10 +443,7 @@ export default function FinalExam() {
               Submit Exam
             </Button>
           ) : (
-            <Button
-              onClick={goToNextQuestion}
-              className="bg-amber-600 hover:bg-amber-700"
-            >
+            <Button onClick={goToNextQuestion}>
               Next →
             </Button>
           )}

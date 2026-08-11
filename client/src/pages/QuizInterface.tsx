@@ -128,10 +128,10 @@ export default function QuizInterface() {
 
   if (loading || !quiz) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mb-4"></div>
-          <p className="text-slate-300">Loading quiz...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+          <p className="text-muted-foreground">Loading quiz...</p>
         </div>
       </div>
     );
@@ -145,21 +145,21 @@ export default function QuizInterface() {
 
   if (submitted && result) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white p-6">
+      <div className="min-h-screen bg-background text-foreground p-6">
         <div className="max-w-2xl mx-auto animate-fadeIn">
-          <Card className="bg-slate-800 border-amber-600/30 p-8 text-center">
+          <Card className="p-8 text-center">
             <div className="mb-6">
-              <div className={`text-6xl font-bold mb-4 ${result.passed ? "text-green-500" : "text-red-500"}`}>
+              <div className={`text-6xl mb-4 ${result.passed ? "text-green-500" : "text-destructive"}`}>
                 {result.passed ? "✓" : "✗"}
               </div>
-              <h1 className="text-3xl font-bold text-amber-600 mb-2">
+              <h1 className="text-3xl text-primary mb-2">
                 {result.passed ? "Quiz Passed!" : "Quiz Complete"}
               </h1>
             </div>
 
             <div className="mb-6">
-              <div className="text-5xl font-bold text-amber-600 mb-2">{result.percentage}%</div>
-              <p className="text-slate-300">
+              <div className="text-5xl text-primary mb-2">{result.percentage}%</div>
+              <p className="text-muted-foreground">
                 You scored {result.score} out of {result.totalPoints} points
               </p>
             </div>
@@ -168,7 +168,7 @@ export default function QuizInterface() {
               className={`p-4 rounded mb-6 ${
                 result.passed
                   ? "bg-green-900/30 border border-green-600"
-                  : "bg-red-900/30 border border-red-600"
+                  : "bg-destructive/10 border border-destructive/40"
               }`}
             >
               <p className="text-lg font-medium">
@@ -182,7 +182,6 @@ export default function QuizInterface() {
               <Button
                 onClick={() => (window.location.href = "/certification/dashboard")}
                 variant="outline"
-                className="border-amber-600 text-amber-600"
               >
                 Back to Dashboard
               </Button>
@@ -195,7 +194,6 @@ export default function QuizInterface() {
                     setAnswerFeedback(null);
                     setFailureAnimationDone(false);
                   }}
-                  className="bg-amber-600 hover:bg-amber-700"
                 >
                   Retake Quiz
                 </Button>
@@ -211,21 +209,21 @@ export default function QuizInterface() {
   const isAnswered = answers[question?.id] !== undefined;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6">
+    <div className="min-h-screen bg-background text-foreground p-6">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-amber-600">{quiz.title}</h2>
-            <span className="text-slate-400 text-sm">
+            <h2 className="text-2xl text-primary">{quiz.title}</h2>
+            <span className="text-muted-foreground text-sm">
               Question {currentQuestion + 1} of {questions.length}
             </span>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-amber-500 to-amber-600 h-2 rounded-full transition-all duration-500 ease-out"
+              className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
               style={{
                 width: `${((currentQuestion + 1) / questions.length) * 100}%`,
               }}
@@ -242,9 +240,9 @@ export default function QuizInterface() {
                 : "animate-slideInLeft"
             }`}
           >
-            <Card className="bg-slate-800 border-amber-600/30 p-8 mb-6">
+            <Card className="p-8 mb-6">
               {/* Question Text */}
-              <h3 className="text-xl font-bold text-white mb-8 leading-relaxed">
+              <h3 className="text-xl text-foreground mb-8 leading-relaxed">
                 {question.questionText}
               </h3>
 
@@ -264,10 +262,10 @@ export default function QuizInterface() {
                           showCorrect
                             ? "border-green-500 bg-green-900/20 scale-105"
                             : showIncorrect
-                            ? "border-red-500 bg-red-900/20 scale-105"
+                            ? "border-destructive bg-destructive/10 scale-105"
                             : isSelected
-                            ? "border-amber-600 bg-amber-600/10"
-                            : "border-slate-600 hover:border-slate-500 hover:bg-slate-700/30"
+                            ? "border-primary bg-primary/10"
+                            : "border-border hover:border-muted-foreground/50 hover:bg-muted/30"
                         }`}
                       >
                         <input
@@ -276,14 +274,14 @@ export default function QuizInterface() {
                           value={option}
                           checked={isSelected}
                           onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                          className="mr-3 w-4 h-4 cursor-pointer"
+                          className="mr-3 w-4 h-4 cursor-pointer accent-primary"
                         />
-                        <span className="text-slate-300 flex-1">{option}</span>
+                        <span className="text-muted-foreground flex-1">{option}</span>
                         {showCorrect && (
                           <span className="text-green-400 font-bold ml-2 animate-pulse">✓</span>
                         )}
                         {showIncorrect && (
-                          <span className="text-red-400 font-bold ml-2 animate-pulse">✗</span>
+                          <span className="text-destructive font-bold ml-2 animate-pulse">✗</span>
                         )}
                       </label>
                     );
@@ -295,7 +293,7 @@ export default function QuizInterface() {
                       value={answers[question.id] || ""}
                       onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                       placeholder="Enter your answer"
-                      className="w-full px-4 py-3 bg-slate-700 border-2 border-slate-600 rounded text-white placeholder:text-slate-500 focus:border-amber-600 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-muted border-2 border-border rounded text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none transition-colors"
                     />
                   </div>
                 )}
@@ -307,7 +305,7 @@ export default function QuizInterface() {
                   className={`mb-6 p-4 rounded-lg border-l-4 animate-slideDown ${
                     answerFeedback.isCorrect
                       ? "bg-green-900/30 border-l-green-500 text-green-300"
-                      : "bg-red-900/30 border-l-red-500 text-red-300"
+                      : "bg-destructive/10 border-l-destructive text-destructive"
                   }`}
                 >
                   <p className="font-semibold mb-1">
@@ -336,10 +334,10 @@ export default function QuizInterface() {
                     }}
                     className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 ${
                       idx === currentQuestion
-                        ? "bg-amber-600 text-white ring-2 ring-amber-400"
+                        ? "bg-primary text-primary-foreground ring-2 ring-primary/50"
                         : answers[questions[idx].id] !== undefined
                         ? "bg-green-600 text-white hover:bg-green-700"
-                        : "bg-slate-700 text-slate-400 hover:bg-slate-600"
+                        : "bg-muted text-muted-foreground hover:bg-accent"
                     }`}
                   >
                     {idx + 1}
@@ -348,12 +346,12 @@ export default function QuizInterface() {
               </div>
 
               {/* Navigation */}
-              <div className="flex justify-between gap-4 pt-6 border-t border-slate-700">
+              <div className="flex justify-between gap-4 pt-6 border-t border-border">
                 <Button
                   onClick={handlePreviousQuestion}
                   disabled={currentQuestion === 0}
                   variant="outline"
-                  className="border-amber-600 text-amber-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   ← Previous
                 </Button>
@@ -371,7 +369,7 @@ export default function QuizInterface() {
                     <Button
                       onClick={handleNextQuestion}
                       disabled={!isAnswered}
-                      className="bg-amber-600 hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Next →
                     </Button>

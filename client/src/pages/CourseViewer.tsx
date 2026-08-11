@@ -46,8 +46,8 @@ export default function CourseViewer() {
 
   if (loading || !courseId) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-slate-300">Loading course...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading course...</p>
       </div>
     );
   }
@@ -56,18 +56,18 @@ export default function CourseViewer() {
   const section = sections[currentSection];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <div className="bg-slate-800 border-b border-amber-600/30 p-6">
+      <div className="bg-card border-b border-border p-6">
         <div className="max-w-7xl mx-auto">
           <Button
             onClick={() => (window.location.href = "/certification/dashboard")}
             variant="ghost"
-            className="text-amber-600 hover:text-amber-500 mb-4"
+            className="text-primary hover:text-foreground mb-4"
           >
             ← Back to Dashboard
           </Button>
-          <h1 className="text-3xl font-bold text-amber-600">{course?.title}</h1>
+          <h1 className="text-3xl text-primary">{course?.title}</h1>
         </div>
       </div>
 
@@ -76,9 +76,9 @@ export default function CourseViewer() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <Card className="bg-slate-800 border-slate-700 sticky top-6">
+            <Card className="sticky top-6">
               <div className="p-4">
-                <h3 className="font-bold text-amber-600 mb-4">Course Sections</h3>
+                <h3 className="text-primary mb-4">Course Sections</h3>
                 <div className="space-y-2">
                   {sections.map((s, idx) => (
                     <button
@@ -86,8 +86,8 @@ export default function CourseViewer() {
                       onClick={() => setCurrentSection(idx)}
                       className={`w-full text-left px-3 py-2 rounded transition ${
                         idx === currentSection
-                          ? "bg-amber-600 text-white"
-                          : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
                       }`}
                     >
                       <div className="text-sm font-medium">Section {s.sectionNumber}</div>
@@ -102,8 +102,8 @@ export default function CourseViewer() {
           {/* Main Content */}
           <div className="lg:col-span-3">
             {section && (
-              <Card className="bg-slate-800 border-amber-600/30 p-8">
-                <h2 className="text-2xl font-bold text-amber-600 mb-4">
+              <Card className="p-8">
+                <h2 className="text-2xl text-primary mb-4">
                   Section {section.sectionNumber}: {section.title}
                 </h2>
                 <div
@@ -112,12 +112,11 @@ export default function CourseViewer() {
                 />
 
                 {/* Navigation */}
-                <div className="flex justify-between mt-8 pt-6 border-t border-slate-700">
+                <div className="flex justify-between mt-8 pt-6 border-t border-border">
                   <Button
                     onClick={() => setCurrentSection(Math.max(0, currentSection - 1))}
                     disabled={currentSection === 0}
                     variant="outline"
-                    className="border-amber-600 text-amber-600"
                   >
                     ← Previous
                   </Button>
@@ -131,7 +130,6 @@ export default function CourseViewer() {
                         window.location.href = `/certification/quiz/${courseId}`;
                       }
                     }}
-                    className="bg-amber-600 hover:bg-amber-700"
                   >
                     {currentSection === sections.length - 1 ? "Take Quiz →" : "Next →"}
                   </Button>

@@ -33,20 +33,20 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-amber-600 mb-2">MineTrans</h1>
-          <p className="text-slate-400">Admin Portal</p>
+          <h1 className="text-4xl text-primary mb-2">MineTrans</h1>
+          <p className="text-muted-foreground font-label text-xs tracking-[0.08em] uppercase">Admin Portal</p>
         </div>
 
         {/* Login Card */}
-        <Card className="bg-slate-800 border-amber-600/30 p-8">
+        <Card className="p-8">
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Username Field */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block font-label text-xs tracking-[0.05em] uppercase text-muted-foreground mb-2">
                 Username
               </label>
               <Input
@@ -54,14 +54,13 @@ export default function AdminLogin() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter admin username"
-                className="bg-slate-700 border-slate-600 text-white placeholder-slate-500"
                 disabled={loading}
               />
             </div>
 
             {/* Password Field */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block font-label text-xs tracking-[0.05em] uppercase text-muted-foreground mb-2">
                 Password
               </label>
               <Input
@@ -69,7 +68,6 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter admin password"
-                className="bg-slate-700 border-slate-600 text-white placeholder-slate-500"
                 disabled={loading}
               />
             </div>
@@ -78,23 +76,23 @@ export default function AdminLogin() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2"
+              className="w-full font-label tracking-[0.05em] uppercase py-2"
             >
               {loading ? "Logging in..." : "Admin Login"}
             </Button>
           </form>
 
           {/* Info Message */}
-          <div className="mt-6 p-4 bg-slate-700/50 border border-slate-600 rounded text-sm text-slate-300">
-            <p className="font-semibold text-amber-600 mb-1">Demo Credentials:</p>
-            <p>Username: <code className="bg-slate-800 px-2 py-1 rounded">admin</code></p>
-            <p>Password: <code className="bg-slate-800 px-2 py-1 rounded">Roger@daginsure</code></p>
+          <div className="mt-6 p-4 bg-secondary/50 border border-border rounded text-sm text-muted-foreground">
+            <p className="font-medium text-primary mb-1">Demo Credentials:</p>
+            <p>Username: <code className="bg-secondary px-2 py-1 rounded">admin</code></p>
+            <p>Password: <code className="bg-secondary px-2 py-1 rounded">Roger@daginsure</code></p>
           </div>
         </Card>
 
         {/* Back Link */}
         <div className="text-center mt-6">
-          <a href="/certification" className="text-amber-600 hover:text-amber-500 text-sm">
+          <a href="/certification" className="text-primary hover:text-foreground text-sm">
             ← Back to Certification
           </a>
         </div>

@@ -85,19 +85,19 @@ export default function AnalyticsDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-slate-300">Loading analytics...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading analytics...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6">
+    <div className="min-h-screen bg-background text-foreground p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-amber-600 mb-2">Analytics Dashboard</h1>
-          <p className="text-slate-400">Track certification program metrics and student engagement</p>
+          <h1 className="text-4xl text-primary mb-2">Analytics Dashboard</h1>
+          <p className="text-muted-foreground">Track certification program metrics and student engagement</p>
         </div>
 
         {/* Time Range Filter */}
@@ -106,11 +106,8 @@ export default function AnalyticsDashboard() {
             <Button
               key={range}
               onClick={() => setTimeRange(range)}
-              className={`capitalize ${
-                timeRange === range
-                  ? "bg-amber-600 text-white"
-                  : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-              }`}
+              variant={timeRange === range ? "default" : "secondary"}
+              className="capitalize"
             >
               {range}
             </Button>
@@ -119,108 +116,108 @@ export default function AnalyticsDashboard() {
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <p className="text-slate-400 text-sm mb-2">Total Students</p>
-            <p className="text-4xl font-bold text-amber-600">{analytics.totalStudents}</p>
+          <Card className="p-6">
+            <p className="text-muted-foreground text-sm mb-2">Total Students</p>
+            <p className="text-4xl text-primary">{analytics.totalStudents}</p>
           </Card>
 
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <p className="text-slate-400 text-sm mb-2">Active Students</p>
-            <p className="text-4xl font-bold text-blue-500">{analytics.activeStudents}</p>
+          <Card className="p-6">
+            <p className="text-muted-foreground text-sm mb-2">Active Students</p>
+            <p className="text-4xl text-foreground">{analytics.activeStudents}</p>
           </Card>
 
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <p className="text-slate-400 text-sm mb-2">Completed</p>
-            <p className="text-4xl font-bold text-green-500">{analytics.completedStudents}</p>
+          <Card className="p-6">
+            <p className="text-muted-foreground text-sm mb-2">Completed</p>
+            <p className="text-4xl text-green-500">{analytics.completedStudents}</p>
           </Card>
 
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <p className="text-slate-400 text-sm mb-2">Completion Rate</p>
-            <p className="text-4xl font-bold text-purple-500">{analytics.averageProgress}%</p>
+          <Card className="p-6">
+            <p className="text-muted-foreground text-sm mb-2">Completion Rate</p>
+            <p className="text-4xl text-primary">{analytics.averageProgress}%</p>
           </Card>
         </div>
 
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Enrollment Trend */}
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <h2 className="text-xl font-bold text-amber-600 mb-4">Enrollment Trend</h2>
+          <Card className="p-6">
+            <h2 className="text-xl text-primary mb-4">Enrollment Trend</h2>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={analytics.enrollmentTrend}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-                <XAxis dataKey="date" stroke="#94a3b8" />
-                <YAxis stroke="#94a3b8" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#3a383d" />
+                <XAxis dataKey="date" stroke="#c9cace" />
+                <YAxis stroke="#c9cace" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1e293b",
-                    border: "1px solid #d97706",
+                    backgroundColor: "#1e1d20",
+                    border: "1px solid rgba(173,106,61,0.4)",
                   }}
                 />
                 <Line
                   type="monotone"
                   dataKey="count"
-                  stroke="#d97706"
+                  stroke="#c9854f"
                   strokeWidth={2}
-                  dot={{ fill: "#d97706", r: 4 }}
+                  dot={{ fill: "#c9854f", r: 4 }}
                 />
               </LineChart>
             </ResponsiveContainer>
           </Card>
 
           {/* Course Completion */}
-          <Card className="bg-slate-800 border-amber-600/30 p-6">
-            <h2 className="text-xl font-bold text-amber-600 mb-4">Course Completion</h2>
+          <Card className="p-6">
+            <h2 className="text-xl text-primary mb-4">Course Completion</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={analytics.courseCompletion}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-                <XAxis dataKey="name" stroke="#94a3b8" />
-                <YAxis stroke="#94a3b8" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#3a383d" />
+                <XAxis dataKey="name" stroke="#c9cace" />
+                <YAxis stroke="#c9cace" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1e293b",
-                    border: "1px solid #d97706",
+                    backgroundColor: "#1e1d20",
+                    border: "1px solid rgba(173,106,61,0.4)",
                   }}
                 />
-                <Bar dataKey="completed" fill="#10b981" />
-                <Bar dataKey="total" fill="#64748b" />
+                <Bar dataKey="completed" fill="#c9854f" />
+                <Bar dataKey="total" fill="#3a383d" />
               </BarChart>
             </ResponsiveContainer>
           </Card>
         </div>
 
         {/* Quiz Performance */}
-        <Card className="bg-slate-800 border-amber-600/30 p-6 mb-8">
-          <h2 className="text-xl font-bold text-amber-600 mb-4">Average Quiz Performance by Course</h2>
+        <Card className="p-6 mb-8">
+          <h2 className="text-xl text-primary mb-4">Average Quiz Performance by Course</h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={analytics.quizPerformance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-              <XAxis dataKey="name" stroke="#94a3b8" />
-              <YAxis stroke="#94a3b8" domain={[0, 100]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#3a383d" />
+              <XAxis dataKey="name" stroke="#c9cace" />
+              <YAxis stroke="#c9cace" domain={[0, 100]} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#1e293b",
-                  border: "1px solid #d97706",
+                  backgroundColor: "#1e1d20",
+                  border: "1px solid rgba(173,106,61,0.4)",
                 }}
               />
-              <Bar dataKey="average" fill="#d97706" />
+              <Bar dataKey="average" fill="#c9854f" />
             </BarChart>
           </ResponsiveContainer>
         </Card>
 
         {/* Student Status Distribution */}
-        <Card className="bg-slate-800 border-amber-600/30 p-6">
-          <h2 className="text-xl font-bold text-amber-600 mb-4">Student Status Distribution</h2>
+        <Card className="p-6">
+          <h2 className="text-xl text-primary mb-4">Student Status Distribution</h2>
           <div className="flex justify-center">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
                   data={[
-                    { name: "Active", value: analytics.activeStudents, fill: "#3b82f6" },
-                    { name: "Completed", value: analytics.completedStudents, fill: "#10b981" },
+                    { name: "Active", value: analytics.activeStudents, fill: "#c9854f" },
+                    { name: "Completed", value: analytics.completedStudents, fill: "#f7f5f1" },
                     {
                       name: "Suspended",
                       value: analytics.totalStudents - analytics.activeStudents - analytics.completedStudents,
-                      fill: "#ef4444",
+                      fill: "#e04b4b",
                     },
                   ]}
                   cx="50%"
@@ -228,17 +225,16 @@ export default function AnalyticsDashboard() {
                   labelLine={false}
                   label={({ name, value }) => `${name}: ${value}`}
                   outerRadius={100}
-                  fill="#8884d8"
                   dataKey="value"
                 >
-                  <Cell fill="#3b82f6" />
-                  <Cell fill="#10b981" />
-                  <Cell fill="#ef4444" />
+                  <Cell fill="#c9854f" />
+                  <Cell fill="#f7f5f1" />
+                  <Cell fill="#e04b4b" />
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1e293b",
-                    border: "1px solid #d97706",
+                    backgroundColor: "#1e1d20",
+                    border: "1px solid rgba(173,106,61,0.4)",
                   }}
                 />
               </PieChart>

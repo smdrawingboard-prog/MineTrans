@@ -94,8 +94,8 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-slate-300">Loading admin dashboard...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading admin dashboard...</p>
       </div>
     );
   }
@@ -105,53 +105,49 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <div className="bg-slate-800 border-b border-amber-600/30 p-6 sticky top-0 z-50">
+      <div className="bg-background/90 backdrop-blur-md border-b border-border p-6 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-amber-600 mb-1">Admin Dashboard</h1>
-            <p className="text-slate-400">MineTrans Certification Management</p>
+            <h1 className="text-3xl text-primary mb-1">Admin Dashboard</h1>
+            <p className="text-muted-foreground">MineTrans Certification Management</p>
           </div>
-          <Button
-            onClick={handleLogout}
-            variant="outline"
-            className="border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white"
-          >
+          <Button onClick={handleLogout} variant="outline">
             Logout
           </Button>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-slate-800 border-b border-slate-700 px-6 py-4">
+      <div className="bg-card border-b border-border px-6 py-4">
         <div className="max-w-7xl mx-auto flex gap-4">
           <button
             onClick={() => setActiveTab("overview")}
-            className={`px-4 py-2 rounded transition ${
+            className={`px-4 py-2 rounded font-label text-xs tracking-[0.05em] uppercase transition ${
               activeTab === "overview"
-                ? "bg-amber-600 text-white"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-card-rest"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Overview
           </button>
           <button
             onClick={() => setActiveTab("students")}
-            className={`px-4 py-2 rounded transition ${
+            className={`px-4 py-2 rounded font-label text-xs tracking-[0.05em] uppercase transition ${
               activeTab === "students"
-                ? "bg-amber-600 text-white"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-card-rest"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Students
           </button>
           <button
             onClick={() => setActiveTab("reports")}
-            className={`px-4 py-2 rounded transition ${
+            className={`px-4 py-2 rounded font-label text-xs tracking-[0.05em] uppercase transition ${
               activeTab === "reports"
-                ? "bg-amber-600 text-white"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-card-rest"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Reports
@@ -166,47 +162,47 @@ export default function AdminDashboard() {
           <div className="space-y-6">
             {/* Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Total Students</p>
-                  <p className="text-4xl font-bold text-amber-600">{students.length}</p>
+                  <p className="text-muted-foreground text-sm mb-2">Total Students</p>
+                  <p className="text-4xl text-primary">{students.length}</p>
                 </div>
               </Card>
 
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Active This Week</p>
-                  <p className="text-4xl font-bold text-amber-600">
+                  <p className="text-muted-foreground text-sm mb-2">Active This Week</p>
+                  <p className="text-4xl text-primary">
                     {students.length > 0 ? Math.ceil(students.length * 0.6) : 0}
                   </p>
                 </div>
               </Card>
 
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm mb-2">Completion Rate</p>
-                  <p className="text-4xl font-bold text-amber-600">45%</p>
+                  <p className="text-muted-foreground text-sm mb-2">Completion Rate</p>
+                  <p className="text-4xl text-primary">45%</p>
                 </div>
               </Card>
             </div>
 
             {/* Recent Activity */}
-            <Card className="bg-slate-800 border-amber-600/30 p-6">
-              <h2 className="text-xl font-bold text-amber-600 mb-4">Recent Enrollments</h2>
+            <Card className="p-6">
+              <h2 className="text-xl text-primary mb-4">Recent Enrollments</h2>
               {students.length === 0 ? (
-                <p className="text-slate-400">No students enrolled yet.</p>
+                <p className="text-muted-foreground">No students enrolled yet.</p>
               ) : (
                 <div className="space-y-3">
                   {students.slice(0, 5).map((student) => (
                     <div
                       key={student.id}
-                      className="flex justify-between items-center p-3 bg-slate-700/50 rounded"
+                      className="flex justify-between items-center p-3 bg-muted/50 rounded"
                     >
                       <div>
-                        <p className="font-semibold text-white">{student.name}</p>
-                        <p className="text-sm text-slate-400">{student.email}</p>
+                        <p className="font-medium text-foreground">{student.name}</p>
+                        <p className="text-sm text-muted-foreground">{student.email}</p>
                       </div>
-                      <p className="text-sm text-slate-400">
+                      <p className="text-sm text-muted-foreground">
                         {new Date(student.enrolledAt).toLocaleDateString()}
                       </p>
                     </div>
@@ -221,93 +217,82 @@ export default function AdminDashboard() {
         {activeTab === "students" && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold">Student Management</h2>
-              <Button
-                onClick={() => setSelectedStudent(null)}
-                className="bg-amber-600 hover:bg-amber-700"
-              >
+              <h2 className="text-2xl">Student Management</h2>
+              <Button onClick={() => setSelectedStudent(null)}>
                 View All Students
               </Button>
             </div>
 
             {selectedStudent ? (
               // Student Detail View
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
+              <Card className="p-6">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-amber-600">{selectedStudent.name}</h3>
-                    <p className="text-slate-400">{selectedStudent.email}</p>
+                    <h3 className="text-2xl text-primary">{selectedStudent.name}</h3>
+                    <p className="text-muted-foreground">{selectedStudent.email}</p>
                   </div>
-                  <Button
-                    onClick={() => setSelectedStudent(null)}
-                    variant="outline"
-                    className="border-slate-600"
-                  >
+                  <Button onClick={() => setSelectedStudent(null)} variant="outline">
                     Back to List
                   </Button>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-slate-700/50 p-4 rounded">
-                    <p className="text-slate-400 text-sm">Student ID</p>
-                    <p className="text-lg font-semibold text-white">{selectedStudent.id}</p>
+                  <div className="bg-muted/50 p-4 rounded">
+                    <p className="text-muted-foreground text-sm">Student ID</p>
+                    <p className="text-lg font-medium text-foreground">{selectedStudent.id}</p>
                   </div>
-                  <div className="bg-slate-700/50 p-4 rounded">
-                    <p className="text-slate-400 text-sm">Joined</p>
-                    <p className="text-lg font-semibold text-white">
+                  <div className="bg-muted/50 p-4 rounded">
+                    <p className="text-muted-foreground text-sm">Joined</p>
+                    <p className="text-lg font-medium text-foreground">
                       {new Date(selectedStudent.enrolledAt).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
 
-                <div className="bg-slate-700/50 p-4 rounded">
-                  <p className="text-slate-400 text-sm mb-3">Course Progress</p>
+                <div className="bg-muted/50 p-4 rounded">
+                  <p className="text-muted-foreground text-sm mb-3">Course Progress</p>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-white">Mining Insurance Fundamentals</span>
-                      <span className="text-amber-600 font-semibold">65%</span>
+                      <span className="text-foreground">Mining Insurance Fundamentals</span>
+                      <span className="text-primary font-medium">65%</span>
                     </div>
-                    <div className="w-full bg-slate-600 rounded-full h-2">
-                      <div className="bg-amber-600 h-2 rounded-full" style={{ width: "65%" }}></div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div className="bg-primary h-2 rounded-full" style={{ width: "65%" }}></div>
                     </div>
                   </div>
                 </div>
               </Card>
             ) : (
               // Student List
-              <Card className="bg-slate-800 border-amber-600/30 overflow-hidden">
+              <Card className="overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-slate-700/50 border-b border-slate-600">
+                    <thead className="bg-muted/50 border-b border-border">
                       <tr>
-                        <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
+                        <th className="px-6 py-3 text-left font-label text-xs tracking-[0.05em] uppercase text-muted-foreground">
                           Name
                         </th>
-                        <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
+                        <th className="px-6 py-3 text-left font-label text-xs tracking-[0.05em] uppercase text-muted-foreground">
                           Email
                         </th>
-                        <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
+                        <th className="px-6 py-3 text-left font-label text-xs tracking-[0.05em] uppercase text-muted-foreground">
                           Joined
                         </th>
-                        <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
+                        <th className="px-6 py-3 text-left font-label text-xs tracking-[0.05em] uppercase text-muted-foreground">
                           Actions
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-700">
+                    <tbody className="divide-y divide-border">
                       {students.map((student) => (
-                        <tr key={student.id} className="hover:bg-slate-700/50 transition">
-                          <td className="px-6 py-4 text-white">{student.name}</td>
-                          <td className="px-6 py-4 text-slate-400">{student.email}</td>
-                          <td className="px-6 py-4 text-slate-400">
+                        <tr key={student.id} className="hover:bg-muted/50 transition">
+                          <td className="px-6 py-4 text-foreground">{student.name}</td>
+                          <td className="px-6 py-4 text-muted-foreground">{student.email}</td>
+                          <td className="px-6 py-4 text-muted-foreground">
                             {new Date(student.enrolledAt).toLocaleDateString()}
                           </td>
                           <td className="px-6 py-4">
-                            <Button
-                              onClick={() => setSelectedStudent(student)}
-                              size="sm"
-                              className="bg-amber-600 hover:bg-amber-700"
-                            >
+                            <Button onClick={() => setSelectedStudent(student)} size="sm">
                               View Details
                             </Button>
                           </td>
@@ -324,37 +309,37 @@ export default function AdminDashboard() {
         {/* Reports Tab */}
         {activeTab === "reports" && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold">Reports & Analytics</h2>
+            <h2 className="text-2xl">Reports & Analytics</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Enrollment Trends */}
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
-                <h3 className="text-lg font-bold text-amber-600 mb-4">Enrollment Trends</h3>
+              <Card className="p-6">
+                <h3 className="text-lg text-primary mb-4">Enrollment Trends</h3>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-slate-300">This Month</span>
-                      <span className="text-amber-600 font-semibold">
+                      <span className="text-secondary-foreground">This Month</span>
+                      <span className="text-primary font-medium">
                         {Math.ceil(students.length * 0.3)}
                       </span>
                     </div>
-                    <div className="w-full bg-slate-600 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div
-                        className="bg-amber-600 h-2 rounded-full"
+                        className="bg-primary h-2 rounded-full"
                         style={{ width: "30%" }}
                       ></div>
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-slate-300">Last Month</span>
-                      <span className="text-amber-600 font-semibold">
+                      <span className="text-secondary-foreground">Last Month</span>
+                      <span className="text-primary font-medium">
                         {Math.ceil(students.length * 0.4)}
                       </span>
                     </div>
-                    <div className="w-full bg-slate-600 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div
-                        className="bg-amber-600 h-2 rounded-full"
+                        className="bg-primary h-2 rounded-full"
                         style={{ width: "40%" }}
                       ></div>
                     </div>
@@ -363,17 +348,17 @@ export default function AdminDashboard() {
               </Card>
 
               {/* Completion Stats */}
-              <Card className="bg-slate-800 border-amber-600/30 p-6">
-                <h3 className="text-lg font-bold text-amber-600 mb-4">Completion Status</h3>
+              <Card className="p-6">
+                <h3 className="text-lg text-primary mb-4">Completion Status</h3>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-slate-300">Completed</span>
-                      <span className="text-amber-600 font-semibold">
+                      <span className="text-secondary-foreground">Completed</span>
+                      <span className="text-primary font-medium">
                         {Math.ceil(students.length * 0.45)}
                       </span>
                     </div>
-                    <div className="w-full bg-slate-600 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div
                         className="bg-green-600 h-2 rounded-full"
                         style={{ width: "45%" }}
@@ -382,28 +367,28 @@ export default function AdminDashboard() {
                   </div>
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-slate-300">In Progress</span>
-                      <span className="text-amber-600 font-semibold">
+                      <span className="text-secondary-foreground">In Progress</span>
+                      <span className="text-primary font-medium">
                         {Math.ceil(students.length * 0.35)}
                       </span>
                     </div>
-                    <div className="w-full bg-slate-600 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div
-                        className="bg-blue-600 h-2 rounded-full"
+                        className="bg-primary h-2 rounded-full"
                         style={{ width: "35%" }}
                       ></div>
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-slate-300">Not Started</span>
-                      <span className="text-amber-600 font-semibold">
+                      <span className="text-secondary-foreground">Not Started</span>
+                      <span className="text-primary font-medium">
                         {Math.ceil(students.length * 0.2)}
                       </span>
                     </div>
-                    <div className="w-full bg-slate-600 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div
-                        className="bg-slate-600 h-2 rounded-full"
+                        className="bg-muted-foreground/40 h-2 rounded-full"
                         style={{ width: "20%" }}
                       ></div>
                     </div>
@@ -413,18 +398,15 @@ export default function AdminDashboard() {
             </div>
 
             {/* Export Button */}
-            <Card className="bg-slate-800 border-amber-600/30 p-6">
+            <Card className="p-6">
               <div className="flex justify-between items-center">
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1">Export Student Data</h3>
-                  <p className="text-slate-400 text-sm">
+                  <h3 className="text-lg text-foreground mb-1">Export Student Data</h3>
+                  <p className="text-muted-foreground text-sm">
                     Download a CSV report of all enrolled students
                   </p>
                 </div>
-                <Button
-                  onClick={handleExportReport}
-                  className="bg-amber-600 hover:bg-amber-700"
-                >
+                <Button onClick={handleExportReport}>
                   Export CSV
                 </Button>
               </div>
