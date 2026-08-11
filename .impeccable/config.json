@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "rgba(173, 106, 61, 0.25)",
+        "createdAt": "2026-08-11T10:20:11.226Z",
+        "reason": "Confirmed elevation shadow for the Raised-Ore Rule (DESIGN.md card-hover token) — has a real 10px offset and 30px blur, not a zero-offset halo; craft-floor's own bar for a decorative glow is offset:0."
+      },
+      {
+        "rule": "dark-glow",
+        "value": "rgba(173,106,61,.25)",
+        "createdAt": "2026-08-11T10:22:00.013Z",
+        "reason": "Same confirmed Raised-Ore Rule elevation shadow as rgba(173, 106, 61, 0.25) — compact rgba formatting matches this file's existing minified-CSS convention."
+      }
+    ]
+  }
+}

@@ -17,15 +17,15 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--onyx);color:var(--bone);font-family:var(--bf);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.gate{width:min(380px,100%);padding:40px 36px;border:1px solid var(--line);background:var(--charcoal)}
+.gate{width:min(380px,100%);padding:40px 36px;border:1px solid var(--line);background:var(--charcoal);box-shadow:0 2px 12px rgba(10,10,11,.45)}
 .gate .brand{font-family:var(--sf);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-bright);margin-bottom:6px}
 .gate h1{font-family:var(--sf);font-size:19px;font-weight:600;color:var(--bone);margin:0 0 22px}
 .gate label{display:block;font-family:var(--sf);font-size:12px;letter-spacing:.05em;color:var(--platinum);margin-bottom:6px}
 .gate input{width:100%;padding:12px 14px;margin-bottom:16px;background:var(--onyx);border:1px solid rgba(201,202,206,.2);color:var(--bone);font-size:14px;font-family:var(--bf)}
 .gate input:focus{outline:none;border-color:var(--copper)}
 .gate .err{display:none;color:#e04b4b;font-size:12.5px;margin-bottom:14px}
-.gate button{width:100%;padding:13px;background:var(--copper);color:var(--onyx);border:0;font-family:var(--sf);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-weight:600}
-.gate button:hover{background:var(--copper-bright)}
+.gate button{width:100%;padding:13px;background:var(--copper);color:var(--onyx);border:0;font-family:var(--sf);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-weight:600;box-shadow:0 2px 12px rgba(10,10,11,.45);transition:background .2s,box-shadow .2s,transform .2s}
+.gate button:hover{background:var(--copper-bright);box-shadow:0 10px 30px rgba(173,106,61,.25);transform:translateY(-2px)}
 .gate .note{margin:16px 0 0;font-size:11px;color:#6b6a6e;line-height:1.5}
 .gate .back{display:block;margin-top:18px;font-family:var(--sf);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--platinum);text-decoration:none}
 .gate .back:hover{color:var(--bone)}

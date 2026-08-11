@@ -87,8 +87,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 
 /* CARDS grid (index insurance facets) */
 .facetgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-.facet{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;padding:34px 28px;text-decoration:none;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s}
-.facet:hover{border-color:var(--copper);transform:translateY(-4px)}
+.facet{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;padding:34px 28px;text-decoration:none;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 12px rgba(10,10,11,.45);transition:border-color .2s,transform .2s,box-shadow .2s}
+.facet:hover{border-color:var(--copper);transform:translateY(-4px);box-shadow:0 10px 30px rgba(173,106,61,.25)}
 .facet .fnum{font-family:var(--df);font-size:13px;color:var(--copper-bright);letter-spacing:.1em}
 .facet h3{font-size:22px}
 .facet p{color:var(--platinum);font-size:14.5px;font-weight:300;flex:1}
@@ -107,8 +107,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 
 .ctaband{background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:60px 0;text-align:center}
 .ctaband h2{max-width:none}
-.ctabtn{display:inline-block;margin-top:26px;font-family:var(--sf);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--onyx);background:var(--copper-bright);padding:15px 34px;border-radius:2px;text-decoration:none}
-.ctabtn:hover{background:var(--bone)}
+.ctabtn{display:inline-block;margin-top:26px;font-family:var(--sf);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--onyx);background:var(--copper-bright);padding:15px 34px;border-radius:2px;text-decoration:none;box-shadow:0 2px 12px rgba(10,10,11,.45);transition:background .2s,box-shadow .2s,transform .2s}
+.ctabtn:hover{background:var(--bone);box-shadow:0 10px 30px rgba(173,106,61,.25);transform:translateY(-2px)}
 
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--onyx)}
