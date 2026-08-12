@@ -180,6 +180,10 @@ footer a:hover{color:var(--bone)}
 .stat .cnt{font-family:var(--df);font-weight:700;font-size:clamp(30px,4.4vw,48px);color:var(--copper-bright);letter-spacing:-.01em}
 .stat .cl{font-family:var(--sf);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--platinum);margin-top:8px}
 @media(max-width:800px){.statrow{grid-template-columns:1fr 1fr;gap:32px 16px}}
+
+.photoband{margin-top:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
+.photoband img{width:100%;height:clamp(240px,38vw,460px);object-fit:cover;display:block}
+.photoband .cap{position:absolute;left:0;right:0;bottom:0;padding:18px clamp(20px,5vw,64px);background:linear-gradient(180deg,transparent,rgba(10,10,11,.92));font-family:var(--sf);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--platinum)}
 </style>
 <script type="application/ld+json">{
   "@context":"https://schema.org",
@@ -279,6 +283,11 @@ footer a:hover{color:var(--bone)}
   </div>
  </div>
 </section>
+
+<figure class="photoband">
+ <img src="images/mining/mine-overview.jpg" alt="Open-pit mining operation with haul truck and excavators">
+ <figcaption class="cap">Sub-Saharan Africa &mdash; open-pit operations at scale</figcaption>
+</figure>
 
 <section style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
  <div class="wrap">
