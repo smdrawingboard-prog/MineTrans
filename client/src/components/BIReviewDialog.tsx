@@ -112,7 +112,7 @@ export default function BIReviewDialog({ trigger }: BIReviewDialogProps) {
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="bg-slate-900 border-amber-600/30 text-white max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-amber-600">Request a BI Review</DialogTitle>
+          <DialogTitle className="text-amber-600">Book a Business Interruption Review</DialogTitle>
           <DialogDescription className="text-slate-400">
             Tell us about your operation and a MineTrans advisor will be in touch within 24 hours.
           </DialogDescription>
