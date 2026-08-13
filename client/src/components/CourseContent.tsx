@@ -1,7 +1,8 @@
 import React from 'react';
+import { CourseReveal } from './CourseReveal';
 
 interface ContentBlock {
-  t: 'p' | 'list' | 'note' | 'formula' | 'twocol' | 'table' | 'groupedlist';
+  t: 'p' | 'list' | 'note' | 'formula' | 'twocol' | 'table' | 'groupedlist' | 'image';
   v?: string | string[];
   h?: string;
   head?: string[];
@@ -11,6 +12,9 @@ interface ContentBlock {
   footer?: string;
   a?: { h: string; items: string[] };
   b?: { h: string; items: string[] };
+  src?: string;
+  alt?: string;
+  caption?: string;
 }
 
 interface CourseContentProps {
@@ -29,8 +33,61 @@ const C = {
 export const CourseContent: React.FC<CourseContentProps> = ({ blocks }) => {
   return (
     <div style={{ color: C.platinum, lineHeight: 1.8 }}>
-      {blocks.map((block, idx) => {
-        switch (block.t) {
+      {blocks.map((block, idx) => (
+        <CourseReveal key={idx} delayMs={Math.min(idx, 5) * 70}>
+          {renderBlock(block, idx)}
+        </CourseReveal>
+      ))}
+    </div>
+  );
+};
+
+function renderBlock(block: ContentBlock, idx: number) {
+  switch (block.t) {
+          case 'image':
+            return (
+              <figure
+                key={idx}
+                style={{
+                  margin: '0 0 1.5rem',
+                  border: `1px solid ${C.graphite2}`,
+                  borderRadius: '4px',
+                  overflow: 'hidden',
+                  position: 'relative',
+                }}
+              >
+                <img
+                  src={block.src}
+                  alt={block.alt || ''}
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    height: 'clamp(180px, 28vw, 340px)',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+                {block.caption && (
+                  <figcaption
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      padding: '12px 18px',
+                      background:
+                        'linear-gradient(180deg, transparent, rgba(10,10,11,.92))',
+                      color: C.platinum,
+                      fontSize: '0.78rem',
+                      letterSpacing: '.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {block.caption}
+                  </figcaption>
+                )}
+              </figure>
+            );
           case 'p':
             return (
               <p
@@ -270,8 +327,5 @@ export const CourseContent: React.FC<CourseContentProps> = ({ blocks }) => {
 
           default:
             return null;
-        }
-      })}
-    </div>
-  );
-};
+  }
+}

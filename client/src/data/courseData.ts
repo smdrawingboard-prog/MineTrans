@@ -6,10 +6,17 @@ export const courseData = {
       n: 1,
       title: 'Understand the Mining Operation',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'chain' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Document the complete mining value chain before anything else. This is the foundation every downstream calculation depends on.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/mine-overview.jpg',
+          alt: 'Open-pit mining operation with haul trucks and excavators',
+          caption: 'The value chain starts here — pit to port',
         },
         {
           t: 'list' as const,
@@ -36,6 +43,7 @@ export const courseData = {
       n: 2,
       title: 'Identify Business Interruption Triggers',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'alert' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -63,6 +71,7 @@ export const courseData = {
       n: 3,
       title: 'Identify Critical Assets',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'target' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -79,10 +88,17 @@ export const courseData = {
       n: 4,
       title: 'Determine Maximum Foreseeable Loss (MFL)',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'flame' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Estimate the worst realistic insured event — e.g. fire destroys the processing plant, production stops completely, rebuilding takes 16 months. This becomes the basis of the BI scenario.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/processing-plant.jpg',
+          alt: 'Mineral processing plant and storage tanks',
+          caption: 'The MFL scenario — the asset a total loss centres on',
         },
       ],
     },
@@ -91,6 +107,7 @@ export const courseData = {
       n: 5,
       title: 'Calculate Gross Profit at Risk',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'chart' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -174,10 +191,17 @@ export const courseData = {
       n: 6,
       title: 'Determine Maximum Downtime',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'clock' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Estimate debris removal, engineering, procurement, manufacturing, shipping, customs, construction, commissioning and ramp-up.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/cargo-ship-port-cranes.jpg',
+          alt: 'Cargo ship loading at port with cranes and containers',
+          caption: 'Shipping and customs — the lead time that drives the downtime estimate',
         },
         {
           t: 'table' as const,
@@ -203,6 +227,7 @@ export const courseData = {
       n: 7,
       title: 'Estimate Reduction in Turnover',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'trend-down' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -224,6 +249,7 @@ export const courseData = {
       n: 8,
       title: 'Calculate Increased Cost of Working (ICOW)',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'coins' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -248,10 +274,17 @@ export const courseData = {
       n: 9,
       title: 'Consider Supply Chain Dependencies',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'link' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Evaluate dependencies outside the mine\'s direct control.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/conveyor-crossing-yard-aerial.jpg',
+          alt: 'Aerial view of a mine logistics yard with conveyor crossings and vehicles',
+          caption: 'Dependencies rarely stop at the mine gate',
         },
         {
           t: 'list' as const,
@@ -276,10 +309,17 @@ export const courseData = {
       n: 10,
       title: 'Assess Risk Mitigation Measures',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'shield' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Document measures that reduce BI exposure — insurers price these in.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/mining-plant-night-lights.jpg',
+          alt: 'Mining processing plant and conveyors lit at night',
+          caption: 'Redundancy and backup capacity — running around the clock',
         },
         {
           t: 'list' as const,
@@ -306,6 +346,7 @@ export const courseData = {
       n: 11,
       title: 'Select an Appropriate Indemnity Period',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'calendar' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -322,6 +363,7 @@ export const courseData = {
       n: 12,
       title: 'Calculate the BI Sum Insured',
       section: 'Part I: 12-Step BI Methodology',
+      icon: 'sigma' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -344,6 +386,7 @@ export const courseData = {
       n: 1,
       title: 'Mining Operation Overview',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'map-pin' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -367,10 +410,17 @@ export const courseData = {
       n: 2,
       title: 'Critical Equipment & Infrastructure',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'gear' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Detailed inventory of critical equipment, replacement costs, and lead times.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/bucket-wheel-excavator.jpg',
+          alt: 'Heavy mining machinery — bucket-wheel excavator in operation',
+          caption: 'The equipment schedule this category is built from',
         },
         {
           t: 'list' as const,
@@ -390,6 +440,7 @@ export const courseData = {
       n: 3,
       title: 'Maintenance & Reliability Programs',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'wrench' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -413,10 +464,17 @@ export const courseData = {
       n: 4,
       title: 'Fire & Explosion Risk',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'flame' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Assessment of fire and explosion hazards specific to mining operations.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/blasting-operations.jpg',
+          alt: 'Blasting operations at an open-pit mine',
+          caption: 'Explosive storage and handling — the sharpest end of this category',
         },
         {
           t: 'list' as const,
@@ -436,10 +494,17 @@ export const courseData = {
       n: 5,
       title: 'Geotechnical & Slope Stability',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'mountain' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Assessment of slope stability and geotechnical risks.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/open-pit-bench-terraces-aerial.jpg',
+          alt: 'Aerial view of terraced open-pit mine benches',
+          caption: 'Every bench angle is a slope-stability decision',
         },
         {
           t: 'list' as const,
@@ -459,10 +524,17 @@ export const courseData = {
       n: 6,
       title: 'Tailings Management',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'droplet' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Assessment of tailings dam design, construction, and management.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/tailings-pond-processing-plant-aerial.jpg',
+          alt: 'Aerial view of a tailings pond and processing plant',
+          caption: 'Design, monitoring and regulatory compliance, in one frame',
         },
         {
           t: 'list' as const,
@@ -482,6 +554,7 @@ export const courseData = {
       n: 7,
       title: 'Water & Environmental Management',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'droplet' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -505,10 +578,17 @@ export const courseData = {
       n: 8,
       title: 'Power & Utilities',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'bolt' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Assessment of power supply reliability and backup systems.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/night-shift.jpg',
+          alt: 'Mining operation running under lights at night',
+          caption: 'Power reliability, tested every night shift',
         },
         {
           t: 'list' as const,
@@ -528,10 +608,17 @@ export const courseData = {
       n: 9,
       title: 'Transportation & Logistics',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'truck' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Assessment of transportation infrastructure and logistics.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/aerial-conveyor.jpg',
+          alt: 'Aerial view of mine conveyor and transport infrastructure',
+          caption: 'Haul roads, rail, conveyors and port — one continuous chain',
         },
         {
           t: 'list' as const,
@@ -551,6 +638,7 @@ export const courseData = {
       n: 10,
       title: 'Supply Chain & Suppliers',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'package' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -574,10 +662,17 @@ export const courseData = {
       n: 11,
       title: 'Safety & Occupational Health',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'shield-check' as const,
       blocks: [
         {
           t: 'p' as const,
           v: 'Assessment of safety programs and occupational health management.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/mining/mining-shovel-dusk-worker.jpg',
+          alt: 'Mining shovel at dusk with a site worker for scale',
+          caption: 'Safety systems, measured against real site conditions',
         },
         {
           t: 'list' as const,
@@ -597,6 +692,7 @@ export const courseData = {
       n: 12,
       title: 'Management & Governance',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'users' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -620,6 +716,7 @@ export const courseData = {
       n: 13,
       title: 'Regulatory & Compliance',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'document' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -643,6 +740,7 @@ export const courseData = {
       n: 14,
       title: 'Financial Performance',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'chart' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -666,6 +764,7 @@ export const courseData = {
       n: 15,
       title: 'Insurance & Risk Transfer',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'umbrella' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -689,6 +788,7 @@ export const courseData = {
       n: 16,
       title: 'Contingency & Business Continuity',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'refresh' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -712,6 +812,7 @@ export const courseData = {
       n: 17,
       title: 'Community & Stakeholder Relations',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'users' as const,
       blocks: [
         {
           t: 'p' as const,
@@ -735,6 +836,7 @@ export const courseData = {
       n: 18,
       title: 'Emerging Risks & Future Outlook',
       section: 'Part II: 18-Category Underwriting Questionnaire',
+      icon: 'compass' as const,
       blocks: [
         {
           t: 'p' as const,
