@@ -152,9 +152,11 @@ export const CourseLayout: React.FC<CourseLayoutProps> = ({
               <div
                 style={{
                   height: '100%',
-                  width: `${percent}%`,
+                  width: '100%',
+                  transform: `scaleX(${percent / 100})`,
+                  transformOrigin: 'left',
                   background: `linear-gradient(90deg, ${C.copper}, #C9854F)`,
-                  transition: 'width 0.5s cubic-bezier(.22,.9,.3,1)',
+                  transition: 'transform 0.5s cubic-bezier(.22,.9,.3,1)',
                 }}
               />
             </div>

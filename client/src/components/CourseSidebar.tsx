@@ -80,9 +80,11 @@ export const CourseSidebar: React.FC<CourseSidebarProps> = ({
             <div
               style={{
                 height: '100%',
-                width: `${items.length ? (doneCount / items.length) * 100 : 0}%`,
+                width: '100%',
+                transform: `scaleX(${items.length ? doneCount / items.length : 0})`,
+                transformOrigin: 'left',
                 background: C.copper,
-                transition: 'width 0.5s cubic-bezier(.22,.9,.3,1)',
+                transition: 'transform 0.5s cubic-bezier(.22,.9,.3,1)',
               }}
             />
           </div>
