@@ -87,8 +87,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 
 /* CARDS grid (index insurance facets) */
 .facetgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-.facet{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;padding:34px 28px;text-decoration:none;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s}
+.facet{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
 .facet:hover{border-color:var(--copper);transform:translateY(-4px)}
+.facet .fimg{width:100%;display:block}
+.facet .fbody{padding:34px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
 .facet .fnum{font-family:var(--df);font-size:13px;color:var(--copper-bright);letter-spacing:.1em}
 .facet h3{font-size:22px}
 .facet p{color:var(--platinum);font-size:14.5px;font-weight:300;flex:1}
@@ -248,6 +250,8 @@ footer a:hover{color:var(--bone)}
   <div class="facetgrid">
 
    <a class="facet" href="insurance-mine.html">
+    <img class="fimg" src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers">
+    <div class="fbody">
     <span class="fnum">01 — The Mine</span>
     <h3>Commercial Assets &amp; Business Interruption</h3>
     <p>Cover for the site itself: buildings, plant infrastructure, commercial assets, and the liabilities that come with operating a mine — plus the income you lose when operations stop.</p>
@@ -257,9 +261,12 @@ footer a:hover{color:var(--bone)}
      <li>Business interruption &amp; loss of income</li>
     </ul>
     <span class="go">Explore mine cover →</span>
+    </div>
    </a>
 
    <a class="facet" href="insurance-machinery.html">
+    <img class="fimg" src="images/diagrams/machinery-risk-assessment.png" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance">
+    <div class="fbody">
     <span class="fnum">02 — Machinery</span>
     <h3>Yellow Metal &amp; Machinery</h3>
     <p>Purpose-built cover for the heavy equipment that keeps a mine running — excavators, haul trucks, drill rigs and mobile plant — against breakdown, damage and loss.</p>
@@ -269,9 +276,12 @@ footer a:hover{color:var(--bone)}
      <li>Contractors' plant &amp; hired-in machinery</li>
     </ul>
     <span class="go">Explore machinery cover →</span>
+    </div>
    </a>
 
    <a class="facet" href="insurance-transit.html">
+    <img class="fimg" src="images/diagrams/transit-risk-assessment.png" alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure">
+    <div class="fbody">
     <span class="fnum">03 — Transit</span>
     <h3>Transit of Valuable Metals</h3>
     <p>Specialist marine and inland transit cover for the movement of valuable and precious metals by land, air and sea — from mine gate to final destination.</p>
@@ -281,6 +291,7 @@ footer a:hover{color:var(--bone)}
      <li>Marine / sea freight cover</li>
     </ul>
     <span class="go">Explore transit cover →</span>
+    </div>
    </a>
 
   </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ContentBlock {
-  t: 'p' | 'list' | 'note' | 'formula' | 'twocol' | 'table' | 'groupedlist';
+  t: 'p' | 'list' | 'note' | 'formula' | 'twocol' | 'table' | 'groupedlist' | 'image';
   v?: string | string[];
   h?: string;
   head?: string[];
@@ -11,6 +11,9 @@ interface ContentBlock {
   footer?: string;
   a?: { h: string; items: string[] };
   b?: { h: string; items: string[] };
+  src?: string;
+  alt?: string;
+  caption?: string;
 }
 
 interface CourseContentProps {
@@ -71,7 +74,6 @@ export const CourseContent: React.FC<CourseContentProps> = ({ blocks }) => {
                 style={{
                   backgroundColor: C.graphite2,
                   border: `1px solid ${C.copper}`,
-                  borderLeft: `4px solid ${C.copper}`,
                   padding: '1rem',
                   marginBottom: '1.5rem',
                   borderRadius: '4px',
@@ -266,6 +268,38 @@ export const CourseContent: React.FC<CourseContentProps> = ({ blocks }) => {
                   </p>
                 )}
               </div>
+            );
+
+          case 'image':
+            return (
+              <figure
+                key={idx}
+                style={{
+                  margin: '0 0 1.5rem',
+                  border: `1px solid ${C.graphite2}`,
+                  borderRadius: '4px',
+                  overflow: 'hidden',
+                  backgroundColor: C.graphite,
+                }}
+              >
+                <img
+                  src={block.src}
+                  alt={block.alt || ''}
+                  style={{ width: '100%', display: 'block' }}
+                />
+                {block.caption && (
+                  <figcaption
+                    style={{
+                      padding: '0.75rem 1rem',
+                      fontSize: '0.85rem',
+                      color: C.platinum,
+                      borderTop: `1px solid ${C.graphite2}`,
+                    }}
+                  >
+                    {block.caption}
+                  </figcaption>
+                )}
+              </figure>
             );
 
           default:
