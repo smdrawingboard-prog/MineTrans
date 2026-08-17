@@ -210,19 +210,28 @@ function vitePluginCopyHtmlFiles(): Plugin {
   return {
     name: "copy-html-files",
     apply: "build",
-    async generateBundle() {
+    writeBundle() {
+      const outDir = path.join(PROJECT_ROOT, "dist/public");
       const publicDir = path.join(PROJECT_ROOT, "client/public");
+
+      // The React SPA (wouter routes under /certification, /admin, etc.) is built from
+      // client/index.html and Rollup writes it to dist/public/index.html with correctly
+      // hashed asset references. The static marketing homepage below is about to overwrite
+      // that same filename, so preserve the SPA shell as 404.html first: GitHub Pages
+      // serves 404.html (with the original URL/pathname intact) for any path that isn't a
+      // real file, which is what lets client-side routes resolve on a static host. Without
+      // this, the whole React app — including the login-gated course — is unreachable.
+      const spaShellPath = path.join(outDir, "index.html");
+      if (fs.existsSync(spaShellPath)) {
+        fs.copyFileSync(spaShellPath, path.join(outDir, "404.html"));
+      }
+
       const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "courses.html", "student-portal.html", "training-showcase.html", "favicon.ico"];
-      
+
       for (const file of htmlFiles) {
         const filePath = path.join(publicDir, file);
         if (fs.existsSync(filePath)) {
-          const content = fs.readFileSync(filePath);
-          this.emitFile({
-            type: "asset",
-            fileName: file,
-            source: content,
-          });
+          fs.copyFileSync(filePath, path.join(outDir, file));
         }
       }
     },
