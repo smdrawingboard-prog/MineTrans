@@ -184,6 +184,43 @@ footer a:hover{color:var(--bone)}
 .photoband{margin-top:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
 .photoband img{width:100%;height:clamp(240px,38vw,460px);object-fit:cover;display:block}
 .photoband .cap{position:absolute;left:0;right:0;bottom:0;padding:18px clamp(20px,5vw,64px);background:linear-gradient(180deg,transparent,rgba(10,10,11,.92));font-family:var(--sf);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--platinum)}
+
+/* APPROACH + PRODUCTS — layered stack graphics */
+.layer{font-family:var(--sf);font-size:10.5px;letter-spacing:.14em;text-align:center;padding:9px 0;
+  border:1px solid rgba(173,106,61,.3);color:var(--platinum);background:var(--onyx);border-radius:1px}
+.layer.base{background:var(--copper);border-color:var(--copper);color:var(--onyx);font-weight:500}
+
+.approachflow{display:flex;align-items:center;justify-content:center;gap:0;margin-top:52px;flex-wrap:wrap}
+.aflow-side{width:230px;border:1px solid var(--line);background:var(--charcoal);padding:28px 24px;border-radius:2px}
+.aflow-side .at{font-family:var(--sf);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-bright);margin-bottom:10px}
+.aflow-side h4{font-family:var(--df);font-size:19px;color:var(--bone);margin-bottom:16px;font-weight:500}
+.aflow-side ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.aflow-side li{font-size:13px;color:var(--platinum);padding-left:16px;position:relative}
+.aflow-side li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--copper-bright)}
+
+.aflow-arrow{width:56px;height:1px;background:var(--line);position:relative;flex:0 0 auto;margin:0 4px}
+.aflow-arrow::after{content:'';position:absolute;right:2px;top:-3px;width:7px;height:7px;border-right:1px solid var(--copper-bright);border-top:1px solid var(--copper-bright);transform:rotate(45deg)}
+@media(max-width:900px){.approachflow{flex-direction:column}.aflow-arrow{width:1px;height:40px;margin:6px 0}.aflow-arrow::after{right:-3px;top:auto;bottom:2px}}
+
+.stack{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line);
+  padding:32px 36px;border-radius:2px;background:linear-gradient(180deg,rgba(30,29,32,.6),transparent);margin:0 4px}
+.stack .apex{width:11px;height:11px;transform:rotate(45deg);background:var(--copper-bright);
+  margin-bottom:8px;box-shadow:0 0 0 5px rgba(173,106,61,.12)}
+.stack .caption{margin-top:18px;font-family:var(--sf);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-bright)}
+
+.productgrid{display:flex;justify-content:center;align-items:flex-end;gap:44px;margin-top:56px;flex-wrap:wrap}
+.canister{display:flex;flex-direction:column;align-items:center}
+.canister .cap{width:26px;height:10px;background:var(--graphite);border:1px solid var(--line);border-bottom:0}
+.canister .body{position:relative;width:66px;border:1px solid rgba(173,106,61,.4);background:var(--charcoal);overflow:hidden}
+.canister .fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,var(--copper-bright),var(--copper))}
+.canister .lbl{writing-mode:vertical-rl;transform:rotate(180deg);position:absolute;inset:0;display:flex;
+  align-items:center;justify-content:center;font-family:var(--sf);font-size:10px;letter-spacing:.12em;
+  color:var(--bone);text-shadow:0 1px 3px rgba(0,0,0,.7);white-space:nowrap}
+
+.productbase{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:10px}
+
+.productcards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+@media(max-width:800px){.productcards{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json">{
   "@context":"https://schema.org",
@@ -312,6 +349,99 @@ footer a:hover{color:var(--bone)}
    </div>
    <div class="impact" id="impact"></div>
 </div>
+ </div>
+</section>
+
+<section id="approach">
+ <div class="wrap">
+  <div class="eyebrow">Our Approach</div>
+  <h2>From site data to <em>structured cover.</em></h2>
+  <p class="lede">We don't start with a policy template. We start with your operation, then run it through an actuarial, technical and technology layer to size cover against real exposure — not assumption.</p>
+
+  <div class="approachflow">
+   <div class="aflow-side">
+    <div class="at">Mine Site</div>
+    <h4>Operational Data</h4>
+    <ul>
+     <li>Equipment &amp; critical assets</li>
+     <li>Geography &amp; site conditions</li>
+     <li>Process &amp; production flow</li>
+    </ul>
+   </div>
+   <div class="aflow-arrow"></div>
+   <div class="stack">
+    <span class="apex"></span>
+    <div class="layer" style="width:150px">ACTUARIAL</div>
+    <div class="layer" style="width:172px">TECHNICAL</div>
+    <div class="layer" style="width:194px">TECHNOLOGY</div>
+    <div class="layer base" style="width:216px">MINETRANS</div>
+    <div class="caption">Risk Quantification Engine</div>
+   </div>
+   <div class="aflow-arrow"></div>
+   <div class="aflow-side">
+    <div class="at">Coverage</div>
+    <h4>Structured Protection</h4>
+    <ul>
+     <li>Industry-specific wording</li>
+     <li>Geography &amp; jurisdiction</li>
+     <li>Scale &amp; sum insured</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="products" style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+ <div class="wrap">
+  <div class="eyebrow">Our Products</div>
+  <h2>Business interruption cover, <em>in three tiers.</em></h2>
+  <p class="lede">Match protection to your risk appetite today, and grow into full coverage as your quantification matures.</p>
+
+  <div class="productgrid">
+   <div class="canister">
+    <div class="cap"></div>
+    <div class="body" style="height:150px">
+     <div class="fill" style="height:100%"></div>
+     <div class="lbl">GUARANTEE · 100%</div>
+    </div>
+   </div>
+   <div class="canister">
+    <div class="cap"></div>
+    <div class="body" style="height:150px">
+     <div class="fill" style="height:90%"></div>
+     <div class="lbl">CORE · 90%</div>
+    </div>
+   </div>
+   <div class="canister">
+    <div class="cap"></div>
+    <div class="body" style="height:150px">
+     <div class="fill" style="height:40%"></div>
+     <div class="lbl">FLEX · ENTRY</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="productbase">
+   <div class="layer" style="width:150px">ACTUARIAL</div>
+   <div class="layer" style="width:172px">TECHNICAL</div>
+   <div class="layer" style="width:194px">TECHNOLOGY</div>
+   <div class="layer base" style="width:216px">MINETRANS</div>
+  </div>
+
+  <div class="productcards">
+   <div class="block">
+    <h3>MineTrans Guarantee</h3>
+    <p>Quantify your entire exposure. Every hour of downtime is measured and covered, so your balance sheet is protected in full.</p>
+   </div>
+   <div class="block">
+    <h3>MineTrans Core</h3>
+    <p>Maximise savings and coverage. Cover the substantial majority of your BI exposure, with premiums optimised to your real risk profile.</p>
+   </div>
+   <div class="block">
+    <h3>MineTrans Flex</h3>
+    <p>Take your first step. Beat any standard policy with a clear roadmap towards full, risk-based protection.</p>
+   </div>
+  </div>
  </div>
 </section>
 
