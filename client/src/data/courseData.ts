@@ -465,6 +465,12 @@ export const courseData = {
           v: 'Assessment of tailings dam design, construction, and management.',
         },
         {
+          t: 'image' as const,
+          src: '/images/diagrams/tailings-risk-assessment.png',
+          alt: 'Tailings risk assessment diagram showing design (upstream, downstream and centreline construction), governance (Engineer of Record and Independent Review Board oversight), monitoring, and consequences and exposure',
+          caption: 'Tailings risk assessment — design, governance, monitoring, and downstream consequences.',
+        },
+        {
           t: 'list' as const,
           v: [
             'Dam design and engineering',
