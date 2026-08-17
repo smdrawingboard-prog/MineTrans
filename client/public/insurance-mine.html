@@ -176,6 +176,25 @@ footer a:hover{color:var(--bone)}
 .photoband{margin-top:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
 .photoband img{width:100%;height:clamp(240px,38vw,460px);object-fit:cover;display:block}
 .photoband .cap{position:absolute;left:0;right:0;bottom:0;padding:18px clamp(20px,5vw,64px);background:linear-gradient(180deg,transparent,rgba(10,10,11,.92));font-family:var(--sf);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--platinum)}
+
+.pageinfographic{margin:0;padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative;background:var(--charcoal);cursor:zoom-in;display:block;width:100%}
+.pageinfographic img{width:100%;display:block}
+.pageinfographic::after{content:'';position:absolute;inset:0;background:rgba(10,10,11,.45);opacity:0;transition:opacity .2s}
+.pageinfographic .zoom{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);width:38px;height:38px;
+  border-radius:50%;background:rgba(10,10,11,.7);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s,transform .2s}
+.pageinfographic:hover .zoom,.pageinfographic:focus-visible .zoom{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.pageinfographic:hover::after,.pageinfographic:focus-visible::after{opacity:1}
+.pageinfographic .zoom svg{width:16px;height:16px;color:var(--bone)}
+
+.lightbox{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;
+  background:rgba(10,10,11,.92);padding:40px clamp(20px,5vw,64px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;width:auto;height:auto;display:block;border-radius:4px;border:1px solid var(--line)}
+.lightbox-close{position:absolute;top:24px;right:clamp(20px,5vw,64px);width:40px;height:40px;border-radius:50%;
+  background:var(--charcoal);border:1px solid var(--line);color:var(--bone);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
+.lightbox-close:hover{border-color:var(--copper)}
+.lightbox-close svg{width:18px;height:18px}
 </style>
 <script type="application/ld+json">{
   "@context":"https://schema.org",
@@ -217,6 +236,15 @@ footer a:hover{color:var(--bone)}
   <div class="eyebrow">01 — Insurance for the Site</div>
   <h1>The Mine: <em>Assets, Liability &amp; Business Interruption</em></h1>
   <p class="lede"><strong>The mine is more than the ground it sits on.</strong> It is buildings, plant infrastructure, commercial assets, and every liability that comes with operating one — and the income stream that stops the moment something goes wrong. This is where we start every risk review.</p>
+ </div>
+</section>
+
+<section>
+ <div class="wrap">
+  <button class="pageinfographic" type="button" data-lightbox-src="images/diagrams/mine-risk-assessment.png" data-lightbox-alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" aria-label="View larger image of the mine risk assessment diagram">
+   <img src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers">
+   <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+  </button>
  </div>
 </section>
 
@@ -326,6 +354,14 @@ footer a:hover{color:var(--bone)}
   </div>
  </div>
 </footer>
+
+<div class="lightbox" id="lightbox">
+ <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Close image">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+ </button>
+ <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7" alt="">
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   var burger=document.querySelector('.burger');
@@ -336,6 +372,33 @@ document.addEventListener('DOMContentLoaded',function(){
       if(window.innerWidth<=900){e.preventDefault();btn.parentElement.classList.toggle('open');}
     });
   });
+
+  var lightbox=document.getElementById('lightbox');
+  var lightboxImg=document.getElementById('lightboxImg');
+  if(lightbox&&lightboxImg){
+    function openLightbox(src,alt){
+      lightboxImg.src=src;lightboxImg.alt=alt||'';
+      lightbox.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow='';
+      lightboxImg.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7';
+    }
+    document.querySelectorAll('.pageinfographic[data-lightbox-src]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt);
+      });
+    });
+    document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+    lightbox.addEventListener('click',function(e){
+      if(e.target===lightbox)closeLightbox();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox();
+    });
+  }
 });
 </script>
 <script>
