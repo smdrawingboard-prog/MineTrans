@@ -128,6 +128,7 @@ function renderBlock(block: ContentBlock, idx: number) {
                 style={{
                   backgroundColor: C.graphite2,
                   border: `1px solid ${C.copper}`,
+                  borderLeft: `4px solid ${C.copper}`,
                   padding: '1rem',
                   marginBottom: '1.5rem',
                   borderRadius: '4px',
