@@ -12,6 +12,12 @@ export const courseData = {
           v: 'Document the complete mining value chain before anything else. This is the foundation every downstream calculation depends on.',
         },
         {
+          t: 'image' as const,
+          src: '/images/diagrams/bi-step1-understand-operation.png',
+          alt: 'Diagram of the mining value chain from exploration and drilling through extraction, crushing, processing and export, each annotated with annual revenue',
+          caption: 'Step 1 — documenting the value chain before anything else.',
+        },
+        {
           t: 'list' as const,
           v: [
             'Exploration (if applicable)',
@@ -40,6 +46,12 @@ export const courseData = {
         {
           t: 'p' as const,
           v: 'Determine the events that could stop or reduce production.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/diagrams/bi-step2-triggers.png',
+          alt: 'Diagram of business interruption triggers — fire, explosion, flood, slope failure, tailings incident and power failure — around a central risk model',
+          caption: 'Step 2 — understanding event likelihood and critical consequence.',
         },
         {
           t: 'list' as const,
@@ -95,6 +107,12 @@ export const courseData = {
         {
           t: 'p' as const,
           v: 'The insurance definition of Gross Profit differs from accounting gross profit.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/diagrams/bi-step5-gross-profit-at-risk.png',
+          alt: 'Diagram of the Gross Profit at Risk calculation: turnover minus deducted variable costs (royalties, freight, export charges, fuel) equals gross profit',
+          caption: 'Step 5 — sizing sums insured against real operational exposure.',
         },
         {
           t: 'formula' as const,
@@ -282,6 +300,12 @@ export const courseData = {
           v: 'Document measures that reduce BI exposure — insurers price these in.',
         },
         {
+          t: 'image' as const,
+          src: '/images/diagrams/bi-step10-risk-mitigation.png',
+          alt: 'Diagram of risk mitigation measures — system redundancy and spares, maintenance and emergency planning, infrastructure resilience and stockpiles — reducing business interruption exposure',
+          caption: 'Step 10 — measures that materially reduce frequency and severity of losses.',
+        },
+        {
           t: 'list' as const,
           v: [
             'Redundant conveyors',
@@ -466,9 +490,9 @@ export const courseData = {
         },
         {
           t: 'image' as const,
-          src: '/images/diagrams/tailings-risk-assessment.png',
-          alt: 'Tailings risk assessment diagram showing design (upstream, downstream and centreline construction), governance (Engineer of Record and Independent Review Board oversight), monitoring, and consequences and exposure',
-          caption: 'Tailings risk assessment — design, governance, monitoring, and downstream consequences.',
+          src: '/images/diagrams/tsf-underwriting-risk.png',
+          alt: 'TSF underwriting risk diagram assessing four pillars — design methods, governance and monitoring, and consequence classification — feeding into an underwriting scorecard',
+          caption: 'Assessment across four pillars of TSF risk — probability, severity, and quality of ongoing management.',
         },
         {
           t: 'list' as const,
