@@ -13,13 +13,13 @@
 <meta property="og:locale" content="en_ZA">
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@400;500&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
   --onyx:#0A0A0B; --charcoal:#1E1D20; --graphite:#3A383D; --platinum:#C9CACE;
   --copper:#AD6A3D; --copper-bright:#C9854F; --bone:#F7F5F1;
   --line:rgba(201,202,206,.14);
-  --df:'Playfair Display',serif; --sf:'Jost',sans-serif; --bf:'Inter',sans-serif;
+  --df:'Playfair Display',serif; --sf:'Jost',sans-serif; --bf:'Inter',sans-serif; --mf:'IBM Plex Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
@@ -36,6 +36,8 @@ h2 em,h1 em{font-style:italic;color:var(--copper-bright)}
 h3{font-size:20px}
 .lede{font-size:clamp(15px,1.5vw,18px);color:var(--platinum);max-width:66ch;margin-top:18px}
 .lede strong{color:var(--bone);font-weight:500}
+.herocta{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-family:var(--sf);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-bright);text-decoration:none;border-bottom:1px solid rgba(173,106,61,.35);padding-bottom:2px;transition:border-color .2s,color .2s}
+.herocta:hover{color:var(--bone);border-color:var(--bone)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;
@@ -99,7 +101,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .facet .fimgbtn:hover::after,.facet .fimgbtn:focus-visible::after{opacity:1}
 .facet .zoom svg{width:16px;height:16px;color:var(--bone)}
 .facet .fbody{padding:34px 28px;display:flex;flex-direction:column;gap:14px;flex:1;text-decoration:none}
-.facet .fnum{font-family:var(--df);font-size:13px;color:var(--copper-bright);letter-spacing:.1em}
+.facet .fnum{font-family:var(--mf);font-weight:400;font-size:13px;color:var(--copper-bright);letter-spacing:.06em}
 .facet h3{font-size:22px}
 .facet p{color:var(--platinum);font-size:14.5px;font-weight:300;flex:1}
 .facet ul{list-style:none;margin-top:6px;display:flex;flex-direction:column;gap:6px}
@@ -151,7 +153,7 @@ footer a:hover{color:var(--bone)}
   background:var(--onyx);position:relative;z-index:2;transition:.5s}
 .flow .node svg{width:26px;height:26px}
 .flow .node .nm{font-family:var(--sf);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--platinum)}
-.flow .node .st{font-family:var(--sf);font-size:10px;margin-top:6px;color:rgba(201,202,206,.55);letter-spacing:.06em}
+.flow .node .st{font-family:var(--mf);font-weight:400;font-size:11px;margin-top:6px;color:rgba(201,202,206,.6);letter-spacing:.02em}
 .flow::before{content:'';position:absolute;top:30px;left:12%;right:12%;height:1px;background:var(--line);z-index:1}
 @media(max-width:640px){.flow::before{display:none}}
 .flow.run .node .cell{border-color:var(--copper)}
@@ -196,7 +198,7 @@ footer a:hover{color:var(--bone)}
 .statband{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--charcoal)}
 .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:44px 0}
 .stat{text-align:center}
-.stat .cnt{font-family:var(--df);font-weight:700;font-size:clamp(30px,4.4vw,48px);color:var(--copper-bright);letter-spacing:-.01em}
+.stat .cnt{font-family:var(--mf);font-weight:400;font-size:clamp(28px,4.2vw,44px);color:var(--copper-bright);letter-spacing:-.01em}
 .stat .cl{font-family:var(--sf);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--platinum);margin-top:8px}
 @media(max-width:800px){.statrow{grid-template-columns:1fr 1fr;gap:32px 16px}}
 
@@ -205,7 +207,16 @@ footer a:hover{color:var(--bone)}
 .photoband .cap{position:absolute;left:0;right:0;bottom:0;padding:18px clamp(20px,5vw,64px);background:linear-gradient(180deg,transparent,rgba(10,10,11,.92));font-family:var(--sf);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--platinum)}
 
 /* APPROACH + PRODUCTS — infographics */
-.infographic{width:100%;height:auto;display:block;margin:0 auto;border-radius:4px}
+.enginebox{margin-top:36px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--charcoal);position:relative}
+.enginebox .fimgbtn{position:relative;display:block;width:100%;padding:0;margin:0;border:0;background:none;cursor:zoom-in}
+.enginebox .infographic{width:100%;height:auto;display:block;margin:0;border-radius:0}
+.enginebox .fimgbtn::after{content:'';position:absolute;inset:0;background:rgba(10,10,11,.45);opacity:0;transition:opacity .2s}
+.enginebox .fimgbtn .zoom{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);width:44px;height:44px;
+  border-radius:50%;background:rgba(10,10,11,.7);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s,transform .2s}
+.enginebox .fimgbtn:hover .zoom,.enginebox .fimgbtn:focus-visible .zoom{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.enginebox .fimgbtn:hover::after,.enginebox .fimgbtn:focus-visible::after{opacity:1}
+.enginebox .zoom svg{width:18px;height:18px;color:var(--bone)}
 </style>
 <script type="application/ld+json">{
   "@context":"https://schema.org",
@@ -253,10 +264,11 @@ footer a:hover{color:var(--bone)}
   <div class="eyebrow">Mining &amp; Marine Insurance Brokers &middot; FSP 53166</div>
   <h1>We insure the mine, <em>what moves it</em>, and <em>what it ships</em>.</h1>
   <p class="lede"><strong>MineTrans</strong> is a specialist insurance broking practice built for mining operations across South Africa and Sub-Saharan Africa. One point of accountability across three interconnected risk categories — the site, the equipment, and the cargo in transit.</p>
+  <a class="herocta" href="contact.html">Request a no-obligation review &rarr;</a>
  </div>
 </section>
 
-<div class="statband"><div class="wrap"><div class="statrow"><div class="stat"><div class="cnt" data-target="53166" data-suffix="">0</div><div class="cl">FSP Number</div></div><div class="stat"><div class="cnt" data-target="3" data-suffix="">0</div><div class="cl">Insurance Facets</div></div><div class="stat"><div class="cnt" data-target="1" data-suffix="">0</div><div class="cl">Point of Accountability</div></div><div class="stat"><div class="cnt" data-target="100" data-suffix="%">0</div><div class="cl">FAIS &amp; POPIA Compliant</div></div></div></div></div>
+<div class="statband"><div class="wrap"><div class="statrow"><div class="stat"><div class="cnt">53166</div><div class="cl">FSP Number</div></div><div class="stat"><div class="cnt">3</div><div class="cl">Insurance Facets</div></div><div class="stat"><div class="cnt">1</div><div class="cl">Point of Accountability</div></div><div class="stat"><div class="cnt">100%</div><div class="cl">FAIS &amp; POPIA Compliant</div></div></div></div></div>
 
 <section id="insurance">
  <div class="wrap">
@@ -357,15 +369,31 @@ footer a:hover{color:var(--bone)}
 
 <section id="approach">
  <div class="wrap">
-  <img class="infographic" src="images/infographics/our-approach.webp" width="1408" height="768" loading="lazy"
-   alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection.">
+  <div class="eyebrow">Our Approach</div>
+  <h2>From site data to <em>structured protection</em>.</h2>
+  <p class="lede">We don't start with a policy template. We start with your operation, then run it through an actuarial, technical and technology layer to size cover against real exposure — not assumption.</p>
+  <div class="enginebox">
+   <button class="fimgbtn" type="button" data-lightbox-src="images/infographics/our-approach.webp" data-lightbox-alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection." aria-label="View larger image of the Our Approach diagram">
+    <img class="infographic" src="images/infographics/our-approach.webp" width="1408" height="768" loading="lazy"
+     alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection.">
+    <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+   </button>
+  </div>
  </div>
 </section>
 
 <section id="products" style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
  <div class="wrap">
-  <img class="infographic" src="images/infographics/our-products.webp" width="1376" height="768" loading="lazy"
-   alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection).">
+  <div class="eyebrow">Our Products</div>
+  <h2>Business interruption cover, <em>in three tiers</em>.</h2>
+  <p class="lede">Match protection to your risk appetite today, and grow into full coverage as your quantification matures.</p>
+  <div class="enginebox" style="background:var(--onyx)">
+   <button class="fimgbtn" type="button" data-lightbox-src="images/infographics/our-products.webp" data-lightbox-alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection)." aria-label="View larger image of the Our Products diagram">
+    <img class="infographic" src="images/infographics/our-products.webp" width="1376" height="768" loading="lazy"
+     alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection).">
+    <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+   </button>
+  </div>
  </div>
 </section>
 
@@ -419,9 +447,20 @@ document.addEventListener('DOMContentLoaded',function(){
   var burger=document.querySelector('.burger');
   var links=document.querySelector('.navlinks');
   if(burger){burger.addEventListener('click',function(){links.classList.toggle('open')});}
-  document.querySelectorAll('.hasdrop > .dropbtn').forEach(function(btn){
+  document.querySelectorAll('.hasdrop').forEach(function(drop){
+    var btn=drop.querySelector('.dropbtn');
+    function setExpanded(v){btn.setAttribute('aria-expanded',v?'true':'false');}
     btn.addEventListener('click',function(e){
-      if(window.innerWidth<=900){e.preventDefault();btn.parentElement.classList.toggle('open');}
+      if(window.innerWidth<=900){
+        e.preventDefault();
+        setExpanded(drop.classList.toggle('open'));
+      }
+    });
+    drop.addEventListener('mouseenter',function(){if(window.innerWidth>900)setExpanded(true);});
+    drop.addEventListener('mouseleave',function(){if(window.innerWidth>900)setExpanded(false);});
+    drop.addEventListener('focusin',function(){setExpanded(true);});
+    drop.addEventListener('focusout',function(e){
+      if(!drop.contains(e.relatedTarget))setExpanded(false);
     });
   });
 
@@ -452,35 +491,6 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
 });
-</script>
-<script>
-(function(){
-  var els=document.querySelectorAll('.cnt[data-target]');
-  if(!els.length)return;
-  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function animate(el){
-    var target=el.dataset.target,suffix=el.dataset.suffix||'';
-    var num=parseFloat(target);
-    if(reduced||isNaN(num)){el.textContent=target;return;}
-    var start=null,dur=1600;
-    function step(ts){
-      if(!start)start=ts;
-      var p=Math.min((ts-start)/dur,1);
-      var eased=1-Math.pow(1-p,3);
-      var val=(num*eased);
-      el.textContent=(Number.isInteger(num)?Math.round(val):val.toFixed(1))+suffix;
-      if(p<1)requestAnimationFrame(step);
-      else el.textContent=target+suffix;
-    }
-    requestAnimationFrame(step);
-  }
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){animate(e.target);obs.unobserve(e.target)}
-    });
-  },{threshold:.5});
-  els.forEach(function(el){obs.observe(el)});
-})();
 </script>
 <script>
 (function(){
