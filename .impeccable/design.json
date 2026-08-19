@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-19T00:00:00Z",
+  "title": "Design System: MineTrans Insurance Brokers",
+  "extensions": {
+    "colorMeta": {
+      "onyx": { "role": "neutral", "displayName": "Onyx", "canonical": "#0A0A0B", "tonalRamp": ["#242428", "#3d3d43", "#55555e", "#6d6d78", "#878792", "#a2a2aa", "#cacace", "#f2f2f3"] },
+      "charcoal": { "role": "neutral", "displayName": "Charcoal", "canonical": "#1E1D20", "tonalRamp": ["#262428", "#3f3d43", "#58555e", "#716d78", "#8a8792", "#a4a1aa", "#cbc9cf", "#f2f2f3"] },
+      "graphite": { "role": "neutral", "displayName": "Graphite", "canonical": "#3A383D", "tonalRamp": ["#262528", "#3f3d42", "#58555d", "#726e78", "#8b8791", "#a5a2aa", "#cccace", "#f2f2f3"] },
+      "platinum": { "role": "neutral", "displayName": "Platinum", "canonical": "#C9CACE", "tonalRamp": ["#242528", "#3d3e43", "#55575e", "#6d6f78", "#878992", "#a1a3aa", "#cacbce", "#f2f2f3"] },
+      "bone": { "role": "neutral", "displayName": "Bone", "canonical": "#F7F5F1", "tonalRamp": ["#312a1c", "#51462e", "#726141", "#927d53", "#ac976d", "#beae8d", "#dad1be", "#f6f3ef"] },
+      "copper": { "role": "primary", "displayName": "Molten Copper", "canonical": "#AD6A3D", "tonalRamp": ["#392314", "#5e3a21", "#84512f", "#aa683c", "#c38155", "#d09d7b", "#e4c7b4", "#f8f1ec"] },
+      "copper-bright": { "role": "primary", "displayName": "Molten Copper, Bright", "canonical": "#C9854F", "tonalRamp": ["#3b2412", "#623c1e", "#89542a", "#b06c36", "#c9854f", "#d5a076", "#e7c9b1", "#f9f1eb"] },
+      "danger": { "role": "tertiary", "displayName": "Failure Red", "canonical": "#E04B4B", "tonalRamp": ["#410b0b", "#6d1313", "#981a1a", "#c42222", "#dd3b3b", "#e56767", "#f0a8a8", "#fbe9e9"] },
+      "danger-content": { "role": "tertiary", "displayName": "Failure Red (content pages)", "canonical": "#C94F4F", "tonalRamp": ["#3b1212", "#621e1e", "#892a2a", "#b03636", "#c94f4f", "#d57676", "#e7b1b1", "#f9ebeb"] },
+      "danger-deep": { "role": "tertiary", "displayName": "Failure Red, Deep (gradient stop)", "canonical": "#7D3B3B", "tonalRamp": ["#341919", "#572929", "#793939", "#9c4a4a", "#b56363", "#c68686", "#debaba", "#f7eeee"] },
+      "shadow-black": { "role": "neutral", "displayName": "Shadow Black", "canonical": "#000000", "tonalRamp": ["#1a1a1a", "#333333", "#4d4d4d", "#666666", "#808080", "#999999", "#cccccc", "#f2f2f2"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page hero H1s and section H2s. Emphasis words inside display text switch to Copper-Bright italics." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, nav links, buttons, form labels — always uppercase, always tracked wide." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy and ledes. Never used for headings or labels." },
+      "mono": { "displayName": "Mono / Data", "purpose": "Any measured value: stat counters, table cells, line references, diagram status labels. Never prose." }
+    },
+    "shadows": [
+      { "name": "popover", "value": "0 24px 48px rgba(0,0,0,.5)", "purpose": "Dropdown menus and the baseline for any new floating/overlay surface (sanctioned direction: extend this neutral family for card/modal elevation)." },
+      { "name": "risk-safe-glow", "value": "0 0 0 6px rgba(173,106,61,.15)", "purpose": "RESERVED. Safe/recovering risk state on the BI-failure animation only. Never decorative." },
+      { "name": "risk-danger-glow", "value": "0 0 0 8px rgba(224,75,75,.14), 0 0 34px 6px rgba(224,75,75,.45)", "purpose": "RESERVED. Active-failure risk state on the BI-failure animation only. Never decorative." }
+    ],
+    "motion": [
+      { "name": "card-lift", "value": "transform 0.2s; translateY(-4px) on hover", "purpose": "The system's one interactive-card motion signature (facet cards)." },
+      { "name": "border-flip", "value": "border-color 0.2s / background 0.2s", "purpose": "Default hover treatment: a hairline border or dark background flips to Copper / Bone, no scale or shadow added." },
+      { "name": "dropdown-reveal", "value": "opacity 0.18s, transform 0.18s", "purpose": "Nav dropdown fade + slight translateY reveal on hover/focus-within." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "900px" },
+      { "name": "mobile", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The site's one CTA style — copper background, sharp corners, flips to bone on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Request a Review</a>",
+      "css": ".ds-btn-primary { display: inline-block; font-family: 'Jost', sans-serif; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0B; background: #C9854F; padding: 15px 34px; border-radius: 2px; text-decoration: none; transition: background 0.2s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #F7F5F1; } .ds-btn-primary:focus-visible { outline: 2px solid #C9854F; outline-offset: 2px; }"
+    },
+    {
+      "name": "Facet Card",
+      "kind": "card",
+      "refersTo": "card-facet",
+      "description": "The system's signature card: hairline border that flips to solid copper and lifts 4px on hover.",
+      "html": "<a class=\"ds-facet\" href=\"#\"><span class=\"ds-facet-num\">01 — The Mine</span><h3 class=\"ds-facet-title\">Commercial Assets &amp; Business Interruption</h3><p class=\"ds-facet-body\">Cover for the site itself: buildings, plant infrastructure, and the income you lose when operations stop.</p><span class=\"ds-facet-go\">Explore mine cover →</span></a>",
+      "css": ".ds-facet { background: #1E1D20; border: 1px solid rgba(201,202,206,.14); border-radius: 4px; padding: 34px 28px; text-decoration: none; display: flex; flex-direction: column; gap: 14px; transition: border-color 0.2s, transform 0.2s; } .ds-facet:hover, .ds-facet:focus-visible { border-color: #AD6A3D; transform: translateY(-4px); } .ds-facet-num { font-family: 'Playfair Display', serif; font-size: 13px; color: #C9854F; letter-spacing: 0.1em; } .ds-facet-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 22px; color: #F7F5F1; margin: 0; } .ds-facet-body { color: #C9CACE; font-size: 14.5px; font-weight: 300; flex: 1; margin: 0; } .ds-facet-go { font-family: 'Jost', sans-serif; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9854F; margin-top: auto; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Form field: onyx-on-charcoal, hairline border that shifts to a copper-tinted line on focus.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-name\">Full Name</label><input class=\"ds-field-input\" id=\"ds-name\" type=\"text\" placeholder=\"Jane Dlamini\" /></div>",
+      "css": ".ds-field-label { display: block; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9CACE; margin-bottom: 7px; } .ds-field-input { width: 100%; background: #0A0A0B; border: 1px solid rgba(201,202,206,.14); color: #F7F5F1; padding: 13px 15px; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.3s; box-sizing: border-box; } .ds-field-input:focus-visible { border-color: rgba(173,106,61,.35); }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "custom",
+      "refersTo": "eyebrow",
+      "description": "The system's most consistent signature: a wide-tracked uppercase kicker preceded by a short copper rule line, opening every major section.",
+      "html": "<div class=\"ds-eyebrow\">Our Insurance Solutions</div>",
+      "css": ".ds-eyebrow { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 0.38em; text-transform: uppercase; color: #C9854F; display: flex; align-items: center; gap: 16px; } .ds-eyebrow::before { content: ''; width: 34px; height: 1px; background: #AD6A3D; }"
+    },
+    {
+      "name": "Stat Counter",
+      "kind": "custom",
+      "refersTo": "stat",
+      "description": "Monospace numeral over a small uppercase label — the system's data-as-instrument pattern.",
+      "html": "<div class=\"ds-stat\"><div class=\"ds-stat-num\">53166</div><div class=\"ds-stat-label\">FSP Number</div></div>",
+      "css": ".ds-stat { text-align: center; } .ds-stat-num { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: clamp(30px, 4.4vw, 48px); color: #C9854F; letter-spacing: -0.01em; } .ds-stat-label { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C9CACE; margin-top: 8px; }"
+    },
+    {
+      "name": "Nav Dropdown",
+      "kind": "nav",
+      "refersTo": "dropmenu",
+      "description": "Popover submenu off the main nav: charcoal panel, copper top edge, neutral black popover shadow.",
+      "html": "<div class=\"ds-dropmenu\"><a class=\"ds-dropitem\" href=\"#\"><span class=\"ds-dropitem-title\">The Mine</span><span class=\"ds-dropitem-desc\">Commercial assets, liability &amp; business interruption</span></a></div>",
+      "css": ".ds-dropmenu { min-width: 280px; background: #1E1D20; border: 1px solid rgba(201,202,206,.14); border-top: 2px solid #AD6A3D; border-radius: 2px; padding: 8px; box-shadow: 0 24px 48px rgba(0,0,0,.5); } .ds-dropitem { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 2px; text-decoration: none; transition: background 0.15s; } .ds-dropitem:hover { background: rgba(173,106,61,.14); } .ds-dropitem-title { font-family: 'Jost', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; font-weight: 500; color: #F7F5F1; } .ds-dropitem-desc { font-family: 'Inter', sans-serif; font-size: 11.5px; color: #C9CACE; font-weight: 300; }"
+    },
+    {
+      "name": "Diagram Panel",
+      "kind": "custom",
+      "refersTo": "enginebox",
+      "description": "Bordered charcoal frame holding a single full-bleed infographic image, no internal padding.",
+      "html": "<figure class=\"ds-enginebox\"><img src=\"/images/diagrams/example.png\" alt=\"\" /></figure>",
+      "css": ".ds-enginebox { border: 1px solid rgba(201,202,206,.14); border-radius: 6px; overflow: hidden; background: #1E1D20; margin: 0; } .ds-enginebox img { width: 100%; display: block; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Assay Office",
+    "overview": "MineTrans reads like the private office where a mine's risk gets weighed, certified, and sealed — not a marketing site dressed up to look serious. The palette is near-black onyx and charcoal, the type pairs an old-world serif (Playfair Display) for authority with a tightly-tracked uppercase sans (Jost) for procedure, and every number that matters — statistics, line references, table values, node status — drops into monospace (IBM Plex Mono) so it visibly reads as measured, not narrated. Copper is the one accent, used sparingly: a thin structural line, a single button, a label. The overall register is quietly luxurious — restrained and expensive-feeling rather than flashy — and it explicitly rejects the neon-glow, dense-dashboard energy of flashy fintech/crypto products. Nothing here should feel like it's trying to impress; it should feel like it's already trusted.\n\nThe system is presently flat by construction, and its one recurring piece of drama — a colored glow ring — is reserved exclusively for signaling risk state in the BI-failure animation, never used decoratively.",
+    "keyCharacteristics": [
+      "Near-black onyx/charcoal surfaces with a single copper accent, used sparingly",
+      "Serif display headlines (Playfair Display) paired with heavily-tracked uppercase sans labels (Jost)",
+      "Numbers and data render in monospace (IBM Plex Mono) to read as measured fact, not prose",
+      "Sharp, small corner radii (2–4px) — nothing rounded enough to feel soft or consumer-app",
+      "Flat by default; the only chromatic glow is a reserved semantic for risk-state visualization"
+    ],
+    "rules": [
+      { "name": "The One-Accent Rule", "body": "Copper is the only expressive hue in the system, used for identity, emphasis, and interaction. Failure Red is not a second accent; it is a reserved semantic exclusively for danger/error states. No screen should introduce a third hue.", "section": "colors" },
+      { "name": "The Structure-vs-Voice Rule", "body": "Base Copper (#AD6A3D) is for lines, dashes, and borders — things you register peripherally. Copper-Bright (#C9854F) is for anything meant to be read — labels, buttons, active emphasis.", "section": "colors" },
+      { "name": "The Instrument Rule", "body": "Any character that represents a measured value — a stat counter, a table cell, a line number, a node's status — renders in IBM Plex Mono. Regular prose never does, even when it contains a number inline.", "section": "typography" },
+      { "name": "The Eyebrow Rule", "body": "Every section opens with an uppercase, wide-tracked (0.38em) Copper-Bright label, prefixed by a 34px Copper rule line. This is the system's most consistent signature — never omit the rule line, never tighten the tracking.", "section": "typography" },
+      { "name": "The Reserved Glow Rule", "body": "Colored glow shadows exist in exactly one place: signaling safe/danger risk state on the BI-failure diagram. Every other elevated surface uses a neutral black shadow or no shadow at all.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Copper to a single accent role — never introduce a second hue for a new status or category.",
+      "Do render every measured number (stats, table values, line refs, status labels) in IBM Plex Mono.",
+      "Do open the eyebrow before major section headings with the 34px Copper rule line and 0.38em tracking.",
+      "Do use neutral black ambient shadows (starting from the Popover value) for any surface that needs to visibly lift — now sanctioned.",
+      "Do cap corner radius at 2px for buttons/CTAs and 4px for cards and text-bearing panels; reserve 6px for photographic/illustrative image containers only.",
+      "Do keep new full-bleed treatments (photo bands, engine panels) as the deliberate exception to the 1180px container, not the default."
+    ],
+    "donts": [
+      "Don't add a colored/chromatic glow to any component outside the BI-failure risk visualization — a decorative colored glow anywhere else is exactly the generic AI-slop tell this system has explicitly rejected.",
+      "Don't reach for a thick colored left-border (\"side-tab\") treatment on cards or callouts — an older .block pattern still has one, but new work should follow the uniform hairline-border treatment instead.",
+      "Don't round corners past 4px on anything text-bearing (buttons, cards, inputs, nav) — soft/pill shapes read as consumer-app, not this system.",
+      "Don't style this as a bright, dense, neon fintech/crypto dashboard — the confirmed anti-reference.",
+      "Don't use Inter, Jost, or Playfair Display outside their assigned roles (body / label / display respectively).",
+      "Don't use Failure Red (#E04B4B) for anything but danger/error/failure signaling — it is not a decorative \"warm\" alternative to copper."
+    ]
+  }
+}
