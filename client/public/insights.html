@@ -348,10 +348,15 @@ footer b{color:var(--platinum);font-weight:500}
    </div>
   </div>
   <a href="risk.html">Mining Risk</a>
-  <a href="insights.html" class="active">Insights</a>
-  <a href="news.html">News</a>
-  <a href="bi-methodology.html">BI Methodology</a>
-  <a href="faq.html">FAQ</a>
+  <div class="hasdrop open">
+   <button class="dropbtn" type="button" aria-expanded="true">Resources<span class="car"></span></button>
+   <div class="dropmenu" role="menu">
+    <a href="insights.html" role="menuitem" class="active"><span class="dt">Insights</span><span class="dd">Mining risk analysis for Sub-Saharan Africa</span></a>
+    <a href="news.html" role="menuitem"><span class="dt">News</span><span class="dd">Daily AI-filtered mining industry news</span></a>
+    <a href="bi-methodology.html" role="menuitem"><span class="dt">BI Methodology</span><span class="dd">Our 12-step business interruption methodology</span></a>
+    <a href="faq.html" role="menuitem"><span class="dt">FAQ</span><span class="dd">Answers on cover, claims &amp; tailings risk</span></a>
+   </div>
+  </div>
   <a href="blueprint.html">Blueprint</a>
   <a class="btn-nav" href="contact.html">Request a Review</a></div>
 </nav>
@@ -491,9 +496,20 @@ document.addEventListener('DOMContentLoaded',function(){
   var burger=document.querySelector('.burger');
   var links=document.querySelector('.navlinks');
   if(burger){burger.addEventListener('click',function(){links.classList.toggle('open')});}
-  document.querySelectorAll('.hasdrop > .dropbtn').forEach(function(btn){
+  document.querySelectorAll('.hasdrop').forEach(function(drop){
+    var btn=drop.querySelector('.dropbtn');
+    function setExpanded(v){btn.setAttribute('aria-expanded',v?'true':'false');}
     btn.addEventListener('click',function(e){
-      if(window.innerWidth<=900){e.preventDefault();btn.parentElement.classList.toggle('open');}
+      if(window.innerWidth<=900){
+        e.preventDefault();
+        setExpanded(drop.classList.toggle('open'));
+      }
+    });
+    drop.addEventListener('mouseenter',function(){if(window.innerWidth>900)setExpanded(true);});
+    drop.addEventListener('mouseleave',function(){if(window.innerWidth>900)setExpanded(false);});
+    drop.addEventListener('focusin',function(){setExpanded(true);});
+    drop.addEventListener('focusout',function(e){
+      if(!drop.contains(e.relatedTarget))setExpanded(false);
     });
   });
   document.querySelectorAll('.navlinks a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open')})});
