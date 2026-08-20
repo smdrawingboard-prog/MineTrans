@@ -273,7 +273,7 @@ footer a:hover{color:var(--bone)}
  </div>
 </section>
 
-<div class="statband"><div class="wrap"><div class="statrow"><div class="stat"><div class="cnt">53166</div><div class="cl">FSP Number</div></div><div class="stat"><div class="cnt">3</div><div class="cl">Insurance Facets</div></div><div class="stat"><div class="cnt">1</div><div class="cl">Point of Accountability</div></div><div class="stat"><div class="cnt">100%</div><div class="cl">FAIS &amp; POPIA Compliant</div></div></div></div></div>
+<div class="statband"><div class="wrap"><div class="statrow"><div class="stat"><div class="cnt" data-target="53166" data-suffix="">53166</div><div class="cl">FSP Number</div></div><div class="stat"><div class="cnt" data-target="3" data-suffix="">3</div><div class="cl">Insurance Facets</div></div><div class="stat"><div class="cnt" data-target="1" data-suffix="">1</div><div class="cl">Point of Accountability</div></div><div class="stat"><div class="cnt" data-target="100" data-suffix="%">100%</div><div class="cl">FAIS &amp; POPIA Compliant</div></div></div></div></div>
 
 <section id="insurance">
  <div class="wrap">
@@ -504,6 +504,35 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
 });
+</script>
+<script>
+(function(){
+  var els=document.querySelectorAll('.cnt[data-target]');
+  if(!els.length)return;
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animate(el){
+    var target=el.dataset.target,suffix=el.dataset.suffix||'';
+    var num=parseFloat(target);
+    if(reduced||isNaN(num)){el.textContent=target+suffix;return;}
+    var start=null,dur=1600;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var eased=1-Math.pow(1-p,3);
+      var val=(num*eased);
+      el.textContent=(Number.isInteger(num)?Math.round(val):val.toFixed(1))+suffix;
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=target+suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){animate(e.target);obs.unobserve(e.target)}
+    });
+  },{threshold:.5});
+  els.forEach(function(el){obs.observe(el)});
+})();
 </script>
 <script>
 (function(){
