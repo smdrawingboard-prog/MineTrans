@@ -316,7 +316,7 @@ footer b{color:var(--platinum);font-weight:500}
 .dropbtn .car{width:8px;height:8px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-3px}
 .hasdrop:hover .dropbtn .car,.hasdrop:focus-within .dropbtn .car{transform:rotate(225deg);margin-top:3px}
 .dropmenu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:280px;background:var(--charcoal);border:1px solid var(--line);border-top:2px solid var(--copper);border-radius:2px;padding:8px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s;box-shadow:0 24px 48px rgba(0,0,0,.5)}
-.hasdrop:hover .dropmenu,.hasdrop:focus-within .dropmenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+@media(min-width:901px){.hasdrop:hover .dropmenu,.hasdrop:focus-within .dropmenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}}
 .dropmenu a{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:2px;text-decoration:none;color:var(--bone);transition:background .15s}
 .dropmenu a:hover{background:rgba(173,106,61,.14)}
 .dropmenu a .dt{font-family:var(--sf);font-size:12.5px;letter-spacing:.04em;font-weight:500}
@@ -325,7 +325,7 @@ footer b{color:var(--platinum);font-weight:500}
 @media(max-width:900px){
  .navlinks>a,.hasdrop{width:100%;padding:16px 0;border-bottom:1px solid var(--line)}
  .dropbtn{width:100%;justify-content:space-between;padding:0}
- .dropmenu{position:static;transform:none;opacity:1;visibility:visible;display:none;box-shadow:none;border:0;border-left:2px solid var(--copper);margin-top:10px;background:none}
+ .hasdrop.open .dropmenu{position:static;transform:none;opacity:1;visibility:visible;display:none;box-shadow:none;border:0;border-left:2px solid var(--copper);margin-top:10px;background:none}
  .hasdrop.open .dropmenu{display:block}
 }
 </style>

@@ -55,7 +55,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .dropbtn .car{width:8px;height:8px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-3px}
 .hasdrop:hover .dropbtn .car,.hasdrop:focus-within .dropbtn .car{transform:rotate(225deg);margin-top:3px}
 .dropmenu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:280px;background:var(--charcoal);border:1px solid var(--line);border-top:2px solid var(--copper);border-radius:2px;padding:8px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s;box-shadow:0 24px 48px rgba(0,0,0,.5)}
-.hasdrop:hover .dropmenu,.hasdrop:focus-within .dropmenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+@media(min-width:901px){.hasdrop:hover .dropmenu,.hasdrop:focus-within .dropmenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}}
 .dropmenu a{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:2px;text-decoration:none;color:var(--bone);transition:background .15s}
 .dropmenu a:hover{background:rgba(173,106,61,.14)}
 .dropmenu a .dt{font-family:var(--sf);font-size:12.5px;letter-spacing:.04em;font-weight:500}
@@ -296,28 +296,36 @@ document.addEventListener('DOMContentLoaded',function(){
 
   var lightbox=document.getElementById('lightbox');
   var lightboxImg=document.getElementById('lightboxImg');
-  if(lightbox&&lightboxImg){
-    function openLightbox(src,alt){
+  var lightboxClose=document.getElementById('lightboxClose');
+  if(lightbox&&lightboxImg&&lightboxClose){
+    var lightboxTrigger=null;
+    function openLightbox(src,alt,trigger){
       lightboxImg.src=src;lightboxImg.alt=alt||'';
+      lightboxTrigger=trigger||document.activeElement;
       lightbox.classList.add('open');
       document.body.style.overflow='hidden';
+      lightboxClose.focus();
     }
     function closeLightbox(){
       lightbox.classList.remove('open');
       document.body.style.overflow='';
       lightboxImg.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7';
+      if(lightboxTrigger)lightboxTrigger.focus();
+      lightboxTrigger=null;
     }
     document.querySelectorAll('.pageinfographic[data-lightbox-src]').forEach(function(btn){
       btn.addEventListener('click',function(){
-        openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt);
+        openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt,btn);
       });
     });
-    document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+    lightboxClose.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',function(e){
       if(e.target===lightbox)closeLightbox();
     });
     document.addEventListener('keydown',function(e){
-      if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox();
+      if(!lightbox.classList.contains('open'))return;
+      if(e.key==='Escape'){closeLightbox();return;}
+      if(e.key==='Tab'){e.preventDefault();lightboxClose.focus();}
     });
   }
 });
