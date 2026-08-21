@@ -25,6 +25,12 @@
         "value": "8px",
         "createdAt": "2026-08-21T11:28:05.862Z",
         "reason": "User confirmed 8px is intentional — DESIGN.md documents this exact insights-page callout as a known one-off"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "8px\">",
+        "createdAt": "2026-08-21T12:10:43.834Z",
+        "reason": "User confirmed 8px is intentional (documented DESIGN.md one-off) — this entry covers the malformed literal the regex detector actually captures from the inline style attribute"
       }
     ]
   }
