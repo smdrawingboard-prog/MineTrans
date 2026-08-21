@@ -31,6 +31,23 @@
         "value": "8px\">",
         "createdAt": "2026-08-21T12:10:43.834Z",
         "reason": "User confirmed 8px is intentional (documented DESIGN.md one-off) — this entry covers the malformed literal the regex detector actually captures from the inline style attribute"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insurance-mine.html",
+          "client/public/insurance.html",
+          "client/public/training-showcase.html"
+        ],
+        "createdAt": "2026-08-21T12:11:53.564Z",
+        "reason": "User confirmed: copper border-left accent matches DESIGN.md's documented '2px Copper border marks emphasis... legacy left-border accent blocks' pattern (training-showcase.html uses a 4px local variant of the same family)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "roboto",
+        "createdAt": "2026-08-21T12:11:53.674Z",
+        "reason": "User confirmed Roboto is intentional — appears only inside the standard OS system-font fallback stack, not as a chosen brand face"
       }
     ]
   }
