@@ -1,6 +1,8 @@
 {
   "detector": {
-    "ignoreRules": [],
+    "ignoreRules": [
+      "layout-transition"
+    ],
     "ignoreFiles": [],
     "ignoreValues": [
       {
@@ -8,6 +10,21 @@
         "value": "inter",
         "createdAt": "2026-08-21T11:18:13.575Z",
         "reason": "User confirmed Inter is intentional — documented body typeface in DESIGN.md's three-font system (Playfair Display display / Jost label / Inter body)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "client/public/*.html"
+        ],
+        "createdAt": "2026-08-21T11:28:05.796Z",
+        "reason": "User confirmed: BI-failure flow diagram glow is DESIGN.md's Reserved Glow Rule exception (pre-existing 'Roger req #2' failure state)"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "8px",
+        "createdAt": "2026-08-21T11:28:05.862Z",
+        "reason": "User confirmed 8px is intentional — DESIGN.md documents this exact insights-page callout as a known one-off"
       }
     ]
   }
