@@ -48,6 +48,15 @@
         "value": "roboto",
         "createdAt": "2026-08-21T12:11:53.674Z",
         "reason": "User confirmed Roboto is intentional — appears only inside the standard OS system-font fallback stack, not as a chosen brand face"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "client/public/insurance-machinery.html"
+        ],
+        "createdAt": "2026-08-24T15:46:45.291Z",
+        "reason": "User confirmed: same 2px copper border-left legacy accent pattern already approved for insurance.html, insurance-mine.html, training-showcase.html"
       }
     ]
   }
