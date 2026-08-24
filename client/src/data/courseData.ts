@@ -374,6 +374,12 @@ export const courseData = {
           v: 'Comprehensive assessment of the mining operation including commodity type, production volume, processing methods, and operational history.',
         },
         {
+          t: 'image' as const,
+          src: '/images/diagrams/mine-risk-assessment.png',
+          alt: 'Diagram of asset and operations risk: property damage exposure on total insured values, replacement costs and critical fixed assets, and business interruption exposure on daily gross profit and production values',
+          caption: 'Sizing asset values and business interruption exposure against real operational throughput and replacement lead times.',
+        },
+        {
           t: 'list' as const,
           v: [
             'Commodity type and grade',
@@ -395,6 +401,12 @@ export const courseData = {
         {
           t: 'p' as const,
           v: 'Detailed inventory of critical equipment, replacement costs, and lead times.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/diagrams/machinery-risk-assessment.png',
+          alt: 'Diagram of equipment risk assessment: machinery breakdown exposure on critical machinery, draglines and compressors, and reliability and maintenance programs covering predictive maintenance and oil analysis',
+          caption: 'Safeguarding high-value mining machinery where mechanical downtime translates directly to business interruption losses.',
         },
         {
           t: 'list' as const,
@@ -562,6 +574,12 @@ export const courseData = {
         {
           t: 'p' as const,
           v: 'Assessment of transportation infrastructure and logistics.',
+        },
+        {
+          t: 'image' as const,
+          src: '/images/diagrams/transit-risk-assessment.png',
+          alt: 'Diagram of logistics and supply chain risk: transit of valuable assets across bulk rail corridors, port loading facilities and shipping routes, and supply chain exposure from imported spares, border delays and single-source suppliers',
+          caption: 'Securing the movement of high-value concentrates and imported spares across rail corridors and marine export terminals.',
         },
         {
           t: 'list' as const,
