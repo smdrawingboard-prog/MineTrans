@@ -45,6 +45,7 @@ The core differentiator is the BI methodology itself — a structured, 12-step B
 ## Evidence on Hand
 
 - FSP number (53166) and the Donaldson Group (Pty) Ltd parent relationship are real, confirmed regulatory facts.
+- MineTrans's POPIA (and related) registration is held under Donaldson Group (Pty) Ltd, not as a standalone MineTrans registration — copy referencing POPIA compliance should reflect that the registration sits with the parent.
 - No testimonials, client case studies, or third-party press exist in the repository — future work must not fabricate them.
 - Figures used in course/marketing content (e.g. USD 500m turnover, USD 320m gross profit at risk, TSF population/consequence numbers) are illustrative placeholders for teaching the methodology, never real client outcomes.
 
