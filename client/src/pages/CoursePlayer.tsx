@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useAuth } from '@/_core/hooks/useAuth';
+import React, { useEffect, useState } from 'react';
 import { CourseLayout } from '@/components/CourseLayout';
 import { courseData } from '@/data/courseData';
 
@@ -11,10 +10,21 @@ const C = {
   platinum: '#C9CACE',
 };
 
-export default function CoursePlayer() {
-  const { user, loading } = useAuth();
+interface Student {
+  id: number;
+  email: string;
+  name: string;
+}
 
-  if (loading) {
+export default function CoursePlayer() {
+  const [student, setStudent] = useState<Student | null | undefined>(undefined);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('certStudent');
+    setStudent(stored ? JSON.parse(stored) : null);
+  }, []);
+
+  if (student === undefined) {
     return (
       <div
         style={{
@@ -31,7 +41,7 @@ export default function CoursePlayer() {
     );
   }
 
-  if (!user) {
+  if (!student) {
     return (
       <div
         style={{
