@@ -81,6 +81,18 @@
   h1 .accent{color:var(--copper)}
   .standfirst{font-size:1.05rem;color:var(--platinum);max-width:60ch;margin-bottom:8px}
 
+  /* Overview figure */
+  .overview-figure{
+    margin:32px 0 40px;border:1px solid var(--rule);border-radius:6px;
+    overflow:hidden;background:var(--charcoal);
+  }
+  .overview-figure img{width:100%;height:auto;display:block}
+  .overview-figure figcaption{
+    padding:12px 18px;font-family:'Jost',sans-serif;font-size:.66rem;font-weight:600;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--copper-light);
+    border-top:1px solid var(--rule);
+  }
+
   /* Sections */
   section{margin-top:52px}
   h2{
@@ -161,6 +173,11 @@
 
   <h1>A Practical Methodology for <span class="accent">Business Interruption</span> Insurance</h1>
   <p class="standfirst">A step-by-step approach to identifying a mine's revenue-generating processes, quantifying potential financial losses from disruption, and determining an appropriate insurance limit and indemnity period.</p>
+
+  <figure class="overview-figure">
+   <img src="images/diagrams/bi-methodology.jpg" alt="Overview diagram of the BI methodology: value chain and assets (SAG mill, crushers, tertiary crusher, mills, primary crusher, maximum foreseeable loss) feeding into quantification and sum insured (gross profit at risk, increased cost of working, formula-based sizing)">
+   <figcaption>The methodology at a glance — value chain and assets through to quantification and sum insured</figcaption>
+  </figure>
 
   <section id="operation">
     <h2><span class="num">1.</span> Understand the Mining Operation</h2>
