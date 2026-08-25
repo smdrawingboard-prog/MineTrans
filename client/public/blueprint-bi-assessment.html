@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BI Assessment Generator | MineTrans Employee Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onyx:#0A0A0B; --charcoal:#1E1D20; --graphite:#3A383D; --platinum:#C9CACE;
+  --copper:#AD6A3D; --copper-bright:#C9854F; --bone:#F7F5F1;
+  --line:rgba(201,202,206,.14); --line-copper:rgba(173,106,61,.4);
+  --sf:'Jost',sans-serif; --bf:'Inter',sans-serif; --mf:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--onyx);color:var(--bone);font-family:var(--bf);font-weight:300;line-height:1.65;min-height:100vh}
+.wrap{max-width:840px;margin:0 auto;padding:48px 24px 80px}
+.back{display:inline-block;font-family:var(--sf);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--platinum);text-decoration:none;margin-bottom:28px}
+.back:hover{color:var(--bone)}
+.eyebrow{font-family:var(--sf);font-weight:400;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--copper-bright);margin-bottom:14px}
+h1{font-family:var(--sf);font-weight:600;font-size:clamp(22px,3.4vw,30px);color:var(--bone);margin-bottom:12px}
+.lede{color:var(--platinum);font-size:14.5px;max-width:62ch;margin-bottom:8px}
+.disclaimer{margin-top:22px;padding:14px 18px;background:var(--charcoal);border:1px solid var(--line-copper);border-radius:4px;font-size:12.5px;color:var(--platinum)}
+.disclaimer b{color:var(--copper-bright)}
+
+form{margin-top:36px;padding:28px;background:var(--charcoal);border:1px solid var(--line);border-radius:4px}
+.field{margin-bottom:18px}
+.field:last-of-type{margin-bottom:0}
+label{display:block;font-family:var(--sf);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--platinum);margin-bottom:8px}
+select,input[type=text]{width:100%;padding:12px 14px;background:var(--onyx);border:1px solid rgba(201,202,206,.2);color:var(--bone);font-size:14px;font-family:var(--bf);border-radius:2px}
+select:focus,input[type=text]:focus{outline:none;border-color:var(--copper)}
+.hint{font-size:11.5px;color:#8a898d;margin-top:6px}
+.actions{margin-top:24px;display:flex;align-items:center;gap:16px}
+button{padding:13px 28px;background:var(--copper);color:var(--onyx);border:0;font-family:var(--sf);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;transition:background .2s}
+button:hover:not(:disabled){background:var(--copper-bright)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.status{font-family:var(--sf);font-size:11.5px;letter-spacing:.06em;color:var(--platinum)}
+.status.err{color:#e04b4b}
+
+#output{margin-top:32px;display:none}
+#output.show{display:block}
+.result{padding:32px;background:var(--charcoal);border:1px solid var(--line);border-radius:4px}
+.result h2{font-family:var(--sf);font-weight:600;font-size:16px;letter-spacing:.02em;color:var(--copper-bright);margin:28px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+.result h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.result p{color:var(--platinum);font-size:14px;margin-bottom:12px}
+.result strong{color:var(--bone);font-weight:500}
+.result ul,.result ol{margin:0 0 12px 20px;color:var(--platinum);font-size:14px}
+.result li{margin-bottom:6px}
+
+@media(max-width:640px){.wrap{padding:32px 18px 60px}form{padding:20px}.result{padding:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <a class="back" href="blueprint-content.html">&larr; Back to Blueprint</a>
+ <div class="eyebrow">Internal Employee Tool</div>
+ <h1>BI Assessment Generator</h1>
+ <p class="lede">Generate a worked example of a Business Interruption insurance assessment for a given commodity, structured against MineTrans's 12-step BI methodology. Use it as a training aid and reference — not as advice for a real client.</p>
+ <div class="disclaimer"><b>Illustrative only.</b> Every figure produced here — revenue, gross profit, indemnity periods, sums insured — is hypothetical and generated for training purposes. It is not real client data, and it does not constitute financial advice as defined in the FAIS Act. Do not share generated output with clients or prospects as-is.</div>
+
+ <form id="bi-gen-form">
+  <div class="field">
+   <label for="commodity">Commodity</label>
+   <select id="commodity" required>
+    <option value="Gold">Gold</option>
+    <option value="Diamonds">Diamonds</option>
+    <option value="Coal">Coal</option>
+    <option value="Chrome">Chrome</option>
+    <option value="Platinum Group Metals">Platinum Group Metals</option>
+    <option value="Iron Ore">Iron Ore</option>
+   </select>
+  </div>
+  <div class="field">
+   <label for="revenue">Illustrative Annual Revenue (optional)</label>
+   <input type="text" id="revenue" placeholder="e.g. USD 400m">
+   <p class="hint">Leave blank to let the example choose a representative figure for this commodity.</p>
+  </div>
+  <div class="actions">
+   <button type="submit" id="bi-gen-btn">Generate Assessment</button>
+   <span class="status" id="bi-gen-status"></span>
+  </div>
+ </form>
+
+ <div id="output"><div class="result" id="bi-gen-result"></div></div>
+</div>
+
+<script>
+(function(){
+  if(sessionStorage.getItem('mt_blueprint_auth')!=='1'){
+    window.location.replace('blueprint.html');
+    return;
+  }
+
+  function renderMarkdown(md){
+    var lines = md.split('\n');
+    var html = '';
+    var inList = null;
+    function closeList(){ if(inList){ html += '</'+inList+'>'; inList = null; } }
+    lines.forEach(function(line){
+      var h2 = line.match(/^##\s+(.*)/);
+      var ol = line.match(/^\d+\.\s+(.*)/);
+      var ul = line.match(/^[-*]\s+(.*)/);
+      if(h2){
+        closeList();
+        html += '<h2>'+escapeHtml(h2[1])+'</h2>';
+      } else if(ol){
+        if(inList!=='ol'){ closeList(); html+='<ol>'; inList='ol'; }
+        html += '<li>'+inlineFormat(escapeHtml(ol[1]))+'</li>';
+      } else if(ul){
+        if(inList!=='ul'){ closeList(); html+='<ul>'; inList='ul'; }
+        html += '<li>'+inlineFormat(escapeHtml(ul[1]))+'</li>';
+      } else if(line.trim()===''){
+        closeList();
+      } else {
+        closeList();
+        html += '<p>'+inlineFormat(escapeHtml(line))+'</p>';
+      }
+    });
+    closeList();
+    return html;
+  }
+  function escapeHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function inlineFormat(s){
+    return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+
+  var form = document.getElementById('bi-gen-form');
+  var btn = document.getElementById('bi-gen-btn');
+  var status = document.getElementById('bi-gen-status');
+  var output = document.getElementById('output');
+  var result = document.getElementById('bi-gen-result');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var commodity = document.getElementById('commodity').value;
+    var revenue = document.getElementById('revenue').value.trim();
+    btn.disabled = true;
+    status.className = 'status';
+    status.textContent = 'Generating — this can take up to a minute…';
+    output.className = '';
+
+    fetch('/api/bi-assessment/generate', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({commodity: commodity, annualRevenue: revenue || undefined})
+    }).then(function(res){
+      return res.json().then(function(data){ return {ok: res.ok, data: data}; });
+    }).then(function(r){
+      btn.disabled = false;
+      if(!r.ok){
+        status.className = 'status err';
+        status.textContent = r.data.error || 'Failed to generate assessment.';
+        return;
+      }
+      status.textContent = '';
+      result.innerHTML = renderMarkdown(r.data.assessment);
+      output.className = 'show';
+    }).catch(function(err){
+      btn.disabled = false;
+      status.className = 'status err';
+      status.textContent = 'Request failed: '+err.message;
+    });
+  });
+})();
+</script>
+</body>
+</html>

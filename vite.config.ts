@@ -226,7 +226,7 @@ function vitePluginCopyHtmlFiles(): Plugin {
         fs.copyFileSync(spaShellPath, path.join(outDir, "404.html"));
       }
 
-      const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "courses.html", "student-portal.html", "training-showcase.html", "favicon.ico"];
+      const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "blueprint-bi-assessment.html", "courses.html", "student-portal.html", "training-showcase.html", "favicon.ico"];
 
       for (const file of htmlFiles) {
         const filePath = path.join(publicDir, file);
@@ -251,7 +251,7 @@ function vitePluginStaticHtmlServer(): Plugin {
         const url = req.url?.split("?")[0] || "/";
         
         // List of HTML files to serve
-        const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "courses.html", "student-portal.html", "training-showcase.html"];
+        const htmlFiles = ["index.html", "risk.html", "insights.html", "news.html", "faq.html", "contact.html", "insurance.html", "insurance-mine.html", "insurance-machinery.html", "insurance-transit.html", "bi-methodology.html", "blueprint.html", "blueprint-content.html", "blueprint-bi-assessment.html", "courses.html", "student-portal.html", "training-showcase.html"];
         
         // If URL is root, serve index.html
         if (url === "/") {

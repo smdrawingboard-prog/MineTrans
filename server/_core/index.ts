@@ -9,6 +9,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { refreshMiningNewsHandler } from "../handlers/refreshMiningNews";
+import { biAssessmentHandler } from "../handlers/biAssessment";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -40,6 +41,7 @@ async function startServer() {
   
   // Scheduled handlers (must be before tRPC middleware)
   app.post("/api/scheduled/refreshMiningNews", refreshMiningNewsHandler);
+  app.post("/api/bi-assessment/generate", biAssessmentHandler);
   
   // tRPC API
   app.use(
