@@ -13,7 +13,7 @@ export const courseData = {
         },
         {
           t: 'image' as const,
-          src: '/images/diagrams/bi-step1-understand-operation.png',
+          src: '/images/diagrams/bi-step1-understand-operation.jpg',
           alt: 'Diagram of the mining value chain from exploration and drilling through extraction, crushing, processing and export, each annotated with annual revenue',
           caption: 'Step 1 — documenting the value chain before anything else.',
         },
@@ -49,7 +49,7 @@ export const courseData = {
         },
         {
           t: 'image' as const,
-          src: '/images/diagrams/bi-step2-triggers.png',
+          src: '/images/diagrams/bi-step2-triggers.jpg',
           alt: 'Diagram of business interruption triggers — fire, explosion, flood, slope failure, tailings incident and power failure — around a central risk model',
           caption: 'Step 2 — understanding event likelihood and critical consequence.',
         },
@@ -110,7 +110,7 @@ export const courseData = {
         },
         {
           t: 'image' as const,
-          src: '/images/diagrams/bi-step5-gross-profit-at-risk.png',
+          src: '/images/diagrams/bi-step5-gross-profit-at-risk.jpg',
           alt: 'Diagram of the Gross Profit at Risk calculation: turnover minus deducted variable costs (royalties, freight, export charges, fuel) equals gross profit',
           caption: 'Step 5 — sizing sums insured against real operational exposure.',
         },
@@ -301,7 +301,7 @@ export const courseData = {
         },
         {
           t: 'image' as const,
-          src: '/images/diagrams/bi-step10-risk-mitigation.png',
+          src: '/images/diagrams/bi-step10-risk-mitigation.jpg',
           alt: 'Diagram of risk mitigation measures — system redundancy and spares, maintenance and emergency planning, infrastructure resilience and stockpiles — reducing business interruption exposure',
           caption: 'Step 10 — measures that materially reduce frequency and severity of losses.',
         },
@@ -502,7 +502,7 @@ export const courseData = {
         },
         {
           t: 'image' as const,
-          src: '/images/diagrams/tsf-underwriting-risk.png',
+          src: '/images/diagrams/tsf-underwriting-risk.jpg',
           alt: 'TSF underwriting risk diagram assessing four pillars — design methods, governance and monitoring, and consequence classification — feeding into an underwriting scorecard',
           caption: 'Assessment across four pillars of TSF risk — probability, severity, and quality of ongoing management.',
         },
