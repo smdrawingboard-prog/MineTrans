@@ -17,6 +17,8 @@ const AnalyticsDashboard = lazy(() => import("./pages/AnalyticsDashboard"));
 const CourseViewer = lazy(() => import("./pages/CourseViewer"));
 const QuizInterface = lazy(() => import("./pages/QuizInterface"));
 const CoursePlayer = lazy(() => import("./pages/CoursePlayer"));
+const CertificationLanding = lazy(() => import("./pages/CertificationLanding"));
+const CertificationAuth = lazy(() => import("./pages/CertificationAuth"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 function Router() {
@@ -25,6 +27,8 @@ function Router() {
       <Switch>
         <Route path={"/"} component={Home} />
 
+        <Route path={"/certification"} component={CertificationLanding} />
+        <Route path={"/certification/auth"} component={CertificationAuth} />
         <Route path={"/certification/admin/login"} component={AdminLogin} />
         <Route path={"/certification/admin/dashboard"} component={AdminDashboard} />
         <Route path={"/certification/dashboard"} component={StudentPortal} />
