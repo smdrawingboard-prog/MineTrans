@@ -43,6 +43,8 @@ button:disabled{opacity:.5;cursor:not-allowed}
 #output{margin-top:32px;display:none}
 #output.show{display:block}
 .result{padding:32px;background:var(--charcoal);border:1px solid var(--line);border-radius:4px}
+.result .source-note{font-family:var(--sf);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a898d;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.result .revenue-note{font-size:12.5px;color:var(--copper-bright);margin-bottom:18px;padding:10px 14px;background:rgba(173,106,61,.1);border-radius:4px}
 .result h2{font-family:var(--sf);font-weight:600;font-size:16px;letter-spacing:.02em;color:var(--copper-bright);margin:28px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
 .result h2:first-child{margin-top:0;padding-top:0;border-top:0}
 .result p{color:var(--platinum);font-size:14px;margin-bottom:12px}
@@ -55,10 +57,10 @@ button:disabled{opacity:.5;cursor:not-allowed}
 </head>
 <body>
 <div class="wrap">
- <a class="back" href="blueprint-content.html">&larr; Back to Blueprint</a>
- <div class="eyebrow">Internal Employee Tool</div>
+ <a class="back" href="blueprint.html">&larr; Back to Blueprint</a>
+ <div class="eyebrow">Blueprint Course Tool</div>
  <h1>BI Assessment Generator</h1>
- <p class="lede">Generate a worked example of a Business Interruption insurance assessment for a given commodity, structured against MineTrans's 12-step BI methodology. Use it as a training aid and reference — not as advice for a real client.</p>
+ <p class="lede">Generate a worked example of a Business Interruption insurance assessment for a given commodity, structured against MineTrans's 11-point BI assessment framework. Use it as a training aid and reference — not as advice for a real client.</p>
  <div class="disclaimer"><b>Illustrative only.</b> Every figure produced here — revenue, gross profit, indemnity periods, sums insured — is hypothetical and generated for training purposes. It is not real client data, and it does not constitute financial advice as defined in the FAIS Act. Do not share generated output with clients or prospects as-is.</div>
 
  <form id="bi-gen-form">
@@ -76,7 +78,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <div class="field">
    <label for="revenue">Illustrative Annual Revenue (optional)</label>
    <input type="text" id="revenue" placeholder="e.g. USD 400m">
-   <p class="hint">Leave blank to let the example choose a representative figure for this commodity.</p>
+   <p class="hint">Leave blank to use the example's representative figure for this commodity.</p>
   </div>
   <div class="actions">
    <button type="submit" id="bi-gen-btn">Generate Assessment</button>
@@ -87,6 +89,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
  <div id="output"><div class="result" id="bi-gen-result"></div></div>
 </div>
 
+<script src="bi-assessment-examples.js"></script>
 <script>
 (function(){
   if(sessionStorage.getItem('mt_blueprint_auth')!=='1'){
@@ -135,13 +138,35 @@ button:disabled{opacity:.5;cursor:not-allowed}
   var output = document.getElementById('output');
   var result = document.getElementById('bi-gen-result');
 
+  function renderResult(markdown, sourceLabel, revenueNote){
+    var html = '<div class="source-note">'+escapeHtml(sourceLabel)+'</div>';
+    if(revenueNote){
+      html += '<div class="revenue-note">'+escapeHtml(revenueNote)+'</div>';
+    }
+    html += renderMarkdown(markdown);
+    result.innerHTML = html;
+    output.className = 'show';
+  }
+
+  function showStaticExample(commodity, revenue){
+    var entry = window.MT_BI_EXAMPLES && window.MT_BI_EXAMPLES[commodity];
+    if(!entry){
+      status.className = 'status err';
+      status.textContent = 'No example is available for this commodity yet.';
+      return;
+    }
+    var note = revenue ? ('Figures below assume the example\'s representative base revenue. You requested an illustrative revenue of "'+revenue+'" — scale Gross Profit at risk and the recommended Sum Insured proportionally when presenting this example.') : '';
+    renderResult(entry, 'Reference worked example — MineTrans Blueprint training library', note);
+    status.textContent = '';
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var commodity = document.getElementById('commodity').value;
     var revenue = document.getElementById('revenue').value.trim();
     btn.disabled = true;
     status.className = 'status';
-    status.textContent = 'Generating — this can take up to a minute…';
+    status.textContent = 'Generating…';
     output.className = '';
 
     fetch('/api/bi-assessment/generate', {
@@ -153,17 +178,14 @@ button:disabled{opacity:.5;cursor:not-allowed}
     }).then(function(r){
       btn.disabled = false;
       if(!r.ok){
-        status.className = 'status err';
-        status.textContent = r.data.error || 'Failed to generate assessment.';
+        showStaticExample(commodity, revenue);
         return;
       }
       status.textContent = '';
-      result.innerHTML = renderMarkdown(r.data.assessment);
-      output.className = 'show';
-    }).catch(function(err){
+      renderResult(r.data.assessment, 'AI-generated for this session — training example only', null);
+    }).catch(function(){
       btn.disabled = false;
-      status.className = 'status err';
-      status.textContent = 'Request failed: '+err.message;
+      showStaticExample(commodity, revenue);
     });
   });
 })();

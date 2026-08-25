@@ -29,12 +29,17 @@ body{background:var(--onyx);color:var(--bone);font-family:var(--bf);min-height:1
 .gate .note{margin:16px 0 0;font-size:11px;color:#6b6a6e;line-height:1.5}
 .gate .back{display:block;margin-top:18px;font-family:var(--sf);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--platinum);text-decoration:none}
 .gate .back:hover{color:var(--bone)}
+.gate .menu{display:none}
+.gate .menu-item{display:block;padding:16px 18px;margin-bottom:12px;border:1px solid var(--line);background:var(--onyx);text-decoration:none;transition:border-color .2s}
+.gate .menu-item:hover{border-color:var(--copper)}
+.gate .menu-item .label{font-family:var(--sf);font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--bone);margin-bottom:4px}
+.gate .menu-item .desc{font-size:12px;color:var(--platinum);line-height:1.5}
 </style>
 </head>
 <body>
 <div class="gate">
   <div class="brand">MineTrans</div>
-  <h1>Employee Access &mdash; Blueprint</h1>
+  <h1 id="mt-gate-title">Employee Access &mdash; Blueprint</h1>
   <form id="mt-gate-form">
     <label for="mt-gate-user">Email</label>
     <input id="mt-gate-user" type="email" autocomplete="username" required>
@@ -43,24 +48,43 @@ body{background:var(--onyx);color:var(--bone);font-family:var(--bf);min-height:1
     <div class="err" id="mt-gate-err">Incorrect email or password.</div>
     <button type="submit">Sign In</button>
   </form>
+  <div class="menu" id="mt-gate-menu">
+    <a class="menu-item" href="blueprint-content.html">
+      <div class="label">Enter the Course</div>
+      <div class="desc">The Advanced Mining Insurance Blueprint course.</div>
+    </a>
+    <a class="menu-item" href="blueprint-bi-assessment.html">
+      <div class="label">BI Assessment Generator</div>
+      <div class="desc">Worked BI assessment examples by commodity — gold, diamonds, coal, chrome, PGMs, iron ore.</div>
+    </a>
+  </div>
   <p class="note">Internal MineTrans access only. Testing credentials &mdash; not for production use.</p>
   <a class="back" href="index.html">&larr; Back to MineTrans</a>
 </div>
 <script>
 (function(){
   var TEST_USER='roger@daginsure.co.za', TEST_PASS='admin';
-  var DEST='blueprint-content.html';
+  var form = document.getElementById('mt-gate-form');
+  var menu = document.getElementById('mt-gate-menu');
+  var title = document.getElementById('mt-gate-title');
+
+  function showMenu(){
+    form.style.display = 'none';
+    menu.style.display = 'block';
+    title.textContent = 'Blueprint';
+  }
+
   if(sessionStorage.getItem('mt_blueprint_auth')==='1'){
-    window.location.replace(DEST);
+    showMenu();
     return;
   }
-  document.getElementById('mt-gate-form').addEventListener('submit', function(e){
+  form.addEventListener('submit', function(e){
     e.preventDefault();
     var u=document.getElementById('mt-gate-user').value.trim().toLowerCase();
     var p=document.getElementById('mt-gate-pass').value;
     if(u===TEST_USER && p===TEST_PASS){
       sessionStorage.setItem('mt_blueprint_auth','1');
-      window.location.replace(DEST);
+      showMenu();
     } else {
       document.getElementById('mt-gate-err').style.display='block';
     }
