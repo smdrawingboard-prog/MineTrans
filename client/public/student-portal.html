@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Portal - MineTrans Courses</title>
   <style>
+/* Blueprint motif — faded background schematic + corner frame (site-wide decorative layer) */
+.mt-blueprint{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mt-blueprint .schematic{position:absolute;top:-6%;right:-8%;width:min(60vw,720px);height:min(60vw,720px);background:url(assets/blueprint-schematic.svg) no-repeat center/contain;opacity:.05}
+.mt-blueprint .corner{position:absolute;width:24px;height:24px;border:1px solid rgba(173,106,61,.35)}
+.mt-blueprint .corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.mt-blueprint .corner.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+.mt-blueprint .corner.bl{bottom:14px;left:14px;border-right:0;border-top:0}
+.mt-blueprint .corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+@media (max-width:640px){.mt-blueprint .corner{width:16px;height:16px}.mt-blueprint .schematic{opacity:.04}}
+
     .portal-container { display: flex; min-height: 100vh; background: #0a0a0b; }
     .portal-sidebar { width: 250px; background: #1a1a1f; border-right: 1px solid #ad6a3d; padding: 20px; }
     .portal-main { flex: 1; padding: 40px; }
@@ -27,6 +37,7 @@
   </style>
 </head>
 <body>
+<div class="mt-blueprint" aria-hidden="true"><div class="schematic"></div><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
   <div class="portal-container">
     <div class="portal-sidebar">
       <h3 style="color: #ad6a3d; margin-top: 0;">Student Portal</h3>

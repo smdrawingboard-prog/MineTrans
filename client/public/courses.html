@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mining Insurance Courses - MineTrans</title>
   <style>
+/* Blueprint motif — faded background schematic + corner frame (site-wide decorative layer) */
+.mt-blueprint{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mt-blueprint .schematic{position:absolute;top:-6%;right:-8%;width:min(60vw,720px);height:min(60vw,720px);background:url(assets/blueprint-schematic.svg) no-repeat center/contain;opacity:.05}
+.mt-blueprint .corner{position:absolute;width:24px;height:24px;border:1px solid rgba(173,106,61,.35)}
+.mt-blueprint .corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.mt-blueprint .corner.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+.mt-blueprint .corner.bl{bottom:14px;left:14px;border-right:0;border-top:0}
+.mt-blueprint .corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+@media (max-width:640px){.mt-blueprint .corner{width:16px;height:16px}.mt-blueprint .schematic{opacity:.04}}
+
     .course-hero { background: linear-gradient(135deg, #0a0a0b 0%, #1a1a1f 100%); padding: 60px 20px; text-align: center; }
     .course-hero h1 { font-size: 3em; color: #f7f5f1; margin: 20px 0; }
     .course-hero p { font-size: 1.2em; color: #ad6a3d; max-width: 600px; margin: 0 auto 30px; }
@@ -22,6 +32,7 @@
   </style>
 </head>
 <body>
+<div class="mt-blueprint" aria-hidden="true"><div class="schematic"></div><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
   <nav class="navbar">
     <div class="nav-container">
       <div class="navmark">
