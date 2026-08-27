@@ -82,13 +82,6 @@
   }
   h1 .accent{color:var(--copper)}
   .standfirst{font-size:1.05rem;color:var(--platinum);max-width:60ch;margin-bottom:8px}
-  .lf-cta-link{
-    display:inline-flex;align-items:center;gap:8px;margin-top:16px;
-    font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--copper-light);text-decoration:none;border-bottom:1px solid rgba(173,106,61,.4);padding-bottom:2px;
-    transition:color .2s,border-color .2s;
-  }
-  .lf-cta-link:hover{color:var(--bone);border-color:var(--bone)}
 
   /* Overview figure */
   .overview-figure{
@@ -150,13 +143,19 @@
   }
   .example .result{color:var(--copper-light);font-weight:700}
 
-  /* Lead capture */
-  #lead-form{
-    margin-top:64px;padding:36px 32px;background:var(--charcoal);
+  /* Lead capture / content gate */
+  #lead-gate{
+    margin-top:32px;padding:36px 32px;background:var(--charcoal);
     border:1px solid var(--rule);border-top:2px solid var(--copper);border-radius:4px;
   }
-  #lead-form h2{border-bottom:none;padding-bottom:0;margin-bottom:10px}
-  #lead-form > p{color:var(--platinum);max-width:60ch;margin-bottom:22px}
+  #lead-gate h2{border-bottom:none;padding-bottom:0;margin-bottom:10px}
+  #lead-gate > p{color:var(--platinum);max-width:60ch;margin-bottom:22px}
+  #lead-gate.unlocked{opacity:.55;pointer-events:none}
+  #gated-content[hidden]{display:none}
+  @media print{
+    #lead-gate{display:none !important}
+    #gated-content[hidden]{display:block !important}
+  }
   .lf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-bottom:16px}
   @media(max-width:560px){.lf-row{grid-template-columns:1fr}}
   .lf-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
@@ -225,7 +224,45 @@
 
   <h1>A Practical Methodology for <span class="accent">Business Interruption</span> Insurance</h1>
   <p class="standfirst">A step-by-step approach to identifying a mine's revenue-generating processes, quantifying potential financial losses from disruption, and determining an appropriate insurance limit and indemnity period.</p>
-  <p class="no-print"><a class="lf-cta-link" href="#lead-form">Request a practical BI review for your operation &rarr;</a></p>
+
+  <section id="lead-gate">
+    <h2>Unlock the Full 12-Step Guide</h2>
+    <p>Enter your details and a MineTrans advisor will apply this methodology to your operation &mdash; no obligation. Submitting unlocks the complete guide below.</p>
+    <form id="biLeadForm" novalidate>
+      <div class="lf-row">
+        <div class="lf-field">
+          <label for="lf-name">Full name *</label>
+          <input id="lf-name" name="contactName" type="text" autocomplete="name" required>
+        </div>
+        <div class="lf-field">
+          <label for="lf-company">Company / mine name *</label>
+          <input id="lf-company" name="companyName" type="text" autocomplete="organization" required>
+        </div>
+      </div>
+      <div class="lf-row">
+        <div class="lf-field">
+          <label for="lf-email">Email *</label>
+          <input id="lf-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="lf-field">
+          <label for="lf-phone">Phone</label>
+          <input id="lf-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+      </div>
+      <div class="lf-field">
+        <label for="lf-message">Anything else MineTrans should know?</label>
+        <textarea id="lf-message" name="message" rows="3" placeholder="Commodity, site location, key risks, current insurer..."></textarea>
+      </div>
+      <label class="lf-consent" for="lf-popia">
+        <input id="lf-popia" name="popiaConsent" type="checkbox" required>
+        <span>I consent to MineTrans, a division of Donaldson Advisory Group, processing my details to respond to this enquiry, in line with POPIA. I may opt out at any time.</span>
+      </label>
+      <button type="submit" id="lf-submit">Unlock the Guide</button>
+      <p class="lf-status" id="lf-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <div id="gated-content" hidden>
 
   <figure class="overview-figure">
    <img src="images/diagrams/bi-methodology.jpg" alt="Overview diagram of the BI methodology: value chain and assets (SAG mill, crushers, tertiary crusher, mills, primary crusher, maximum foreseeable loss) feeding into quantification and sum insured (gross profit at risk, increased cost of working, formula-based sizing)">
@@ -405,55 +442,33 @@
     <p>This methodology aligns with common practices used by mining companies, insurers, brokers and risk engineers to establish appropriate Business Interruption insurance limits and support underwriting decisions.</p>
   </section>
 
-  <section id="lead-form">
-    <h2>Get a Practical BI Review for Your Operation</h2>
-    <p>Tell us a little about your operation and a MineTrans advisor will apply this methodology to your numbers &mdash; no obligation.</p>
-    <form id="biLeadForm" novalidate>
-      <div class="lf-row">
-        <div class="lf-field">
-          <label for="lf-name">Full name *</label>
-          <input id="lf-name" name="contactName" type="text" autocomplete="name" required>
-        </div>
-        <div class="lf-field">
-          <label for="lf-company">Company / mine name *</label>
-          <input id="lf-company" name="companyName" type="text" autocomplete="organization" required>
-        </div>
-      </div>
-      <div class="lf-row">
-        <div class="lf-field">
-          <label for="lf-email">Email *</label>
-          <input id="lf-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="lf-field">
-          <label for="lf-phone">Phone</label>
-          <input id="lf-phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-      </div>
-      <div class="lf-field">
-        <label for="lf-message">Anything else MineTrans should know?</label>
-        <textarea id="lf-message" name="message" rows="3" placeholder="Commodity, site location, key risks, current insurer..."></textarea>
-      </div>
-      <label class="lf-consent" for="lf-popia">
-        <input id="lf-popia" name="popiaConsent" type="checkbox" required>
-        <span>I consent to MineTrans, a division of Donaldson Advisory Group, processing my details to respond to this enquiry, in line with POPIA. I may opt out at any time.</span>
-      </label>
-      <button type="submit" id="lf-submit">Request my BI review</button>
-      <p class="lf-status" id="lf-status" role="status" aria-live="polite"></p>
-    </form>
-  </section>
-
   <footer>
     <div class="legal">MineTrans is a division of Donaldson Advisory Group. This document is illustrative and for discussion purposes only.</div>
     <div class="cta"><a href="https://www.minetrans.co.za">Schedule a risk review &middot; minetrans.co.za</a></div>
   </footer>
 
+  </div>
+
 </div>
 <script>
 (function(){
+  var GATE_KEY = 'mt_bi_lead_unlocked';
+  var gate = document.getElementById('lead-gate');
+  var content = document.getElementById('gated-content');
   var form = document.getElementById('biLeadForm');
-  if(!form) return;
+  if(!gate || !content || !form) return;
+
   var submitBtn = document.getElementById('lf-submit');
   var status = document.getElementById('lf-status');
+
+  function unlock(){
+    content.hidden = false;
+    gate.classList.add('unlocked');
+  }
+
+  try {
+    if (sessionStorage.getItem(GATE_KEY) === '1') unlock();
+  } catch(e){}
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -476,32 +491,30 @@
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
+    submitBtn.textContent = 'Unlocking...';
 
+    // Best-effort lead capture: this only reaches a server when the site is
+    // deployed with the Express/API backend (see server/handlers/
+    // biMethodologyLead.ts). On static hosting (e.g. GitHub Pages) this call
+    // has nothing to reach and fails silently — the gate still unlocks,
+    // since the on-page value exchange (details for the guide) already
+    // happened the moment the visitor submitted valid, consenting details.
     fetch('/api/leads/bi-methodology', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-    })
-      .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
-      .then(function(result){
-        if(result.ok && result.data.success){
-          status.textContent = result.data.message || 'Thank you — a MineTrans advisor will be in touch shortly.';
-          status.setAttribute('data-state', 'success');
-          form.reset();
-        } else {
-          status.textContent = (result.data && result.data.message) || 'Something went wrong. Please try again or email us directly.';
-          status.setAttribute('data-state', 'error');
-        }
-      })
-      .catch(function(){
-        status.textContent = 'Something went wrong. Please try again or email us directly.';
-        status.setAttribute('data-state', 'error');
-      })
-      .finally(function(){
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Request my BI review';
-      });
+    }).catch(function(){});
+
+    try { sessionStorage.setItem(GATE_KEY, '1'); } catch(e){}
+
+    status.textContent = 'Thank you — unlocking the guide...';
+    status.setAttribute('data-state', 'success');
+    submitBtn.textContent = 'Unlocked';
+
+    setTimeout(function(){
+      unlock();
+      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 350);
   });
 })();
 </script>
