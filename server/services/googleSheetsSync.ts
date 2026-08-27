@@ -73,8 +73,8 @@ function parseServiceAccountCredentials(rawCredentials: string): ServiceAccountC
   return {
     ...parsed,
     client_email: parsed.client_email,
-    // JSON.parse normally expands \\n. This also handles platforms that
-    // preserve the escaped sequence when storing a multiline private key.
+    // JSON.parse normally expands escaped newlines. This also handles
+    // platforms that preserve the literal sequence in a multiline key.
     private_key: parsed.private_key.replace(/\\n/g, "\n"),
   };
 }
