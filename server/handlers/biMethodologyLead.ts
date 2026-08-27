@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import { sendLeadNotificationEmail } from "../services/emailService";
-import { appendBIReviewLead } from "../services/googleSheetsSync";
+import { appendBIMethodologyLead } from "../services/googleSheetsSync";
 
 /**
  * Lean lead-capture endpoint for the public BI Methodology page
@@ -17,7 +17,7 @@ const requestSchema = z.object({
   phone: z.string().trim().max(60).optional().default(""),
   message: z.string().trim().max(2000).optional().default(""),
   popiaConsent: z.literal(true, {
-    errorMap: () => ({ message: "POPIA consent is required" }),
+    message: "POPIA consent is required",
   }),
 });
 
@@ -32,9 +32,28 @@ export async function biMethodologyLeadHandler(req: Request, res: Response) {
     return;
   }
 
-  const { contactName, companyName, email, phone, message } = parsed.data;
+  const { contactName, companyName, email, phone, message, popiaConsent } = parsed.data;
+  const submittedAt = new Date().toISOString();
 
-  const lead = {
+  const stored = await appendBIMethodologyLead({
+    submittedAt,
+    contactName,
+    companyName,
+    email,
+    phone,
+    operationDetails: message,
+    popiaConsent,
+  });
+
+  if (!stored) {
+    res.status(502).json({
+      success: false,
+      message: "We could not record your details. Please try again or email us directly.",
+    });
+    return;
+  }
+
+  const notificationLead = {
     companyName,
     contactName,
     email,
@@ -53,20 +72,11 @@ export async function biMethodologyLeadHandler(req: Request, res: Response) {
     message: message
       ? `[BI Methodology page enquiry] ${message}`
       : "[BI Methodology page enquiry]",
-    submittedAt: new Date().toISOString(),
+    submittedAt,
   };
 
-  // Google Sheets is a best-effort side-channel: log the lead there without
-  // letting a Sheets outage or missing config fail the submission — email
-  // notification remains the source of truth.
-  const sheetsSync = appendBIReviewLead(lead).catch((error) => {
-    console.error("[Leads] Google Sheets sync failed for BI methodology lead:", error);
-    return false;
-  });
-
   try {
-    await sendLeadNotificationEmail(lead);
-    await sheetsSync;
+    await sendLeadNotificationEmail(notificationLead);
     res.json({
       success: true,
       message: "Thank you — a MineTrans advisor will be in touch shortly.",
