@@ -153,7 +153,7 @@
   /* Lead capture */
   #lead-form{
     margin-top:64px;padding:36px 32px;background:var(--charcoal);
-    border:1px solid var(--rule);border-top:2px solid var(--copper);border-radius:6px;
+    border:1px solid var(--rule);border-top:2px solid var(--copper);border-radius:4px;
   }
   #lead-form h2{border-bottom:none;padding-bottom:0;margin-bottom:10px}
   #lead-form > p{color:var(--platinum);max-width:60ch;margin-bottom:22px}
@@ -166,7 +166,7 @@
     color:var(--platinum);text-transform:uppercase;
   }
   .lf-field input,.lf-field textarea{
-    background:var(--onyx);border:1px solid var(--rule);border-radius:3px;color:var(--bone);
+    background:var(--onyx);border:1px solid var(--rule);border-radius:2px;color:var(--bone);
     font-family:'Inter',sans-serif;font-size:.95rem;padding:11px 13px;line-height:1.5;
   }
   .lf-field input:focus,.lf-field textarea:focus{outline:none;border-color:var(--copper)}
@@ -178,14 +178,14 @@
   .lf-consent span{font-size:.82rem;color:var(--platinum);line-height:1.55}
   #lf-submit{
     font-family:'Jost',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
-    background:var(--copper);color:var(--onyx);border:0;border-radius:3px;padding:13px 26px;cursor:pointer;
+    background:var(--copper);color:var(--onyx);border:0;border-radius:2px;padding:13px 26px;cursor:pointer;
     transition:background .2s;
   }
   #lf-submit:hover{background:var(--copper-light)}
   #lf-submit:disabled{opacity:.6;cursor:not-allowed}
   .lf-status{margin-top:14px;font-size:.85rem}
-  .lf-status[data-state="success"]{color:#7dbb7d}
-  .lf-status[data-state="error"]{color:#e07a7a}
+  .lf-status[data-state="success"]{color:var(--copper-light)}
+  .lf-status[data-state="error"]{color:#e04b4b}
 
   /* Footer / disclaimer */
   footer{
