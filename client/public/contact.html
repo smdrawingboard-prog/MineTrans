@@ -545,31 +545,43 @@ const bio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)retur
  e.target.querySelectorAll('.bfill').forEach((f,i)=>setTimeout(()=>{f.style.width=f.dataset.w},i*180))}),{threshold:.4});
 document.querySelectorAll('.barchart').forEach(el=>bio.observe(el));
 
-/* ---------- BI REVIEW FORM ----------
-   Set SHEET_ENDPOINT to a Google Form "formResponse" URL (or other webhook)
-   once one exists, so submissions land in a Google Sheet with zero backend.
-   Until then, submissions are sent as a pre-filled email to jp@daginsure.co.za. */
+/* ---------- BI REVIEW FORM ---------- */
 (function(){
   const form=document.getElementById('bi-review-form');
   if(!form)return;
-  const SHEET_ENDPOINT='';
   const msg=document.getElementById('bf-msg');
+  const button=form.querySelector('button[type="submit"]');
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     const data=Object.fromEntries(new FormData(form).entries());
-    if(SHEET_ENDPOINT){
-      try{
-        await fetch(SHEET_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)});
-        msg.className='fmsg show ok';
-        msg.textContent='Thank you — your request has been submitted. We will contact you within 24 hours.';
-        form.reset();
-        return;
-      }catch(err){ /* fall through to email */ }
+    const originalLabel=button.textContent;
+    button.disabled=true;
+    button.textContent='Submitting…';
+    msg.className='fmsg';
+
+    try{
+      const response=await fetch('/api/trpc/leads.submitBIReview',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({json:data})
+      });
+      const payload=await response.json();
+      const result=payload?.result?.data?.json||payload?.result?.data;
+
+      if(!response.ok||!result?.success){
+        throw new Error(result?.message||'Submission failed');
+      }
+
+      msg.className='fmsg show ok';
+      msg.textContent=result.message;
+      form.reset();
+    }catch(err){
+      msg.className='fmsg show err';
+      msg.textContent=err?.message||'Your request could not be submitted. Please email jp@daginsure.co.za.';
+    }finally{
+      button.disabled=false;
+      button.textContent=originalLabel;
     }
-    const body=Object.entries(data).map(([k,v])=>k+': '+v).join('\n');
-    window.location.href='mailto:jp@daginsure.co.za?subject='+encodeURIComponent('BI Review Request - '+(data.companyName||''))+'&body='+encodeURIComponent(body);
-    msg.className='fmsg show ok';
-    msg.textContent='Opening your email client to send the request to jp@daginsure.co.za…';
   });
 })();
 </script>
