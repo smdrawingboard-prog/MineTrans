@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
+import { Award } from "lucide-react";
 
 interface Student {
   id: number;
@@ -266,7 +267,7 @@ export default function StudentPortal() {
 
             <Card className="bg-slate-800 border-amber-600/30 p-8 text-center">
               <div className="mb-4">
-                <div className="text-5xl mb-4">📜</div>
+                <Award className="w-12 h-12 mx-auto mb-4 text-amber-600" strokeWidth={1.5} />
                 <h3 className="text-xl font-bold text-white mb-2">No Certificates Yet</h3>
                 <p className="text-slate-400 mb-6">
                   Complete a course and pass the final exam to earn your certificate.
