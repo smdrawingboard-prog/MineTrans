@@ -9,6 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* Blueprint motif — faded background schematic + corner frame (site-wide decorative layer) */
+.mt-blueprint{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mt-blueprint .schematic{position:absolute;top:-6%;right:-8%;width:min(60vw,720px);height:min(60vw,720px);background:url(assets/blueprint-schematic.svg) no-repeat center/contain;opacity:.05}
+.mt-blueprint .corner{position:absolute;width:24px;height:24px;border:1px solid rgba(173,106,61,.35)}
+.mt-blueprint .corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.mt-blueprint .corner.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+.mt-blueprint .corner.bl{bottom:14px;left:14px;border-right:0;border-top:0}
+.mt-blueprint .corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+@media (max-width:640px){.mt-blueprint .corner{width:16px;height:16px}.mt-blueprint .schematic{opacity:.04}}
+
 :root{
   --onyx:#0A0A0B; --charcoal:#1E1D20; --graphite:#3A383D; --platinum:#C9CACE;
   --copper:#AD6A3D; --copper-bright:#C9854F; --bone:#F7F5F1;
@@ -45,8 +55,14 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .result{padding:32px;background:var(--charcoal);border:1px solid var(--line);border-radius:4px}
 .result .source-note{font-family:var(--sf);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a898d;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
 .result .revenue-note{font-size:12.5px;color:var(--copper-bright);margin-bottom:18px;padding:10px 14px;background:rgba(173,106,61,.1);border-radius:4px}
-.result h2{font-family:var(--sf);font-weight:600;font-size:16px;letter-spacing:.02em;color:var(--copper-bright);margin:28px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
-.result h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.result h2{position:relative;font-family:var(--sf);font-weight:600;font-size:16px;letter-spacing:.02em;color:var(--copper-bright);margin:32px 0 14px;padding-top:26px}
+.result h2::before{content:'';position:absolute;top:0;left:0;right:0;height:9px;
+  background:
+    linear-gradient(90deg,rgba(173,106,61,.4) 0 1px,transparent 1px) 0 0/100% 1px no-repeat,
+    linear-gradient(rgba(173,106,61,.4) 0 1px,transparent 1px) 0 0/1px 9px no-repeat,
+    linear-gradient(rgba(173,106,61,.4) 0 1px,transparent 1px) 100% 0/1px 9px no-repeat}
+.result h2:first-child{margin-top:0;padding-top:0}
+.result h2:first-child::before{display:none}
 .result p{color:var(--platinum);font-size:14px;margin-bottom:12px}
 .result strong{color:var(--bone);font-weight:500}
 .result ul,.result ol{margin:0 0 12px 20px;color:var(--platinum);font-size:14px}
@@ -56,6 +72,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 </style>
 </head>
 <body>
+<div class="mt-blueprint" aria-hidden="true"><div class="schematic"></div><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
 <div class="wrap">
  <a class="back" href="blueprint.html">&larr; Back to Blueprint</a>
  <div class="eyebrow">Blueprint Course Tool</div>

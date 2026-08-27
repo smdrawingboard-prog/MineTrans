@@ -57,6 +57,15 @@
         ],
         "createdAt": "2026-08-24T15:46:45.291Z",
         "reason": "User confirmed: same 2px copper border-left legacy accent pattern already approved for insurance.html, insurance-mine.html, training-showcase.html"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "client/public/blueprint-bi-assessment.html"
+        ],
+        "createdAt": "2026-08-26T11:26:34.244Z",
+        "reason": "User confirmed: intentional blueprint page-break divider (hairline + corner ticks, non-repeating), not a tiled grid background"
       }
     ]
   }

@@ -9,6 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* Blueprint motif — faded background schematic + corner frame (site-wide decorative layer) */
+.mt-blueprint{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mt-blueprint .schematic{position:absolute;top:-6%;right:-8%;width:min(60vw,720px);height:min(60vw,720px);background:url(assets/blueprint-schematic.svg) no-repeat center/contain;opacity:.05}
+.mt-blueprint .corner{position:absolute;width:24px;height:24px;border:1px solid rgba(173,106,61,.35)}
+.mt-blueprint .corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.mt-blueprint .corner.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+.mt-blueprint .corner.bl{bottom:14px;left:14px;border-right:0;border-top:0}
+.mt-blueprint .corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+@media (max-width:640px){.mt-blueprint .corner{width:16px;height:16px}.mt-blueprint .schematic{opacity:.04}}
+
 :root{
   --onyx:#0A0A0B; --graphite:#3A383D; --charcoal:#1E1D20; --platinum:#C9CACE;
   --copper:#AD6A3D; --copper-bright:#C9854F; --bone:#F7F5F1;
@@ -107,6 +117,7 @@ footer{border-top:1px solid var(--line);padding:clamp(40px,8vh,80px) 0;margin-to
 </style>
 </head>
 <body>
+<div class="mt-blueprint" aria-hidden="true"><div class="schematic"></div><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
 <div id="bar"></div>
 <nav>
  <a class="navmark" href="index.html"><img class="mk" src="images/logo/mt-badge.png" alt="MineTrans">MineTrans</a>
