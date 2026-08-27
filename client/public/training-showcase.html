@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MineTrans Advanced Mining Insurance Training Course</title>
     <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -22,10 +25,15 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--onyx);
             color: var(--platinum);
             line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .logo, .cta-button, .stat-card .number, .stat-card .label,
+        .part-card h3, .part-card .number, .feature-card h4, .outcome-item h4 {
+            font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* Navigation */
@@ -206,7 +214,7 @@
         .part-card {
             background-color: var(--graphite);
             border: 2px solid var(--graphite2);
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 2.5rem;
             transition: all 0.3s ease;
         }
@@ -290,7 +298,7 @@
         .feature-card {
             background-color: var(--onyx);
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 4px;
             border: 1px solid var(--graphite2);
             transition: all 0.3s ease;
         }
@@ -301,8 +309,17 @@
         }
 
         .feature-icon {
-            font-size: 2.5rem;
             margin-bottom: 1rem;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--copper);
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .feature-card h4 {
@@ -337,7 +354,7 @@
         .outcome-item {
             background-color: var(--graphite);
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 4px;
             border: 1px solid var(--graphite2);
             border-top: 2px solid var(--copper);
         }
@@ -520,37 +537,37 @@
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📚</div>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.67 4.67 4 5.5 4H11a2 2 0 0 1 2 2v14a1.5 1.5 0 0 0-1.5-1.5H4V5.5Z"/><path d="M20 5.5c0-.83-.67-1.5-1.5-1.5H13a2 2 0 0 0-2 2v14a1.5 1.5 0 0 1 1.5-1.5H20V5.5Z"/></svg></div>
                     <h4>Comprehensive Content</h4>
                     <p>30 detailed modules covering every aspect of mining insurance underwriting with real-world examples.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
                     <h4>Interactive Quizzes</h4>
                     <p>Test your knowledge with section quizzes featuring multiple choice, calculations, and true/false questions.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/><path d="M4 20h16"/></svg></div>
                     <h4>Progress Tracking</h4>
                     <p>Monitor your learning progress with detailed dashboards showing completion rates and scores.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 5H4a3 3 0 0 0 3 3"/><path d="M17 5h3a3 3 0 0 1-3 3"/><path d="M12 14v3"/><path d="M9 20h6"/><path d="M10 17h4v3h-4z"/></svg></div>
                     <h4>Certification</h4>
                     <p>Earn a digital certificate upon completion, downloadable and shareable with your network.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">⏱️</div>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg></div>
                     <h4>Self-Paced Learning</h4>
                     <p>Study at your own pace with 24/7 access to all course materials and resources.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="12" height="16" rx="1.5"/><path d="M5 6.5h6"/><rect x="16" y="9" width="6" height="10" rx="1"/></svg></div>
                     <h4>Responsive Design</h4>
                     <p>Access the course on any device - desktop, tablet, or mobile for seamless learning.</p>
                 </div>
