@@ -46,18 +46,19 @@ export default function CriticalFailureAnimation({
       />
 
       <div
+        style={{ fontFamily: "'Inter', sans-serif" }}
         className={`relative text-center px-6 transition-all duration-500 ${
           stage === "resolve" ? "opacity-0 scale-95" : "opacity-100 scale-100 cf-shake"
         }`}
       >
         <div className="text-red-500 text-7xl mb-4 cf-pulse">⚠</div>
-        <p className="font-mono tracking-[0.4em] text-red-500 text-sm mb-2">
+        <p className="tracking-[0.4em] text-red-500 text-sm mb-2">
           MINETRANS RISK SIMULATION
         </p>
         <h2 className="text-4xl md:text-5xl font-extrabold text-red-500 uppercase tracking-wide cf-pulse">
           Critical Failure
         </h2>
-        <p className="mt-4 text-red-300 font-mono text-sm max-w-md mx-auto">
+        <p className="mt-4 text-red-300 text-sm max-w-md mx-auto">
           Insufficient risk assessment detected. Review the methodology before
           re-attempting.
         </p>

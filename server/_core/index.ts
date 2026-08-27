@@ -9,6 +9,7 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { refreshMiningNewsHandler } from "../handlers/refreshMiningNews";
 import { biAssessmentHandler } from "../handlers/biAssessment";
+import { biMethodologyLeadHandler } from "../handlers/biMethodologyLead";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -40,6 +41,7 @@ async function startServer() {
   // Scheduled handlers (must be before tRPC middleware)
   app.post("/api/scheduled/refreshMiningNews", refreshMiningNewsHandler);
   app.post("/api/bi-assessment/generate", biAssessmentHandler);
+  app.post("/api/leads/bi-methodology", biMethodologyLeadHandler);
   
   // tRPC API
   app.use(
