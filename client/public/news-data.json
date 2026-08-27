@@ -1,20 +1,12 @@
 {
-  "updatedAt": "2026-08-26T19:53:17.856Z",
+  "updatedAt": "2026-08-27T08:29:42.146Z",
   "articles": [
-    {
-      "headline": "African Mining News",
-      "excerpt": "",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/",
-      "publishedAt": "2026-08-26T19:53:17.819Z",
-      "category": "General"
-    },
     {
       "headline": "Celebrating women who shape Africa&#8217;s environmental future",
       "excerpt": "Earlier this year, more than 60 professionals from across the SRK Consulting global network gathered in Sandton at the Contaminated Land Environmental Rehabilitation (CLER) Workshop to exchange specialist knowledge on&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/celebrating-women-who-shape-africas-environmental-future/",
-      "publishedAt": "2026-08-26T19:53:17.819Z",
+      "publishedAt": "2026-08-27T08:29:39.862Z",
       "category": "Tailings Risk"
     },
     {
@@ -22,7 +14,7 @@
       "excerpt": "Over more than 20 years in mining, I have learnt that succeeding in this industry is not about becoming ‘one of the boys’. It is about bringing your own female&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/women-in-mining-bringing-a-different-perspective-to-address-complex-client-needs-at-bme/",
-      "publishedAt": "2026-08-26T19:53:17.819Z",
+      "publishedAt": "2026-08-27T08:29:39.862Z",
       "category": "General"
     },
     {
@@ -30,7 +22,7 @@
       "excerpt": "Namibia&#8217;s mining industry continues to attract investment across uranium, gold, copper and other critical minerals, positioning the sector for another period of growth. As mining operations expand, however, success will&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/minerals/water-stewardship-and-integrated-mining-solutions-for-namibias-next-phase-of-growth/",
-      "publishedAt": "2026-08-26T19:53:17.819Z",
+      "publishedAt": "2026-08-27T08:29:39.862Z",
       "category": "Commodity Prices"
     },
     {
@@ -38,15 +30,23 @@
       "excerpt": "In many mine-wide water balances, the tailings storage facility (TSF) still appears as a single line item: a convenient ‘black box’ where water goes in, something comes out and the&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/from-black-box-to-blue-box-in-tailings-storage-facility-water-management/",
-      "publishedAt": "2026-08-26T19:53:17.819Z",
+      "publishedAt": "2026-08-27T08:29:39.862Z",
       "category": "Tailings Risk"
+    },
+    {
+      "headline": "African Mining News",
+      "excerpt": "",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/",
+      "publishedAt": "2026-08-27T08:29:39.861Z",
+      "category": "General"
     },
     {
       "headline": "Clear Search",
       "excerpt": "Sponsored by&nbsp;&nbsp;&nbsp;",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.comjavascript:clearSearch();",
-      "publishedAt": "2026-08-26T19:53:15.956Z",
+      "publishedAt": "2026-08-27T08:29:38.557Z",
       "category": "General"
     },
     {
@@ -54,7 +54,7 @@
       "excerpt": "Note: When you select a default region you will be directed to the MiningWeekly.com home page of your choice whenever you visit miningweekly.com. This setting is controlled by cookies and should your cookies be re-set you will then be directed to the regional edition associated with the geographic l",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.comjavascript:void(0);",
-      "publishedAt": "2026-08-26T19:53:15.956Z",
+      "publishedAt": "2026-08-27T08:29:38.557Z",
       "category": "General"
     },
     {
@@ -62,7 +62,7 @@
       "excerpt": "sponsored by&nbsp;&nbsp;",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/cookie-policy",
-      "publishedAt": "2026-08-26T19:53:15.956Z",
+      "publishedAt": "2026-08-27T08:29:38.557Z",
       "category": "Regulation"
     },
     {
@@ -70,15 +70,15 @@
       "excerpt": "Research Reports",
       "publication": "Mining Weekly",
       "sourceUrl": "https://www.miningweekly.com/page/africa-edition/page:1",
-      "publishedAt": "2026-08-26T19:53:15.956Z",
+      "publishedAt": "2026-08-27T08:29:38.557Z",
       "category": "General"
     },
     {
-      "headline": "Thermoplastic Pipeline Systems",
-      "excerpt": "Astore Keymak is one of South Africa’s leading suppliers of high-quality Thermoplastic Pipeline Systems, with branches in the major provinces.",
+      "headline": "Materials Handling",
+      "excerpt": "Mitsubishi Chemical Advanced Materials South Africa (Pty) Ltd is a leading manufacturer of high-performance engineering plastics for the mining...",
       "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6474",
-      "publishedAt": "2026-08-26T19:53:15.956Z",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6427",
+      "publishedAt": "2026-08-27T08:29:38.557Z",
       "category": "General"
     }
   ]
