@@ -44,7 +44,7 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    background:var(--onyx);
+    background:linear-gradient(rgba(10,10,11,.94),rgba(10,10,11,.94)),url('images/blueprints/method-of-mining-coal.jpg') center top/cover no-repeat fixed;
     color:var(--platinum);
     font-family:'Inter',sans-serif;
     font-size:16px;
@@ -52,6 +52,7 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
+  @media(max-width:900px){body{background-attachment:scroll}}
   .page{max-width:860px;margin:0 auto;padding:56px 28px 72px}
 
   /* Masthead */
