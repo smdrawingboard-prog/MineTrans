@@ -46,17 +46,16 @@ export const leadsRouter = router({
         submittedAt: new Date().toISOString(),
       };
 
-      // Google Sheets is a best-effort side-channel: log a lead there
-      // without letting a Sheets outage or missing config fail the
-      // submission — email notification remains the source of truth.
-      const sheetsSync = appendBIReviewLead(lead).catch((error) => {
-        console.error("[Leads] Google Sheets sync failed for BI review lead:", error);
-        return false;
-      });
-
       try {
+        const stored = await appendBIReviewLead(lead);
+        if (!stored) {
+          return {
+            success: false,
+            message: "Your request could not be saved. Please try again or email jp@daginsure.co.za.",
+          };
+        }
+
         await sendLeadNotificationEmail(lead);
-        await sheetsSync;
 
         return {
           success: true,
