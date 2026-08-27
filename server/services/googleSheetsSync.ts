@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import type { sheets_v4 } from "googleapis";
 import * as certDb from "./certificationDb";
 
 /**
@@ -23,7 +24,18 @@ interface GoogleSheetsConfig {
 }
 
 let sheetsClient: any = null;
-let leadsSheetsClient: any = null;
+let leadsSheetsClient: sheets_v4.Sheets | null = null;
+
+const LEADS_RANGE = "Leads!A:Q";
+const SHEETS_REQUEST_TIMEOUT_MS = 10_000;
+
+interface ServiceAccountCredentials {
+  client_email: string;
+  private_key: string;
+  project_id?: string;
+  token_uri?: string;
+  type?: string;
+}
 
 export interface BIReviewLead {
   companyName: string;
@@ -45,82 +57,159 @@ export interface BIReviewLead {
   submittedAt: string;
 }
 
-/**
- * Lazily builds a Sheets client from GOOGLE_SHEETS_CREDENTIALS (a service
- * account JSON string), independent of the admin-triggered sync client
- * above, so public lead submissions can log to Sheets without an admin
- * having called initializeGoogleSheets first.
- */
-function getLeadsSheetsClient() {
+function parseServiceAccountCredentials(rawCredentials: string): ServiceAccountCredentials {
+  let parsed: Partial<ServiceAccountCredentials>;
+
+  try {
+    parsed = JSON.parse(rawCredentials) as Partial<ServiceAccountCredentials>;
+  } catch {
+    throw new Error("GOOGLE_SHEETS_CREDENTIALS is not valid JSON");
+  }
+
+  if (!parsed.client_email || !parsed.private_key) {
+    throw new Error("GOOGLE_SHEETS_CREDENTIALS is missing client_email or private_key");
+  }
+
+  return {
+    ...parsed,
+    client_email: parsed.client_email,
+    // JSON.parse normally expands \\n. This also handles platforms that
+    // preserve the escaped sequence when storing a multiline private key.
+    private_key: parsed.private_key.replace(/\\n/g, "\n"),
+  };
+}
+
+function getLeadsSheetsClient(): sheets_v4.Sheets | null {
   if (leadsSheetsClient) return leadsSheetsClient;
 
   const rawCredentials = process.env.GOOGLE_SHEETS_CREDENTIALS;
-  if (!rawCredentials) return null;
+  if (!rawCredentials) {
+    console.error("[Google Sheets] GOOGLE_SHEETS_CREDENTIALS is not configured");
+    return null;
+  }
 
   try {
-    const credentials = JSON.parse(rawCredentials);
+    const credentials = parseServiceAccountCredentials(rawCredentials);
     const auth = new google.auth.GoogleAuth({
       credentials,
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
+
     leadsSheetsClient = google.sheets({ version: "v4", auth });
     return leadsSheetsClient;
-  } catch (error) {
-    console.error("[Google Sheets] Failed to initialize leads client:", error);
+  } catch {
+    // Do not log the raw credentials or the underlying parser/auth object.
+    console.error("[Google Sheets] Service-account credentials could not be initialized");
     return null;
   }
 }
 
+function getGoogleApiStatus(error: unknown): number | undefined {
+  if (!error || typeof error !== "object") return undefined;
+
+  const candidate = error as {
+    code?: string | number;
+    response?: { status?: number };
+  };
+
+  if (typeof candidate.response?.status === "number") {
+    return candidate.response.status;
+  }
+
+  const numericCode = Number(candidate.code);
+  return Number.isFinite(numericCode) ? numericCode : undefined;
+}
+
+function getGoogleApiCode(error: unknown): string | undefined {
+  if (!error || typeof error !== "object") return undefined;
+  const code = (error as { code?: unknown }).code;
+  return typeof code === "string" || typeof code === "number" ? String(code) : undefined;
+}
+
+function toLeadRow(lead: BIReviewLead): string[] {
+  const row = [
+    lead.submittedAt,
+    lead.companyName,
+    lead.contactName,
+    lead.email,
+    lead.phone,
+    lead.position,
+    lead.miningSector,
+    lead.riskArea,
+    lead.siteLocation,
+    lead.annualTurnover,
+    lead.biSumInsured,
+    lead.indemnityPeriod,
+    lead.keyFacility,
+    lead.previousClaims,
+    lead.currentInsurer,
+    lead.siteVisitAvailability,
+    lead.message,
+  ].map((value) => String(value ?? ""));
+
+  if (row.length !== 17) {
+    throw new Error("BI Review row must contain exactly 17 values");
+  }
+
+  return row;
+}
+
 /**
- * Append a BI Review lead submission as a new row.
- * Requires GOOGLE_SHEETS_CREDENTIALS and GOOGLE_SHEETS_BI_REVIEW_ID env vars;
- * returns false (without throwing) if either is missing or the call fails,
- * so this is safe to call as a best-effort side-channel to email delivery.
+ * Appends one BI Review submission to Leads!A:Q.
+ *
+ * This function intentionally performs a single append attempt. Retrying an
+ * append after an ambiguous network timeout can create duplicate lead rows.
+ * The caller receives false and may present a safe retry message instead.
  */
 export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
   const spreadsheetId = process.env.GOOGLE_SHEETS_BI_REVIEW_ID;
   const client = getLeadsSheetsClient();
 
-  if (!client || !spreadsheetId) {
-    console.warn(
-      "[Google Sheets] BI Review sync not configured (set GOOGLE_SHEETS_CREDENTIALS and GOOGLE_SHEETS_BI_REVIEW_ID to enable)"
-    );
+  if (!spreadsheetId) {
+    console.error("[Google Sheets] GOOGLE_SHEETS_BI_REVIEW_ID is not configured");
     return false;
   }
 
+  if (!client) return false;
+
   try {
-    await client.spreadsheets.values.append({
-      spreadsheetId,
-      range: "Leads!A:Q",
-      valueInputOption: "RAW",
-      insertDataOption: "INSERT_ROWS",
-      requestBody: {
-        values: [
-          [
-            lead.submittedAt,
-            lead.companyName,
-            lead.contactName,
-            lead.email,
-            lead.phone,
-            lead.position,
-            lead.miningSector,
-            lead.riskArea,
-            lead.siteLocation,
-            lead.annualTurnover,
-            lead.biSumInsured,
-            lead.indemnityPeriod,
-            lead.keyFacility,
-            lead.previousClaims,
-            lead.currentInsurer,
-            lead.siteVisitAvailability,
-            lead.message,
-          ],
-        ],
+    const response = await client.spreadsheets.values.append(
+      {
+        spreadsheetId,
+        range: LEADS_RANGE,
+        valueInputOption: "RAW",
+        insertDataOption: "INSERT_ROWS",
+        requestBody: {
+          majorDimension: "ROWS",
+          values: [toLeadRow(lead)],
+        },
       },
+      {
+        timeout: SHEETS_REQUEST_TIMEOUT_MS,
+      }
+    );
+
+    const updatedRows = response.data.updates?.updatedRows ?? 0;
+    if (updatedRows !== 1) {
+      console.error("[Google Sheets] Append completed without confirming one inserted row", {
+        updatedRows,
+      });
+      return false;
+    }
+
+    console.info("[Google Sheets] BI Review lead stored", {
+      updatedRows,
+      updatedRange: response.data.updates?.updatedRange,
     });
     return true;
   } catch (error) {
-    console.error("[Google Sheets] Failed to append BI review lead:", error);
+    // Log operational metadata only. Never log the lead, private key, access
+    // token, request headers, or full Google API error response.
+    console.error("[Google Sheets] BI Review append failed", {
+      status: getGoogleApiStatus(error),
+      code: getGoogleApiCode(error),
+      timeoutMs: SHEETS_REQUEST_TIMEOUT_MS,
+    });
     return false;
   }
 }
