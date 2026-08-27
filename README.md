@@ -49,10 +49,12 @@ committed to the repo; set them via your hosting provider or a local
 
 ### Google Sheets
 
-The "Request a BI Review" form (home page) logs each submission to a
-Google Sheet in addition to emailing the sales team. This is optional and
-best-effort — the form still works and still emails the lead if these
-aren't set, it just skips the sheet:
+The "Request a BI Review" form (home page) and the lead-capture form on
+the BI Methodology page (`client/public/bi-methodology.html`, posted to
+`/api/leads/bi-methodology`) both log each submission to the same Google
+Sheet, in addition to emailing the sales team. This is optional and
+best-effort — both forms still work and still email the lead if these
+aren't set, they just skip the sheet:
 
 - `GOOGLE_SHEETS_CREDENTIALS` — a Google service-account JSON key (as a
   single-line string), shared with edit access on the target spreadsheet

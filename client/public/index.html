@@ -23,7 +23,8 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
-body{background:var(--onyx);color:var(--bone);font-family:var(--bf);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{background:linear-gradient(rgba(10,10,11,.94),rgba(10,10,11,.94)),url('images/blueprints/mining-machinery.jpg') center top/cover no-repeat fixed;color:var(--bone);font-family:var(--bf);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media(max-width:900px){body{background-attachment:scroll}}
 img{max-width:100%;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 section{padding:clamp(56px,9vh,110px) 0}
@@ -121,7 +122,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 
 /* generic content blocks used on facet pages */
 .blockgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
-.block{background:var(--charcoal);border:1px solid var(--line);border-left:2px solid var(--copper);padding:26px 24px;border-radius:2px}
+.block{background:var(--charcoal);border:1px solid var(--line);border-top:2px solid var(--copper);padding:26px 24px;border-radius:4px}
 .block h3{font-size:17px;margin-bottom:10px}
 .block p{color:var(--platinum);font-size:14px;font-weight:300}
 @media(max-width:800px){.blockgrid{grid-template-columns:1fr}}
@@ -218,19 +219,29 @@ footer a:hover{color:var(--bone)}
 .enginebox .fimgbtn:hover::after,.enginebox .fimgbtn:focus-visible::after{opacity:1}
 .enginebox .zoom svg{width:18px;height:18px;color:var(--bone)}
 
-/* INTRO SPLASH — logo slides in, holds, then clears to reveal the parent line */
+/* INTRO SPLASH — logo & wordmark ease in, parent line follows, then a mining
+   photograph holds for 5s before the whole overlay clears to reveal the site */
 .introsplash{position:fixed;inset:0;z-index:500;background:var(--onyx);display:flex;align-items:center;justify-content:center;
-  animation:introOut .5s ease 3.2s forwards}
+  animation:introOut .6s ease 10.4s forwards}
 .introsplash.static{animation:none;opacity:0;visibility:hidden}
+.introsplash .isstage{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;
+  animation:introStageOut .6s cubic-bezier(.4,0,1,1) 3.6s forwards}
 .introsplash .ismark{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-64px);
-  animation:introSlideIn .7s cubic-bezier(.16,1,.3,1) .15s forwards, introSlideOut .5s cubic-bezier(.4,0,1,1) 1.5s forwards}
+  animation:introSlideIn 1s cubic-bezier(.16,1,.3,1) .2s forwards}
 .introsplash .ismark img{width:44px;height:44px;object-fit:contain;display:block}
 .introsplash .ismark span{font-family:var(--sf);font-size:26px;letter-spacing:.05em;color:var(--bone);font-weight:500}
-.introsplash .isparent{position:absolute;font-family:var(--sf);font-size:12px;letter-spacing:.32em;text-transform:uppercase;
-  color:var(--copper-bright);opacity:0;animation:introParentIn .6s ease 1.7s forwards}
+.introsplash .isparent{font-family:var(--sf);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  text-align:center;max-width:min(86vw,420px);color:var(--copper-bright);opacity:0;animation:introParentIn 1s ease 1.4s forwards}
+@media(max-width:480px){.introsplash .isparent{font-size:10.5px;letter-spacing:.1em}}
+.introsplash .isphoto{position:absolute;inset:0;opacity:0;
+  animation:introPhotoIn .6s ease 4.2s forwards, introPhotoOut .6s ease 9.8s forwards}
+.introsplash .isphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.introsplash .isphoto::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.35),rgba(10,10,11,.15) 40%,rgba(10,10,11,.55))}
 @keyframes introSlideIn{from{opacity:0;transform:translateX(-64px)}to{opacity:1;transform:translateX(0)}}
-@keyframes introSlideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(64px)}}
 @keyframes introParentIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes introStageOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-14px)}}
+@keyframes introPhotoIn{from{opacity:0}to{opacity:1}}
+@keyframes introPhotoOut{from{opacity:1}to{opacity:0}}
 @keyframes introOut{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}
 @media(prefers-reduced-motion:reduce){
   .introsplash{display:none}
@@ -244,7 +255,7 @@ footer a:hover{color:var(--bone)}
   "description":"Specialist mining and marine insurance broking across South Africa and Sub-Saharan Africa, covering mine assets, plant and machinery, and transit of valuable metals.",
   "areaServed":["South Africa","Sub-Saharan Africa"],
   "telephone":"+27115688472",
-  "parentOrganization":{"@type":"Organization","name":"Donaldson Group (Pty) Ltd"},
+  "parentOrganization":{"@type":"Organization","name":"Donaldson Advisory Group"},
   "makesOffer":[
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"The Mine: Commercial Assets, Liability & Business Interruption Insurance"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Yellow Metal & Machinery Insurance"}},
@@ -254,8 +265,11 @@ footer a:hover{color:var(--bone)}
 </head>
 <body>
 <div class="introsplash" id="introsplash" aria-hidden="true">
- <div class="ismark"><img src="images/logo/mt-badge.png" alt="" width="44" height="44"><span>MineTrans</span></div>
- <div class="isparent">A Division of Donaldson Group</div>
+ <div class="isstage">
+  <div class="ismark"><img src="images/logo/mt-badge.png" alt="" width="44" height="44"><span>MineTrans</span></div>
+  <div class="isparent">MineTrans is a division of Donaldson Advisory Group</div>
+ </div>
+ <div class="isphoto"><img src="images/mining/haul-trucks-sunset.jpg" alt="" width="2000" height="1230"></div>
 </div>
 <script>
 (function(){
@@ -465,7 +479,7 @@ footer a:hover{color:var(--bone)}
     <a href="contact.html">Contact &amp; Reviews</a>
    </div>
   </div>
-  <p class="fsp">MineTrans Insurance Brokers is a Juristic Representative of <b>Donaldson Group (Pty) Ltd</b>, an authorised Financial Services Provider (<b>FSP No. 53166</b>) in terms of the Financial Advisory and Intermediary Services Act 37 of 2002. Donaldson Group (Pty) Ltd accepts responsibility for the activities of its representatives performed within the scope of their mandate. This content is provided for general information purposes and does not constitute financial advice. Please consult your Key Individual or financial adviser before making any decisions regarding insurance cover.</p>
+  <p class="fsp">MineTrans is a division of <b>Donaldson Advisory Group</b>.</p>
   <div class="footbottom">
    <span>&copy; 2026 MineTrans Insurance Brokers. All rights reserved.</span>
    <span><a href="tel:+27115688472" style="display:inline;color:var(--platinum)">+27 11 568 8472</a> &nbsp;|&nbsp; <a href="https://www.minetrans.co.za" style="display:inline;color:var(--platinum)">www.minetrans.co.za</a></span>
