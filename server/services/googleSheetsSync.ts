@@ -27,6 +27,7 @@ let sheetsClient: any = null;
 let leadsSheetsClient: sheets_v4.Sheets | null = null;
 
 const LEADS_RANGE = "Leads!A:Q";
+const BI_METHODOLOGY_RANGE = "'BI Methodology Leads'!A:L";
 const SHEETS_REQUEST_TIMEOUT_MS = 10_000;
 
 interface ServiceAccountCredentials {
@@ -206,6 +207,85 @@ export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
     // Log operational metadata only. Never log the lead, private key, access
     // token, request headers, or full Google API error response.
     console.error("[Google Sheets] BI Review append failed", {
+      status: getGoogleApiStatus(error),
+      code: getGoogleApiCode(error),
+      timeoutMs: SHEETS_REQUEST_TIMEOUT_MS,
+    });
+    return false;
+  }
+}
+
+export interface BIMethodologyLead {
+  submittedAt: string;
+  contactName: string;
+  companyName: string;
+  email: string;
+  phone: string;
+  operationDetails: string;
+  popiaConsent: boolean;
+}
+
+/**
+ * Appends one guide-unlock enquiry to the dedicated BI Methodology Leads tab.
+ */
+export async function appendBIMethodologyLead(lead: BIMethodologyLead): Promise<boolean> {
+  const spreadsheetId = process.env.GOOGLE_SHEETS_BI_REVIEW_ID;
+  const client = getLeadsSheetsClient();
+
+  if (!spreadsheetId) {
+    console.error("[Google Sheets] GOOGLE_SHEETS_BI_REVIEW_ID is not configured");
+    return false;
+  }
+
+  if (!client) return false;
+
+  const row = [
+    lead.submittedAt,
+    lead.contactName,
+    lead.companyName,
+    lead.email,
+    lead.phone,
+    lead.operationDetails,
+    lead.popiaConsent ? "Yes" : "",
+    "New",
+    "",
+    "",
+    "",
+    "BI Methodology guide",
+  ].map((value) => String(value ?? ""));
+
+  try {
+    const response = await client.spreadsheets.values.append(
+      {
+        spreadsheetId,
+        range: BI_METHODOLOGY_RANGE,
+        valueInputOption: "RAW",
+        insertDataOption: "INSERT_ROWS",
+        requestBody: {
+          majorDimension: "ROWS",
+          values: [row],
+        },
+      },
+      {
+        timeout: SHEETS_REQUEST_TIMEOUT_MS,
+      }
+    );
+
+    const updatedRows = response.data.updates?.updatedRows ?? 0;
+    if (updatedRows !== 1) {
+      console.error("[Google Sheets] BI Methodology append did not confirm one inserted row", {
+        updatedRows,
+      });
+      return false;
+    }
+
+    console.info("[Google Sheets] BI Methodology lead stored", {
+      updatedRows,
+      updatedRange: response.data.updates?.updatedRange,
+    });
+    return true;
+  } catch (error) {
+    console.error("[Google Sheets] BI Methodology append failed", {
       status: getGoogleApiStatus(error),
       code: getGoogleApiCode(error),
       timeoutMs: SHEETS_REQUEST_TIMEOUT_MS,
