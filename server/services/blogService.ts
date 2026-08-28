@@ -36,7 +36,7 @@ function getBlogConfig(): { spreadsheetId: string; credentials: ServiceAccountCr
       credentials: {
         ...parsed,
         client_email: parsed.client_email,
-        private_key: parsed.private_key.replace(/\\\\n/g, "\\n"),
+        private_key: parsed.private_key.replace(/\\n/g, "\n"),
       },
     };
   } catch {
