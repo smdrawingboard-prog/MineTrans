@@ -29,6 +29,32 @@ const RISK_CATEGORIES = {
 };
 
 // Keywords for categorizing articles
+const EXCLUDED_BROKER_PATTERNS: RegExp[] = [
+  /\bmarsh\b/i,
+  /\baon\b/i,
+  /\blockton\b/i,
+  /\bgib(?:\s+insurance)?\b/i,
+  /\bprice\s+forbes\b/i,
+  /\bcompendium\b/i,
+  /\bwillis(?:\s+towers\s+watson)?\b/i,
+  /\bwtw\b/i,
+  /\bmaksure\b/i,
+  /\bolea\b/i,
+];
+
+function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
+  const searchableText = [
+    article.headline,
+    article.excerpt,
+    article.publication,
+    article.sourceUrl,
+  ]
+    .map((value) => String(value ?? ""))
+    .join(" ");
+
+  return EXCLUDED_BROKER_PATTERNS.some((pattern) => pattern.test(searchableText));
+}
+
 const CATEGORY_KEYWORDS: Record<string, string[]> = {
   [RISK_CATEGORIES.MACHINERY_BREAKDOWN]: [
     "machinery",
@@ -857,8 +883,12 @@ export async function fetchAllMiningNews(): Promise<InsertMiningNews[]> {
     ];
 
     // Remove duplicates based on headline
+    const allowedArticles = allArticles.filter(
+      (article) => !isExcludedBrokerArticle(article)
+    );
+
     const uniqueArticles = Array.from(
-      new Map(allArticles.map((a) => [a.headline, a])).values()
+      new Map(allowedArticles.map((a) => [a.headline, a])).values()
     );
 
     // Sort by publication date (newest first)
