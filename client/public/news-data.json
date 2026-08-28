@@ -1,14 +1,6 @@
 {
-  "updatedAt": "2026-08-27T22:02:58.984Z",
+  "updatedAt": "2026-08-28T08:32:08.216Z",
   "articles": [
-    {
-      "headline": "African Mining News",
-      "excerpt": "",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/",
-      "publishedAt": "2026-08-27T22:02:58.773Z",
-      "category": "General"
-    },
     {
       "headline": "Celebrating women who shape Africa&#8217;s environmental future",
       "excerpt": "Earlier this year, more than 60 professionals from across the SRK Consulting global network gathered in Sandton at the Contaminated Land Environmental Rehabilitation (CLER) Workshop to exchange specialist knowledge on&hellip;",
@@ -40,46 +32,6 @@
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/from-black-box-to-blue-box-in-tailings-storage-facility-water-management/",
       "publishedAt": "2026-08-27T22:02:58.773Z",
       "category": "Tailings Risk"
-    },
-    {
-      "headline": "LINKEDIN",
-      "excerpt": "Latest news from Mining Journal about LINKEDIN...",
-      "publication": "Mining Journal",
-      "sourceUrl": "https://www.linkedin.com/company/mining-journal/",
-      "publishedAt": "2026-08-27T22:02:57.232Z",
-      "category": "General"
-    },
-    {
-      "headline": "Clear Search",
-      "excerpt": "Sponsored by&nbsp;&nbsp;&nbsp;",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.miningweekly.comjavascript:clearSearch();",
-      "publishedAt": "2026-08-27T22:02:57.084Z",
-      "category": "General"
-    },
-    {
-      "headline": "Set Now",
-      "excerpt": "Note: When you select a default region you will be directed to the MiningWeekly.com home page of your choice whenever you visit miningweekly.com. This setting is controlled by cookies and should your cookies be re-set you will then be directed to the regional edition associated with the geographic l",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.miningweekly.comjavascript:void(0);",
-      "publishedAt": "2026-08-27T22:02:57.084Z",
-      "category": "General"
-    },
-    {
-      "headline": "Cookie Policy",
-      "excerpt": "sponsored by&nbsp;&nbsp;",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.miningweekly.com/page/cookie-policy",
-      "publishedAt": "2026-08-27T22:02:57.084Z",
-      "category": "Regulation"
-    },
-    {
-      "headline": "2",
-      "excerpt": "Research Reports",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.miningweekly.com/page/africa-edition/page:1",
-      "publishedAt": "2026-08-27T22:02:57.084Z",
-      "category": "General"
     }
   ]
 }
