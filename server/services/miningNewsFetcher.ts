@@ -55,6 +55,27 @@ function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
   return EXCLUDED_BROKER_PATTERNS.some((pattern) => pattern.test(searchableText));
 }
 
+const INVALID_HEADLINES = new Set([
+  "african mining news",
+  "clear search",
+  "cookie policy",
+  "linkedin",
+  "set now",
+]);
+
+function isValidNewsArticle(article: InsertMiningNews): boolean {
+  const headline = String(article.headline ?? "").trim();
+  const publication = String(article.publication ?? "").trim();
+  const sourceUrl = String(article.sourceUrl ?? "").trim();
+
+  if (headline.length < 12 || /^\d+$/.test(headline)) return false;
+  if (INVALID_HEADLINES.has(headline.toLowerCase())) return false;
+  if (headline.toLowerCase() === publication.toLowerCase()) return false;
+  if (!/^https?:\/\//i.test(sourceUrl) || /javascript:/i.test(sourceUrl)) return false;
+
+  return true;
+}
+
 const CATEGORY_KEYWORDS: Record<string, string[]> = {
   [RISK_CATEGORIES.MACHINERY_BREAKDOWN]: [
     "machinery",
@@ -884,7 +905,7 @@ export async function fetchAllMiningNews(): Promise<InsertMiningNews[]> {
 
     // Remove duplicates based on headline
     const allowedArticles = allArticles.filter(
-      (article) => !isExcludedBrokerArticle(article)
+      (article) => isValidNewsArticle(article) && !isExcludedBrokerArticle(article)
     );
 
     const uniqueArticles = Array.from(
