@@ -26,7 +26,6 @@ interface GoogleSheetsConfig {
 let sheetsClient: any = null;
 let leadsSheetsClient: sheets_v4.Sheets | null = null;
 
-const LEADS_RANGE = "Leads!A:Q";
 const BI_METHODOLOGY_RANGE = "'BI Methodology Leads'!A:L";
 const SHEETS_REQUEST_TIMEOUT_MS = 10_000;
 
@@ -146,10 +145,16 @@ function toLeadRow(lead: BIReviewLead): string[] {
     lead.currentInsurer,
     lead.siteVisitAvailability,
     lead.message,
+    "New",
+    "",
+    "Medium",
+    "",
+    "",
+    "",
   ].map((value) => String(value ?? ""));
 
-  if (row.length !== 17) {
-    throw new Error("BI Review row must contain exactly 17 values");
+  if (row.length !== 23) {
+    throw new Error("BI Review row must contain exactly 23 values");
   }
 
   return row;
@@ -189,7 +194,7 @@ export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
     const submittedRows = existing.data.values ?? [];
     const blankIndex = submittedRows.findIndex((row) => !String(row?.[0] ?? "").trim());
     const targetRow = blankIndex >= 0 ? blankIndex + 2 : submittedRows.length + 2;
-    const targetRange = `Leads!A${targetRow}:Q${targetRow}`;
+    const targetRange = `Leads!A${targetRow}:W${targetRow}`;
 
     const response = await client.spreadsheets.values.update(
       {
@@ -272,12 +277,29 @@ export async function appendBIMethodologyLead(lead: BIMethodologyLead): Promise<
   ].map((value) => String(value ?? ""));
 
   try {
-    const response = await client.spreadsheets.values.append(
+    const existing = await client.spreadsheets.values.get(
       {
         spreadsheetId,
-        range: BI_METHODOLOGY_RANGE,
+        range: "'BI Methodology Leads'!A2:A1000",
+        majorDimension: "ROWS",
+      },
+      {
+        timeout: SHEETS_REQUEST_TIMEOUT_MS,
+      }
+    );
+
+    const submittedRows = existing.data.values ?? [];
+    const blankIndex = submittedRows.findIndex((existingRow) =>
+      !String(existingRow?.[0] ?? "").trim()
+    );
+    const targetRow = blankIndex >= 0 ? blankIndex + 2 : submittedRows.length + 2;
+    const targetRange = `'BI Methodology Leads'!A${targetRow}:L${targetRow}`;
+
+    const response = await client.spreadsheets.values.update(
+      {
+        spreadsheetId,
+        range: targetRange,
         valueInputOption: "RAW",
-        insertDataOption: "INSERT_ROWS",
         requestBody: {
           majorDimension: "ROWS",
           values: [row],
@@ -288,21 +310,22 @@ export async function appendBIMethodologyLead(lead: BIMethodologyLead): Promise<
       }
     );
 
-    const updatedRows = response.data.updates?.updatedRows ?? 0;
+    const updatedRows = response.data.updatedRows ?? 0;
     if (updatedRows !== 1) {
-      console.error("[Google Sheets] BI Methodology append did not confirm one inserted row", {
+      console.error("[Google Sheets] BI Methodology write did not confirm one row", {
         updatedRows,
+        targetRange,
       });
       return false;
     }
 
     console.info("[Google Sheets] BI Methodology lead stored", {
       updatedRows,
-      updatedRange: response.data.updates?.updatedRange,
+      updatedRange: response.data.updatedRange,
     });
     return true;
   } catch (error) {
-    console.error("[Google Sheets] BI Methodology append failed", {
+    console.error("[Google Sheets] BI Methodology write failed", {
       status: getGoogleApiStatus(error),
       code: getGoogleApiCode(error),
       timeoutMs: SHEETS_REQUEST_TIMEOUT_MS,

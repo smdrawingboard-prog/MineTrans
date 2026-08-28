@@ -59,10 +59,9 @@ aren't set, they just skip the sheet:
   single-line string), shared with edit access on the target spreadsheet
 - `GOOGLE_SHEETS_BI_REVIEW_ID` — the spreadsheet ID, with a `Leads` tab
 
-The separate `server/services/googleSheetsSync.ts` admin sync (student
-progress → Sheets) and `server/services/blogService.ts` content sourcing
-(blog posts from a public Sheet via `GOOGLE_SHEETS_BLOG_ID`) are unrelated,
-pre-existing pieces of scaffolding — neither is wired into any UI yet.
+Published rows in the workbook's `Blog` tab are read server-side with the
+same service-account credentials and displayed in the Latest Insights section.
+The browser never receives a Google API key or direct access to the workbook.
 
 ## Brand
 
