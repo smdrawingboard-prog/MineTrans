@@ -1,6 +1,6 @@
-import { google } from 'googleapis';
+import { google } from "googleapis";
 
-interface BlogPost {
+export interface BlogPost {
   id: string;
   title: string;
   subtitle: string;
@@ -12,81 +12,93 @@ interface BlogPost {
   published: boolean;
 }
 
-// Initialize Google Sheets API
-const sheets = google.sheets('v4');
+interface ServiceAccountCredentials {
+  client_email: string;
+  private_key: string;
+  project_id?: string;
+}
 
-// Configuration - set these in environment variables
-const GOOGLE_SHEETS_ID = process.env.GOOGLE_SHEETS_BLOG_ID || '';
-const GOOGLE_API_KEY = process.env.BUILT_IN_FORGE_API_KEY || '';
+const SHEETS_REQUEST_TIMEOUT_MS = 10_000;
 
-/**
- * Fetch blog posts from Google Sheets
- * Expected sheet structure:
- * Column A: ID
- * Column B: Title
- * Column C: Subtitle
- * Column D: Content
- * Column E: Author
- * Column F: Date (YYYY-MM-DD)
- * Column G: Category
- * Column H: Image URL
- * Column I: Published (TRUE/FALSE)
- */
-export async function getBlogPosts(): Promise<BlogPost[]> {
+function getBlogConfig(): { spreadsheetId: string; credentials: ServiceAccountCredentials } | null {
+  const spreadsheetId = process.env.GOOGLE_SHEETS_BI_REVIEW_ID || process.env.GOOGLE_SHEETS_BLOG_ID;
+  const rawCredentials = process.env.GOOGLE_SHEETS_CREDENTIALS;
+  if (!spreadsheetId || !rawCredentials) {
+    console.warn("[Google Sheets] Blog integration is not configured");
+    return null;
+  }
+
   try {
-    if (!GOOGLE_SHEETS_ID || !GOOGLE_API_KEY) {
-      console.warn('Google Sheets blog integration not configured');
-      return [];
-    }
+    const parsed = JSON.parse(rawCredentials) as Partial<ServiceAccountCredentials>;
+    if (!parsed.client_email || !parsed.private_key) throw new Error("missing credentials");
+    return {
+      spreadsheetId,
+      credentials: {
+        ...parsed,
+        client_email: parsed.client_email,
+        private_key: parsed.private_key.replace(/\\\\n/g, "\\n"),
+      },
+    };
+  } catch {
+    console.error("[Google Sheets] Blog credentials could not be initialized");
+    return null;
+  }
+}
 
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: GOOGLE_SHEETS_ID,
-      range: 'Blog!A2:I100', // Skip header row
-      key: GOOGLE_API_KEY,
+/** Read published Blog rows from the same private management workbook. */
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  const config = getBlogConfig();
+  if (!config) return [];
+
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: config.credentials,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     });
+    const client = google.sheets({ version: "v4", auth });
+    const response = await client.spreadsheets.values.get(
+      {
+        spreadsheetId: config.spreadsheetId,
+        range: "Blog!A2:I500",
+        majorDimension: "ROWS",
+      },
+      { timeout: SHEETS_REQUEST_TIMEOUT_MS }
+    );
 
-    const rows = response.data.values || [];
-    const posts: BlogPost[] = rows
-      .filter(row => row[8]?.toLowerCase() === 'true') // Filter published posts
+    return (response.data.values ?? [])
+      .filter((row) => String(row[8] ?? "").toLowerCase() === "true")
       .map((row, index) => ({
-        id: row[0] || `post-${index}`,
-        title: row[1] || '',
-        subtitle: row[2] || '',
-        content: row[3] || '',
-        author: row[4] || 'MineTrans',
-        date: row[5] || new Date().toISOString().split('T')[0],
-        category: row[6] || 'Insights',
-        image: row[7] || '',
-        published: row[8]?.toLowerCase() === 'true',
+        id: String(row[0] || `post-${index + 1}`),
+        title: String(row[1] || ""),
+        subtitle: String(row[2] || ""),
+        content: String(row[3] || ""),
+        author: String(row[4] || "MineTrans"),
+        date: String(row[5] || ""),
+        category: String(row[6] || "Insights"),
+        image: String(row[7] || ""),
+        published: true,
       }))
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date descending
-
-    return posts;
+      .filter((post) => post.title)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   } catch (error) {
-    console.error('Error fetching blog posts from Google Sheets:', error);
+    console.error("[Google Sheets] Blog read failed", {
+      code: error && typeof error === "object" && "code" in error ? String(error.code) : undefined,
+      timeoutMs: SHEETS_REQUEST_TIMEOUT_MS,
+    });
     return [];
   }
 }
 
-/**
- * Get a single blog post by ID
- */
 export async function getBlogPostById(id: string): Promise<BlogPost | null> {
   const posts = await getBlogPosts();
-  return posts.find(post => post.id === id) || null;
+  return posts.find((post) => post.id === id) || null;
 }
 
-/**
- * Get blog posts by category
- */
 export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
   const posts = await getBlogPosts();
-  return posts.filter(post => post.category === category);
+  return posts.filter((post) => post.category === category);
 }
 
-/**
- * Get latest N blog posts
- */
 export async function getLatestBlogPosts(limit: number = 5): Promise<BlogPost[]> {
   const posts = await getBlogPosts();
   return posts.slice(0, limit);
