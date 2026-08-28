@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import { refreshMiningNewsHandler } from "../handlers/refreshMiningNews";
 import { biAssessmentHandler } from "../handlers/biAssessment";
 import { biMethodologyLeadHandler } from "../handlers/biMethodologyLead";
+import { getLatestBlogPosts } from "../services/blogService";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -42,6 +43,11 @@ async function startServer() {
   app.post("/api/scheduled/refreshMiningNews", refreshMiningNewsHandler);
   app.post("/api/bi-assessment/generate", biAssessmentHandler);
   app.post("/api/leads/bi-methodology", biMethodologyLeadHandler);
+  app.get("/api/blog/posts", async (_req, res) => {
+    const posts = await getLatestBlogPosts(12);
+    res.set("Cache-Control", "public, max-age=300");
+    res.json({ posts });
+  });
   
   // tRPC API
   app.use(
