@@ -156,11 +156,12 @@ function toLeadRow(lead: BIReviewLead): string[] {
 }
 
 /**
- * Appends one BI Review submission to Leads!A:Q.
+ * Stores one BI Review submission in the first blank row of Leads!A:Q.
  *
- * This function intentionally performs a single append attempt. Retrying an
- * append after an ambiguous network timeout can create duplicate lead rows.
- * The caller receives false and may present a safe retry message instead.
+ * The management sheet is preformatted through row 200, so the Sheets append
+ * endpoint treats those visually empty rows as occupied. Reading column A and
+ * updating the first blank row keeps new enquiries directly below the header
+ * while preserving the sheet's formatting, validation and workflow columns.
  */
 export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
   const spreadsheetId = process.env.GOOGLE_SHEETS_BI_REVIEW_ID;
@@ -174,12 +175,27 @@ export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
   if (!client) return false;
 
   try {
-    const response = await client.spreadsheets.values.append(
+    const existing = await client.spreadsheets.values.get(
       {
         spreadsheetId,
-        range: LEADS_RANGE,
+        range: "Leads!A2:A1000",
+        majorDimension: "ROWS",
+      },
+      {
+        timeout: SHEETS_REQUEST_TIMEOUT_MS,
+      }
+    );
+
+    const submittedRows = existing.data.values ?? [];
+    const blankIndex = submittedRows.findIndex((row) => !String(row?.[0] ?? "").trim());
+    const targetRow = blankIndex >= 0 ? blankIndex + 2 : submittedRows.length + 2;
+    const targetRange = `Leads!A${targetRow}:Q${targetRow}`;
+
+    const response = await client.spreadsheets.values.update(
+      {
+        spreadsheetId,
+        range: targetRange,
         valueInputOption: "RAW",
-        insertDataOption: "INSERT_ROWS",
         requestBody: {
           majorDimension: "ROWS",
           values: [toLeadRow(lead)],
@@ -190,23 +206,24 @@ export async function appendBIReviewLead(lead: BIReviewLead): Promise<boolean> {
       }
     );
 
-    const updatedRows = response.data.updates?.updatedRows ?? 0;
+    const updatedRows = response.data.updatedRows ?? 0;
     if (updatedRows !== 1) {
-      console.error("[Google Sheets] Append completed without confirming one inserted row", {
+      console.error("[Google Sheets] Write completed without confirming one row", {
         updatedRows,
+        targetRange,
       });
       return false;
     }
 
     console.info("[Google Sheets] BI Review lead stored", {
       updatedRows,
-      updatedRange: response.data.updates?.updatedRange,
+      updatedRange: response.data.updatedRange,
     });
     return true;
   } catch (error) {
     // Log operational metadata only. Never log the lead, private key, access
     // token, request headers, or full Google API error response.
-    console.error("[Google Sheets] BI Review append failed", {
+    console.error("[Google Sheets] BI Review write failed", {
       status: getGoogleApiStatus(error),
       code: getGoogleApiCode(error),
       timeoutMs: SHEETS_REQUEST_TIMEOUT_MS,
