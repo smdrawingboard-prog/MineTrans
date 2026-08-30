@@ -4,8 +4,8 @@ The website and advisor training/certification platform for **MineTrans
 Insurance Brokers** — specialist mining and marine insurance broking for
 Sub-Saharan Africa.
 
-MineTrans Insurance Brokers is a Juristic Representative of Donaldson
-Group (Pty) Ltd — FSP No. 53166.
+MineTrans Insurance Brokers is a division of Donaldson Advisory Group —
+FSP No. 53166.
 
 ---
 

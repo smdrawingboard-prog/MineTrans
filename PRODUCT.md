@@ -15,7 +15,7 @@ Two distinct audiences, served by two parts of the same repo:
 
 ## Product Purpose
 
-MineTrans Insurance Brokers structures and places mining & marine insurance cover across South Africa and Sub-Saharan Africa, as a Juristic Representative of Donaldson Group (Pty) Ltd (FSP No. 53166). The public site's job is to make a visitor understand the three interconnected risk categories it covers under one broker, before they make contact. The certification platform's job is to train MineTrans's own advisors to a consistent, rigorous standard on the Business Interruption methodology, with progress tracked through quizzes, a final exam, and issued certificates.
+MineTrans Insurance Brokers structures and places mining & marine insurance cover across South Africa and Sub-Saharan Africa, as a division of Donaldson Advisory Group (FSP No. 53166). The public site's job is to make a visitor understand the three interconnected risk categories it covers under one broker, before they make contact. The certification platform's job is to train MineTrans's own advisors to a consistent, rigorous standard on the Business Interruption methodology, with progress tracked through quizzes, a final exam, and issued certificates.
 
 ## Positioning
 
@@ -39,13 +39,13 @@ The core differentiator is the BI methodology itself — a structured, 12-step B
 ## Brand Commitments
 
 - Name: MineTrans (MineTrans Insurance Brokers).
-- Regulatory disclosure — FSP No. 53166, and status as a Juristic Representative of Donaldson Group (Pty) Ltd — must travel with the brand wherever official/legal context appears, not just live in the footer.
+- Regulatory disclosure — FSP No. 53166, and status as a division of Donaldson Advisory Group — must travel with the brand wherever official/legal context appears, not just live in the footer.
 - Course title: "MineTrans Advanced Mining Insurance Blueprint."
 
 ## Evidence on Hand
 
-- FSP number (53166) and the Donaldson Group (Pty) Ltd parent relationship are real, confirmed regulatory facts.
-- MineTrans's POPIA (and related) registration is held under Donaldson Group (Pty) Ltd, not as a standalone MineTrans registration — copy referencing POPIA compliance should reflect that the registration sits with the parent.
+- FSP number (53166) and the Donaldson Advisory Group parent relationship are real, confirmed regulatory facts.
+- MineTrans's POPIA (and related) registration is held under the Donaldson Advisory Group parent, not as a standalone MineTrans registration — copy referencing POPIA compliance should reflect that the registration sits with the parent, and should not claim standalone/unqualified compliance.
 - No testimonials, client case studies, or third-party press exist in the repository — future work must not fabricate them.
 - Figures used in course/marketing content (e.g. USD 500m turnover, USD 320m gross profit at risk, TSF population/consequence numbers) are illustrative placeholders for teaching the methodology, never real client outcomes.
 
@@ -55,7 +55,7 @@ The core differentiator is the BI methodology itself — a structured, 12-step B
 2. The methodology is the proof — BI and underwriting claims trace back to the 12-step methodology or 18-category questionnaire, not vague reassurance.
 3. Illustrative is not real — course and marketing figures are always clearly examples, never dressed up as client outcomes.
 4. Internal training stays internal — the certification platform serves MineTrans's own advisors; don't design it as a public-facing product.
-5. Regulatory disclosure is non-negotiable — FSP number and Donaldson Group status are load-bearing brand facts, not fine print.
+5. Regulatory disclosure is non-negotiable — FSP number and Donaldson Advisory Group status are load-bearing brand facts, not fine print.
 
 ## Accessibility & Inclusion
 
