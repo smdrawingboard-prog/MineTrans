@@ -89,20 +89,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .breadcrumb a:hover{color:var(--copper-bright)}
 .breadcrumb span{color:var(--copper-bright)}
 
-/* CARDS grid (index insurance facets) */
+/* CARDS grid (index insurance facets) — the whole card is one link to the
+   facet page; the zoom button is a small explicit corner control that
+   stops propagation so it never fights the card's primary navigation. */
 .facetgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-.facet{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
-.facet:hover{border-color:var(--copper);transform:translateY(-4px)}
-.facet .fimgbtn{position:relative;display:block;width:100%;padding:0;margin:0;border:0;background:none;cursor:zoom-in}
+.facet{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;text-decoration:none;color:inherit}
+.facet:hover,.facet:focus-visible{border-color:var(--copper);transform:translateY(-4px)}
+.facet .fimgwrap{position:relative}
 .facet .fimg{width:100%;display:block}
-.facet .fimgbtn::after{content:'';position:absolute;inset:0;background:rgba(10,10,11,.45);opacity:0;transition:opacity .2s}
-.facet .fimgbtn .zoom{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);width:38px;height:38px;
-  border-radius:50%;background:rgba(10,10,11,.7);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .2s,transform .2s}
-.facet .fimgbtn:hover .zoom,.facet .fimgbtn:focus-visible .zoom{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.facet .fimgbtn:hover::after,.facet .fimgbtn:focus-visible::after{opacity:1}
+.facet .fimgbtn{position:absolute;top:12px;right:12px;width:38px;height:38px;padding:0;margin:0;border:1px solid var(--line);
+  border-radius:50%;background:rgba(10,10,11,.7);display:flex;align-items:center;justify-content:center;cursor:zoom-in;
+  opacity:0;transition:opacity .2s,transform .2s;transform:scale(.9)}
+.facet:hover .fimgbtn,.facet .fimgbtn:focus-visible{opacity:1;transform:scale(1)}
+@media(hover:none){.facet .fimgbtn{opacity:1;transform:scale(1)}}
 .facet .zoom svg{width:16px;height:16px;color:var(--bone)}
-.facet .fbody{padding:34px 28px;display:flex;flex-direction:column;gap:14px;flex:1;text-decoration:none}
+.facet .fbody{padding:34px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
 .facet .fnum{font-family:var(--mf);font-weight:400;font-size:13px;color:var(--copper-bright);letter-spacing:.06em}
 .facet h3{font-size:22px}
 .facet p{color:var(--platinum);font-size:14.5px;font-weight:300;flex:1}
@@ -120,6 +121,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
   background:var(--charcoal);border:1px solid var(--line);color:var(--bone);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
 .lightbox-close:hover{border-color:var(--copper)}
 .lightbox-close svg{width:18px;height:18px}
+
+/* Approach layers (3-step process, replaces image-only argument) */
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.layers .layer{border:1px solid var(--line);border-top:2px solid var(--copper);border-radius:4px;padding:26px 24px;background:var(--charcoal)}
+.layers .layer .lnum{font-family:var(--mf);font-weight:400;font-size:13px;color:var(--copper-bright);letter-spacing:.06em;margin-bottom:10px;display:block}
+.layers .layer h3{font-size:17px;margin-bottom:8px}
+.layers .layer p{color:var(--platinum);font-size:14px;font-weight:300}
+@media(max-width:900px){.layers{grid-template-columns:1fr}}
+
+/* Product tiers (3-column, replaces image-only tier comparison) */
+.tiergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.tier{background:var(--onyx);border:1px solid var(--line);border-radius:4px;padding:34px 28px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s}
+.tier:hover{border-color:var(--copper);transform:translateY(-4px)}
+.tier .fnum{font-family:var(--mf);font-weight:400;font-size:13px;color:var(--copper-bright);letter-spacing:.06em}
+.tier h3{font-size:20px}
+.tier p{color:var(--platinum);font-size:14px;font-weight:300}
+.tiercta{margin-top:28px;text-align:center}
+.tiercta p{color:var(--platinum);font-size:14px;margin-bottom:14px}
+@media(max-width:900px){.tiergrid{grid-template-columns:1fr}}
 
 /* generic content blocks used on facet pages */
 .blockgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
@@ -182,12 +202,15 @@ footer a:hover{color:var(--bone)}
   background:radial-gradient(circle at 50% 26%,rgba(224,75,75,.16),transparent 60%);pointer-events:none}
 .flow.recover .node .cell{border-color:var(--copper);box-shadow:0 0 0 5px rgba(173,106,61,.12)}
 .flow.recover .node .st{color:var(--copper-bright)}
-.flowlegend{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px;font-family:var(--sf);font-size:11px;letter-spacing:.04em;color:var(--platinum)}
+.flowlegend{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-top:30px;font-family:var(--sf);font-size:11px;letter-spacing:.04em;color:var(--platinum)}
 .flowlegend span{display:flex;align-items:center;gap:8px}
 .flowlegend .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
 .flowlegend .dot.ok{background:var(--copper)}
 .flowlegend .dot.bad{background:#E04B4B}
 .flowlegend .dot.cov{background:var(--copper-bright)}
+.flowtoggle{margin-left:auto;font-family:var(--mf);font-size:11px;letter-spacing:.04em;color:var(--copper-bright);
+  background:none;border:1px solid rgba(173,106,61,.35);border-radius:2px;padding:6px 12px;cursor:pointer;transition:border-color .2s,color .2s}
+.flowtoggle:hover,.flowtoggle:focus-visible{border-color:var(--copper-bright);color:var(--bone)}
 .impact{margin-top:28px;border:1px solid rgba(224,75,75,.4);background:rgba(224,75,75,.07);
   padding:16px 20px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;border-radius:2px;
   opacity:0;transform:translateY(8px);transition:.5s;pointer-events:none}
@@ -221,22 +244,24 @@ footer a:hover{color:var(--bone)}
 .enginebox .zoom svg{width:18px;height:18px;color:var(--bone)}
 
 /* INTRO SPLASH — logo & wordmark ease in over the mining photograph (with a
-   sheer dark tint so both stay readable), hold, then the whole overlay
-   clears to reveal the site. Runs 5s total. */
+   sheer dark tint so both stay readable), hold briefly, then the whole
+   overlay clears to reveal the site. Runs 1.2s total, and any click, key
+   press, or scroll dismisses it immediately. */
 .introsplash{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(rgba(10,10,11,.32),rgba(10,10,11,.32)),url('images/mining/haul-trucks-sunset.jpg') center/cover no-repeat;
-  animation:introOut .7s ease 4.3s forwards}
-.introsplash.static{animation:none;opacity:0;visibility:hidden}
+  animation:introOut .3s ease .9s forwards}
+.introsplash.static{animation:none;opacity:0;visibility:hidden;pointer-events:none}
+.introsplash.dismiss{animation:introOut .2s ease forwards;pointer-events:none}
 .introsplash::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 620px 260px at center,rgba(10,10,11,.6),transparent 72%)}
 .introsplash .isstage{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:22px}
-.introsplash .ismark{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-64px);
-  animation:introSlideIn .7s cubic-bezier(.16,1,.3,1) .15s forwards}
+.introsplash .ismark{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-32px);
+  animation:introSlideIn .4s cubic-bezier(.16,1,.3,1) .1s forwards}
 .introsplash .ismark img{width:44px;height:44px;object-fit:contain;display:block}
 .introsplash .ismark span{font-family:var(--sf);font-size:26px;letter-spacing:.05em;color:var(--bone);font-weight:500;text-shadow:0 2px 12px rgba(10,10,11,.6)}
 .introsplash .isparent{font-family:var(--sf);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
   text-align:center;max-width:min(86vw,420px);color:var(--copper-bright);opacity:0;text-shadow:0 2px 12px rgba(10,10,11,.6);
-  animation:introParentIn .6s ease .9s forwards}
+  animation:introParentIn .35s ease .3s forwards}
 @media(max-width:480px){.introsplash .isparent{font-size:10.5px;letter-spacing:.1em}}
 @keyframes introSlideIn{from{opacity:0;transform:translateX(-64px)}to{opacity:1;transform:translateX(0)}}
 @keyframes introParentIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
@@ -270,13 +295,26 @@ footer a:hover{color:var(--bone)}
 </div>
 <script>
 (function(){
+  var splash=document.getElementById('introsplash');
   try{
-    if(sessionStorage.getItem('mt-intro-played')){
-      document.getElementById('introsplash').classList.add('static');
-    }else{
-      sessionStorage.setItem('mt-intro-played','1');
+    if(localStorage.getItem('mt-intro-played')){
+      splash.classList.add('static');
+      return;
     }
+    localStorage.setItem('mt-intro-played','1');
   }catch(e){}
+  var dismissed=false;
+  function dismiss(){
+    if(dismissed)return;
+    dismissed=true;
+    splash.classList.add('dismiss');
+    ['click','keydown','wheel','touchstart','scroll'].forEach(function(evt){
+      window.removeEventListener(evt,dismiss,true);
+    });
+  }
+  ['click','keydown','wheel','touchstart','scroll'].forEach(function(evt){
+    window.addEventListener(evt,dismiss,{capture:true,passive:true});
+  });
 })();
 </script>
 <nav>
@@ -317,7 +355,7 @@ footer a:hover{color:var(--bone)}
  </div>
 </section>
 
-<div class="statband"><div class="wrap"><div class="statrow"><div class="stat"><div class="cnt" data-target="53166" data-suffix="">53166</div><div class="cl">FSP Number</div></div><div class="stat"><div class="cnt" data-target="3" data-suffix="">3</div><div class="cl">Insurance Facets</div></div><div class="stat"><div class="cnt" data-target="1" data-suffix="">1</div><div class="cl">Point of Accountability</div></div><div class="stat"><div class="cnt" data-target="100" data-suffix="%">100%</div><div class="cl">FAIS &amp; POPIA Compliant</div></div></div></div></div>
+<div class="statband"><div class="wrap"><div class="statrow"><div class="stat"><div class="cnt" data-target="53166" data-suffix="">53166</div><div class="cl">FSP Number</div></div><div class="stat"><div class="cnt" data-target="3" data-suffix="">3</div><div class="cl">Risk Categories, One Broker</div></div><div class="stat"><div class="cnt" data-target="12" data-suffix="">12</div><div class="cl">Step BI Methodology</div></div><div class="stat"><div class="cnt" data-target="FAIS" data-suffix="">FAIS</div><div class="cl">Regulated Financial Services</div></div></div></div></div>
 
 <section id="insurance">
  <div class="wrap">
@@ -327,12 +365,14 @@ footer a:hover{color:var(--bone)}
 
   <div class="facetgrid">
 
-   <div class="facet">
-    <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/mine-risk-assessment.png" data-lightbox-alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" aria-label="View larger image of the mine risk assessment diagram">
-     <img class="fimg" src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers">
-     <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
-    </button>
-    <a class="fbody" href="insurance-mine.html">
+   <a class="facet" href="insurance-mine.html">
+    <div class="fimgwrap">
+     <img class="fimg" src="images/diagrams/mine-risk-assessment.webp" width="1408" height="768" loading="lazy" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers">
+     <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/mine-risk-assessment.webp" data-lightbox-alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" aria-label="View larger image of the mine risk assessment diagram">
+      <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+     </button>
+    </div>
+    <div class="fbody">
     <span class="fnum">01 — The Mine</span>
     <h3>Commercial Assets &amp; Business Interruption</h3>
     <p>Cover for the site itself: buildings, plant infrastructure, commercial assets, and the liabilities that come with operating a mine — plus the income you lose when operations stop.</p>
@@ -342,15 +382,17 @@ footer a:hover{color:var(--bone)}
      <li>Business interruption &amp; loss of income</li>
     </ul>
     <span class="go">Explore mine cover →</span>
-    </a>
-   </div>
+    </div>
+   </a>
 
-   <div class="facet">
-    <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/machinery-risk-assessment.png" data-lightbox-alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance" aria-label="View larger image of the machinery risk assessment diagram">
-     <img class="fimg" src="images/diagrams/machinery-risk-assessment.png" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance">
-     <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
-    </button>
-    <a class="fbody" href="insurance-machinery.html">
+   <a class="facet" href="insurance-machinery.html">
+    <div class="fimgwrap">
+     <img class="fimg" src="images/diagrams/machinery-risk-assessment.webp" width="1408" height="768" loading="lazy" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance">
+     <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/machinery-risk-assessment.webp" data-lightbox-alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance" aria-label="View larger image of the machinery risk assessment diagram">
+      <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+     </button>
+    </div>
+    <div class="fbody">
     <span class="fnum">02 — Machinery</span>
     <h3>Yellow Metal &amp; Machinery</h3>
     <p>Purpose-built cover for the heavy equipment that keeps a mine running — excavators, haul trucks, drill rigs and mobile plant — against breakdown, damage and loss.</p>
@@ -360,15 +402,17 @@ footer a:hover{color:var(--bone)}
      <li>Contractors' plant &amp; hired-in machinery</li>
     </ul>
     <span class="go">Explore machinery cover →</span>
-    </a>
-   </div>
+    </div>
+   </a>
 
-   <div class="facet">
-    <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/transit-risk-assessment.png" data-lightbox-alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure" aria-label="View larger image of the transit risk assessment diagram">
-     <img class="fimg" src="images/diagrams/transit-risk-assessment.png" alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure">
-     <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
-    </button>
-    <a class="fbody" href="insurance-transit.html">
+   <a class="facet" href="insurance-transit.html">
+    <div class="fimgwrap">
+     <img class="fimg" src="images/diagrams/transit-risk-assessment.webp" width="1408" height="768" loading="lazy" alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure">
+     <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/transit-risk-assessment.webp" data-lightbox-alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure" aria-label="View larger image of the transit risk assessment diagram">
+      <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+     </button>
+    </div>
+    <div class="fbody">
     <span class="fnum">03 — Transit</span>
     <h3>Transit of Valuable Metals</h3>
     <p>Specialist marine transit cover for the movement of valuable precious metals by land, air and sea — from mine gate to final destination.</p>
@@ -378,8 +422,8 @@ footer a:hover{color:var(--bone)}
      <li>Marine / sea freight cover</li>
     </ul>
     <span class="go">Explore transit cover →</span>
-    </a>
-   </div>
+    </div>
+   </a>
 
   </div>
  </div>
@@ -410,6 +454,7 @@ footer a:hover{color:var(--bone)}
     <span><i class="dot ok"></i>Production flowing</span>
     <span><i class="dot bad"></i>Single point of failure</span>
     <span><i class="dot cov"></i>BI cover carries fixed costs &amp; payroll</span>
+    <button class="flowtoggle" type="button" id="flowToggle" aria-pressed="false">⏸ Pause</button>
    </div>
    <div class="impact" id="impact"></div>
 </div>
@@ -421,6 +466,23 @@ footer a:hover{color:var(--bone)}
   <div class="eyebrow">Our Approach</div>
   <h2>From site data to <em>structured protection</em>.</h2>
   <p class="lede">We don't start with a policy template. We start with your operation, then run it through an actuarial, technical and technology layer to size cover against real exposure — not assumption.</p>
+  <div class="layers">
+   <div class="layer">
+    <span class="lnum">01 — Actuarial</span>
+    <h3>Quantify the exposure</h3>
+    <p>We model gross profit at risk, maximum foreseeable loss and downtime against your actual production data — not industry averages.</p>
+   </div>
+   <div class="layer">
+    <span class="lnum">02 — Technical</span>
+    <h3>Map the critical assets</h3>
+    <p>We rank equipment by production impact and replacement time to identify the single points of failure that drive your indemnity period.</p>
+   </div>
+   <div class="layer">
+    <span class="lnum">03 — Technology</span>
+    <h3>Structure the programme</h3>
+    <p>The output feeds directly into a sized Business Interruption sum insured and indemnity period — not a policy template.</p>
+   </div>
+  </div>
   <div class="enginebox">
    <button class="fimgbtn" type="button" data-lightbox-src="images/infographics/our-approach.webp" data-lightbox-alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection." aria-label="View larger image of the Our Approach diagram">
     <img class="infographic" src="images/infographics/our-approach.webp" width="1408" height="768" loading="lazy"
@@ -436,6 +498,27 @@ footer a:hover{color:var(--bone)}
   <div class="eyebrow">Our Products</div>
   <h2>Business interruption cover, <em>in three tiers</em>.</h2>
   <p class="lede">Match protection to your risk appetite today, and grow into full coverage as your quantification matures.</p>
+  <div class="tiergrid">
+   <div class="tier">
+    <span class="fnum">01 — Guarantee</span>
+    <h3>MineTrans Guarantee</h3>
+    <p>100% of quantified exposure covered under a fully structured Business Interruption programme — the full-protection tier.</p>
+   </div>
+   <div class="tier">
+    <span class="fnum">02 — Core</span>
+    <h3>MineTrans Core</h3>
+    <p>90% of quantified exposure covered, maximising savings while carrying the bulk of the risk your survey identified.</p>
+   </div>
+   <div class="tier">
+    <span class="fnum">03 — Flex</span>
+    <h3>MineTrans Flex</h3>
+    <p>An entry tier with a clear, costed roadmap towards full protection as your quantification and budget mature.</p>
+   </div>
+  </div>
+  <div class="tiercta">
+   <p>Not sure which tier fits your operation?</p>
+   <a class="ctabtn" href="contact.html">Talk to an advisor</a>
+  </div>
   <div class="enginebox" style="background:var(--onyx)">
    <button class="fimgbtn" type="button" data-lightbox-src="images/infographics/our-products.webp" data-lightbox-alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection)." aria-label="View larger image of the Our Products diagram">
     <img class="infographic" src="images/infographics/our-products.webp" width="1376" height="768" loading="lazy"
@@ -476,7 +559,7 @@ footer a:hover{color:var(--bone)}
     <a href="contact.html">Contact &amp; Reviews</a>
    </div>
   </div>
-  <p class="fsp">MineTrans is a division of <b>Donaldson Advisory Group</b>.</p>
+  <p class="fsp">MineTrans is a division of <b>Donaldson Advisory Group</b> &mdash; FSP No. 53166.</p>
   <div class="footbottom">
    <span>&copy; 2026 MineTrans Insurance Brokers. All rights reserved.</span>
    <span><a href="tel:+27115688472" style="display:inline;color:var(--platinum)">+27 11 568 8472</a> &nbsp;|&nbsp; <a href="https://www.minetrans.co.za" style="display:inline;color:var(--platinum)">www.minetrans.co.za</a></span>
@@ -533,7 +616,9 @@ document.addEventListener('DOMContentLoaded',function(){
       lightboxTrigger=null;
     }
     document.querySelectorAll('.fimgbtn[data-lightbox-src]').forEach(function(btn){
-      btn.addEventListener('click',function(){
+      btn.addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
         openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt,btn);
       });
     });
@@ -581,23 +666,43 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>
 (function(){
   var flow=document.getElementById('flow'),flowbox=document.getElementById('flowbox'),impact=document.getElementById('impact');
+  var toggle=document.getElementById('flowToggle');
   if(!flow)return;
   var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timers=[],paused=false,cycleCount=0,MAX_CYCLES=2;
   function ss(k){document.querySelectorAll('#flow .st').forEach(function(s){s.textContent=s.dataset[k]})}
   function si(m){if(!impact)return;
     if(m==='fail'){impact.className='impact show';impact.innerHTML='<span class="ih">Impact — uninsured</span><span class="iv">Production halted</span><span class="iv">Fixed costs continue</span><span class="iv">Payroll continues</span>'}
     else if(m==='rec'){impact.className='impact covered show';impact.innerHTML='<span class="ih">Impact — covered</span><span class="iv">Rebuild funded</span><span class="iv">Fixed costs paid</span><span class="iv">Cash flow protected</span>'}
     else impact.className='impact'}
+  function clearTimers(){timers.forEach(clearTimeout);timers=[]}
   function cyc(){
     flow.className='flow run';flowbox.classList.remove('failing');ss('ok');si('ok');
-    setTimeout(function(){flow.className='flow fail';flowbox.classList.add('failing');ss('fail');si('fail')},5000);
-    setTimeout(function(){flow.className='flow recover';flowbox.classList.remove('failing');ss('rec');si('rec')},9600);
-    setTimeout(cyc,14600);
+    timers.push(setTimeout(function(){flow.className='flow fail';flowbox.classList.add('failing');ss('fail');si('fail')},5000));
+    timers.push(setTimeout(function(){flow.className='flow recover';flowbox.classList.remove('failing');ss('rec');si('rec')},9600));
+    cycleCount++;
+    if(cycleCount<MAX_CYCLES){
+      timers.push(setTimeout(cyc,14600));
+    }else if(toggle){
+      timers.push(setTimeout(function(){toggle.textContent='↻ Replay';toggle.setAttribute('aria-pressed','true')},14600));
+    }
+  }
+  function start(){cycleCount=0;cyc();if(toggle){toggle.textContent='⏸ Pause';toggle.setAttribute('aria-pressed','false')}}
+  if(toggle){
+    toggle.addEventListener('click',function(){
+      if(toggle.textContent.indexOf('Replay')>-1){start();return}
+      paused=!paused;
+      if(paused){clearTimers();toggle.textContent='▶ Resume';toggle.setAttribute('aria-pressed','true')}
+      else{toggle.textContent='⏸ Pause';toggle.setAttribute('aria-pressed','false');cycleCount=0;cyc()}
+    });
   }
   if(!reduced){
-    var f=new IntersectionObserver(function(e){if(e[0].isIntersecting){cyc();f.disconnect()}},{threshold:.35});
+    var f=new IntersectionObserver(function(e){if(e[0].isIntersecting){start();f.disconnect()}},{threshold:.35});
     f.observe(flow);
-  }else{flow.classList.add('run');ss('ok')}
+  }else{
+    flow.classList.add('run');ss('ok');
+    if(toggle)toggle.style.display='none';
+  }
 })();
 </script>
 </body>

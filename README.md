@@ -3,8 +3,8 @@
  **MineTrans Insurance Brokers** — specialist mining and marine insurance broking solutions for
 Sub-Saharan Africa.
 
-MineTrans Insurance Brokers is a division of Donaldson Advisory
-Group (Pty) Ltd — FSP No. 53166.
+MineTrans Insurance Brokers is a division of Donaldson Advisory Group —
+FSP No. 53166.
 
 ---
 
