@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+# Internal employee tools and logged-in areas — not for indexing.
+Disallow: /blueprint.html
+Disallow: /blueprint-content.html
+Disallow: /blueprint-bi-assessment.html
+Disallow: /blueprint-bi-method-assessment.html
+Disallow: /student-portal.html
+Disallow: /admin
+Disallow: /api/
+
 Sitemap: https://www.minetrans.co.za/sitemap.xml

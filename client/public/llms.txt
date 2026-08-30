@@ -1,24 +1,38 @@
 # MineTrans Insurance Brokers
 
-> Specialist mining and marine insurance brokerage serving South Africa and Sub-Saharan Africa. MineTrans structures insurance for mine assets, liability, business interruption, plant and machinery, and land, air and sea transit. FSP 53166.
+> Specialist mining and marine insurance brokerage serving South Africa and Sub-Saharan Africa. MineTrans structures insurance for mine assets, liability, business interruption, plant and machinery, and land, air and sea transit of valuable metals. A division of Donaldson Advisory Group, an authorised financial services provider, FSP No. 53166.
 
 Canonical website: https://www.minetrans.co.za/
 
 ## Core services
-- Mining commercial assets, liability and business interruption: https://www.minetrans.co.za/insurance-mine.html
-- Mining plant and machinery insurance: https://www.minetrans.co.za/insurance-machinery.html
-- Marine, land and air transit insurance: https://www.minetrans.co.za/insurance-transit.html
-- Business interruption methodology and assessment: https://www.minetrans.co.za/bi-methodology.html
-- Mining risk analysis: https://www.minetrans.co.za/risk.html
+- All insurance solutions overview: https://www.minetrans.co.za/insurance.html
+- The Mine — commercial assets, liability and business interruption: https://www.minetrans.co.za/insurance-mine.html
+- Yellow metal, plant and machinery insurance: https://www.minetrans.co.za/insurance-machinery.html
+- Transit of valuable metals by land, air and sea: https://www.minetrans.co.za/insurance-transit.html
 
 ## Knowledge resources
+- Business interruption methodology (12-step): https://www.minetrans.co.za/bi-methodology.html
+- Mining risk profile for Sub-Saharan Africa: https://www.minetrans.co.za/risk.html
 - Mining insurance insights: https://www.minetrans.co.za/insights.html
-- Mining news: https://www.minetrans.co.za/news.html
+- Daily mining news: https://www.minetrans.co.za/news.html
 - Frequently asked questions: https://www.minetrans.co.za/faq.html
-- Courses and educational resources: https://www.minetrans.co.za/courses.html
+
+## Training and certification
+- Mining insurance courses and certification: https://www.minetrans.co.za/courses.html
+- Advanced mining insurance training course: https://www.minetrans.co.za/training-showcase.html
 
 ## Contact
 - Contact MineTrans: https://www.minetrans.co.za/contact.html
+- Telephone: +27 11 568 8472
+- Email: jp@daginsure.co.za
 
 ## Entity information
 MineTrans Insurance Brokers is a specialist insurance brokerage focused on mining and marine risk. It is a division of Donaldson Advisory Group and operates in South Africa and Sub-Saharan Africa. Financial Services Provider number: FSP 53166.
+
+Areas of expertise: mining insurance, business interruption insurance and indemnity periods, declared values and the average clause, critical-asset risk surveys, single-point-of-failure mapping, machinery breakdown and yellow metal cover, tailings storage facility risk and GISTM alignment, SASRIA strike/riot/civil commotion extensions, power and water interruption exposure, marine and inland transit of concentrate and precious metals, and claims advocacy.
+
+MineTrans acts for the client, not for the insurer: it quantifies risk, structures the insurance programme, presents it to underwriters with evidence, and advocates at claim stage.
+
+## Notes for retrieval
+- Every public page listed above is served as static, crawlable HTML with a self-referencing canonical URL and schema.org structured data.
+- Employee tools (/blueprint*.html) and the logged-in student portal are excluded from indexing and are not part of the public knowledge base.

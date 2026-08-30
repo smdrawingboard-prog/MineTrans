@@ -58,10 +58,25 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // `extensions` lets /faq resolve to /faq.html instead of falling through to the SPA
+  // shell. Both URLs then serve the same page, and each page's self-referencing
+  // canonical tag tells search engines the .html form is the one to index.
+  app.use(express.static(distPath, { extensions: ["html"] }));
 
-  // fall through to index.html if the file doesn't exist
+  // Fall through to the React application shell for anything that isn't a real file.
+  //
+  // The client build writes the SPA shell to dist/public/index.html, and the
+  // copy-html-files plugin then overwrites that filename with the static marketing
+  // homepage — preserving the shell as 404.html first. So 404.html, not index.html, is
+  // the shell, and it is what client-side routes (/certification, /admin, …) need here.
+  // Falling back to index.html instead would serve the marketing homepage for every app
+  // route and every unknown URL. The shell is marked noindex, so unknown URLs cannot be
+  // indexed as duplicates of the homepage.
+  const spaShell = path.resolve(distPath, "404.html");
+  const fallback = fs.existsSync(spaShell)
+    ? spaShell
+    : path.resolve(distPath, "index.html");
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(fallback);
   });
 }
