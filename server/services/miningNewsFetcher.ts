@@ -28,7 +28,8 @@ const RISK_CATEGORIES = {
   GENERAL: "General",
 };
 
-// Keywords for categorizing articles
+// Competitor brokers whose articles must never reach the MineTrans news feed.
+// Matched against headline, excerpt, publication and source URL.
 const EXCLUDED_BROKER_PATTERNS: RegExp[] = [
   /\bmarsh\b/i,
   /\baon\b/i,
@@ -42,7 +43,28 @@ const EXCLUDED_BROKER_PATTERNS: RegExp[] = [
   /\bolea\b/i,
 ];
 
-function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
+// Two broker names above are also ordinary English words, and mining coverage uses both
+// in their innocent sense — wetland rehabilitation near a tailings facility ("salt marsh"),
+// or a "compendium of regulations". These collocations are never how a broker is named in
+// a story about the firm, so allowing them removes false positives without letting a
+// competitor through.
+const BROKER_FALSE_POSITIVE_PATTERNS: RegExp[] = [
+  /\b(?:salt|tidal|coastal|fresh(?:\s|-)?water|reed|peat|wetland)\s+marsh(?:es|land)?\b/i,
+  /\bcompendium\s+of\b/i,
+];
+
+/**
+ * Strips text that only looks like a broker name so the exclusion check below sees the
+ * remaining, genuinely ambiguous mentions.
+ */
+function stripBrokerFalsePositives(text: string): string {
+  return BROKER_FALSE_POSITIVE_PATTERNS.reduce(
+    (acc, pattern) => acc.replace(new RegExp(pattern.source, "gi"), " "),
+    text
+  );
+}
+
+export function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
   const searchableText = [
     article.headline,
     article.excerpt,
@@ -52,7 +74,9 @@ function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
     .map((value) => String(value ?? ""))
     .join(" ");
 
-  return EXCLUDED_BROKER_PATTERNS.some((pattern) => pattern.test(searchableText));
+  const text = stripBrokerFalsePositives(searchableText);
+
+  return EXCLUDED_BROKER_PATTERNS.some((pattern) => pattern.test(text));
 }
 
 const INVALID_HEADLINES = new Set([
@@ -805,7 +829,17 @@ async function fetchFromMiningJournal(): Promise<InsertMiningNews[]> {
 /**
  * Generate fallback mining news articles for demonstration
  */
+/**
+ * Fallback articles are hand-written, but they are still routed through the broker
+ * exclusion so that every article the feed can emit has passed the same check.
+ */
 function generateFallbackMiningNews(): InsertMiningNews[] {
+  return buildFallbackMiningNews().filter(
+    (article) => !isExcludedBrokerArticle(article)
+  );
+}
+
+function buildFallbackMiningNews(): InsertMiningNews[] {
   const now = new Date();
   const fallbackArticles: InsertMiningNews[] = [
     {
