@@ -1,13 +1,29 @@
 {
-  "updatedAt": "2026-09-01T16:21:11.836Z",
+  "updatedAt": "2026-09-01T20:49:48.830Z",
   "articles": [
     {
-      "headline": "Health & Safety",
-      "excerpt": "Supplier & Distributor of the Widest Range of Accurate & Easy-to-Use Alcohol Breathalysers",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6580",
-      "publishedAt": "2026-09-01T16:21:08.400Z",
+      "headline": "The future of mining is wearable: Turning workforce visibility into operational excellence",
+      "excerpt": "For decades, mining executives have wrestled with what many believed was an unavoidable trade-off: produce more or protect more. The narrative was simple. Increased safety requirements, stricter regulations and more&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/the-future-of-mining-is-wearable-turning-workforce-visibility-into-operational-excellence/",
+      "publishedAt": "2026-09-01T20:49:47.669Z",
       "category": "Safety"
+    },
+    {
+      "headline": "The future of mining operations will be decided in the control room",
+      "excerpt": "Across southern Africa, the mining industry is investing billions in automation, artificial intelligence, remote operations and integrated control technologies. The sector’s next competitive advantage, however, may not come from the&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/the-future-of-mining-operations-will-be-decided-in-the-control-room/",
+      "publishedAt": "2026-09-01T20:49:47.669Z",
+      "category": "General"
+    },
+    {
+      "headline": "Avoiding critical infrastructure delays: Solutions for mining camp readiness and productivity",
+      "excerpt": "In the high-stakes arena of African mining, infrastructure bottlenecks – particularly delays in workforce accommodation, sanitation, water or power systems – frequently trigger substantial hidden costs. These include lost production&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/press-release/avoiding-critical-infrastructure-delays-solutions-for-mining-camp-readiness-and-productivity/",
+      "publishedAt": "2026-09-01T20:49:47.669Z",
+      "category": "Power & Water"
     },
     {
       "headline": "Op-Ed: Ethiopia&#8217;s hidden SEDEX deposit — part of Africa&#8217;s next great basin?",
