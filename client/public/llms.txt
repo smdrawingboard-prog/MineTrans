@@ -17,8 +17,17 @@ Canonical website: https://www.minetrans.co.za/
 - Frequently asked questions: https://www.minetrans.co.za/faq.html
 - Courses and educational resources: https://www.minetrans.co.za/courses.html
 
+## Training and certification
+- Mining insurance courses and certification: https://www.minetrans.co.za/courses.html
+- Advanced mining insurance training course: https://www.minetrans.co.za/training-showcase.html
+
 ## Contact
 - Contact MineTrans: https://www.minetrans.co.za/contact.html
 
 ## Entity information
 MineTrans Insurance Brokers is a specialist insurance brokerage focused on mining and marine risk. It is a division of Donaldson Advisory Group and operates in South Africa and Sub-Saharan Africa. Financial Services Provider number: FSP 53166.
+
+## Notes for retrieval
+- Every public page listed above is served as static, crawlable HTML with a self-referencing canonical URL and schema.org structured data.
+- Insights is a blog post authored by Roger Donaldson, Owner and Director of MineTrans Insurance Brokers.
+- Employee tools (/blueprint*.html) and the logged-in student portal are excluded from indexing and are not part of the public knowledge base.

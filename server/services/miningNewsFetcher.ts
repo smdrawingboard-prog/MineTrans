@@ -28,7 +28,9 @@ const RISK_CATEGORIES = {
   GENERAL: "General",
 };
 
-// Keywords for categorizing articles
+// Competing brokers the client asked us to keep out of the news feed entirely:
+// Marsh, AON, Lockton, GIB Insurance, Price Forbes, Compendium, Willis, Maksure
+// and OLEA. Matching is word-bounded so "Aonla" or "Marshall" don't trip it.
 const EXCLUDED_BROKER_PATTERNS: RegExp[] = [
   /\bmarsh\b/i,
   /\baon\b/i,
@@ -42,15 +44,30 @@ const EXCLUDED_BROKER_PATTERNS: RegExp[] = [
   /\bolea\b/i,
 ];
 
-function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
-  const searchableText = [
-    article.headline,
-    article.excerpt,
-    article.publication,
-    article.sourceUrl,
-  ]
-    .map((value) => String(value ?? ""))
-    .join(" ");
+// Two broker names are also ordinary mining vocabulary: "marsh" is wetland terrain
+// that turns up constantly in tailings and environmental reporting, and "compendium"
+// is a common noun in publishing copy. Strip those uses before the broker patterns
+// run so genuine mining stories aren't dropped as competitor coverage.
+const BROKER_FALSE_POSITIVE_PATTERNS: RegExp[] = [
+  /\b(?:salt|tidal|coastal|freshwater|reed|peat|tailings)\s+marsh(?:es)?\b/gi,
+  /\bmarsh(?:es|lands?|y)\b/gi,
+  /\bmarsh\s+gas\b/gi,
+  /\bcompendium\s+of\b/gi,
+];
+
+function stripBrokerFalsePositives(text: string): string {
+  return BROKER_FALSE_POSITIVE_PATTERNS.reduce(
+    (stripped, pattern) => stripped.replace(pattern, " "),
+    text
+  );
+}
+
+export function isExcludedBrokerArticle(article: InsertMiningNews): boolean {
+  const searchableText = stripBrokerFalsePositives(
+    [article.headline, article.excerpt, article.publication, article.sourceUrl]
+      .map((value) => String(value ?? ""))
+      .join(" ")
+  );
 
   return EXCLUDED_BROKER_PATTERNS.some((pattern) => pattern.test(searchableText));
 }
