@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-09-02T03:49:33.186Z",
+  "updatedAt": "2026-09-02T10:57:32.054Z",
   "articles": [
     {
-      "headline": "The future of mining is wearable: Turning workforce visibility into operational excellence",
-      "excerpt": "For decades, mining executives have wrestled with what many believed was an unavoidable trade-off: produce more or protect more. The narrative was simple. Increased safety requirements, stricter regulations and more&hellip;",
+      "headline": "BME reimagines mining by turning data into value",
+      "excerpt": "BME, an Omnia Holdings company, is reimagining blasting by harnessing the vast amounts of operational data generated across the mining supply chain to support better decisions and create measurable business&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/technology/the-future-of-mining-is-wearable-turning-workforce-visibility-into-operational-excellence/",
-      "publishedAt": "2026-09-02T03:49:31.357Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/bme-reimagines-mining-by-turning-data-into-value/",
+      "publishedAt": "2026-09-02T10:57:30.740Z",
+      "category": "Supply Chain"
+    },
+    {
+      "headline": "Fire safety in mining starts with the right equipment for the right environment",
+      "excerpt": "Fire is a material operational and safety risk across South Africa’s mining sector. The country’s latest mandatory fire prevention guideline recorded 584 reported mine-fire incidents between 2019 and 2023, with&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/safety/fire-safety-in-mining-starts-with-the-right-equipment-for-the-right-environment/",
+      "publishedAt": "2026-09-02T10:57:30.740Z",
       "category": "Safety"
     },
     {
-      "headline": "The future of mining operations will be decided in the control room",
-      "excerpt": "Across southern Africa, the mining industry is investing billions in automation, artificial intelligence, remote operations and integrated control technologies. The sector’s next competitive advantage, however, may not come from the&hellip;",
+      "headline": "Tyre handling is a safety issue, not just a maintenance task",
+      "excerpt": "In busy mining environments, tyre handling is far more than a maintenance activity – it is a critical safety function. Manual tyre handling introduces unnecessary risks, extends equipment downtime and&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/technology/the-future-of-mining-operations-will-be-decided-in-the-control-room/",
-      "publishedAt": "2026-09-02T03:49:31.357Z",
-      "category": "General"
+      "sourceUrl": "https://www.africanminingnews.co.za/safety/tyre-handling-is-a-safety-issue-not-just-a-maintenance-task/",
+      "publishedAt": "2026-09-02T10:57:30.740Z",
+      "category": "Machinery Breakdown"
     },
     {
-      "headline": "Avoiding critical infrastructure delays: Solutions for mining camp readiness and productivity",
-      "excerpt": "In the high-stakes arena of African mining, infrastructure bottlenecks – particularly delays in workforce accommodation, sanitation, water or power systems – frequently trigger substantial hidden costs. These include lost production&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/avoiding-critical-infrastructure-delays-solutions-for-mining-camp-readiness-and-productivity/",
-      "publishedAt": "2026-09-02T03:49:31.357Z",
-      "category": "Power & Water"
-    },
-    {
-      "headline": "Mine Safety Technology Solutions",
-      "excerpt": "A Leader in Mining Collision Avoidance Systems",
+      "headline": "Mineral Processing Equipment",
+      "excerpt": "Energy and Densification Systems (EDS) has developed equipment for crushing, milling, blending and densifying products. Based on its globally...",
       "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:8185",
-      "publishedAt": "2026-09-02T03:49:30.246Z",
-      "category": "Safety"
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:7653",
+      "publishedAt": "2026-09-02T10:57:30.248Z",
+      "category": "Power & Water"
     },
     {
       "headline": "Op-Ed: Ethiopia&#8217;s hidden SEDEX deposit — part of Africa&#8217;s next great basin?",
