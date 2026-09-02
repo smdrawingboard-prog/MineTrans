@@ -58,10 +58,20 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // `extensions` lets /faq resolve to faq.html, matching the extensionless links
+  // some pages use while the canonical URLs stay on the .html form.
+  app.use(express.static(distPath, { extensions: ["html"] }));
 
-  // fall through to index.html if the file doesn't exist
+  // The build overwrites dist/public/index.html with the static marketing homepage
+  // and preserves the React SPA shell as 404.html (see vitePluginCopyHtmlFiles).
+  // Falling back to index.html would therefore serve the marketing page for every
+  // client-side route (/certification, /admin, ...) and make the app unreachable.
+  const spaShell = path.resolve(distPath, "404.html");
+  const fallback = fs.existsSync(spaShell)
+    ? spaShell
+    : path.resolve(distPath, "index.html");
+
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(fallback);
   });
 }
