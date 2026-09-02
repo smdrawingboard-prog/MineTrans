@@ -199,7 +199,12 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  @media(max-width:900px){body{background-attachment:scroll}}
+  /* On mobile the backdrop moves to a fixed layer. background-attachment:scroll made the cover area the whole page, not the viewport, which magnified the blueprint ~4.6x into a blurry smear; a fixed element keeps it viewport-sized without the iOS jank of background-attachment:fixed. */
+@media(max-width:900px){
+ body{background-image:none;background-color:#0A0A0B}
+ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/method-of-mining-coal.jpg') center center/cover no-repeat}
+}
   .page{max-width:860px;margin:0 auto;padding:56px 28px 72px}
 
   /* Masthead */
