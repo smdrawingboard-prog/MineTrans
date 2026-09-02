@@ -586,7 +586,14 @@
                 gap: 1rem;
             }
         }
-    </style>
+    /* Mobile tap targets: footer nav links were 16px high. */
+@media(max-width:900px){
+ footer nav a{min-height:44px;display:inline-flex;align-items:center}
+ .logo,a{min-height:auto}
+ footer nav li{display:flex}
+ header a,.logo{min-height:44px;display:inline-flex;align-items:center}
+}
+</style>
 </head>
 <body>
     <!-- Navigation -->

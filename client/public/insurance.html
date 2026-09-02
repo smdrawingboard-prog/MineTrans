@@ -185,7 +185,7 @@ body{background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images
 @media(max-width:900px){
  body{background-image:none;background-color:#0A0A0B}
  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/clamshell-bucket.jpg') center center/cover no-repeat}
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/clamshell-bucket-900.webp') center center/cover no-repeat}
 }
 ::selection{background:var(--copper);color:var(--onyx)}
 img{max-width:100%;height:auto;display:block}
@@ -272,6 +272,20 @@ footer{border-top:1px solid var(--line);padding:clamp(40px,8vh,80px) 0;margin-to
  .dropbtn{width:100%;justify-content:space-between;padding:0}
  .hasdrop.open .dropmenu{position:static;transform:none;opacity:1;visibility:visible;display:none;box-shadow:none;border:0;border-left:2px solid var(--copper);margin-top:10px;background:none}
  .hasdrop.open .dropmenu{display:block}
+}
+/* Mobile tap targets. The burger was 34x27 and the in-menu section toggles 14px
+   high, both well under the 44px minimum for a primary control on a touch screen. */
+@media(max-width:900px){
+ .burger{width:44px;height:44px;padding:0;align-items:center;justify-content:center}
+ .navmark{min-height:44px}
+ .dropbtn{min-height:44px;padding:12px 0}
+ .dropmenu a{min-height:44px;justify-content:center}
+ .navlinks>a{min-height:44px;display:flex;align-items:center}
+ .navlinks>a.btn-nav{justify-content:center}
+ .herocta{min-height:44px}
+ .lightbox-close{min-height:44px}
+ footer a,header a{min-height:44px;display:inline-flex;align-items:center}
+ a[href^="tel:"],a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
 }
 </style>
 </head>

@@ -187,7 +187,7 @@ body{background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images
 @media(max-width:900px){
  body{background-image:none;background-color:#0A0A0B}
  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/method-of-mining-coal.jpg') center center/cover no-repeat}
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/method-of-mining-coal-900.webp') center center/cover no-repeat}
 }
 img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
@@ -360,6 +360,31 @@ footer a:hover{color:var(--bone)}
   background:var(--charcoal);border:1px solid var(--line);color:var(--bone);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
 .lightbox-close:hover{border-color:var(--copper)}
 .lightbox-close svg{width:18px;height:18px}
+
+/* On a phone the 92vw/88vh cap just re-shows the diagram at the size that was
+   already unreadable, so "enlarge" achieved nothing. Render it to the height of
+   the screen instead and let the overlay pan horizontally, which puts the labels
+   at a legible size. Pinch-zoom still works on top of this. */
+@media(max-width:900px){
+ .lightbox{padding:0}
+ .lightbox.open{display:block;overflow:auto;-webkit-overflow-scrolling:touch}
+ .lightbox img{max-width:none;max-height:none;width:auto;height:86vh;margin:7vh 0;border-radius:0;border:0}
+ .lightbox-close{position:fixed;top:14px;right:14px;width:44px;height:44px;z-index:2}
+}
+/* Mobile tap targets. The burger was 34x27 and the in-menu section toggles 14px
+   high, both well under the 44px minimum for a primary control on a touch screen. */
+@media(max-width:900px){
+ .burger{width:44px;height:44px;padding:0;align-items:center;justify-content:center}
+ .navmark{min-height:44px}
+ .dropbtn{min-height:44px;padding:12px 0}
+ .dropmenu a{min-height:44px;justify-content:center}
+ .navlinks>a{min-height:44px;display:flex;align-items:center}
+ .navlinks>a.btn-nav{justify-content:center}
+ .herocta{min-height:44px}
+ .lightbox-close{min-height:44px}
+ footer a,header a{min-height:44px;display:inline-flex;align-items:center}
+ a[href^="tel:"],a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
+}
 </style>
 </head>
 <body>
@@ -406,7 +431,10 @@ footer a:hover{color:var(--bone)}
 <section>
  <div class="wrap">
   <button class="pageinfographic" type="button" data-lightbox-src="images/diagrams/mine-risk-assessment.png" data-lightbox-alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" aria-label="View larger image of the mine risk assessment diagram">
-   <img src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers">
+   <picture>
+<source type="image/webp" srcset="images/diagrams/mine-risk-assessment-640.webp 640w, images/diagrams/mine-risk-assessment-1024.webp 1024w, images/diagrams/mine-risk-assessment-1408.webp 1408w" sizes="(max-width:900px) 89vw, 1050px">
+<img src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" decoding="async" loading="lazy">
+</picture>
    <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
   </button>
  </div>
@@ -478,7 +506,10 @@ footer a:hover{color:var(--bone)}
 </section>
 
 <figure class="photoband">
- <img src="images/mining/blasting-operations.jpg" alt="Blasting operations at an open-pit mine">
+ <picture>
+<source type="image/webp" srcset="images/mining/blasting-operations-640.webp 640w, images/mining/blasting-operations-1024.webp 1024w, images/mining/blasting-operations-1400.webp 1400w" sizes="100vw">
+<img src="images/mining/blasting-operations.jpg" alt="Blasting operations at an open-pit mine" decoding="async" loading="lazy">
+</picture>
  <figcaption class="cap">Operational risk, in the field &mdash; blasting and overburden removal</figcaption>
 </figure>
 
@@ -571,6 +602,12 @@ document.addEventListener('DOMContentLoaded',function(){
       btn.addEventListener('click',function(){
         openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt,btn);
       });
+    });
+    // The mobile overlay renders the diagram wider than the screen so its labels
+    // are legible. Open centred so both edges are visibly cut, which signals that
+    // it pans; harmless on desktop, where the image fits and there is nothing to scroll.
+    lightboxImg.addEventListener('load',function(){
+      lightbox.scrollLeft=(lightbox.scrollWidth-lightbox.clientWidth)/2;
     });
     lightboxClose.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',function(e){

@@ -154,7 +154,7 @@ body{background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images
 @media(max-width:900px){
  body{background-image:none;background-color:#0A0A0B}
  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/mining-machinery.jpg') center center/cover no-repeat}
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/mining-machinery-900.webp') center center/cover no-repeat}
 }
 img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
@@ -250,6 +250,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
   background:var(--charcoal);border:1px solid var(--line);color:var(--bone);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
 .lightbox-close:hover{border-color:var(--copper)}
 .lightbox-close svg{width:18px;height:18px}
+
+/* On a phone the 92vw/88vh cap just re-shows the diagram at the size that was
+   already unreadable, so "enlarge" achieved nothing. Render it to the height of
+   the screen instead and let the overlay pan horizontally, which puts the labels
+   at a legible size. Pinch-zoom still works on top of this. */
+@media(max-width:900px){
+ .lightbox{padding:0}
+ .lightbox.open{display:block;overflow:auto;-webkit-overflow-scrolling:touch}
+ .lightbox img{max-width:none;max-height:none;width:auto;height:86vh;margin:7vh 0;border-radius:0;border:0}
+ .lightbox-close{position:fixed;top:14px;right:14px;width:44px;height:44px;z-index:2}
+}
 
 /* generic content blocks used on facet pages */
 .blockgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
@@ -374,6 +385,20 @@ footer a:hover{color:var(--bone)}
 @media(prefers-reduced-motion:reduce){
   .introsplash{display:none}
 }
+/* Mobile tap targets. The burger was 34x27 and the in-menu section toggles 14px
+   high, both well under the 44px minimum for a primary control on a touch screen. */
+@media(max-width:900px){
+ .burger{width:44px;height:44px;padding:0;align-items:center;justify-content:center}
+ .navmark{min-height:44px}
+ .dropbtn{min-height:44px;padding:12px 0}
+ .dropmenu a{min-height:44px;justify-content:center}
+ .navlinks>a{min-height:44px;display:flex;align-items:center}
+ .navlinks>a.btn-nav{justify-content:center}
+ .herocta{min-height:44px}
+ .lightbox-close{min-height:44px}
+ footer a,header a{min-height:44px;display:inline-flex;align-items:center}
+ a[href^="tel:"],a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
+}
 </style>
 </head>
 <body>
@@ -446,7 +471,10 @@ footer a:hover{color:var(--bone)}
 
    <div class="facet">
     <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/mine-risk-assessment.png" data-lightbox-alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" aria-label="View larger image of the mine risk assessment diagram">
-     <img class="fimg" src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers">
+     <picture>
+<source type="image/webp" srcset="images/diagrams/mine-risk-assessment-640.webp 640w, images/diagrams/mine-risk-assessment-1024.webp 1024w, images/diagrams/mine-risk-assessment-1408.webp 1408w" sizes="(max-width:900px) 89vw, 340px">
+<img class="fimg" src="images/diagrams/mine-risk-assessment.png" alt="Mine asset &amp; operations risk diagram: property damage and business interruption exposure run through actuarial, technical and technology layers" decoding="async" loading="lazy">
+</picture>
      <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
     </button>
     <a class="fbody" href="insurance-mine.html">
@@ -464,7 +492,10 @@ footer a:hover{color:var(--bone)}
 
    <div class="facet">
     <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/machinery-risk-assessment.png" data-lightbox-alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance" aria-label="View larger image of the machinery risk assessment diagram">
-     <img class="fimg" src="images/diagrams/machinery-risk-assessment.png" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance">
+     <picture>
+<source type="image/webp" srcset="images/diagrams/machinery-risk-assessment-640.webp 640w, images/diagrams/machinery-risk-assessment-1024.webp 1024w, images/diagrams/machinery-risk-assessment-1408.webp 1408w" sizes="(max-width:900px) 89vw, 340px">
+<img class="fimg" src="images/diagrams/machinery-risk-assessment.png" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance" decoding="async" loading="lazy">
+</picture>
      <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
     </button>
     <a class="fbody" href="insurance-machinery.html">
@@ -482,7 +513,10 @@ footer a:hover{color:var(--bone)}
 
    <div class="facet">
     <button class="fimgbtn" type="button" data-lightbox-src="images/diagrams/transit-risk-assessment.png" data-lightbox-alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure" aria-label="View larger image of the transit risk assessment diagram">
-     <img class="fimg" src="images/diagrams/transit-risk-assessment.png" alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure">
+     <picture>
+<source type="image/webp" srcset="images/diagrams/transit-risk-assessment-640.webp 640w, images/diagrams/transit-risk-assessment-1024.webp 1024w, images/diagrams/transit-risk-assessment-1408.webp 1408w" sizes="(max-width:900px) 89vw, 340px">
+<img class="fimg" src="images/diagrams/transit-risk-assessment.png" alt="Logistics &amp; supply chain risk diagram: transit of valuable assets run through actuarial, technical and technology layers into supply chain exposure" decoding="async" loading="lazy">
+</picture>
      <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
     </button>
     <a class="fbody" href="insurance-transit.html">
@@ -503,7 +537,10 @@ footer a:hover{color:var(--bone)}
 </section>
 
 <figure class="photoband">
- <img src="images/mining/night-operations.jpg" alt="Mining stacker-reclaimer and conveyor structure lit up during night operations" style="object-position:center 42%">
+ <picture>
+<source type="image/webp" srcset="images/mining/night-operations-640.webp 640w, images/mining/night-operations-1024.webp 1024w, images/mining/night-operations-1600.webp 1600w" sizes="100vw">
+<img src="images/mining/night-operations.jpg" alt="Mining stacker-reclaimer and conveyor structure lit up during night operations" style="object-position:center 42%" decoding="async" loading="lazy">
+</picture>
  <figcaption class="cap">Sub-Saharan Africa &mdash; operations run around the clock</figcaption>
 </figure>
 
@@ -541,7 +578,7 @@ footer a:hover{color:var(--bone)}
   <div class="enginebox">
    <button class="fimgbtn" type="button" data-lightbox-src="images/infographics/our-approach.webp" data-lightbox-alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection." aria-label="View larger image of the Our Approach diagram">
     <img class="infographic" src="images/infographics/our-approach.webp" width="1408" height="768" loading="lazy"
-     alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection.">
+     alt="Our Approach: mine site operational data (equipment, site conditions, process flow) runs through MineTrans's actuarial, technical and technology layers to produce structured protection." srcset="images/infographics/our-approach-640.webp 640w, images/infographics/our-approach-1024.webp 1024w, images/infographics/our-approach-1408.webp 1408w" sizes="(max-width:900px) 89vw, 1050px" decoding="async">
     <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
    </button>
   </div>
@@ -556,7 +593,7 @@ footer a:hover{color:var(--bone)}
   <div class="enginebox" style="background:var(--onyx)">
    <button class="fimgbtn" type="button" data-lightbox-src="images/infographics/our-products.webp" data-lightbox-alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection)." aria-label="View larger image of the Our Products diagram">
     <img class="infographic" src="images/infographics/our-products.webp" width="1376" height="768" loading="lazy"
-     alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection).">
+     alt="Our Products: business interruption cover in three tiers on the same actuarial, technical, technology and MineTrans base — MineTrans Guarantee (100% exposure quantified and covered), MineTrans Core (90%, maximise savings and coverage), and MineTrans Flex (entry tier, a clear roadmap towards full protection)." srcset="images/infographics/our-products-640.webp 640w, images/infographics/our-products-1024.webp 1024w, images/infographics/our-products-1376.webp 1376w" sizes="(max-width:900px) 89vw, 1050px" decoding="async">
     <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
    </button>
   </div>
@@ -653,6 +690,12 @@ document.addEventListener('DOMContentLoaded',function(){
       btn.addEventListener('click',function(){
         openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt,btn);
       });
+    });
+    // The mobile overlay renders the diagram wider than the screen so its labels
+    // are legible. Open centred so both edges are visibly cut, which signals that
+    // it pans; harmless on desktop, where the image fits and there is nothing to scroll.
+    lightboxImg.addEventListener('load',function(){
+      lightbox.scrollLeft=(lightbox.scrollWidth-lightbox.clientWidth)/2;
     });
     lightboxClose.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',function(e){

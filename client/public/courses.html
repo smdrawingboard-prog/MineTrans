@@ -251,7 +251,15 @@
     .site-footer a { color: #c9cace; font-size: 13px; }
     .site-footer a:hover { color: #f7f5f1; }
     .site-footer small { color: #7d7d84; font-size: 12px; }
-  </style>
+  /* Mobile tap targets: nav and footer links were 14-16px high. */
+@media(max-width:900px){
+ .nav-menu a{min-height:44px;display:flex;align-items:center}
+ .navmark,.request-review-btn{min-height:44px;display:flex;align-items:center;justify-content:center}
+ .enroll-btn{min-height:44px}
+ .site-footer a{min-height:44px;display:inline-flex;align-items:center}
+ .course-detail a{min-height:44px}
+}
+</style>
 </head>
 <body>
   <nav class="navbar">
