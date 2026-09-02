@@ -151,6 +151,31 @@ footer a:hover{color:var(--bone)}
   background:var(--charcoal);border:1px solid var(--line);color:var(--bone);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
 .lightbox-close:hover{border-color:var(--copper)}
 .lightbox-close svg{width:18px;height:18px}
+
+/* On a phone the 92vw/88vh cap re-shows the diagram at the size that was
+   already unreadable, so "enlarge" achieved nothing. Render it to the height
+   of the screen and let the overlay pan horizontally, which puts the labels
+   at a legible size. Pinch-zoom still works on top of this. */
+@media(max-width:900px){
+ .lightbox{padding:0}
+ .lightbox.open{display:block;overflow:auto;-webkit-overflow-scrolling:touch}
+ .lightbox img{max-width:none;max-height:none;width:auto;height:86vh;margin:7vh 0;border-radius:0;border:0}
+ .lightbox-close{position:fixed;top:14px;right:14px;width:44px;height:44px;z-index:2}
+}
+/* Mobile tap targets: the burger was 34x27 and the in-menu section toggles
+   14px high, both well under the 44px minimum for a touch control. */
+@media(max-width:900px){
+ .burger{width:44px;height:44px;padding:0;align-items:center;justify-content:center}
+ .navmark{min-height:44px}
+ .dropbtn{min-height:44px;padding:12px 0}
+ .dropmenu a{min-height:44px;justify-content:center}
+ .navlinks>a{min-height:44px;display:flex;align-items:center}
+ .navlinks>a.btn-nav{justify-content:center}
+ .herocta{min-height:44px}
+ .lightbox-close{min-height:44px}
+ footer a,header a{min-height:44px;display:inline-flex;align-items:center}
+ a[href^="tel:"],a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
+}
 </style>
 <script type="application/ld+json">{
   "@context":"https://schema.org",
@@ -333,6 +358,12 @@ document.addEventListener('DOMContentLoaded',function(){
       btn.addEventListener('click',function(){
         openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt,btn);
       });
+    });
+    // The mobile overlay renders the diagram wider than the screen so its labels
+    // are legible. Open centred so both edges are visibly cut, which signals that
+    // it pans; inert on desktop, where the image fits and there is nothing to scroll.
+    lightboxImg.addEventListener('load',function(){
+      lightbox.scrollLeft=(lightbox.scrollWidth-lightbox.clientWidth)/2;
     });
     lightboxClose.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',function(e){

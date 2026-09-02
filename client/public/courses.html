@@ -20,7 +20,21 @@
     .stat-label { color: #c9cace; font-size: 0.9em; }
     .enroll-btn { background: #ad6a3d; color: #f7f5f1; border: none; padding: 12px 30px; border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 20px; transition: background 0.3s; }
     .enroll-btn:hover { background: #8b5a2f; }
-  </style>
+  /* Mobile tap targets: the burger was 34x27 and the in-menu section toggles
+   14px high, both well under the 44px minimum for a touch control. */
+@media(max-width:900px){
+ .burger{width:44px;height:44px;padding:0;align-items:center;justify-content:center}
+ .navmark{min-height:44px}
+ .dropbtn{min-height:44px;padding:12px 0}
+ .dropmenu a{min-height:44px;justify-content:center}
+ .navlinks>a{min-height:44px;display:flex;align-items:center}
+ .navlinks>a.btn-nav{justify-content:center}
+ .herocta{min-height:44px}
+ .lightbox-close{min-height:44px}
+ footer a,header a{min-height:44px;display:inline-flex;align-items:center}
+ a[href^="tel:"],a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
+}
+</style>
 </head>
 <body>
   <nav class="navbar">

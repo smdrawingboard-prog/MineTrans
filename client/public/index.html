@@ -130,6 +130,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .lightbox-close:hover{border-color:var(--copper)}
 .lightbox-close svg{width:18px;height:18px}
 
+/* On a phone the 92vw/88vh cap re-shows the diagram at the size that was
+   already unreadable, so "enlarge" achieved nothing. Render it to the height
+   of the screen and let the overlay pan horizontally, which puts the labels
+   at a legible size. Pinch-zoom still works on top of this. */
+@media(max-width:900px){
+ .lightbox{padding:0}
+ .lightbox.open{display:block;overflow:auto;-webkit-overflow-scrolling:touch}
+ .lightbox img{max-width:none;max-height:none;width:auto;height:86vh;margin:7vh 0;border-radius:0;border:0}
+ .lightbox-close{position:fixed;top:14px;right:14px;width:44px;height:44px;z-index:2}
+}
+
 /* Approach layers (3-step process, replaces image-only argument) */
 .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
 .layers .layer{border:1px solid var(--line);border-top:2px solid var(--copper);border-radius:4px;padding:26px 24px;background:var(--charcoal)}
@@ -276,6 +287,20 @@ footer a:hover{color:var(--bone)}
 @keyframes introOut{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}
 @media(prefers-reduced-motion:reduce){
   .introsplash{display:none}
+}
+/* Mobile tap targets: the burger was 34x27 and the in-menu section toggles
+   14px high, both well under the 44px minimum for a touch control. */
+@media(max-width:900px){
+ .burger{width:44px;height:44px;padding:0;align-items:center;justify-content:center}
+ .navmark{min-height:44px}
+ .dropbtn{min-height:44px;padding:12px 0}
+ .dropmenu a{min-height:44px;justify-content:center}
+ .navlinks>a{min-height:44px;display:flex;align-items:center}
+ .navlinks>a.btn-nav{justify-content:center}
+ .herocta{min-height:44px}
+ .lightbox-close{min-height:44px}
+ footer a,header a{min-height:44px;display:inline-flex;align-items:center}
+ a[href^="tel:"],a[href^="mailto:"]{min-height:44px;display:inline-flex;align-items:center}
 }
 </style>
 <script type="application/ld+json">{
@@ -647,6 +672,12 @@ document.addEventListener('DOMContentLoaded',function(){
         e.stopPropagation();
         openLightbox(btn.dataset.lightboxSrc,btn.dataset.lightboxAlt,btn);
       });
+    });
+    // The mobile overlay renders the diagram wider than the screen so its labels
+    // are legible. Open centred so both edges are visibly cut, which signals that
+    // it pans; inert on desktop, where the image fits and there is nothing to scroll.
+    lightboxImg.addEventListener('load',function(){
+      lightbox.scrollLeft=(lightbox.scrollWidth-lightbox.clientWidth)/2;
     });
     lightboxClose.addEventListener('click',closeLightbox);
     lightbox.addEventListener('click',function(e){
