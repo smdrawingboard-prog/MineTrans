@@ -32,7 +32,7 @@ body{background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images
 @media(max-width:900px){
  body{background-image:none;background-color:#0A0A0B}
  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/mining-dumper-blueprint.jpg') center center/cover no-repeat}
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/mining-dumper-blueprint-900.webp') center center/cover no-repeat}
 }
 img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
@@ -203,7 +203,10 @@ footer a:hover{color:var(--bone)}
 <section>
  <div class="wrap">
   <button class="pageinfographic" type="button" data-lightbox-src="images/diagrams/machinery-risk-assessment.webp" data-lightbox-alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance" aria-label="View larger image of the machinery risk assessment diagram">
-   <img src="images/diagrams/machinery-risk-assessment.webp" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance">
+   <picture>
+<source type="image/webp" srcset="images/diagrams/machinery-risk-assessment-640.webp 640w, images/diagrams/machinery-risk-assessment-1024.webp 1024w, images/diagrams/machinery-risk-assessment-1408.webp 1408w" sizes="(max-width:900px) 89vw, 1050px">
+<img src="images/diagrams/machinery-risk-assessment.webp" alt="Machinery risk diagram: equipment breakdown risk run through actuarial, technical and technology layers into reliability &amp; maintenance" decoding="async" loading="lazy">
+</picture>
    <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
   </button>
  </div>
@@ -234,7 +237,10 @@ footer a:hover{color:var(--bone)}
 </section>
 
 <figure class="photoband">
- <img src="images/mining/bucket-wheel-excavator.jpg" alt="Heavy mining machinery — bucket-wheel excavator in operation">
+ <picture>
+<source type="image/webp" srcset="images/mining/bucket-wheel-excavator-640.webp 640w, images/mining/bucket-wheel-excavator-1024.webp 1024w, images/mining/bucket-wheel-excavator-1400.webp 1400w" sizes="100vw">
+<img src="images/mining/bucket-wheel-excavator.jpg" alt="Heavy mining machinery — bucket-wheel excavator in operation" decoding="async" loading="lazy">
+</picture>
  <figcaption class="cap">Yellow metal at work &mdash; the fleet that keeps output moving</figcaption>
 </figure>
 

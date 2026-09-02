@@ -60,7 +60,7 @@
 @media(max-width:900px){
  body{background-image:none;background-color:#0A0A0B}
  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/method-of-mining-coal.jpg') center center/cover no-repeat}
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/method-of-mining-coal-900.webp') center center/cover no-repeat}
 }
   .page{max-width:860px;margin:0 auto;padding:56px 28px 72px}
 
@@ -274,7 +274,10 @@
   <div id="gated-content" hidden>
 
   <figure class="overview-figure">
-   <img src="images/diagrams/bi-methodology.jpg" alt="Overview diagram of the BI methodology: value chain and assets (SAG mill, crushers, tertiary crusher, mills, primary crusher, maximum foreseeable loss) feeding into quantification and sum insured (gross profit at risk, increased cost of working, formula-based sizing)">
+   <picture>
+<source type="image/webp" srcset="images/diagrams/bi-methodology-640.webp 640w, images/diagrams/bi-methodology-1024.webp 1024w, images/diagrams/bi-methodology-1920.webp 1920w" sizes="(max-width:900px) 89vw, 820px">
+<img src="images/diagrams/bi-methodology.jpg" alt="Overview diagram of the BI methodology: value chain and assets (SAG mill, crushers, tertiary crusher, mills, primary crusher, maximum foreseeable loss) feeding into quantification and sum insured (gross profit at risk, increased cost of working, formula-based sizing)" decoding="async" loading="lazy">
+</picture>
    <figcaption>The methodology at a glance — value chain and assets through to quantification and sum insured</figcaption>
   </figure>
 

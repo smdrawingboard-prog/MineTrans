@@ -34,7 +34,7 @@ body{background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images
 @media(max-width:900px){
  body{background-image:none;background-color:#0A0A0B}
  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/clamshell-bucket.jpg') center center/cover no-repeat}
+  background:linear-gradient(rgba(10,10,11,.8),rgba(10,10,11,.8)),url('images/blueprints/clamshell-bucket-900.webp') center center/cover no-repeat}
 }
 ::selection{background:var(--copper);color:var(--onyx)}
 img{max-width:100%;height:auto;display:block}
@@ -377,7 +377,10 @@ footer b{color:var(--platinum);font-weight:500}
   <h2 class="rv d1" style="max-width:24ch">Mining risk in Sub-Saharan Africa: <em>insurance as strategy, not paperwork.</em></h2>
 
   <figure class="photoband rv d2">
-   <img src="images/mining/excavation-overview.jpg" alt="Sub-Saharan Africa — sustained operational pressure">
+   <picture>
+<source type="image/webp" srcset="images/mining/excavation-overview-640.webp 640w, images/mining/excavation-overview-1024.webp 1024w, images/mining/excavation-overview-1400.webp 1400w" sizes="(max-width:900px) 89vw, 1050px">
+<img src="images/mining/excavation-overview.jpg" alt="Sub-Saharan Africa — sustained operational pressure" decoding="async" loading="lazy">
+</picture>
    <figcaption class="cap">Sub-Saharan Africa — sustained operational pressure</figcaption>
   </figure>
 
