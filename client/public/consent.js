@@ -170,6 +170,10 @@
     'cursor:pointer;text-decoration:underline;text-underline-offset:2px;opacity:.8;',
     'min-height:44px;display:inline-flex;align-items:center}',
     '.mtc-reopen:hover{opacity:1}',
+    '.mtc-pol{color:inherit;text-decoration:underline;text-underline-offset:2px;opacity:.8;min-height:44px;display:inline-flex;align-items:center}',
+    '.mtc-pol:hover{opacity:1}',
+    '.mtc-sep{opacity:.5}',
+    '.mtc-fallback{max-width:1100px;margin:0 auto;padding:0 22px 26px;font-size:12px;color:#9A9AA0}',
     '@media(max-width:760px){',
     '.mtc-in{padding:18px 16px;gap:16px}',
     '.mtc-acts{width:100%}',
@@ -286,8 +290,8 @@
       "We use cookies to keep the site working and, with your permission, to measure how it is used. " +
       "Nothing beyond what is strictly necessary is set until you choose. You can change this at any time. "
     ));
-    var link = el("a", null, "Ask us about your data");
-    link.href = "contact.html";
+    var link = el("a", null, "Read our cookie policy");
+    link.href = "/cookie-policy.html";
     p.appendChild(link);
     p.appendChild(document.createTextNode("."));
     copy.appendChild(p);
@@ -337,10 +341,28 @@
     btn.type = "button";
     btn.addEventListener("click", function () { render({ openPanel: true }); });
 
-    var host = footer.querySelector(".footbottom") || footer.querySelector(".inner") || footer;
+    var host = footer.querySelector(".footbottom") || footer.querySelector(".inner") ||
+               footer.querySelector(".wrap") || footer;
+
+    // bi-methodology.html keeps its whole footer inside a lead-gated container,
+    // so anchoring there would hide the controls from anyone who has not filled
+    // the form in. Withdrawing consent has to stay reachable, so fall back to a
+    // discreet strip at the end of the page whenever the footer is not rendered.
+    if (!footer.getClientRects().length) {
+      host = el("div", "mtc-fallback");
+      document.body.appendChild(host);
+    }
+
     var wrap = el("div");
     wrap.style.marginTop = "10px";
     wrap.style.fontSize = "12px";
+
+    if (!/\/cookie-policy\.html$/.test(location.pathname)) {
+      var pol = el("a", "mtc-pol", "Cookie policy");
+      pol.href = "/cookie-policy.html";
+      wrap.appendChild(pol);
+      wrap.appendChild(el("span", "mtc-sep", "\u00A0\u00B7\u00A0"));
+    }
     wrap.appendChild(btn);
     host.appendChild(wrap);
   }
