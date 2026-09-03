@@ -290,7 +290,7 @@
       "We use cookies to keep the site working and, with your permission, to measure how it is used. " +
       "Nothing beyond what is strictly necessary is set until you choose. You can change this at any time. "
     ));
-    var link = el("a", null, "Read our cookie policy");
+    var link = el("a", null, "Read our privacy & cookie policy");
     link.href = "/cookie-policy.html";
     p.appendChild(link);
     p.appendChild(document.createTextNode("."));
@@ -358,7 +358,7 @@
     wrap.style.fontSize = "12px";
 
     if (!/\/cookie-policy\.html$/.test(location.pathname)) {
-      var pol = el("a", "mtc-pol", "Cookie policy");
+      var pol = el("a", "mtc-pol", "Privacy & cookie policy");
       pol.href = "/cookie-policy.html";
       wrap.appendChild(pol);
       wrap.appendChild(el("span", "mtc-sep", "\u00A0\u00B7\u00A0"));
