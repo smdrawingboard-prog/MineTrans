@@ -188,6 +188,93 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "Indemnity Period",
         "Sum Insured"
       ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://www.minetrans.co.za/bi-methodology.html#howto",
+      "name": "How to calculate a business interruption sum insured for a mining operation",
+      "description": "A twelve-step method for identifying a mine's revenue-generating processes, quantifying the financial loss from disruption, and setting an appropriate business interruption sum insured and indemnity period.",
+      "inLanguage": "en-ZA",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Understand the Mining Operation",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-1"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Identify Business Interruption Triggers",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-2"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Identify Critical Assets",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-3"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Determine Maximum Foreseeable Loss (MFL)",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-4"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Calculate Gross Profit at Risk",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-5"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Determine Maximum Downtime",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-6"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "Estimate Reduction in Turnover",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-7"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 8,
+          "name": "Calculate Increased Cost of Working (ICOW)",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-8"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 9,
+          "name": "Consider Supply Chain Dependencies",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-9"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 10,
+          "name": "Assess Risk Mitigation Measures",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-10"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 11,
+          "name": "Select an Appropriate Indemnity Period",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-11"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 12,
+          "name": "Determine the BI Sum Insured",
+          "url": "https://www.minetrans.co.za/bi-methodology.html#step-12"
+        }
+      ],
+      "publisher": {
+        "@id": "https://www.minetrans.co.za/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://www.minetrans.co.za/bi-methodology.html#webpage"
+      }
     }
   ]
 }
@@ -325,11 +412,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   #lead-gate h2{border-bottom:none;padding-bottom:0;margin-bottom:10px}
   #lead-gate > p{color:var(--platinum);max-width:60ch;margin-bottom:22px}
-  #lead-gate.unlocked{opacity:.55;pointer-events:none}
-  #gated-content[hidden]{display:none}
   @media print{
     #lead-gate{display:none !important}
-    #gated-content[hidden]{display:block !important}
   }
   .lf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-bottom:16px}
   @media(max-width:560px){.lf-row{grid-template-columns:1fr}}
@@ -420,44 +504,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>A Practical Methodology for <span class="accent">Business Interruption</span> Insurance</h1>
   <p class="standfirst">A step-by-step approach to identifying a mine's revenue-generating processes, quantifying potential financial losses from disruption, and determining an appropriate insurance limit and indemnity period.</p>
 
-  <section id="lead-gate">
-    <h2>Unlock the Full 12-Step Guide</h2>
-    <p>Enter your details and a MineTrans advisor will apply this methodology to your operation &mdash; no obligation. Submitting unlocks the complete guide below.</p>
-    <form id="biLeadForm" novalidate>
-      <div class="lf-row">
-        <div class="lf-field">
-          <label for="lf-name">Full name *</label>
-          <input id="lf-name" name="contactName" type="text" autocomplete="name" required>
-        </div>
-        <div class="lf-field">
-          <label for="lf-company">Company / mine name *</label>
-          <input id="lf-company" name="companyName" type="text" autocomplete="organization" required>
-        </div>
-      </div>
-      <div class="lf-row">
-        <div class="lf-field">
-          <label for="lf-email">Email *</label>
-          <input id="lf-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="lf-field">
-          <label for="lf-phone">Phone</label>
-          <input id="lf-phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-      </div>
-      <div class="lf-field">
-        <label for="lf-message">Anything else MineTrans should know?</label>
-        <textarea id="lf-message" name="message" rows="3" placeholder="Commodity, site location, key risks, current insurer..."></textarea>
-      </div>
-      <label class="lf-consent" for="lf-popia">
-        <input id="lf-popia" name="popiaConsent" type="checkbox" required>
-        <span>I consent to MineTrans, a division of Donaldson Advisory Group, processing my details to respond to this enquiry, in line with POPIA. I may opt out at any time.</span>
-      </label>
-      <button type="submit" id="lf-submit">Unlock the Guide</button>
-      <p class="lf-status" id="lf-status" role="status" aria-live="polite"></p>
-    </form>
-  </section>
 
-  <div id="gated-content" hidden>
+  <div id="gated-content">
 
   <figure class="overview-figure">
    <picture>
@@ -468,7 +516,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </figure>
 
   <section id="operation">
-    <h2><span class="num">1.</span> Understand the Mining Operation</h2>
+    <h2 id="step-1"><span class="num">1.</span> Understand the Mining Operation</h2>
     <p>Document the complete mining value chain:</p>
     <ul class="chain">
       <li>Exploration (if applicable)</li>
@@ -485,12 +533,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <section id="triggers">
-    <h2><span class="num">2.</span> Identify Business Interruption Triggers</h2>
+    <h2 id="step-2"><span class="num">2.</span> Identify Business Interruption Triggers</h2>
     <p>Determine events that could stop or reduce production: fire, explosion, flood, slope failure, conveyor collapse, processing plant damage, power failure, tailings dam incident, equipment breakdown (if insured), natural catastrophes.</p>
   </section>
 
   <section id="critical-assets">
-    <h2><span class="num">3.</span> Identify Critical Assets</h2>
+    <h2 id="step-3"><span class="num">3.</span> Identify Critical Assets</h2>
     <p>Rank equipment according to impact on production. Example:</p>
     <div class="table-scroll">
 <table>
@@ -508,12 +556,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <section id="mfl">
-    <h2><span class="num">4.</span> Determine Maximum Foreseeable Loss (MFL)</h2>
+    <h2 id="step-4"><span class="num">4.</span> Determine Maximum Foreseeable Loss (MFL)</h2>
     <p>Estimate the worst realistic insured event — e.g. fire destroys the processing plant, production stops completely, rebuilding takes 16 months. This becomes the basis of the BI scenario.</p>
   </section>
 
   <section id="gross-profit">
-    <h2><span class="num">5.</span> Calculate Gross Profit at Risk</h2>
+    <h2 id="step-5"><span class="num">5.</span> Calculate Gross Profit at Risk</h2>
     <p>The insurance definition of Gross Profit differs from accounting gross profit.</p>
     <div class="formula">Gross Profit&nbsp;&nbsp;=&nbsp;&nbsp;Turnover&nbsp;&nbsp;&minus;&nbsp;&nbsp;Uninsured Variable Costs</div>
     <p><strong>Variable costs</strong> often include royalties, freight, export charges, fuel linked directly to production, consumables directly related to output.</p>
@@ -531,7 +579,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <section id="downtime">
-    <h2><span class="num">6.</span> Determine Maximum Downtime</h2>
+    <h2 id="step-6"><span class="num">6.</span> Determine Maximum Downtime</h2>
     <p>Estimate debris removal, engineering, procurement, manufacturing, shipping, customs, construction, commissioning, ramp-up. Example:</p>
     <div class="table-scroll">
 <table>
@@ -551,7 +599,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <section id="turnover">
-    <h2><span class="num">7.</span> Estimate Reduction in Turnover</h2>
+    <h2 id="step-7"><span class="num">7.</span> Estimate Reduction in Turnover</h2>
     <div class="table-scroll">
 <table>
       <thead><tr><th>Month</th><th>Production</th><th>Revenue Loss</th></tr></thead>
@@ -565,22 +613,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <section id="icow">
-    <h2><span class="num">8.</span> Calculate Increased Cost of Working (ICOW)</h2>
+    <h2 id="step-8"><span class="num">8.</span> Calculate Increased Cost of Working (ICOW)</h2>
     <p>Estimate additional costs incurred to reduce the interruption: hiring mobile crushers, contract mining, temporary generators, equipment rental, alternative haul routes, outsourced processing, air freight of spare parts. These costs are generally recoverable if economically justified.</p>
   </section>
 
   <section id="supply-chain">
-    <h2><span class="num">9.</span> Consider Supply Chain Dependencies</h2>
+    <h2 id="step-9"><span class="num">9.</span> Consider Supply Chain Dependencies</h2>
     <p>Evaluate single-source suppliers, explosives supply, electricity provider, water supply, rail network, port facilities, fuel suppliers. Also assess contingent business interruption exposures where available.</p>
   </section>
 
   <section id="mitigation">
-    <h2><span class="num">10.</span> Assess Risk Mitigation Measures</h2>
+    <h2 id="step-10"><span class="num">10.</span> Assess Risk Mitigation Measures</h2>
     <p>Document redundant conveyors, spare transformers, backup generators, critical spare parts, duplicate pumps, preventive maintenance, emergency response plans, fire protection systems, stockpile capacity. These measures can reduce BI exposure.</p>
   </section>
 
   <section id="indemnity">
-    <h2><span class="num">11.</span> Select an Appropriate Indemnity Period</h2>
+    <h2 id="step-11"><span class="num">11.</span> Select an Appropriate Indemnity Period</h2>
     <div class="table-scroll">
 <table>
       <thead><tr><th>Mine Type</th><th>Typical Indemnity Period</th></tr></thead>
@@ -598,7 +646,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <section id="sum-insured">
-    <h2><span class="num">12.</span> Determine the BI Sum Insured</h2>
+    <h2 id="step-12"><span class="num">12.</span> Determine the BI Sum Insured</h2>
     <div class="formula">BI Sum Insured&nbsp;&nbsp;=&nbsp;&nbsp;Annual Gross Profit&nbsp;&nbsp;&times;&nbsp;&nbsp;(Indemnity Period &divide; 12)&nbsp;&nbsp;+&nbsp;&nbsp;ICOW</div>
     <p class="example">Example: Annual Gross Profit USD 320m, Indemnity Period 18 months, ICOW USD 25m &nbsp;&rarr;&nbsp; (320 &times; 1.5) + 25 = <span class="result">USD 505 million</span></p>
   </section>
@@ -640,6 +688,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>This methodology aligns with common practices used by mining companies, insurers, brokers and risk engineers to establish appropriate Business Interruption insurance limits and support underwriting decisions.</p>
   </section>
 
+
+  <section id="lead-gate">
+    <h2>Apply this to your operation</h2>
+    <p>Working through the twelve steps against a live mine takes production data, a critical-asset view and claims history. Send your details and a MineTrans advisor will apply the methodology to your operation and come back with an indicative indemnity period and BI sum insured &mdash; no obligation.</p>
+    <form id="biLeadForm" novalidate>
+      <div class="lf-row">
+        <div class="lf-field">
+          <label for="lf-name">Full name *</label>
+          <input id="lf-name" name="contactName" type="text" autocomplete="name" required>
+        </div>
+        <div class="lf-field">
+          <label for="lf-company">Company / mine name *</label>
+          <input id="lf-company" name="companyName" type="text" autocomplete="organization" required>
+        </div>
+      </div>
+      <div class="lf-row">
+        <div class="lf-field">
+          <label for="lf-email">Email *</label>
+          <input id="lf-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="lf-field">
+          <label for="lf-phone">Phone</label>
+          <input id="lf-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+      </div>
+      <div class="lf-field">
+        <label for="lf-message">Anything else MineTrans should know?</label>
+        <textarea id="lf-message" name="message" rows="3" placeholder="Commodity, site location, key risks, current insurer..."></textarea>
+      </div>
+      <label class="lf-consent" for="lf-popia">
+        <input id="lf-popia" name="popiaConsent" type="checkbox" required>
+        <span>I consent to MineTrans, a division of Donaldson Advisory Group, processing my details to respond to this enquiry, in line with POPIA. I may opt out at any time.</span>
+      </label>
+      <button type="submit" id="lf-submit">Request a review</button>
+      <p class="lf-status" id="lf-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
   <footer>
     <div class="legal">MineTrans is a division of Donaldson Advisory Group, an authorised financial services provider, FSP No. 53166. <a href="cookie-policy.html">Privacy &amp; cookie policy</a>. This document is illustrative and for discussion purposes only.</div>
     <div class="cta"><a href="https://www.minetrans.co.za">Schedule a risk review &middot; minetrans.co.za</a></div>
@@ -650,23 +736,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <script>
 (function(){
-  var GATE_KEY = 'mt_bi_lead_unlocked';
-  var gate = document.getElementById('lead-gate');
-  var content = document.getElementById('gated-content');
   var form = document.getElementById('biLeadForm');
-  if(!gate || !content || !form) return;
+  if(!form) return;
 
   var submitBtn = document.getElementById('lf-submit');
   var status = document.getElementById('lf-status');
-
-  function unlock(){
-    content.hidden = false;
-    gate.classList.add('unlocked');
-  }
-
-  try {
-    if (sessionStorage.getItem(GATE_KEY) === '1') unlock();
-  } catch(e){}
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -689,28 +763,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Unlocking...';
+    submitBtn.textContent = 'Sending...';
 
     // Best-effort lead capture: this only reaches a server when the site is
     // deployed with the Express/API backend (see server/handlers/
     // biMethodologyLead.ts). On static hosting (e.g. GitHub Pages) this call
-    // has nothing to reach and fails silently — the gate still unlocks,
-    // since the on-page value exchange (details for the guide) already
-    // happened the moment the visitor submitted valid, consenting details.
+    // has nothing to reach and fails silently. The methodology itself is not
+    // withheld either way — this form requests a review, it does not unlock
+    // content.
     fetch('/api/leads/bi-methodology', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }).catch(function(){});
 
-    try { sessionStorage.setItem(GATE_KEY, '1'); } catch(e){}
-
-    status.textContent = 'Thank you — unlocking the guide...';
+    status.textContent = 'Thank you — a MineTrans advisor will be in touch.';
     status.setAttribute('data-state', 'success');
-    submitBtn.textContent = 'Unlocked';
+    submitBtn.textContent = 'Request sent';
 
     setTimeout(function(){
-      unlock();
       content.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 350);
   });
