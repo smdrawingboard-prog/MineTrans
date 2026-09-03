@@ -22,7 +22,7 @@ Canonical website: https://www.minetrans.co.za/
 - Advanced mining insurance training course: https://www.minetrans.co.za/training-showcase.html
 
 ## Legal
-- Cookie policy and POPIA data-subject rights: https://www.minetrans.co.za/cookie-policy.html
+- Privacy and cookie policy, POPIA data-subject rights: https://www.minetrans.co.za/cookie-policy.html
 
 ## Contact
 - Contact MineTrans: https://www.minetrans.co.za/contact.html
