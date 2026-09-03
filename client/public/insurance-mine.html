@@ -2,6 +2,17 @@
 <html lang="en-ZA">
 <head>
 <meta charset="UTF-8">
+<!-- Consent Mode defaults - must run before Google Tag Manager -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+(function(){var d={ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',
+analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied'};
+try{var s=localStorage.getItem('mt_consent_v1');if(s){var p=JSON.parse(s);
+for(var k in d){if(p[k]==='granted')d[k]='granted';}}}catch(e){}
+d.security_storage='granted';d.wait_for_update=500;
+gtag('consent','default',d);gtag('set','ads_data_redaction',d.ad_storage!=='granted');})();
+</script>
+<!-- End Consent Mode defaults -->
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -659,5 +670,6 @@ document.addEventListener('DOMContentLoaded',function(){
   }else{flow.classList.add('run');ss('ok')}
 })();
 </script>
+<script src="/consent.js" defer></script>
 </body>
 </html>
