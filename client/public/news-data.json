@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-09-04T10:56:38.165Z",
+  "updatedAt": "2026-09-04T16:03:33.652Z",
   "articles": [
     {
       "headline": "BME reimagines mining by turning data into value",
       "excerpt": "BME, an Omnia Holdings company, is reimagining blasting by harnessing the vast amounts of operational data generated across the mining supply chain to support better decisions and create measurable business&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/technology/bme-reimagines-mining-by-turning-data-into-value/",
-      "publishedAt": "2026-09-04T10:56:37.819Z",
+      "publishedAt": "2026-09-04T16:03:28.582Z",
       "category": "Supply Chain"
     },
     {
@@ -14,7 +14,7 @@
       "excerpt": "Fire is a material operational and safety risk across South Africa’s mining sector. The country’s latest mandatory fire prevention guideline recorded 584 reported mine-fire incidents between 2019 and 2023, with&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/safety/fire-safety-in-mining-starts-with-the-right-equipment-for-the-right-environment/",
-      "publishedAt": "2026-09-04T10:56:37.819Z",
+      "publishedAt": "2026-09-04T16:03:28.582Z",
       "category": "Safety"
     },
     {
@@ -22,16 +22,24 @@
       "excerpt": "In busy mining environments, tyre handling is far more than a maintenance activity – it is a critical safety function. Manual tyre handling introduces unnecessary risks, extends equipment downtime and&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/safety/tyre-handling-is-a-safety-issue-not-just-a-maintenance-task/",
-      "publishedAt": "2026-09-04T10:56:37.819Z",
+      "publishedAt": "2026-09-04T16:03:28.582Z",
       "category": "Machinery Breakdown"
     },
     {
-      "headline": "Fire Safety Solutions & Products",
-      "excerpt": "SafeQuip is a leading distributor and manufacturer of fire safety solutions, offering a comprehensive range of products designed to meet all...",
+      "headline": "Mineral Processing Equipment",
+      "excerpt": "Your global lifecycle technology & service partner for materials & minerals processing equipment for coal, iron ore, copper, manganese & other...",
       "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6554",
-      "publishedAt": "2026-09-04T10:56:36.644Z",
-      "category": "Safety"
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:7653",
+      "publishedAt": "2026-09-04T16:03:27.325Z",
+      "category": "Commodity Prices"
+    },
+    {
+      "headline": "African Rainbow Minerals profit up 19% on higher platinum prices",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/african-rainbow-minerals-profit-up-19-on-higher-platinum-prices/",
+      "publishedAt": "2026-09-04T13:50:23.000Z",
+      "category": "Commodity Prices"
     },
     {
       "headline": "Op-Ed: Ethiopia&#8217;s hidden SEDEX deposit — part of Africa&#8217;s next great basin?",
@@ -63,14 +71,6 @@
       "publication": "Mining.com",
       "sourceUrl": "https://www.mining.com/web/south-africas-northam-platinum-invites-more-potential-suitors-after-unsolicited-offer/",
       "publishedAt": "2026-08-25T13:32:55.000Z",
-      "category": "Commodity Prices"
-    },
-    {
-      "headline": "Central African Republic closes informal gold mine after collapse kills at least 49",
-      "excerpt": "",
-      "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/web/central-african-republic-closes-informal-gold-mine-after-collapse-kills-at-least-49/",
-      "publishedAt": "2026-08-20T16:52:38.000Z",
       "category": "Commodity Prices"
     }
   ]
