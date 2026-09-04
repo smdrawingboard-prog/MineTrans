@@ -38,7 +38,18 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
-  
+
+  // Permanent redirects for pages that have been removed, so URLs already in
+  // the index or in someone's bookmarks land on the page that replaced them
+  // rather than on a 404.
+  const GONE: Record<string, string> = {
+    "/courses.html": "/training-showcase.html",
+    "/courses": "/training-showcase.html",
+  };
+  app.get(Object.keys(GONE), (req, res) => {
+    res.redirect(301, GONE[req.path]);
+  });
+
   // Scheduled handlers (must be before tRPC middleware)
   app.post("/api/scheduled/refreshMiningNews", refreshMiningNewsHandler);
   app.post("/api/bi-assessment/generate", biAssessmentHandler);
