@@ -28,6 +28,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Mining &amp; Marine Insurance Brokers South Africa | MineTrans</title>
 <meta name="description" content="MineTrans structures cover for the mine, its machinery and the metals it moves: assets, liability, business interruption, plant and transit cover. FSP 53166.">
 <link rel="canonical" href="https://www.minetrans.co.za/">
+<link rel="stylesheet" href="/homepage-video.css">
+<link rel="preload" as="image" href="/videos/minetrans-insurance-homepage-poster.webp" fetchpriority="high">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="MineTrans Insurance Brokers">
 <meta name="geo.region" content="ZA">
@@ -417,32 +419,6 @@ footer a:hover{color:var(--bone)}
 .enginebox .fimgbtn:hover::after,.enginebox .fimgbtn:focus-visible::after{opacity:1}
 .enginebox .zoom svg{width:18px;height:18px;color:var(--bone)}
 
-/* INTRO SPLASH — logo & wordmark ease in over the mining photograph (with a
-   sheer dark tint so both stay readable), hold briefly, then the whole
-   overlay clears to reveal the site. Runs 1.2s total, and any click, key
-   press, or scroll dismisses it immediately. */
-.introsplash{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(rgba(10,10,11,.32),rgba(10,10,11,.32)),url('images/mining/haul-trucks-sunset.jpg') center/cover no-repeat;
-  animation:introOut .3s ease .9s forwards}
-.introsplash.static{animation:none;opacity:0;visibility:hidden;pointer-events:none}
-.introsplash.dismiss{animation:introOut .2s ease forwards;pointer-events:none}
-.introsplash::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 620px 260px at center,rgba(10,10,11,.6),transparent 72%)}
-.introsplash .isstage{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:22px}
-.introsplash .ismark{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-32px);
-  animation:introSlideIn .4s cubic-bezier(.16,1,.3,1) .1s forwards}
-.introsplash .ismark img{width:44px;height:44px;object-fit:contain;display:block}
-.introsplash .ismark span{font-family:var(--sf);font-size:26px;letter-spacing:.05em;color:var(--bone);font-weight:500;text-shadow:0 2px 12px rgba(10,10,11,.6)}
-.introsplash .isparent{font-family:var(--sf);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
-  text-align:center;max-width:min(86vw,420px);color:var(--copper-bright);opacity:0;text-shadow:0 2px 12px rgba(10,10,11,.6);
-  animation:introParentIn .35s ease .3s forwards}
-@media(max-width:480px){.introsplash .isparent{font-size:10.5px;letter-spacing:.1em}}
-@keyframes introSlideIn{from{opacity:0;transform:translateX(-64px)}to{opacity:1;transform:translateX(0)}}
-@keyframes introParentIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes introOut{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}
-@media(prefers-reduced-motion:reduce){
-  .introsplash{display:none}
-}
 /* Mobile tap targets: the burger was 34x27 and the in-menu section toggles
    14px high, both well under the 44px minimum for a touch control. */
 @media(max-width:900px){
@@ -466,36 +442,6 @@ footer a:hover{color:var(--bone)}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZTBRWHT"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<div class="introsplash" id="introsplash" aria-hidden="true">
- <div class="isstage">
-  <div class="ismark"><img src="images/logo/mt-badge.png" alt="MineTrans specialist mining, machinery and transit insurance" width="44" height="44"><span>MineTrans</span></div>
-  <div class="isparent">MineTrans is a division of Donaldson Advisory Group</div>
- </div>
-</div>
-<script>
-(function(){
-  var splash=document.getElementById('introsplash');
-  try{
-    if(localStorage.getItem('mt-intro-played')){
-      splash.classList.add('static');
-      return;
-    }
-    localStorage.setItem('mt-intro-played','1');
-  }catch(e){}
-  var dismissed=false;
-  function dismiss(){
-    if(dismissed)return;
-    dismissed=true;
-    splash.classList.add('dismiss');
-    ['click','keydown','wheel','touchstart','scroll'].forEach(function(evt){
-      window.removeEventListener(evt,dismiss,true);
-    });
-  }
-  ['click','keydown','wheel','touchstart','scroll'].forEach(function(evt){
-    window.addEventListener(evt,dismiss,{capture:true,passive:true});
-  });
-})();
-</script>
 <nav>
  <a class="navmark" href="index.html"><img class="mk" src="images/logo/mt-badge.png" alt="MineTrans">MineTrans</a>
  <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -526,11 +472,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </nav>
 
 <section class="hero">
- <div class="wrap in">
+ <div class="wrap in hero-video-layout">
+ <div class="hero-copy">
   <div class="eyebrow">Mining &amp; Marine Insurance Brokers &middot; FSP 53166</div>
   <h1>We insure the mine, <em>what moves it</em>, and <em>what it ships</em>.</h1>
   <p class="lede"><strong>MineTrans</strong> is a specialist insurance broking practice built for mining operations across South Africa and Sub-Saharan Africa. One point of accountability across three interconnected risk categories — the site, the equipment, and the cargo in transit.</p>
   <a class="herocta" href="contact.html">Request a no-obligation review &rarr;</a>
+ </div>
+ <figure class="hero-film" aria-label="MineTrans brand introduction">
+  <div class="hero-film-frame">
+   <img src="/videos/minetrans-insurance-homepage-poster.webp" width="910" height="512" alt="MineTrans logo over mining machinery" fetchpriority="high" decoding="async">
+   <video id="homepage-video" width="910" height="512" muted playsinline preload="none" poster="/videos/minetrans-insurance-homepage-poster.webp" aria-hidden="true" tabindex="-1" data-src="/videos/minetrans-insurance-homepage-video.mp4"></video>
+  </div>
+  <figcaption>
+   <span>MineTrans is a division of Donaldson Advisory Group.</span>
+   <button id="homepage-video-toggle" type="button" aria-controls="homepage-video" hidden>Play video</button>
+  </figcaption>
+  <p id="homepage-video-status" class="hero-film-status" role="status" hidden></p>
+ </figure>
  </div>
 </section>
 
@@ -909,5 +868,6 @@ document.addEventListener('DOMContentLoaded',function(){
 })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/homepage-video.js" defer></script>
 </body>
 </html>
