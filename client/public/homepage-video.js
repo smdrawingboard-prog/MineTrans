@@ -1,4 +1,4 @@
-/* No cookies, tracking, third-party player, or autoplay downloads on mobile. */
+/* Local silent intro; respect reduced motion and data saving on every screen. */
 (() => {
   'use strict';
   const video = document.getElementById('homepage-video');
@@ -6,7 +6,6 @@
   const status = document.getElementById('homepage-video-status');
   if (!video || !toggle || !status) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const mobile = window.matchMedia('(max-width: 900px)');
   const connection = navigator.connection;
   let userActed = false;
   let visible = true;
@@ -50,11 +49,10 @@
   ['pause', 'ended'].forEach(event => video.addEventListener(event, label));
   video.addEventListener('error', () => { stop(); video.classList.remove('has-frame'); });
   function constrained() {
-    return reduced.matches || mobile.matches || (connection && (connection.saveData || /(^|-)2g$|^3g$/.test(connection.effectiveType)));
+    return reduced.matches || (connection && (connection.saveData || /(^|-)2g$|^3g$/.test(connection.effectiveType)));
   }
   function policyChanged() { if (constrained()) stop(); }
   reduced.addEventListener('change', policyChanged);
-  mobile.addEventListener('change', policyChanged);
   if (connection && connection.addEventListener) connection.addEventListener('change', policyChanged);
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
   if ('IntersectionObserver' in window) {
@@ -63,7 +61,7 @@
       if (!visible) stop();
     }).observe(video);
   }
-  // Play once only, after page loading and a paint opportunity; never delay navigation.
+  // Loop silently after page loading and a paint opportunity; never delay navigation.
   function schedule() {
     window.setTimeout(() => {
       if (!userActed && !constrained() && !document.hidden && visible) play();

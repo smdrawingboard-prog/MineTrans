@@ -36,7 +36,10 @@ function setup({mobile = false, reduced = false, saveData = false, effectiveType
 const desktop=setup(); assert(!desktop.video.src); await desktop.run(); assert(!desktop.video.paused); assert.equal(desktop.toggle.textContent,'Pause video');
 desktop.toggle.click(); assert(desktop.video.paused); await desktop.run(); assert(desktop.video.paused);
 desktop.toggle.click(); await Promise.resolve(); desktop.hide(); assert(desktop.video.paused);
-for(const settings of [{mobile:true},{reduced:true},{saveData:true},{effectiveType:'2g'},{effectiveType:'3g'},{effectiveType:'slow-2g'}]){
+const phone=setup({mobile:true});await phone.run();assert(!phone.video.paused);
+assert(/<video[^>]*\sloop\s/.test(html));
+assert(html.indexOf('class="intro-video"') < html.indexOf('<h1>'));
+for(const settings of [{reduced:true},{saveData:true},{effectiveType:'2g'},{effectiveType:'3g'},{effectiveType:'slow-2g'}]){
   const test=setup(settings);await test.run();assert(!test.video.src);test.toggle.click();await Promise.resolve();assert(test.video.src);
 }
 const off=setup();await off.run();off.offscreen();assert(off.video.paused);
