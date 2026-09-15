@@ -1,29 +1,37 @@
 {
-  "updatedAt": "2026-09-15T04:15:07.216Z",
+  "updatedAt": "2026-09-15T11:26:10.067Z",
   "articles": [
     {
-      "headline": "BME reimagines mining by turning data into value",
-      "excerpt": "BME, an Omnia Holdings company, is reimagining blasting by harnessing the vast amounts of operational data generated across the mining supply chain to support better decisions and create measurable business&hellip;",
+      "headline": "The invisible load: WMI redefines workplace safety for women in mining",
+      "excerpt": "Building on its inaugural May 2026 dialogue, the Wits Mining Institute (WMI) recently convened leaders from academia, government, labour and industry for its second Beyond the Fence event, sponsored by&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/technology/bme-reimagines-mining-by-turning-data-into-value/",
-      "publishedAt": "2026-09-15T04:15:05.474Z",
-      "category": "Supply Chain"
-    },
-    {
-      "headline": "Fire safety in mining starts with the right equipment for the right environment",
-      "excerpt": "Fire is a material operational and safety risk across South Africa’s mining sector. The country’s latest mandatory fire prevention guideline recorded 584 reported mine-fire incidents between 2019 and 2023, with&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/safety/fire-safety-in-mining-starts-with-the-right-equipment-for-the-right-environment/",
-      "publishedAt": "2026-09-15T04:15:05.474Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/health/the-invisible-load-wmi-redefines-workplace-safety-for-women-in-mining/",
+      "publishedAt": "2026-09-15T11:26:09.789Z",
       "category": "Safety"
     },
     {
-      "headline": "Tyre handling is a safety issue, not just a maintenance task",
-      "excerpt": "In busy mining environments, tyre handling is far more than a maintenance activity – it is a critical safety function. Manual tyre handling introduces unnecessary risks, extends equipment downtime and&hellip;",
+      "headline": "What lies beneath can change groundwater risk in modern mining",
+      "excerpt": "Groundwater is difficult to see, yet easy to simplify. In water-scarce mining regions, however, it can be one of the most sensitive parts of the environmental system. Mining operations, neighbouring&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/safety/tyre-handling-is-a-safety-issue-not-just-a-maintenance-task/",
-      "publishedAt": "2026-09-15T04:15:05.474Z",
-      "category": "Machinery Breakdown"
+      "sourceUrl": "https://www.africanminingnews.co.za/press-release/what-lies-beneath-can-change-groundwater-risk-in-modern-mining/",
+      "publishedAt": "2026-09-15T11:26:09.789Z",
+      "category": "Tailings Risk"
+    },
+    {
+      "headline": "Royal Tyres and Ascenso join forces to reshape mining tyre solutions across southern Africa",
+      "excerpt": "Royal Tyres, the Durban-based South African tyre business with 87 years in the southern African market, has entered a strategic partnership with Ascenso, the India-headquartered global tyre manufacturer, which will&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/royal-tyres-and-ascenso-join-forces-to-reshape-mining-tyre-solutions-across-southern-africa/",
+      "publishedAt": "2026-09-15T11:26:09.789Z",
+      "category": "Commodity Prices"
+    },
+    {
+      "headline": "Materials Handling",
+      "excerpt": "Mitsubishi Chemical Advanced Materials South Africa (Pty) Ltd is a leading manufacturer of high-performance engineering plastics for the mining...",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6427",
+      "publishedAt": "2026-09-15T11:26:08.569Z",
+      "category": "General"
     },
     {
       "headline": "BMI cuts platinum, palladium price forecasts as car sales shrink and South African supply recovers",
