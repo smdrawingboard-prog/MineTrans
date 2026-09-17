@@ -1,20 +1,12 @@
 {
-  "updatedAt": "2026-09-16T21:06:02.938Z",
+  "updatedAt": "2026-09-17T04:18:00.021Z",
   "articles": [
-    {
-      "headline": "Mineral Processing Equipment",
-      "excerpt": "Multotec, recognised industry leaders in metallurgy and process engineering help mining houses across the world process minerals more efficiently,...",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:7653",
-      "publishedAt": "2026-09-16T21:06:02.327Z",
-      "category": "General"
-    },
     {
       "headline": "The invisible load: WMI redefines workplace safety for women in mining",
       "excerpt": "Building on its inaugural May 2026 dialogue, the Wits Mining Institute (WMI) recently convened leaders from academia, government, labour and industry for its second Beyond the Fence event, sponsored by&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/health/the-invisible-load-wmi-redefines-workplace-safety-for-women-in-mining/",
-      "publishedAt": "2026-09-16T21:06:02.324Z",
+      "publishedAt": "2026-09-17T04:17:58.099Z",
       "category": "Safety"
     },
     {
@@ -22,7 +14,7 @@
       "excerpt": "Groundwater is difficult to see, yet easy to simplify. In water-scarce mining regions, however, it can be one of the most sensitive parts of the environmental system. Mining operations, neighbouring&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/what-lies-beneath-can-change-groundwater-risk-in-modern-mining/",
-      "publishedAt": "2026-09-16T21:06:02.324Z",
+      "publishedAt": "2026-09-17T04:17:58.099Z",
       "category": "Tailings Risk"
     },
     {
@@ -30,8 +22,16 @@
       "excerpt": "Royal Tyres, the Durban-based South African tyre business with 87 years in the southern African market, has entered a strategic partnership with Ascenso, the India-headquartered global tyre manufacturer, which will&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/technology/royal-tyres-and-ascenso-join-forces-to-reshape-mining-tyre-solutions-across-southern-africa/",
-      "publishedAt": "2026-09-16T21:06:02.324Z",
+      "publishedAt": "2026-09-17T04:17:58.099Z",
       "category": "Commodity Prices"
+    },
+    {
+      "headline": "Drilling and Tunnelling",
+      "excerpt": "ROSOND provides fast, efficient, safe, and cost-effective drilling and grouting services to mining and exploration industries throughout Africa.",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:8098",
+      "publishedAt": "2026-09-17T04:17:57.099Z",
+      "category": "General"
     },
     {
       "headline": "BMI cuts platinum, palladium price forecasts as car sales shrink and South African supply recovers",
