@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineTrans Yellow Machinery Insurance for Mining Contractors</title>
+    <meta name="hz:slide-selector" content=".slide">
+    <meta name="hz:canvas-width" content="1200">
+    <meta name="hz:canvas-height" content="1600">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .slide {
+            width: 1200px;
+            height: 1600px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin: 20px auto;
+        }
+
+        /* SLIDE 1: HERO - MINING OPERATION */
+        .slide1 {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide1::before {
+            content: '';
+            position: absolute;
+            right: -100px;
+            top: -100px;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content .subtitle {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .mining-graphic {
+            flex: 1;
+            text-align: right;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .mining-graphic img {
+            max-width: 350px;
+            height: auto;
+            opacity: 0.9;
+            filter: brightness(0.95);
+        }
+
+        .logo-header {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 10;
+        }
+
+        .logo-header img {
+            height: 60px;
+            width: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #FFD700;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid #1a1a1a;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* SLIDE 2: THREE VALUATION METHODS */
+        .slide2 {
+            background: white;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #FFD700;
+            padding-bottom: 20px;
+            display: inline-block;
+        }
+
+        .valuation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .valuation-card {
+            background: #fafaf8;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #FFD700;
+            text-align: left;
+        }
+
+        .valuation-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .valuation-card p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .valuation-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .best-for {
+            font-size: 14px;
+            color: #FFD700;
+            font-weight: 600;
+            background: rgba(255,215,0,0.1);
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        /* SLIDE 3: OUR DIFFERENTIATOR */
+        .slide3 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 80px 60px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .differentiator-box {
+            background: rgba(255,215,0,0.1);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .differentiator-box h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: #FFD700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .differentiator-box p {
+            font-size: 20px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 20px;
+        }
+
+        .how-it-works {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .work-step {
+            background: rgba(255,215,0,0.05);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 3px solid #FFD700;
+        }
+
+        .work-step-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .work-step-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.5;
+        }
+
+        /* SLIDE 4: YELLOW MACHINERY COVERAGE */
+        .slide4 {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 100%), url('/home/user/MineTrans/client/public/images/mining/haul-truck-loading.jpg') right center/cover no-repeat;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .equipment-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .equipment-item {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+        }
+
+        .coverage-details {
+            background: #fafaf8;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #1a1a1a;
+        }
+
+        .detail-item::before {
+            content: '✓';
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* SLIDE 5: WHY CHOOSE MINETRANS */
+        .slide5 {
+            background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.93) 100%), url('/home/user/MineTrans/client/public/images/mining/bucket-wheel-excavator.jpg') right center/cover no-repeat;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 4px solid #FFD700;
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* SLIDE 6: PRICING & OFFER */
+        .slide6 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 80px 60px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pricing-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #FFD700;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .price-card {
+            background: rgba(255,215,0,0.1);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .price-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .price-features {
+            font-size: 14px;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .urgency {
+            background: rgba(255,215,0,0.2);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFD700;
+        }
+
+        /* SLIDE 7: CALL TO ACTION */
+        .slide7 {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 100px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .slide7 h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .slide7 p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            background: rgba(0,0,0,0.2);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .contact-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .roger-contact {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid white;
+        }
+
+        .roger-contact p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .final-cta {
+            background: #1a1a1a;
+            color: #FFD700;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid #1a1a1a;
+        }
+
+        .final-cta:hover {
+            background: transparent;
+            border-color: white;
+            color: white;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .accent {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: HERO - MINING OPERATION -->
+    <div class="slide slide1">
+        <div class="logo-header">
+            <img src="/home/user/MineTrans/client/public/images/logo/mt-badge.png" alt="MineTrans Logo">
+        </div>
+        <div class="hero-content">
+            <h1>Your Yellow Iron<br><span class="accent">Works Non-Stop.</span></h1>
+            <p class="subtitle">So Should Your Coverage.</p>
+            <p>Mining contractors can't afford downtime. When your excavator, loader, or dozer goes down, your crew stops and your margins disappear. MineTrans keeps your yellow machinery insured—so you're never caught off guard.</p>
+            <button class="cta-button">Get Protected Today</button>
+        </div>
+        <div class="mining-graphic">
+            <img src="/home/user/MineTrans/client/public/images/mining/excavator-loading.jpg" alt="Mining excavator at work">
+        </div>
+    </div>
+
+    <!-- SLIDE 2: THREE VALUATION METHODS -->
+    <div class="slide slide2">
+        <h2 class="section-header">Three Ways to Insure Your Equipment</h2>
+
+        <div class="valuation-grid">
+            <div class="valuation-card">
+                <div class="valuation-icon">📋</div>
+                <h3>Agreed Value</h3>
+                <p>You and MineTrans agree on what the equipment is worth today. No appraisals at claim time—just a straightforward payout when something goes wrong.</p>
+                <div class="best-for">Best for: Equipment you know well</div>
+            </div>
+
+            <div class="valuation-card">
+                <div class="valuation-icon">📊</div>
+                <h3>Market Value</h3>
+                <p>Coverage based on current fair market price for your specific make, model, and condition. Adjusts with market fluctuations and age of equipment.</p>
+                <div class="best-for">Best for: Flexible, market-aligned</div>
+            </div>
+
+            <div class="valuation-card">
+                <div class="valuation-icon">🔧</div>
+                <h3>New Replacement Value</h3>
+                <p>Full protection to replace your machine with brand new equivalent. Maximum coverage for critical equipment that can't afford to be out of service.</p>
+                <div class="best-for">Best for: Core revenue equipment</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: OUR DIFFERENTIATOR -->
+    <div class="slide slide3">
+        <div class="differentiator-box">
+            <h2>We Allocate Professionals to Determine the Correct Replacement Value</h2>
+            <p>This is what sets MineTrans apart. We don't guess. We send specialists who understand mining equipment to inspect your machinery, assess its true value, and ensure you're covered for exactly what it's worth.</p>
+        </div>
+
+        <div class="how-it-works">
+            <div class="work-step">
+                <div class="work-step-number">1</div>
+                <div class="work-step-text">You contact us with equipment details</div>
+            </div>
+            <div class="work-step">
+                <div class="work-step-number">2</div>
+                <div class="work-step-text">Our expert inspects on-site</div>
+            </div>
+            <div class="work-step">
+                <div class="work-step-number">3</div>
+                <div class="work-step-number">3</div>
+                <div class="work-step-text">We lock in the right value</div>
+            </div>
+            <div class="work-step">
+                <div class="work-step-number">4</div>
+                <div class="work-step-text">You're fully protected</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: YELLOW MACHINERY COVERAGE -->
+    <div class="slide slide4">
+        <h2 class="section-header">Complete Yellow Machinery Protection</h2>
+
+        <div class="equipment-list">
+            <div class="equipment-item">Excavators & Backhoes</div>
+            <div class="equipment-item">Wheel Loaders</div>
+            <div class="equipment-item">Bulldozers & Dozers</div>
+            <div class="equipment-item">Haul Trucks</div>
+            <div class="equipment-item">Motor Graders</div>
+            <div class="equipment-item">Skid Steers & Compact Equipment</div>
+        </div>
+
+        <div class="coverage-details">
+            <h3 style="font-size: 20px; margin-bottom: 20px; color: #1a1a1a;"><span class="accent">What's Covered:</span></h3>
+            <div class="detail-item">Mechanical breakdown and hydraulic failures</div>
+            <div class="detail-item">Accidental damage and collision</div>
+            <div class="detail-item">Electrical and engine failures</div>
+            <div class="detail-item">Transmission and drivetrain problems</div>
+            <div class="detail-item">24/7 emergency breakdown support line</div>
+            <div class="detail-item">Preferred mobile repair service network</div>
+            <div class="detail-item">Fast parts sourcing to minimize downtime</div>
+            <div class="detail-item">No waiting period—coverage starts immediately</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: WHY CHOOSE MINETRANS -->
+    <div class="slide slide5">
+        <h2 class="section-header">Why Mining Contractors Choose MineTrans</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>4-Hour Claims</h3>
+                <p>No red tape. We understand you can't wait. Fast assessment, faster approval, faster repairs.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Mining Expert Team</h3>
+                <p>We're not generic insurers. Our team lives and breathes mining operations—we get your business.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Professional Valuation</h3>
+                <p>No appraisals at claim time. We lock in the right value upfront with on-site inspections.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">📊</div>
+                <h3>Predictable Pricing</h3>
+                <p>Fixed premiums. No hidden fees. Budget with confidence. Scale coverage as you grow.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🚜</div>
+                <h3>Local Presence, National Reach</h3>
+                <p>We're local enough to understand your market, big enough to handle your claims.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">📞</div>
+                <h3>Contractor-Focused Support</h3>
+                <p>Contact us when you need to. We respond like we're part of your operation—because we are.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: PRICING & OFFER -->
+    <div class="slide slide6">
+        <h2 class="pricing-header">Transparent Pricing for Your Fleet</h2>
+
+        <div class="pricing-cards">
+            <div class="price-card">
+                <h3>STARTER</h3>
+                <div class="price">$1,500<span style="font-size: 20px;">/yr</span></div>
+                <div class="price-features">
+                    • 1-2 pieces of equipment<br>
+                    • Up to $500K coverage<br>
+                    • 24-hour support<br>
+                    • Emergency dispatch
+                </div>
+            </div>
+
+            <div class="price-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,165,0,0.1) 100%); transform: scale(1.05);">
+                <h3>STANDARD</h3>
+                <div class="price">$3,200<span style="font-size: 20px;">/yr</span></div>
+                <div class="price-features">
+                    • Up to 5 pieces<br>
+                    • Up to $1.5M coverage<br>
+                    • 4-hour claims<br>
+                    • Priority dispatch<br>
+                    <span style="font-weight: 700;">MOST CONTRACTORS CHOOSE THIS</span>
+                </div>
+            </div>
+
+            <div class="price-card">
+                <h3>ENTERPRISE</h3>
+                <div class="price">Custom</div>
+                <div class="price-features">
+                    • Unlimited equipment<br>
+                    • Coverage to $2M+<br>
+                    • Dedicated account manager<br>
+                    • Contract mining rates
+                </div>
+            </div>
+        </div>
+
+        <div class="urgency">
+            ⏰ LAUNCH OFFER: First 30 mining contractors get 15% OFF + Free Equipment Audit
+        </div>
+    </div>
+
+    <!-- SLIDE 7: CALL TO ACTION -->
+    <div class="slide slide7">
+        <div class="logo-header" style="top: 40px; left: 50%; transform: translateX(-50%); position: static; margin-bottom: 30px;">
+            <img src="/home/user/MineTrans/client/public/images/logo/mt-badge.png" alt="MineTrans Logo" style="height: 80px;">
+        </div>
+        <h1>Your Equipment Is Your Business.<br>Protect It Like It Is.</h1>
+        <p>Mining contractors need insurance that understands the grind. MineTrans was built for you—equipment specialists, claims that move fast, and coverage that actually works.</p>
+
+        <div class="contact-section">
+            <div class="contact-item">
+                <span class="contact-label">📞 CALL DIRECT:</span>
+                [Your Local Number] • Say "Mining Contractor" for instant routing
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">📧 EMAIL INQUIRY:</span>
+                contractors@minetrans.local
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">🌐 QUOTE PORTAL:</span>
+                minetrans.local/contractor-quote
+            </div>
+
+            <div class="roger-contact">
+                <p><strong>Contract Mining Specialists:</strong></p>
+                <p>Roger Donaldson<br>roger@minetrans.local<br>(Contract mining approach & bulk operations)</p>
+            </div>
+        </div>
+
+        <button class="final-cta">Get Your Quote in 5 Minutes</button>
+    </div>
+
+</body>
+</html>
