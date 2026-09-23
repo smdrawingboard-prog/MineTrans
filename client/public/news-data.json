@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-09-23T11:09:16.863Z",
+  "updatedAt": "2026-09-23T16:30:58.017Z",
   "articles": [
     {
       "headline": "WMI seminar challenges mining to move from legacy to leadership",
       "excerpt": "Learning from South African mining’s past consequences, and progressing toward a more sustainable and inclusive industry, will be the focus of the Wits Mining Institute (WMI) 2026 seminar. With the&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/wmi-seminar-challenges-mining-to-move-from-legacy-to-leadership/",
-      "publishedAt": "2026-09-23T11:09:16.075Z",
+      "publishedAt": "2026-09-23T16:30:55.866Z",
       "category": "General"
     },
     {
@@ -14,7 +14,7 @@
       "excerpt": "With fierce competition globally for investment capital, independent due diligence is essential for the credible and accurate valuation of mineral assets – even when not formally required by stock exchanges&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/minerals/how-due-diligence-underpins-credible-mineral-asset-valuation/",
-      "publishedAt": "2026-09-23T11:09:16.075Z",
+      "publishedAt": "2026-09-23T16:30:55.866Z",
       "category": "General"
     },
     {
@@ -22,16 +22,24 @@
       "excerpt": "The Africa Gas &amp; LNG Summit (AfGLNG) will take place in Maputo from 11 to 13 November 2026, bringing together government leaders, energy executives, investors and industry experts to examine&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/oil-gas/africa-gas-lng-summit-2026-to-bring-investment-and-local-value-into-focus-in-maputo/",
-      "publishedAt": "2026-09-23T11:09:16.075Z",
+      "publishedAt": "2026-09-23T16:30:55.866Z",
       "category": "Power & Water"
     },
     {
-      "headline": "Health & Safety",
-      "excerpt": "Supplier & Distributor of the Widest Range of Accurate & Easy-to-Use Alcohol Breathalysers",
+      "headline": "Instrumentation",
+      "excerpt": "FLANDERS Southern Africa provides integrated solutions for mining and industrial operations, covering field services, automation, electrification,...",
       "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6580",
-      "publishedAt": "2026-09-23T11:09:15.021Z",
-      "category": "Safety"
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6493",
+      "publishedAt": "2026-09-23T16:30:54.155Z",
+      "category": "General"
+    },
+    {
+      "headline": "Ex-Gold Fields CEO targets $1B Africa critical minerals fund",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/ex-gold-fields-ceo-targets-1b-africa-critical-minerals-fund/",
+      "publishedAt": "2026-09-23T14:58:43.000Z",
+      "category": "Commodity Prices"
     },
     {
       "headline": "West Africa key to gold growth, Fortuna CEO says",
@@ -63,14 +71,6 @@
       "publication": "Mining.com",
       "sourceUrl": "https://www.mining.com/op-ed-ethiopias-hidden-sedex-deposit-part-of-africas-next-great-basin/",
       "publishedAt": "2026-08-28T20:16:00.000Z",
-      "category": "General"
-    },
-    {
-      "headline": "South Africa&#8217;s Harmony raises dividend after profit surge",
-      "excerpt": "",
-      "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/web/south-africas-harmony-raises-dividend-after-profit-surge/",
-      "publishedAt": "2026-08-27T14:48:00.000Z",
       "category": "General"
     }
   ]
