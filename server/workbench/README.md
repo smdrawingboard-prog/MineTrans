@@ -35,3 +35,81 @@ Training input provenance persists after editing client names. Confirming client
 Unknown policy values produce an unconfirmed gap, rather than implying zero existing insurance. Uploaded evidence hashes and filenames are derived from the stored document when saving; user-supplied hashes for external references are rejected. The PDF contains a per-scenario calculation trail and the greatest economic exposure including excluded scenarios. Draft reports with missing data display an incomplete notice. Monetary outputs are rounded for display only.
 
 Historical PDFs retain their original saved engine output. Opening a historic version recalculates the interactive screen using the current engine and explicitly warns if versions differ; save a new assessment version to adopt the new calculations. The saved historical PDF is the authoritative snapshot.
+
+
+## Interim Google Sheets storage
+
+Set `WORKBENCH_STORAGE=sheets` to use Sheets instead of MySQL. MySQL remains the
+unchanged default; this switch does not migrate any existing database records.
+The frontend layout and API contracts are unchanged.
+
+Required Railway production variables:
+
+- `WORKBENCH_STORAGE=sheets`
+- `WORKBENCH_SHEETS_ID=17GvxSjTCNGq2wsOd1-pJ7E3InfIkTOPiLchHoCwobog`
+- `GOOGLE_SHEETS_CREDENTIALS`: existing server-only service-account JSON. That
+  account needs editor access to the workbook. Never expose it to the browser.
+- `WORKBENCH_ORIGIN=https://www.minetrans.co.za`
+- `WORKBENCH_SESSION_SECRET`, `WORKBENCH_DATA_KEY`, `WORKBENCH_USERS_JSON`: same
+  secure session key, AES-256 key, and named bcrypt accounts described above.
+  Sheets mode does not require `DATABASE_URL`.
+
+Run `node scripts/setup-workbench-sheets.mjs` in the server environment to create
+or verify **BI Web Records**. Setup does not alter the manual assessment tabs,
+leads, blog, or any existing records. Never run the MySQL setup script for Sheets.
+The BI Web Records tab has been prepared in the MineTrans workbook; setting
+Railway variables and provisioning accounts is still required for activation.
+
+### What is saved
+
+The website stores encrypted assessment snapshots (including the exact model
+results and report text), actor/time/version metadata, access changes, and uploaded
+evidence in BI Web Records. Both the index and payload are encrypted. Files stay
+behind the workbench's authenticated download endpoint; they are not public Drive
+links. The existing 2 MB per file and 50 files per assessment limits still apply.
+Payloads are split into cells of at most 40,000 characters and written in a single
+RAW append. No editable user text is interpreted as a spreadsheet formula.
+
+The manual BI Assessments/Costs/Scenarios/Schedule/ICOW/Evidence/Actions tabs are a
+separate interim workflow. There is no two-way import, automatic reconciliation,
+or automatic document extraction between those tabs and website snapshots.
+
+### Concurrency and recovery
+
+Rows form an append-only application event log. Replay in physical row order
+accepts a save only when its expected version matches the latest accepted version.
+If two servers append against the same version, only the first matching event is
+accepted. Later conflicts stay in the log but do not become saved versions; the
+API returns 409. Access revocations and the 50-document limit are checked again
+when replaying. Each write is read back before success is returned. Ambiguous
+network timeouts are checked by event UUID; the application never blindly retries
+an append. If confirmation fails, reopen the assessment before retrying.
+
+This is an interim, low-volume backend, bounded to 5,000 events (including rejected
+conflicts) and 200 visible assessments. Read/write quotas can temporarily prevent
+saving, especially with many concurrent users or large evidence files. The app
+fails closed and does not report unconfirmed writes as successful. Arrange migration
+before these limits. Batch requests reduce reads when listing assessments or
+verifying several evidence references.
+
+Do not edit, reorder, delete or insert rows in BI Web Records. Warning protection
+is an editing reminder, **not** a security boundary. Spreadsheet owners/editors can
+damage or roll back the log; encryption detects altered ciphertext but cannot prove
+that rows were never deleted or reordered. This is **not** an immutable regulatory
+audit archive. Retain restricted workbook version history and backups plus a secure
+backup of WORKBENCH_DATA_KEY; losing/replacing the key makes old data unreadable.
+Do not share this multipurpose workbook with insurers: give named workbench access
+only. Do not switch backends after collecting data without an explicit migration.
+
+### Verification and activation
+
+- `node --test server/workbench/sheets-store.test.mjs`
+- `pnpm exec vitest run server/workbench/routes.test.ts server/workbench/sheets-routes.test.ts`
+- `pnpm check` and `pnpm build` in a complete checkout.
+
+Tests use an in-memory Sheets API double; they verify concurrent version conflicts,
+timeout recovery, access revocation, encrypted payload integrity, document limits,
+and the HTTP save/reopen/upload/PDF lifecycle. They do not establish live Railway
+credentials or Google permissions. After deployment, use a clearly labeled test
+assessment to verify sign-in, save/reopen, evidence download, assigned insurer
+contribution/revocation, and PDF export before using real mine data.
