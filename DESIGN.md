@@ -21,7 +21,7 @@ typography:
     lineHeight: 1.1
     letterSpacing: "-0.01em"
   label:
-    fontFamily: "'Jost', sans-serif"
+    fontFamily: "'Poppins', sans-serif"
     fontSize: "12px"
     fontWeight: 400
     lineHeight: 1.4
@@ -113,13 +113,13 @@ components:
 
 **Creative North Star: "The Assay Office"**
 
-MineTrans reads like the private office where a mine's risk gets weighed, certified, and sealed — not a marketing site dressed up to look serious. The palette is near-black onyx and charcoal, the type pairs an old-world serif (Playfair Display) for authority with a tightly-tracked uppercase sans (Jost) for procedure, and every number that matters — statistics, line references, table values, node status — drops into monospace (IBM Plex Mono) so it visibly reads as *measured*, not narrated. Copper is the one accent, used sparingly: a thin structural line, a single button, a label. The overall register is **quietly luxurious** — restrained and expensive-feeling rather than flashy — and it explicitly rejects the neon-glow, dense-dashboard energy of flashy fintech/crypto products. Nothing here should feel like it's trying to impress; it should feel like it's already trusted.
+MineTrans reads like the private office where a mine's risk gets weighed, certified, and sealed — not a marketing site dressed up to look serious. The palette is near-black onyx and charcoal, the type pairs an old-world serif (Playfair Display) for authority with a tightly-tracked uppercase sans (Poppins) for procedure, and every number that matters — statistics, line references, table values, node status — drops into monospace (IBM Plex Mono) so it visibly reads as *measured*, not narrated. Copper is the one accent, used sparingly: a thin structural line, a single button, a label. The overall register is **quietly luxurious** — restrained and expensive-feeling rather than flashy — and it explicitly rejects the neon-glow, dense-dashboard energy of flashy fintech/crypto products. Nothing here should feel like it's trying to impress; it should feel like it's already trusted.
 
 The system is presently flat by construction (see Elevation & Depth for the confirmed direction to open this up going forward), and its one recurring piece of drama — a colored glow ring — is reserved exclusively for signaling risk state in the BI-failure animation, never used decoratively.
 
 **Key Characteristics:**
 - Near-black onyx/charcoal surfaces with a single copper accent, used sparingly
-- Serif display headlines (Playfair Display) paired with heavily-tracked uppercase sans labels (Jost)
+- Serif display headlines (Playfair Display) paired with heavily-tracked uppercase sans labels (Poppins)
 - Numbers and data render in monospace (IBM Plex Mono) to read as measured fact, not prose
 - Sharp, small corner radii (2–4px) — nothing rounded enough to feel soft or consumer-app
 - Flat by default; the only chromatic glow is a reserved semantic for risk-state visualization
@@ -150,7 +150,7 @@ Deliberately restrained: one dark neutral family, one accent, used almost everyw
 ## Typography
 
 **Display Font:** Playfair Display (serif), with a system-serif fallback
-**Label Font:** Jost (sans-serif), with a system-sans fallback
+**Label Font:** Poppins (sans-serif), with a system-sans fallback
 **Body Font:** Inter (sans-serif), with a system-sans fallback
 **Mono Font:** IBM Plex Mono (monospace), with a system-mono fallback
 
@@ -201,7 +201,7 @@ Buttons, cards, and inputs should feel **quietly confident**: understated at res
 
 ### Buttons
 - **Shape:** 2px radius, functionally square.
-- **Primary:** Copper-Bright background, Onyx text, Jost label typography (12–12.5px, 0.08em tracking, uppercase), 15px/34px padding.
+- **Primary:** Copper-Bright background, Onyx text, Poppins label typography (12–12.5px, 0.08em tracking, uppercase), 15px/34px padding.
 - **Hover / Focus:** background flips to Bone (the only color change; no scale, no shadow).
 
 ### Cards / Containers (`.facet`)
@@ -213,13 +213,13 @@ Buttons, cards, and inputs should feel **quietly confident**: understated at res
 
 ### Inputs / Fields
 - **Style:** Onyx background (a shade darker than the Charcoal form panel it sits in), 1px Platinum hairline border, Bone text, 13px/15px padding, no radius rounding beyond the card default.
-- **Label:** Jost, 11px, 0.12em tracking, uppercase, Platinum — always above the field, never inline/floating.
+- **Label:** Poppins, 11px, 0.12em tracking, uppercase, Platinum — always above the field, never inline/floating.
 - **Focus:** border shifts from hairline Platinum to the copper-tinted line color (`rgba(173,106,61,.35)`) — no glow, no outline, just a color-shifted border.
-- **Feedback:** inline message text below the form, Jost 12.5px; success in Copper-Bright, error in a dedicated red (`#E04B4B`) reserved for error/failure states only.
+- **Feedback:** inline message text below the form, Poppins 12.5px; success in Copper-Bright, error in a dedicated red (`#E04B4B`) reserved for error/failure states only.
 
 ### Navigation
 - Fixed, translucent Onyx (90% opacity) with a 14px backdrop blur and a 1px bottom hairline.
-- Labels are Jost, 12.5px, 0.05em tracking, uppercase, Platinum at rest, Bone on hover/active.
+- Labels are Poppins, 12.5px, 0.05em tracking, uppercase, Platinum at rest, Bone on hover/active.
 - Dropdown submenus: Charcoal background, 2px Copper top border, 4px radius, Popover shadow, top-edge fade/slide-in transition.
 
 ### Photo Bands (signature component)
@@ -243,5 +243,5 @@ Bordered, Charcoal-background containers (6px radius) that hold a single illustr
 - **Don't** reach for a thick colored left-border ("side-tab") treatment on cards or callouts — an older `.block` pattern still has one, but the course components were deliberately moved off it this session to a uniform 1px hairline border; new work should follow the hairline treatment, not the legacy left-border one.
 - **Don't** round corners past 4px on anything text-bearing (buttons, cards, inputs, nav) — soft/pill shapes read as consumer-app, not this system.
 - **Don't** style this as a bright, dense, neon fintech/crypto dashboard — the confirmed anti-reference. Restraint and negative space are load-bearing, not empty.
-- **Don't** use Inter, Jost, or Playfair Display outside their assigned roles (body / label / display respectively) — don't, for example, set a headline in Jost or a label in Inter.
+- **Don't** use Inter, Poppins, or Playfair Display outside their assigned roles (body / label / display respectively) — don't, for example, set a headline in Poppins or a label in Inter.
 - **Don't** use Failure Red (`#E04B4B`) for anything but danger/error/failure signaling — it is not a decorative "warm" alternative to copper.

@@ -44,7 +44,7 @@
       "refersTo": "button-primary",
       "description": "The site's one CTA style — copper background, sharp corners, flips to bone on hover.",
       "html": "<a class=\"ds-btn-primary\" href=\"#\">Request a Review</a>",
-      "css": ".ds-btn-primary { display: inline-block; font-family: 'Jost', sans-serif; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0B; background: #C9854F; padding: 15px 34px; border-radius: 2px; text-decoration: none; transition: background 0.2s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #F7F5F1; } .ds-btn-primary:focus-visible { outline: 2px solid #C9854F; outline-offset: 2px; }"
+      "css": ".ds-btn-primary { display: inline-block; font-family: 'Poppins', sans-serif; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0B; background: #C9854F; padding: 15px 34px; border-radius: 2px; text-decoration: none; transition: background 0.2s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #F7F5F1; } .ds-btn-primary:focus-visible { outline: 2px solid #C9854F; outline-offset: 2px; }"
     },
     {
       "name": "Facet Card",
@@ -52,7 +52,7 @@
       "refersTo": "card-facet",
       "description": "The system's signature card: hairline border that flips to solid copper and lifts 4px on hover.",
       "html": "<a class=\"ds-facet\" href=\"#\"><span class=\"ds-facet-num\">01 — The Mine</span><h3 class=\"ds-facet-title\">Commercial Assets &amp; Business Interruption</h3><p class=\"ds-facet-body\">Cover for the site itself: buildings, plant infrastructure, and the income you lose when operations stop.</p><span class=\"ds-facet-go\">Explore mine cover →</span></a>",
-      "css": ".ds-facet { background: #1E1D20; border: 1px solid rgba(201,202,206,.14); border-radius: 4px; padding: 34px 28px; text-decoration: none; display: flex; flex-direction: column; gap: 14px; transition: border-color 0.2s, transform 0.2s; } .ds-facet:hover, .ds-facet:focus-visible { border-color: #AD6A3D; transform: translateY(-4px); } .ds-facet-num { font-family: 'Playfair Display', serif; font-size: 13px; color: #C9854F; letter-spacing: 0.1em; } .ds-facet-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 22px; color: #F7F5F1; margin: 0; } .ds-facet-body { color: #C9CACE; font-size: 14.5px; font-weight: 300; flex: 1; margin: 0; } .ds-facet-go { font-family: 'Jost', sans-serif; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9854F; margin-top: auto; }"
+      "css": ".ds-facet { background: #1E1D20; border: 1px solid rgba(201,202,206,.14); border-radius: 4px; padding: 34px 28px; text-decoration: none; display: flex; flex-direction: column; gap: 14px; transition: border-color 0.2s, transform 0.2s; } .ds-facet:hover, .ds-facet:focus-visible { border-color: #AD6A3D; transform: translateY(-4px); } .ds-facet-num { font-family: 'Playfair Display', serif; font-size: 13px; color: #C9854F; letter-spacing: 0.1em; } .ds-facet-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 22px; color: #F7F5F1; margin: 0; } .ds-facet-body { color: #C9CACE; font-size: 14.5px; font-weight: 300; flex: 1; margin: 0; } .ds-facet-go { font-family: 'Poppins', sans-serif; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9854F; margin-top: auto; }"
     },
     {
       "name": "Text Input",
@@ -60,7 +60,7 @@
       "refersTo": "input-field",
       "description": "Form field: onyx-on-charcoal, hairline border that shifts to a copper-tinted line on focus.",
       "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-name\">Full Name</label><input class=\"ds-field-input\" id=\"ds-name\" type=\"text\" placeholder=\"Jane Dlamini\" /></div>",
-      "css": ".ds-field-label { display: block; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9CACE; margin-bottom: 7px; } .ds-field-input { width: 100%; background: #0A0A0B; border: 1px solid rgba(201,202,206,.14); color: #F7F5F1; padding: 13px 15px; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.3s; box-sizing: border-box; } .ds-field-input:focus-visible { border-color: rgba(173,106,61,.35); }"
+      "css": ".ds-field-label { display: block; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9CACE; margin-bottom: 7px; } .ds-field-input { width: 100%; background: #0A0A0B; border: 1px solid rgba(201,202,206,.14); color: #F7F5F1; padding: 13px 15px; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.3s; box-sizing: border-box; } .ds-field-input:focus-visible { border-color: rgba(173,106,61,.35); }"
     },
     {
       "name": "Eyebrow Label",
@@ -68,7 +68,7 @@
       "refersTo": "eyebrow",
       "description": "The system's most consistent signature: a wide-tracked uppercase kicker preceded by a short copper rule line, opening every major section.",
       "html": "<div class=\"ds-eyebrow\">Our Insurance Solutions</div>",
-      "css": ".ds-eyebrow { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 0.38em; text-transform: uppercase; color: #C9854F; display: flex; align-items: center; gap: 16px; } .ds-eyebrow::before { content: ''; width: 34px; height: 1px; background: #AD6A3D; }"
+      "css": ".ds-eyebrow { font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 0.38em; text-transform: uppercase; color: #C9854F; display: flex; align-items: center; gap: 16px; } .ds-eyebrow::before { content: ''; width: 34px; height: 1px; background: #AD6A3D; }"
     },
     {
       "name": "Stat Counter",
@@ -76,7 +76,7 @@
       "refersTo": "stat",
       "description": "Monospace numeral over a small uppercase label — the system's data-as-instrument pattern.",
       "html": "<div class=\"ds-stat\"><div class=\"ds-stat-num\">53166</div><div class=\"ds-stat-label\">FSP Number</div></div>",
-      "css": ".ds-stat { text-align: center; } .ds-stat-num { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: clamp(30px, 4.4vw, 48px); color: #C9854F; letter-spacing: -0.01em; } .ds-stat-label { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C9CACE; margin-top: 8px; }"
+      "css": ".ds-stat { text-align: center; } .ds-stat-num { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: clamp(30px, 4.4vw, 48px); color: #C9854F; letter-spacing: -0.01em; } .ds-stat-label { font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C9CACE; margin-top: 8px; }"
     },
     {
       "name": "Nav Dropdown",
@@ -84,7 +84,7 @@
       "refersTo": "dropmenu",
       "description": "Popover submenu off the main nav: charcoal panel, copper top edge, neutral black popover shadow.",
       "html": "<div class=\"ds-dropmenu\"><a class=\"ds-dropitem\" href=\"#\"><span class=\"ds-dropitem-title\">The Mine</span><span class=\"ds-dropitem-desc\">Commercial assets, liability &amp; business interruption</span></a></div>",
-      "css": ".ds-dropmenu { min-width: 280px; background: #1E1D20; border: 1px solid rgba(201,202,206,.14); border-top: 2px solid #AD6A3D; border-radius: 2px; padding: 8px; box-shadow: 0 24px 48px rgba(0,0,0,.5); } .ds-dropitem { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 2px; text-decoration: none; transition: background 0.15s; } .ds-dropitem:hover { background: rgba(173,106,61,.14); } .ds-dropitem-title { font-family: 'Jost', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; font-weight: 500; color: #F7F5F1; } .ds-dropitem-desc { font-family: 'Inter', sans-serif; font-size: 11.5px; color: #C9CACE; font-weight: 300; }"
+      "css": ".ds-dropmenu { min-width: 280px; background: #1E1D20; border: 1px solid rgba(201,202,206,.14); border-top: 2px solid #AD6A3D; border-radius: 2px; padding: 8px; box-shadow: 0 24px 48px rgba(0,0,0,.5); } .ds-dropitem { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 2px; text-decoration: none; transition: background 0.15s; } .ds-dropitem:hover { background: rgba(173,106,61,.14); } .ds-dropitem-title { font-family: 'Poppins', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; font-weight: 500; color: #F7F5F1; } .ds-dropitem-desc { font-family: 'Inter', sans-serif; font-size: 11.5px; color: #C9CACE; font-weight: 300; }"
     },
     {
       "name": "Diagram Panel",
@@ -97,10 +97,10 @@
   ],
   "narrative": {
     "northStar": "The Assay Office",
-    "overview": "MineTrans reads like the private office where a mine's risk gets weighed, certified, and sealed — not a marketing site dressed up to look serious. The palette is near-black onyx and charcoal, the type pairs an old-world serif (Playfair Display) for authority with a tightly-tracked uppercase sans (Jost) for procedure, and every number that matters — statistics, line references, table values, node status — drops into monospace (IBM Plex Mono) so it visibly reads as measured, not narrated. Copper is the one accent, used sparingly: a thin structural line, a single button, a label. The overall register is quietly luxurious — restrained and expensive-feeling rather than flashy — and it explicitly rejects the neon-glow, dense-dashboard energy of flashy fintech/crypto products. Nothing here should feel like it's trying to impress; it should feel like it's already trusted.\n\nThe system is presently flat by construction, and its one recurring piece of drama — a colored glow ring — is reserved exclusively for signaling risk state in the BI-failure animation, never used decoratively.",
+    "overview": "MineTrans reads like the private office where a mine's risk gets weighed, certified, and sealed — not a marketing site dressed up to look serious. The palette is near-black onyx and charcoal, the type pairs an old-world serif (Playfair Display) for authority with a tightly-tracked uppercase sans (Poppins) for procedure, and every number that matters — statistics, line references, table values, node status — drops into monospace (IBM Plex Mono) so it visibly reads as measured, not narrated. Copper is the one accent, used sparingly: a thin structural line, a single button, a label. The overall register is quietly luxurious — restrained and expensive-feeling rather than flashy — and it explicitly rejects the neon-glow, dense-dashboard energy of flashy fintech/crypto products. Nothing here should feel like it's trying to impress; it should feel like it's already trusted.\n\nThe system is presently flat by construction, and its one recurring piece of drama — a colored glow ring — is reserved exclusively for signaling risk state in the BI-failure animation, never used decoratively.",
     "keyCharacteristics": [
       "Near-black onyx/charcoal surfaces with a single copper accent, used sparingly",
-      "Serif display headlines (Playfair Display) paired with heavily-tracked uppercase sans labels (Jost)",
+      "Serif display headlines (Playfair Display) paired with heavily-tracked uppercase sans labels (Poppins)",
       "Numbers and data render in monospace (IBM Plex Mono) to read as measured fact, not prose",
       "Sharp, small corner radii (2–4px) — nothing rounded enough to feel soft or consumer-app",
       "Flat by default; the only chromatic glow is a reserved semantic for risk-state visualization"
@@ -125,7 +125,7 @@
       "Don't reach for a thick colored left-border (\"side-tab\") treatment on cards or callouts — an older .block pattern still has one, but new work should follow the uniform hairline-border treatment instead.",
       "Don't round corners past 4px on anything text-bearing (buttons, cards, inputs, nav) — soft/pill shapes read as consumer-app, not this system.",
       "Don't style this as a bright, dense, neon fintech/crypto dashboard — the confirmed anti-reference.",
-      "Don't use Inter, Jost, or Playfair Display outside their assigned roles (body / label / display respectively).",
+      "Don't use Inter, Poppins, or Playfair Display outside their assigned roles (body / label / display respectively).",
       "Don't use Failure Red (#E04B4B) for anything but danger/error/failure signaling — it is not a decorative \"warm\" alternative to copper."
     ]
   }
