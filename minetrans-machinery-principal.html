@@ -44,7 +44,7 @@ strong{font-weight:400;color:var(--bone)}
 
 /* ---- ledger rows: hairline-separated, no card grid ---- */
 .ledger{border-top:1px solid var(--hairline);flex:1;display:flex;flex-direction:column}
-.ledger .row{flex:1;display:grid;grid-template-columns:300px 1fr;gap:34px;
+.ledger .row{flex:1;display:grid;grid-template-columns:330px 1fr;gap:34px;
   align-items:center;padding:22px 0;border-bottom:1px solid var(--hairline)}
 .ledger .row p{font-size:15.5px;max-width:58ch}
 
@@ -112,12 +112,13 @@ strong{font-weight:400;color:var(--bone)}
 
 /* copper callout boxes: the argument, and the offer. Used nowhere else. */
 .moves{flex:1;max-width:772px;display:flex;flex-direction:column;justify-content:center;gap:20px}
-.move{display:grid;grid-template-columns:62px 1fr;gap:24px;align-items:start;
+.move{display:grid;grid-template-columns:52px 1fr;gap:26px;align-items:start;
   border:1px solid var(--copper);border-radius:4px;padding:26px 30px 28px;
   background:rgba(173,106,61,.05)}
 .move.lead{border:2px solid var(--copper-bright);background:rgba(201,133,79,.10)}
-.move .n{font-family:'IBM Plex Mono',monospace;font-weight:300;font-size:28px;
-  color:var(--copper-bright);line-height:1.1}
+.move .rail{display:flex;flex-direction:column;align-items:center;gap:10px}
+.move .n{font-family:'IBM Plex Mono',monospace;font-weight:300;font-size:16px;
+  color:var(--copper-bright);line-height:1}
 .move h3{font-family:'Playfair Display',serif;font-weight:500;font-size:22px;
   line-height:1.25;margin-bottom:8px}
 .move p{font-size:15.5px;line-height:1.6}
@@ -128,6 +129,32 @@ strong{font-weight:400;color:var(--bone)}
   text-transform:uppercase;color:var(--copper-bright);display:block;margin-bottom:12px}
 .callout p{font-size:16px;line-height:1.62}
 
+/* drawn icon set: one stroke weight, copper, no library */
+.ico{width:46px;height:46px;flex:none;stroke:var(--copper-bright);stroke-width:1.5;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ico-sm{width:38px;height:38px}
+
+/* illustrative bar comparison: proportion shown, never asserted */
+.gfx{display:flex;flex-direction:column;gap:46px;max-width:900px;margin-top:30px}
+.gfx-k{font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--copper-bright);display:block;margin-bottom:16px}
+.bar{position:relative;height:64px;margin-bottom:14px}
+.bar .fill{position:absolute;top:0;bottom:0;left:0;border:1px solid var(--copper);
+  background:rgba(173,106,61,.16);border-radius:3px}
+.bar .fill.lead{border:1px solid var(--copper-bright);background:rgba(201,133,79,.26)}
+.bar .ghost{position:absolute;top:0;bottom:0;border:1px dashed var(--copper);
+  border-radius:3px;opacity:.55}
+.bar .bl{position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  font-size:14.5px;color:var(--bone);z-index:2}
+.bar .bv{position:absolute;right:0;top:50%;transform:translateY(-50%);
+  font-family:'IBM Plex Mono',monospace;font-weight:300;font-size:16px;color:var(--copper-bright)}
+.bar .bg{position:absolute;top:50%;transform:translateY(-50%);
+  font-family:'IBM Plex Mono',monospace;font-weight:300;font-size:13.5px;color:var(--platinum)}
+.gfx-n{font-size:14px;color:var(--platinum);margin-top:4px}
+.disclaim{border-top:1px solid var(--hairline);padding-top:18px;margin-top:4px}
+.disclaim p{font-size:12px;line-height:1.55;color:var(--platinum);opacity:.8;max-width:78ch}
+
+.rowhead{display:flex;align-items:center;gap:15px}
 .anchor{margin-top:auto}
 </style>
 </head>
@@ -158,22 +185,22 @@ strong{font-weight:400;color:var(--bone)}
 
   <div class="moves">
     <div class="move">
-      <span class="n">01</span>
+      <div class="rail"><svg class='ico' viewBox='0 0 48 48' aria-hidden='true'><rect x='8' y='12' width='32' height='28' rx='2'/><path d='M8 21H40'/><path d='M17 8V15M31 8V15'/><path d='M16 31H29M25 27L29 31L25 35'/></svg><span class="n">01</span></div>
       <div><h3>The figure is last year's</h3>
       <p>A sum insured carried forward from last year's schedule is the most common reason a machinery claim settles short. Plant is bought, sold and moved between sites faster than the schedule is revisited.</p></div>
     </div>
     <div class="move lead">
-      <span class="n">02</span>
+      <div class="rail"><svg class='ico' viewBox='0 0 48 48' aria-hidden='true'><path d='M8 24L40 17'/><path d='M24 20.5V36M17 37H31'/><path d='M8 24V28'/><path d='M2 28A6 4 0 0 0 14 28'/><path d='M40 17V21'/><path d='M34 21A6 4 0 0 0 46 21'/></svg><span class="n">02</span></div>
       <div><h3>Being wrong is not neutral. It is proportional.</h3>
       <p>Under-declaring the value can trigger average at claims stage, reducing the settlement in proportion to the shortfall. The difference is not absorbed by the insurer. It is carried by the operator, at the worst possible moment.</p></div>
     </div>
     <div class="move">
-      <span class="n">03</span>
+      <div class="rail"><svg class='ico' viewBox='0 0 48 48' aria-hidden='true'><rect x='9' y='25' width='9' height='15' rx='1'/><rect x='30' y='11' width='9' height='29' rx='1'/><path d='M20 20H28M25 16.5L28.5 20L25 23.5'/></svg><span class="n">03</span></div>
       <div><h3>Replacement is not book value</h3>
       <p>Cover should reflect what it costs to replace with equivalent equipment delivered and commissioned at your site, not a book or trade-in figure. For imported plant that means exchange rate movement, freight and duties, which move independently of the machine.</p></div>
     </div>
     <div class="move">
-      <span class="n">04</span>
+      <div class="rail"><svg class='ico' viewBox='0 0 48 48' aria-hidden='true'><path d='M24 7L39 12V24C39 32 32 38 24 41C16 38 9 32 9 24V12Z'/><path d='M24 7L20 19L27 24L22 34L24 41'/></svg><span class="n">04</span></div>
       <div><h3>The policy may not respond at all</h3>
       <p>All-risk answers sudden external damage. Machinery breakdown answers internal failure. A machine that fails internally with no external damage is a breakdown claim, so a programme carrying only all-risk leaves that exposure open.</p></div>
     </div>
@@ -185,7 +212,68 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 03 THREE BASES OF VALUATION -->
+<!-- 03 HOW AVERAGE WORKS -->
+<div class="slide">
+<div class="copy" style="justify-content:space-between">
+  <div class="eyebrow"><i></i><span>How average works</span></div>
+  <div style="display:flex;align-items:flex-start;gap:26px">
+    <svg class='ico' viewBox='0 0 48 48' aria-hidden='true'><path d='M8 24L40 17'/><path d='M24 20.5V36M17 37H31'/><path d='M8 24V28'/><path d='M2 28A6 4 0 0 0 14 28'/><path d='M40 17V21'/><path d='M34 21A6 4 0 0 0 46 21'/></svg>
+    <h2 style="margin-bottom:0">The shortfall is not the insurer's. <em>It is yours.</em></h2>
+  </div>
+  <p style="margin-bottom:8px">Declare a machine below its replacement cost and the same proportion comes off every claim against it. The gap does not appear until the day you need the money.</p>
+
+  <div class="gfx">
+    <div>
+      <span class="gfx-k">On the schedule</span>
+      <div class="bar">
+        <div class="fill" style="width:100%"></div>
+        <span class="bl">What the machine costs to replace</span>
+        <span class="bv" style="right:18px">R12 000 000</span>
+      </div>
+      <div class="bar">
+        <div class="fill lead" style="width:60%"></div>
+        <div class="ghost" style="left:60%;width:40%"></div>
+        <span class="bl">What the schedule declared</span>
+        <span class="bv" style="right:40%;margin-right:18px">R7 200 000</span>
+        <span class="bg" style="left:62%;margin-left:18px">under-declared by 40%</span>
+      </div>
+      <p class="gfx-n">The figure was carried forward and never revisited.</p>
+    </div>
+
+    <div>
+      <span class="gfx-k">At claims stage</span>
+      <div class="bar">
+        <div class="fill" style="width:100%"></div>
+        <span class="bl">The loss</span>
+        <span class="bv" style="right:18px">R4 000 000</span>
+      </div>
+      <div class="bar">
+        <div class="fill lead" style="width:60%"></div>
+        <div class="ghost" style="left:60%;width:40%"></div>
+        <span class="bl">What the policy pays</span>
+        <span class="bv" style="right:40%;margin-right:18px">R2 400 000</span>
+        <span class="bg" style="left:62%;margin-left:18px">R1 600 000 carried by you</span>
+      </div>
+      <p class="gfx-n">The same proportion, applied to the settlement.</p>
+    </div>
+  </div>
+
+  <div class="callout anchor" style="margin-bottom:26px">
+    <span class="k">What prevents it</span>
+    <p>A schedule that reflects current replacement cost, per item. That is the work we do before a claim tests the figure, not after.</p>
+  </div>
+
+  <div class="disclaim">
+    <p>Illustrative example only, to show how average operates. The figures are not a quotation, a premium, or a representation of any actual claim. Cover, terms and sums insured are subject to underwriting and the policy wording.</p>
+  </div>
+  </div>
+  <div class="foot">
+    <p>MineTrans is a division of Donaldson Group (Pty) Ltd, an authorised financial services provider, FSP No. 53166.</p>
+    <div class="mark">Yellow Metal &amp; Machinery</div>
+  </div>
+</div>
+
+<!-- 04 THREE BASES OF VALUATION -->
 <div class="slide">
 <div class="copy">
   <div class="eyebrow"><i></i><span>Basis of valuation</span></div>
@@ -221,7 +309,7 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 04 THE DIFFERENTIATOR -->
+<!-- 05 THE DIFFERENTIATOR -->
 <div class="slide">
 <div class="copy">
   <div class="eyebrow"><i></i><span>How we set the figure</span></div>
@@ -243,7 +331,7 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 05 WHAT'S COVERED -->
+<!-- 06 WHAT'S COVERED -->
 <div class="slide">
 <div class="copy">
   <div class="eyebrow"><i></i><span>What's covered</span></div>
@@ -251,17 +339,17 @@ strong{font-weight:400;color:var(--bone)}
   <p style="margin-bottom:34px">Every machine on site carries a different risk profile depending on how it's used, where it operates, and how it's owned. Cover is structured item by item, not as a blanket average.</p>
 
   <div class="ledger">
-    <div class="row"><h3>Yellow Metal &amp; Mobile Equipment</h3>
+    <div class="row"><div class="rowhead"><svg class='ico ico-sm' viewBox='0 0 48 48' aria-hidden='true'><rect x='5' y='33' width='24' height='7' rx='3.5'/><rect x='9' y='21' width='12' height='12' rx='1.5'/><path d='M21 25L31 15L38 21'/><path d='M38 21L41.5 27.5L35 28.5Z'/></svg><h3>Yellow Metal &amp; Mobile Equipment</h3></div>
       <p>Cover for excavators, haul trucks, dozers, loaders, drill rigs and graders against accidental damage, overturning, fire and theft.</p></div>
-    <div class="row"><h3>Plant &amp; Machinery Breakdown</h3>
+    <div class="row"><div class="rowhead"><svg class='ico ico-sm' viewBox='0 0 48 48' aria-hidden='true'><path d='M24 7L39 12V24C39 32 32 38 24 41C16 38 9 32 9 24V12Z'/><path d='M24 7L20 19L27 24L22 34L24 41'/></svg><h3>Plant &amp; Machinery Breakdown</h3></div>
       <p>Mechanical or electrical breakdown of fixed and mobile plant. This is the exposure that standard asset policies typically exclude.</p></div>
-    <div class="row"><h3>Contractors' Plant &amp; Hired-In Equipment</h3>
+    <div class="row"><div class="rowhead"><svg class='ico ico-sm' viewBox='0 0 48 48' aria-hidden='true'><rect x='23' y='20' width='17' height='10' rx='1'/><rect x='27' y='12' width='10' height='8' rx='1'/><path d='M23 24L11 30'/><path d='M11 30H5V37H13'/><circle cx='17' cy='35' r='5'/><circle cx='35' cy='35' r='5'/></svg><h3>Contractors' Plant &amp; Hired-In Equipment</h3></div>
       <p>Cover extended to equipment brought on site by contractors, or hired in to supplement the owned fleet.</p></div>
-    <div class="row"><h3>Third-Party &amp; Collision Damage</h3>
+    <div class="row"><div class="rowhead"><svg class='ico ico-sm' viewBox='0 0 48 48' aria-hidden='true'><path d='M5 13H31L35 25H9Z'/><rect x='33' y='16' width='9' height='9' rx='1'/><path d='M7 27H43'/><circle cx='15' cy='35' r='5'/><circle cx='35' cy='35' r='5'/></svg><h3>Third-Party &amp; Collision Damage</h3></div>
       <p>Damage caused by, or to, mobile equipment during operation: on site and, where relevant, on public roads.</p></div>
-    <div class="row"><h3>Consequential Loss of Use</h3>
+    <div class="row"><div class="rowhead"><svg class='ico ico-sm' viewBox='0 0 48 48' aria-hidden='true'><rect x='5' y='33' width='21' height='7' rx='3.5'/><rect x='8' y='24' width='15' height='9' rx='1'/><path d='M31 40V8M38 40V8M31 8H38'/><path d='M31 15H38M31 22H38M31 29H38'/></svg><h3>Consequential Loss of Use</h3></div>
       <p>Where a critical machine is down for repair, cover for the resulting operational impact can be structured alongside the asset.</p></div>
-    <div class="row"><h3>Basis of Valuation</h3>
+    <div class="row"><div class="rowhead"><svg class='ico ico-sm' viewBox='0 0 48 48' aria-hidden='true'><path d='M8 24L40 17'/><path d='M24 20.5V36M17 37H31'/><path d='M8 24V28'/><path d='M2 28A6 4 0 0 0 14 28'/><path d='M40 17V21'/><path d='M34 21A6 4 0 0 0 46 21'/></svg><h3>Basis of Valuation</h3></div>
       <p>Sums insured set to reflect your required replacement cost of specialised mining equipment, not depreciated book value.</p></div>
   </div>
 
@@ -272,7 +360,7 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 06 WHY SEPARATE -->
+<!-- 07 WHY SEPARATE -->
 <div class="slide">
 <div class="copy">
   <div class="eyebrow"><i></i><span>Why it's structured separately</span></div>
@@ -300,7 +388,7 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 07 METHODOLOGY + CONTACT -->
+<!-- 08 METHODOLOGY + CONTACT -->
 <div class="slide">
 <div class="copy" style="justify-content:space-between">
   <div class="eyebrow"><i></i><span>The methodology</span></div>
