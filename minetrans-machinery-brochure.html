@@ -110,6 +110,24 @@ strong{font-weight:400;color:var(--bone)}
 .cover .brandmark .wm i{font-family:'Playfair Display',serif;font-style:normal;font-weight:400;
   font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone);opacity:.92}
 
+/* copper callout boxes: the argument, and the offer. Used nowhere else. */
+.moves{flex:1;max-width:772px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.move{display:grid;grid-template-columns:62px 1fr;gap:24px;align-items:start;
+  border:1px solid var(--copper);border-radius:4px;padding:26px 30px 28px;
+  background:rgba(173,106,61,.05)}
+.move.lead{border:2px solid var(--copper-bright);background:rgba(201,133,79,.10)}
+.move .n{font-family:'IBM Plex Mono',monospace;font-weight:300;font-size:28px;
+  color:var(--copper-bright);line-height:1.1}
+.move h3{font-family:'Playfair Display',serif;font-weight:500;font-size:22px;
+  line-height:1.25;margin-bottom:8px}
+.move p{font-size:15.5px;line-height:1.6}
+
+.callout{max-width:772px;border:1px solid var(--copper);border-radius:4px;padding:28px 32px;
+  background:rgba(173,106,61,.05)}
+.callout .k{font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--copper-bright);display:block;margin-bottom:12px}
+.callout p{font-size:16px;line-height:1.62}
+
 .anchor{margin-top:auto}
 </style>
 </head>
@@ -130,28 +148,36 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 02 WHAT'S COVERED -->
+
+<!-- 02 WHY A SCHEDULE PAYS OUT SHORT -->
 <div class="slide">
 <div class="copy">
-  <div class="eyebrow"><i></i><span>What's covered</span></div>
-  <h2>Built around the <em>equipment schedule.</em></h2>
-  <p style="margin-bottom:34px">Every machine on site carries a different risk profile depending on how it's used, where it operates, and how it's owned. Cover is structured item by item, not as a blanket average.</p>
+  <div class="eyebrow"><i></i><span>Before you renew</span></div>
+  <h2>Four reasons a schedule <em>pays out short.</em></h2>
+  <p style="margin-bottom:30px">Each one can be checked against your own paperwork in an afternoon.</p>
 
-  <div class="ledger">
-    <div class="row"><h3>Yellow Metal &amp; Mobile Equipment</h3>
-      <p>Cover for excavators, haul trucks, dozers, loaders, drill rigs and graders against accidental damage, overturning, fire and theft.</p></div>
-    <div class="row"><h3>Plant &amp; Machinery Breakdown</h3>
-      <p>Mechanical or electrical breakdown of fixed and mobile plant. This is the exposure that standard asset policies typically exclude.</p></div>
-    <div class="row"><h3>Contractors' Plant &amp; Hired-In Equipment</h3>
-      <p>Cover extended to equipment brought on site by contractors, or hired in to supplement the owned fleet.</p></div>
-    <div class="row"><h3>Third-Party &amp; Collision Damage</h3>
-      <p>Damage caused by, or to, mobile equipment during operation: on site and, where relevant, on public roads.</p></div>
-    <div class="row"><h3>Consequential Loss of Use</h3>
-      <p>Where a critical machine is down for repair, cover for the resulting operational impact can be structured alongside the asset.</p></div>
-    <div class="row"><h3>Basis of Valuation</h3>
-      <p>Sums insured set to reflect your required replacement cost of specialised mining equipment, not depreciated book value.</p></div>
+  <div class="moves">
+    <div class="move">
+      <span class="n">01</span>
+      <div><h3>The figure is last year's</h3>
+      <p>A sum insured carried forward from last year's schedule is the most common reason a machinery claim settles short. Plant is bought, sold and moved between sites faster than the schedule is revisited.</p></div>
+    </div>
+    <div class="move lead">
+      <span class="n">02</span>
+      <div><h3>Being wrong is not neutral. It is proportional.</h3>
+      <p>Under-declaring the value can trigger average at claims stage, reducing the settlement in proportion to the shortfall. The difference is not absorbed by the insurer. It is carried by the operator, at the worst possible moment.</p></div>
+    </div>
+    <div class="move">
+      <span class="n">03</span>
+      <div><h3>Replacement is not book value</h3>
+      <p>Cover should reflect what it costs to replace with equivalent equipment delivered and commissioned at your site, not a book or trade-in figure. For imported plant that means exchange rate movement, freight and duties, which move independently of the machine.</p></div>
+    </div>
+    <div class="move">
+      <span class="n">04</span>
+      <div><h3>The policy may not respond at all</h3>
+      <p>All-risk answers sudden external damage. Machinery breakdown answers internal failure. A machine that fails internally with no external damage is a breakdown claim, so a programme carrying only all-risk leaves that exposure open.</p></div>
+    </div>
   </div>
-
   </div>
   <div class="foot">
     <p>MineTrans is a division of Donaldson Group (Pty) Ltd, an authorised financial services provider, FSP No. 53166.</p>
@@ -217,7 +243,36 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 05 WHY SEPARATE -->
+<!-- 05 WHAT'S COVERED -->
+<div class="slide">
+<div class="copy">
+  <div class="eyebrow"><i></i><span>What's covered</span></div>
+  <h2>Built around the <em>equipment schedule.</em></h2>
+  <p style="margin-bottom:34px">Every machine on site carries a different risk profile depending on how it's used, where it operates, and how it's owned. Cover is structured item by item, not as a blanket average.</p>
+
+  <div class="ledger">
+    <div class="row"><h3>Yellow Metal &amp; Mobile Equipment</h3>
+      <p>Cover for excavators, haul trucks, dozers, loaders, drill rigs and graders against accidental damage, overturning, fire and theft.</p></div>
+    <div class="row"><h3>Plant &amp; Machinery Breakdown</h3>
+      <p>Mechanical or electrical breakdown of fixed and mobile plant. This is the exposure that standard asset policies typically exclude.</p></div>
+    <div class="row"><h3>Contractors' Plant &amp; Hired-In Equipment</h3>
+      <p>Cover extended to equipment brought on site by contractors, or hired in to supplement the owned fleet.</p></div>
+    <div class="row"><h3>Third-Party &amp; Collision Damage</h3>
+      <p>Damage caused by, or to, mobile equipment during operation: on site and, where relevant, on public roads.</p></div>
+    <div class="row"><h3>Consequential Loss of Use</h3>
+      <p>Where a critical machine is down for repair, cover for the resulting operational impact can be structured alongside the asset.</p></div>
+    <div class="row"><h3>Basis of Valuation</h3>
+      <p>Sums insured set to reflect your required replacement cost of specialised mining equipment, not depreciated book value.</p></div>
+  </div>
+
+  </div>
+  <div class="foot">
+    <p>MineTrans is a division of Donaldson Group (Pty) Ltd, an authorised financial services provider, FSP No. 53166.</p>
+    <div class="mark">Yellow Metal &amp; Machinery</div>
+  </div>
+</div>
+
+<!-- 06 WHY SEPARATE -->
 <div class="slide">
 <div class="copy">
   <div class="eyebrow"><i></i><span>Why it's structured separately</span></div>
@@ -245,7 +300,7 @@ strong{font-weight:400;color:var(--bone)}
   </div>
 </div>
 
-<!-- 06 METHODOLOGY + CONTACT -->
+<!-- 07 METHODOLOGY + CONTACT -->
 <div class="slide">
 <div class="copy" style="justify-content:space-between">
   <div class="eyebrow"><i></i><span>The methodology</span></div>
@@ -254,6 +309,11 @@ strong{font-weight:400;color:var(--bone)}
 
   <div class="pullquote" style="margin-bottom:48px">
     <p>Specialist mining &amp; marine insurance broking across South Africa and Sub-Saharan Africa.</p>
+  </div>
+
+  <div class="callout" style="margin-bottom:34px">
+    <span class="k">What a review gives you</span>
+    <p>One review of your declared values against real equipment lead times. We stress-test your indemnity periods and hand you the findings, whether or not you place cover through us.</p>
   </div>
 
   <button class="cta">Request a review of your fleet</button>
