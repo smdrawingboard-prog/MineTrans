@@ -67,6 +67,6 @@ The browser never receives a Google API key or direct access to the workbook.
 
 - Palette: Onyx `#0A0A0B` · Graphite `#1E1D20` · Platinum `#C9CACE` ·
   Copper `#AD6A3D` · Bone `#F7F5F1`
-- Fonts: Playfair Display (headings) · Jost (labels) · Inter (body)
+- Fonts: Playfair Display (headings) · Poppins (labels) · Inter (body)
 - All figures in course/marketing content are illustrative only and do
   not constitute financial advice under the FAIS Act.
