@@ -57,6 +57,12 @@
         ],
         "createdAt": "2026-08-24T15:46:45.291Z",
         "reason": "User confirmed: same 2px copper border-left legacy accent pattern already approved for insurance.html, insurance-mine.html, training-showcase.html"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "poppins",
+        "createdAt": "2026-10-06T09:27:04.996Z",
+        "reason": "User explicitly requested Poppins replace Jost in the machinery brochure"
       }
     ]
   }
