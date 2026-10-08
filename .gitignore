@@ -115,3 +115,10 @@ client/public/__manus__/version.json
 
 # Claude Code local settings (per-user tool approvals, not shareable config)
 .claude/settings.local.json
+
+dist-ds/
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules

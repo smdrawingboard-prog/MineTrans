@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["entry.ts", "../../client/src/**/*.d.ts"],
+  "exclude": [],
+  "compilerOptions": {
+    "noEmit": false, "incremental": false, "tsBuildInfoFile": null,
+    "declaration": true, "emitDeclarationOnly": true, "jsx": "react-jsx",
+    "outDir": "../../dist-ds/types", "rootDir": "../..", "baseUrl": "../.."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "pkg": "minetrans-ui",
+  "globalName": "MineTrans",
+  "shape": "package",
+  "buildCmd": "npx vite build -c .design-sync/lib-build/vite.config.ts && node .design-sync/lib-build/make-dts.mjs",
+  "tsconfig": "tsconfig.json",
+  "srcDir": "client/src/components/ui",
+  "cssEntry": "minetrans.css"
+}
