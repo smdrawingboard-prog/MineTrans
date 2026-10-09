@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="client/public/images/logo/mt-logo-lockup-dark.png" alt="MineTrans Insurance Brokers" width="480">
+</p>
+
 # MineTrans
 
  **MineTrans Insurance Brokers** — specialist mining and marine insurance broking solutions for
