@@ -67,6 +67,13 @@ Published rows in the workbook's `Blog` tab are read server-side with the
 same service-account credentials and displayed in the Latest Insights section.
 The browser never receives a Google API key or direct access to the workbook.
 
+## Deployment and SEO
+
+- The live site (`www.minetrans.co.za`) is served by the Express server (`pnpm start`) on Railway; pushes to `main` deploy it. The bare domain `minetrans.co.za` is redirected by the registrar/DNS host, not by this repo.
+- Static pages live in `client/public/`. When you add an indexable page, add it to `client/public/sitemap.xml` (full `https://www.` URL, truthful `lastmod`). Private pages carry `noindex` and are listed in `robots.txt`.
+- Unknown URLs must return a real 404 (see `serveStatic` in `server/_core/vite.ts`); keep `/certification/*` as the only SPA routes served with 200.
+- `client/public/llms.txt` summarises the site for AI crawlers; update it when pages or key facts change.
+
 ## Brand
 
 - Palette: Onyx `#0A0A0B` · Graphite `#1E1D20` · Platinum `#C9CACE` ·

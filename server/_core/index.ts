@@ -47,6 +47,9 @@ async function startServer() {
   const GONE: Record<string, string> = {
     "/courses.html": "/training-showcase.html",
     "/courses": "/training-showcase.html",
+    // The privacy policy lives on the combined privacy & cookie policy page.
+    "/privacy-policy": "/cookie-policy.html",
+    "/privacy": "/cookie-policy.html",
   };
   app.get(Object.keys(GONE), (req, res) => {
     res.redirect(301, GONE[req.path]);
