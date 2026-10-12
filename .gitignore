@@ -115,3 +115,6 @@ client/public/__manus__/version.json
 
 # Claude Code local settings (per-user tool approvals, not shareable config)
 .claude/settings.local.json
+
+# CTO Toolkit local scan output
+.cto-toolkit/

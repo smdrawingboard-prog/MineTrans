@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-10-12 — Google crawl fixes and repo cleanup
+
+### Fixed
+
+- **Unknown URLs now return a real HTTP 404** instead of 200 (soft 404s). The SPA shell is still served so people see the NotFound view; `/certification/*` routes still return 200, and unknown `/api/` paths return a JSON 404.
+- **`sitemap.xml`:** removed `changefreq`/`priority` (ignored by Google) and corrected `lastmod` dates.
+- **Job title:** "Owner and Director" corrected to "Director" in structured data, bylines and `llms.txt`.
+
+### Added
+
+- `/privacy-policy` and `/privacy` permanently redirect to the existing combined policy at `/cookie-policy.html`.
+
+### Removed
+
+- `todo.md` — the completed certification-system checklist (all items done and shipped).
+
+### Open items (need a decision)
+
+- The legal entity is described inconsistently across pages ("Donaldson Advisory Group" vs "Donaldson Group"). Align the wording, with Key Individual sign-off, before changing legal text.
+- `.github/workflows/deploy.yml` still publishes to GitHub Pages while the live site is served by the Express server on Railway. Remove it if Pages is no longer used.
+
 ## 2026-08-17 — Homepage infographics, course visuals, and a critical deployment fix
 
 ### Added
@@ -33,5 +54,5 @@
 ### Notes for future maintainers
 
 - `client/public/index.html` is the file served at the site root — it is a **fully static, hand-written marketing page**, not the React app. The actual React SPA entry is `client/index.html` (mounts `#root`, loads `/src/main.tsx`).
-- Any client-side-routed page (anything under `/certification/*`, `/admin/*`, etc.) is only reachable through the `404.html` fallback described above. If `vite.config.ts`'s `vitePluginCopyHtmlFiles` is ever refactored, make sure the `404.html` preservation step stays intact, or the entire React app will silently go dark again.
-- `courses.html`, `student-portal.html`, `training-showcase.html`, and `blueprint-content.html` are built and deployed but not linked from the main site navigation. Worth deciding whether they should be linked in, redirected, or removed.
+- Any client-side-routed page (anything under `/certification/*`) is served from the `404.html` SPA shell by the Express fallback in `server/_core/vite.ts` (updated 2026-10-12: the live site runs on Express/Railway, not GitHub Pages; only `/certification/*` and `/404` return 200 from the shell, everything else unknown returns 404). If `vite.config.ts`'s `vitePluginCopyHtmlFiles` is ever refactored, make sure the `404.html` preservation step stays intact, or the entire React app will silently go dark again.
+- `courses.html` has since been removed and redirects to `training-showcase.html`. `student-portal.html`, `training-showcase.html`, and `blueprint-content.html` are still built and deployed; `training-showcase.html` is in the sitemap, the other two are noindex and blocked in `robots.txt`.
