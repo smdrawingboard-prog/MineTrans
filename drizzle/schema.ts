@@ -257,3 +257,24 @@ export const certificates = mysqlTable("certificates", {
 
 export type Certificate = typeof certificates.$inferSelect;
 export type InsertCertificate = typeof certificates.$inferInsert;
+
+/**
+ * Website enquiries. Every lead is written here FIRST (the durable copy),
+ * then mirrored to Google Sheets for the sales team. sheetsSynced stays
+ * false if the Sheets write fails so it can be retried.
+ */
+export const leads = mysqlTable("leads", {
+  id: int("id").autoincrement().primaryKey(),
+  source: varchar("source", { length: 40 }).notNull(), // bi-review | bi-methodology
+  companyName: varchar("companyName", { length: 255 }).notNull(),
+  contactName: varchar("contactName", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  phone: varchar("phone", { length: 60 }),
+  payload: text("payload").notNull(), // full submitted lead as JSON
+  sheetsSynced: mysqlEnum("sheetsSynced", ["true", "false"]).default("false").notNull(),
+  sheetsAttempts: int("sheetsAttempts").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Lead = typeof leads.$inferSelect;
+export type InsertLead = typeof leads.$inferInsert;

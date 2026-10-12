@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import { sendLeadNotificationEmail } from "../services/emailService";
-import { appendBIMethodologyLead } from "../services/googleSheetsSync";
+import { saveLead, syncLeadToSheets } from "../services/leadStore";
 
 /**
  * Lean lead-capture endpoint for the public BI Methodology page
@@ -35,7 +35,7 @@ export async function biMethodologyLeadHandler(req: Request, res: Response) {
   const { contactName, companyName, email, phone, message, popiaConsent } = parsed.data;
   const submittedAt = new Date().toISOString();
 
-  const stored = await appendBIMethodologyLead({
+  const methodologyLead = {
     submittedAt,
     contactName,
     companyName,
@@ -43,7 +43,12 @@ export async function biMethodologyLeadHandler(req: Request, res: Response) {
     phone,
     operationDetails: message,
     popiaConsent,
-  });
+  };
+
+  // Database first (durable copy), then Sheets; a Sheets failure is retried later.
+  const leadId = await saveLead("bi-methodology", methodologyLead, methodologyLead);
+  const sheetsOk = await syncLeadToSheets(leadId ?? 0, "bi-methodology", methodologyLead);
+  const stored = leadId !== null || sheetsOk;
 
   if (!stored) {
     res.status(502).json({
