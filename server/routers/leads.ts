@@ -1,7 +1,7 @@
 import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
 import { sendLeadNotificationEmail } from "../services/emailService";
-import { appendBIReviewLead } from "../services/googleSheetsSync";
+import { saveLead, syncLeadToSheets } from "../services/leadStore";
 
 export const leadsRouter = router({
   submitBIReview: publicProcedure
@@ -47,8 +47,11 @@ export const leadsRouter = router({
       };
 
       try {
-        const stored = await appendBIReviewLead(lead);
-        if (!stored) {
+        // Database first (durable copy), then Sheets. The lead counts as
+        // received if either store has it; a Sheets failure is retried later.
+        const leadId = await saveLead("bi-review", lead, lead);
+        const sheetsOk = await syncLeadToSheets(leadId, "bi-review", lead);
+        if (leadId === null && !sheetsOk) {
           return {
             success: false,
             message: "Your request could not be saved. Please try again or email jp@daginsure.co.za.",

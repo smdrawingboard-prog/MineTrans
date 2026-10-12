@@ -12,6 +12,7 @@ import { refreshMiningNewsHandler } from "../handlers/refreshMiningNews";
 import { biAssessmentHandler } from "../handlers/biAssessment";
 import { biMethodologyLeadHandler } from "../handlers/biMethodologyLead";
 import { getLatestBlogPosts } from "../services/blogService";
+import { retryUnsyncedLeads } from "../services/leadStore";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -90,6 +91,14 @@ async function startServer() {
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
   });
+
+  // Re-send any leads whose Google Sheets write failed (they are safe in the database).
+  const retryLeads = () =>
+    retryUnsyncedLeads()
+      .then(n => n > 0 && console.log(`[Leads] Re-synced ${n} lead(s) to Google Sheets`))
+      .catch(err => console.error("[Leads] Retry sweep failed:", err));
+  setTimeout(retryLeads, 60_000);
+  setInterval(retryLeads, 10 * 60_000);
 }
 
 startServer().catch(console.error);
