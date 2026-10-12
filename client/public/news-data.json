@@ -1,76 +1,84 @@
 {
-  "updatedAt": "2026-09-25T04:17:31.331Z",
+  "updatedAt": "2026-10-12T07:59:29.988Z",
   "articles": [
     {
-      "headline": "WMI seminar challenges mining to move from legacy to leadership",
-      "excerpt": "Learning from South African mining’s past consequences, and progressing toward a more sustainable and inclusive industry, will be the focus of the Wits Mining Institute (WMI) 2026 seminar. With the&hellip;",
+      "headline": "Greta Garbo is back – starring in SKF’s initiative to overcome friction",
+      "excerpt": "More than a century after her first campaign promoting SKF, one of the most iconic figures of our time is once again the face of the company. Using artificial intelligence&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/wmi-seminar-challenges-mining-to-move-from-legacy-to-leadership/",
-      "publishedAt": "2026-09-25T04:17:30.777Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/greta-garbo-is-back-starring-in-skfs-initiative-to-overcome-friction/",
+      "publishedAt": "2026-10-12T07:59:28.368Z",
       "category": "General"
     },
     {
-      "headline": "How due diligence underpins credible mineral asset valuation",
-      "excerpt": "With fierce competition globally for investment capital, independent due diligence is essential for the credible and accurate valuation of mineral assets – even when not formally required by stock exchanges&hellip;",
+      "headline": "Why the factory isn&#8217;t where South Africa wins in the mining tyre value chain",
+      "excerpt": "Giant mining tyres are made in a handful of plants worldwide. That is not a South African failure – and it points to where a mining economy should actually be&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/minerals/how-due-diligence-underpins-credible-mineral-asset-valuation/",
-      "publishedAt": "2026-09-25T04:17:30.777Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/press-release/why-the-factory-isnt-where-south-africa-wins-in-the-mining-tyre-value-chain/",
+      "publishedAt": "2026-10-12T07:59:28.368Z",
       "category": "General"
     },
     {
-      "headline": "Africa Gas &#038; LNG Summit 2026 to bring investment and local value into focus in Maputo",
-      "excerpt": "The Africa Gas &amp; LNG Summit (AfGLNG) will take place in Maputo from 11 to 13 November 2026, bringing together government leaders, energy executives, investors and industry experts to examine&hellip;",
+      "headline": "New heights in sight as Zambia targets new phase of mining growth",
+      "excerpt": "Zambia is positioning itself for a major expansion of its mining industry, underpinned by an ambitious copper production target supported by regulatory reform, renewed exploration and a broader strategy to&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/oil-gas/africa-gas-lng-summit-2026-to-bring-investment-and-local-value-into-focus-in-maputo/",
-      "publishedAt": "2026-09-25T04:17:30.777Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/minerals/new-heights-in-sight-as-zambia-targets-new-phase-of-mining-growth/",
+      "publishedAt": "2026-10-12T07:59:28.368Z",
+      "category": "Commodity Prices"
+    },
+    {
+      "headline": "Mineral Processing Equipment",
+      "excerpt": "Multotec, recognised industry leaders in metallurgy and process engineering help mining houses across the world process minerals more efficiently,...",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:7653",
+      "publishedAt": "2026-10-12T07:59:27.121Z",
+      "category": "General"
+    },
+    {
+      "headline": "Mining pilots: the graveyard of good ideas and great technology",
+      "excerpt": "By Keagan Keyser|2026-10-09T05:52:12+00:00October 9th, 2026|News|",
+      "publication": "African Mining",
+      "sourceUrl": "https://www.africanmining.co.za/2026/04/01/mining-pilots-the-graveyard-of-good-ideas-and-great-technology/",
+      "publishedAt": "2026-10-12T07:59:26.999Z",
+      "category": "General"
+    },
+    {
+      "headline": "SEW-EURODRIVE powers progress, setting the pace for African mining operations",
+      "excerpt": "Cold Link Africa RACA Journal African Mines Handbook / Online Mining and Technical Exhibitions (MTE) Equipment and Hire Plumbing Africa SA Affordable Housing Timber iQ",
+      "publication": "African Mining",
+      "sourceUrl": "https://www.africanmining.co.za/2026/02/01/sew-eurodrive-powers-progress-setting-the-pace-for-african-mining-operations/",
+      "publishedAt": "2026-10-12T07:59:26.999Z",
       "category": "Power & Water"
     },
     {
-      "headline": "Health & Safety",
-      "excerpt": "Supplier & Distributor of the Widest Range of Accurate & Easy-to-Use Alcohol Breathalysers",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6580",
-      "publishedAt": "2026-09-25T04:17:29.803Z",
-      "category": "Safety"
+      "headline": "Print Media Pack 2026",
+      "excerpt": "African Mines Handbook Print Media Pack 2026",
+      "publication": "African Mining",
+      "sourceUrl": "https://www.africanmining.co.za/wp-content/uploads/AM_PRINT_MediaPack2026.pdf",
+      "publishedAt": "2026-10-12T07:59:26.999Z",
+      "category": "General"
     },
     {
-      "headline": "Ex-Gold Fields CEO targets $1B Africa critical minerals fund",
+      "headline": "US agency to do more equity investing in Africa, official says",
       "excerpt": "",
       "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/ex-gold-fields-ceo-targets-1b-africa-critical-minerals-fund/",
-      "publishedAt": "2026-09-23T14:58:43.000Z",
-      "category": "Commodity Prices"
+      "sourceUrl": "https://www.mining.com/web/us-agency-to-do-more-equity-investing-in-africa-official-says/",
+      "publishedAt": "2026-10-09T13:30:35.000Z",
+      "category": "General"
     },
     {
-      "headline": "West Africa key to gold growth, Fortuna CEO says",
+      "headline": "3rd Africa Minerals Strategy Group High-Level Roundtable Concludes in New York with Historic Signing of Continental Minerals Declaration",
       "excerpt": "",
       "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/west-africa-key-to-gold-growth-fortuna-ceo-says/",
-      "publishedAt": "2026-09-17T16:33:54.000Z",
-      "category": "Commodity Prices"
+      "sourceUrl": "https://www.mining.com/sponsored-content/3rd-africa-minerals-strategy-group-high-level-roundtable-concludes-in-new-york-with-historic-signing-of-continental-minerals-declaration/",
+      "publishedAt": "2026-09-25T21:56:30.000Z",
+      "category": "General"
     },
     {
-      "headline": "BMI cuts platinum, palladium price forecasts as car sales shrink and South African supply recovers",
+      "headline": "South Africa seeks partners for $2.7 billion manganese corridor",
       "excerpt": "",
       "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/platinum-palladium-price-forecasts-cut-by-bmi-as-car-sales-shrink-and-south-african-supply-recovers/",
-      "publishedAt": "2026-09-10T17:12:44.000Z",
-      "category": "Commodity Prices"
-    },
-    {
-      "headline": "African Rainbow Minerals profit up 19% on higher platinum prices",
-      "excerpt": "",
-      "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/web/african-rainbow-minerals-profit-up-19-on-higher-platinum-prices/",
-      "publishedAt": "2026-09-04T13:50:23.000Z",
-      "category": "Commodity Prices"
-    },
-    {
-      "headline": "Op-Ed: Ethiopia&#8217;s hidden SEDEX deposit — part of Africa&#8217;s next great basin?",
-      "excerpt": "",
-      "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/op-ed-ethiopias-hidden-sedex-deposit-part-of-africas-next-great-basin/",
-      "publishedAt": "2026-08-28T20:16:00.000Z",
+      "sourceUrl": "https://www.mining.com/web/south-africa-seeks-partners-for-2-7-billion-manganese-corridor/",
+      "publishedAt": "2026-09-25T19:34:22.000Z",
       "category": "General"
     }
   ]
