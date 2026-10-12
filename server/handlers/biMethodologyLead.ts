@@ -46,9 +46,14 @@ export async function biMethodologyLeadHandler(req: Request, res: Response) {
   };
 
   // Database first (durable copy), then Sheets; a Sheets failure is retried later.
-  const leadId = await saveLead("bi-methodology", methodologyLead, methodologyLead);
-  const sheetsOk = await syncLeadToSheets(leadId ?? 0, "bi-methodology", methodologyLead);
-  const stored = leadId !== null || sheetsOk;
+  let stored = false;
+  try {
+    const leadId = await saveLead("bi-methodology", methodologyLead, methodologyLead);
+    const sheetsOk = await syncLeadToSheets(leadId, "bi-methodology", methodologyLead);
+    stored = leadId !== null || sheetsOk;
+  } catch (error) {
+    console.error("[Leads] Unexpected error storing BI methodology lead:", error);
+  }
 
   if (!stored) {
     res.status(502).json({

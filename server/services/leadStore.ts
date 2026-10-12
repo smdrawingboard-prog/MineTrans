@@ -83,11 +83,12 @@ async function pushToSheets(source: LeadSource, payload: unknown): Promise<boole
 
 /** Mirrors a saved lead to Google Sheets and records the outcome. */
 export async function syncLeadToSheets(
-  id: number,
+  id: number | null,
   source: LeadSource,
   payload: unknown
 ): Promise<boolean> {
   const ok = await pushToSheets(source, payload);
+  if (id === null) return ok; // no database row to update
   const db = await getDb();
   if (db) {
     try {

@@ -50,10 +50,7 @@ export const leadsRouter = router({
         // Database first (durable copy), then Sheets. The lead counts as
         // received if either store has it; a Sheets failure is retried later.
         const leadId = await saveLead("bi-review", lead, lead);
-        const sheetsOk =
-          leadId !== null
-            ? await syncLeadToSheets(leadId, "bi-review", lead)
-            : await syncLeadToSheets(0, "bi-review", lead);
+        const sheetsOk = await syncLeadToSheets(leadId, "bi-review", lead);
         if (leadId === null && !sheetsOk) {
           return {
             success: false,
