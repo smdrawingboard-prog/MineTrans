@@ -26,7 +26,7 @@ Canonical website: https://www.minetrans.co.za/
 - Contact MineTrans: https://www.minetrans.co.za/contact.html
 
 ## Entity information
-MineTrans Insurance Brokers is a specialist insurance brokerage focused on mining and marine risk. It is a division of Donaldson Advisory Group and operates in South Africa and Sub-Saharan Africa. Financial Services Provider number: FSP 53166.
+MineTrans Insurance Brokers is a specialist insurance brokerage focused on mining and marine risk. It is a division of Donaldson Group (Pty) Ltd and operates in South Africa and Sub-Saharan Africa. Financial Services Provider number: FSP 53166.
 
 ## Notes for retrieval
 - Every public page listed above is served as static, crawlable HTML with a self-referencing canonical URL and schema.org structured data.
