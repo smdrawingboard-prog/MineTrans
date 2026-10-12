@@ -82,6 +82,12 @@ export function serveStatic(app: Express) {
     }
     // app.use("*") strips the mount path from req.path, so test the full URL.
     const urlPath = req.originalUrl.split("?")[0];
-    res.status(SPA_ROUTE.test(urlPath) ? 200 : 404).sendFile(fallback);
+    res
+      .status(SPA_ROUTE.test(urlPath) ? 200 : 404)
+      .sendFile(fallback, err => {
+        if (err && !res.headersSent) {
+          res.status(404).type("text/plain").send("Not found");
+        }
+      });
   });
 }
