@@ -71,7 +71,17 @@ export function serveStatic(app: Express) {
     ? spaShell
     : path.resolve(distPath, "index.html");
 
-  app.use("*", (_req, res) => {
-    res.sendFile(fallback);
+  // Only the React app's own routes get a 200 from the SPA shell. Anything else
+  // is a genuine miss: answer 404 (the shell still renders its NotFound view for
+  // people) so Google doesn't treat every made-up URL as a live page ("soft 404").
+  const SPA_ROUTE = /^\/(certification(\/|$)|404\/?$)/;
+  app.use("*", (req, res) => {
+    if (req.originalUrl.startsWith("/api/")) {
+      res.status(404).json({ error: "Not found" });
+      return;
+    }
+    // app.use("*") strips the mount path from req.path, so test the full URL.
+    const urlPath = req.originalUrl.split("?")[0];
+    res.status(SPA_ROUTE.test(urlPath) ? 200 : 404).sendFile(fallback);
   });
 }
