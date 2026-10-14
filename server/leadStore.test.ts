@@ -8,7 +8,7 @@ vi.mock("./services/googleSheetsSync", () => ({
   appendBIMethodologyLead: vi.fn(),
 }));
 
-import { saveLead, syncLeadToSheets } from "./services/leadStore";
+import { retryUnsyncedLeads, saveLead, syncLeadToSheets } from "./services/leadStore";
 
 describe("leadStore", () => {
   beforeEach(() => {
@@ -38,5 +38,24 @@ describe("leadStore", () => {
     const ok = await syncLeadToSheets(7, "bi-review", {});
     expect(ok).toBe(false);
     expect(set.mock.calls[0][0]).toMatchObject({ sheetsSynced: "false" });
+  });
+
+  it("retry sweep re-syncs pending leads and survives a failing row", async () => {
+    const rows = [
+      { id: 1, source: "bi-review", payload: JSON.stringify({ a: 1 }) },
+      { id: 2, source: "bi-review", payload: "not-json" },
+      { id: 3, source: "bi-review", payload: JSON.stringify({ a: 3 }) },
+    ];
+    const where = vi.fn().mockResolvedValue(undefined);
+    const db = {
+      execute: vi.fn().mockResolvedValue(undefined),
+      select: () => ({ from: () => ({ where: () => ({ limit: () => Promise.resolve(rows) }) }) }),
+      update: () => ({ set: () => ({ where }) }),
+    };
+    getDb.mockResolvedValue(db);
+    appendBIReviewLead.mockResolvedValue(true);
+    const synced = await retryUnsyncedLeads();
+    expect(synced).toBe(2); // row 2 has bad JSON and is skipped, not fatal
+    expect(appendBIReviewLead).toHaveBeenCalledTimes(2);
   });
 });
