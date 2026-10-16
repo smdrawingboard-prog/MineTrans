@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-10-12T07:59:29.988Z",
+  "updatedAt": "2026-10-16T03:56:39.646Z",
   "articles": [
     {
       "headline": "Greta Garbo is back – starring in SKF’s initiative to overcome friction",
       "excerpt": "More than a century after her first campaign promoting SKF, one of the most iconic figures of our time is once again the face of the company. Using artificial intelligence&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/technology/greta-garbo-is-back-starring-in-skfs-initiative-to-overcome-friction/",
-      "publishedAt": "2026-10-12T07:59:28.368Z",
+      "publishedAt": "2026-10-16T03:56:37.653Z",
       "category": "General"
     },
     {
@@ -14,7 +14,7 @@
       "excerpt": "Giant mining tyres are made in a handful of plants worldwide. That is not a South African failure – and it points to where a mining economy should actually be&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/why-the-factory-isnt-where-south-africa-wins-in-the-mining-tyre-value-chain/",
-      "publishedAt": "2026-10-12T07:59:28.368Z",
+      "publishedAt": "2026-10-16T03:56:37.653Z",
       "category": "General"
     },
     {
@@ -22,40 +22,24 @@
       "excerpt": "Zambia is positioning itself for a major expansion of its mining industry, underpinned by an ambitious copper production target supported by regulatory reform, renewed exploration and a broader strategy to&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/minerals/new-heights-in-sight-as-zambia-targets-new-phase-of-mining-growth/",
-      "publishedAt": "2026-10-12T07:59:28.368Z",
+      "publishedAt": "2026-10-16T03:56:37.653Z",
       "category": "Commodity Prices"
     },
     {
-      "headline": "Mineral Processing Equipment",
-      "excerpt": "Multotec, recognised industry leaders in metallurgy and process engineering help mining houses across the world process minerals more efficiently,...",
+      "headline": "Freight & Logistics",
+      "excerpt": "We partner growth of our select clients through our comprehensive and competitive integrated international logistics, trade finance and information...",
       "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:7653",
-      "publishedAt": "2026-10-12T07:59:27.121Z",
-      "category": "General"
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6528",
+      "publishedAt": "2026-10-16T03:56:36.764Z",
+      "category": "Supply Chain"
     },
     {
-      "headline": "Mining pilots: the graveyard of good ideas and great technology",
-      "excerpt": "By Keagan Keyser|2026-10-09T05:52:12+00:00October 9th, 2026|News|",
-      "publication": "African Mining",
-      "sourceUrl": "https://www.africanmining.co.za/2026/04/01/mining-pilots-the-graveyard-of-good-ideas-and-great-technology/",
-      "publishedAt": "2026-10-12T07:59:26.999Z",
-      "category": "General"
-    },
-    {
-      "headline": "SEW-EURODRIVE powers progress, setting the pace for African mining operations",
-      "excerpt": "Cold Link Africa RACA Journal African Mines Handbook / Online Mining and Technical Exhibitions (MTE) Equipment and Hire Plumbing Africa SA Affordable Housing Timber iQ",
-      "publication": "African Mining",
-      "sourceUrl": "https://www.africanmining.co.za/2026/02/01/sew-eurodrive-powers-progress-setting-the-pace-for-african-mining-operations/",
-      "publishedAt": "2026-10-12T07:59:26.999Z",
-      "category": "Power & Water"
-    },
-    {
-      "headline": "Print Media Pack 2026",
-      "excerpt": "African Mines Handbook Print Media Pack 2026",
-      "publication": "African Mining",
-      "sourceUrl": "https://www.africanmining.co.za/wp-content/uploads/AM_PRINT_MediaPack2026.pdf",
-      "publishedAt": "2026-10-12T07:59:26.999Z",
-      "category": "General"
+      "headline": "Deaths prompt South African miners&#8217; safety review, minerals council CEO says",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/deaths-prompt-south-african-miners-safety-review-minerals-council-ceo-says/",
+      "publishedAt": "2026-10-14T16:39:28.000Z",
+      "category": "Safety"
     },
     {
       "headline": "US agency to do more equity investing in Africa, official says",
@@ -80,6 +64,14 @@
       "sourceUrl": "https://www.mining.com/web/south-africa-seeks-partners-for-2-7-billion-manganese-corridor/",
       "publishedAt": "2026-09-25T19:34:22.000Z",
       "category": "General"
+    },
+    {
+      "headline": "Western miners can match China’s speed if African governments cut red tape, KoBold president says",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/western-miners-can-match-chinas-speed-if-african-governments-cut-red-tape-kobold-president-says/",
+      "publishedAt": "2026-09-25T16:23:58.000Z",
+      "category": "Regulation"
     }
   ]
 }
