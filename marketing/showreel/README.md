@@ -1,17 +1,22 @@
-# MineTrans showreel
+# MineTrans showreels
 
-15-second, 1920×1080, 60fps brand showreel built from the site's own interface (the BI-failure cascade, the illustrative settlement chart and the review request form).
+| Video | Length | Built from |
+|---|---|---|
+| `minetrans-showreel.mp4` | 15s | The site's interface: BI-failure cascade, illustrative settlement chart, review request form |
+| `minetrans-the-mine-30s.mp4` | 30s | `insurance-mine.html` only, and its risk-assessment diagram cut into moving pieces: commercial assets, liability, business interruption, the diagram's three steps, then the cascade into cover |
 
-- `minetrans-showreel.mp4` — final video with soundtrack
-- `minetrans-showreel.html` — the source page; `window.seek(t)` draws any moment, `window.renderAudio()` returns the WAV track
-- `src/` — editable source and render tooling
+All 1920×1080, 60fps, with a Web Audio soundtrack at 120 BPM.
 
-Rebuild after editing `src/reel.src.html` (needs Python 3, Node with Playwright, and ffmpeg):
+- `*.mp4` — final videos
+- `*.html` — the source pages; `window.seek(t)` draws any moment, `window.renderAudio()` returns the WAV track
+- `src/` — editable sources (`reel.src.html`, `mine30.src.html`) and render tooling
+
+Rebuild after editing a source in `src/` (needs Python 3, Node with Playwright, and ffmpeg):
 
 ```bash
 python3 src/build.py
-node src/render.cjs stills   # one frame per beat in src/beats/ for review
-node src/render.cjs          # full render
+node src/render.cjs minetrans-the-mine-30s stills   # one frame per beat in src/beats/ for review
+node src/render.cjs minetrans-the-mine-30s          # full render (omit the name for the 15s reel)
 ```
 
 Figures shown are the site's illustrative examples, not client data (FAIS). Fonts: Playfair Display, SIL Open Font License.

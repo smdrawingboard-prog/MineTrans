@@ -1,10 +1,14 @@
 // Render minetrans-showreel.html to MP4: 60fps, 3 subframes blended with tmix, Web Audio track muxed in.
-// Usage: node render.cjs            (writes ../minetrans-showreel.mp4)
-//        node render.cjs stills     (one PNG per beat into ./beats for review)
+// Usage: node render.cjs [reel] [stills]
+//   reel   = minetrans-showreel (default) or minetrans-the-mine-30s
+//   stills = one PNG per beat into ./beats/<reel> for review, instead of the MP4
 const { chromium } = require('playwright');
 const path = require('path'), fs = require('fs'), { spawn } = require('child_process');
-const ROOT = path.resolve(__dirname, '..'), PAGE = 'file://' + path.join(ROOT, 'minetrans-showreel.html');
-const FPS = 60, SUB = 3, DUR = 15;
+const ROOT = path.resolve(__dirname, '..');
+const REEL = process.argv.find(a => a.startsWith('minetrans-')) || 'minetrans-showreel';
+const PAGE = 'file://' + path.join(ROOT, REEL + '.html');
+const FPS = 60, SUB = 3;
+let DUR = 15;
 
 function run(cmd, args, opts = {}) {
   const p = spawn(cmd, args, { stdio: ['pipe', 'inherit', 'inherit'], ...opts });
@@ -19,12 +23,15 @@ async function openPage(browser) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   page.on('pageerror', e => { throw e; });
   await page.goto(PAGE);
-  await page.waitForFunction(() => window.__ready === true, { timeout: 30000 });
+  await page.waitForFunction(() => window.__ready === true || !!window.__error, { timeout: 30000 });
+  const err = await page.evaluate(() => window.__error);
+  if (err) throw new Error(err);
+  DUR = await page.evaluate(() => window.DURATION || 15);
   return page;
 }
 
 async function stills(page) {
-  const out = path.join(__dirname, 'beats');
+  const out = path.join(__dirname, 'beats', REEL);
   fs.mkdirSync(out, { recursive: true });
   for (let b = 0; b < DUR * 2; b++) {
     const t = b * 0.5 + 0.22;
@@ -51,16 +58,16 @@ async function video(page) {
   ff.p.stdin.end();
   await ff.done;
   await run('ffmpeg', ['-loglevel', 'error', '-y', '-i', silent, '-i', wav, '-c:v', 'copy', '-c:a', 'aac', '-b:a', '256k',
-    '-shortest', '-movflags', '+faststart', path.join(ROOT, 'minetrans-showreel.mp4')]).done;
+    '-shortest', '-movflags', '+faststart', path.join(ROOT, REEL + '.mp4')]).done;
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log('wrote', path.join(ROOT, 'minetrans-showreel.mp4'));
+  console.log('wrote', path.join(ROOT, REEL + '.mp4'));
 }
 
 (async () => {
   const browser = await chromium.launch();
   try {
     const page = await openPage(browser);
-    await (process.argv[2] === 'stills' ? stills(page) : video(page));
+    await (process.argv.includes('stills') ? stills(page) : video(page));
   } finally {
     await browser.close();
   }

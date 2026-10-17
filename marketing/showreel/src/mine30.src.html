@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Mine — 30s</title>
+<style>
+@font-face{font-family:PF;src:url(data:font/woff2;base64,{{PF_N}}) format('woff2');font-weight:400 900;font-style:normal}
+@font-face{font-family:PF;src:url(data:font/woff2;base64,{{PF_I}}) format('woff2');font-weight:400 900;font-style:italic}
+:root{--onyx:#0A0A0B;--char:#1E1D20;--plat:#C9CACE;--bone:#F7F5F1;--cu:#C9854F;--line:rgba(201,202,206,.16);--img:#2B3337}
+html,body{margin:0;padding:0;background:var(--onyx);overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;background:var(--onyx);
+  font-family:PF,serif;color:var(--bone);font-weight:500;-webkit-font-smoothing:antialiased}
+#cam,.layer{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.a{position:absolute}
+.m{display:inline-block;overflow:hidden;vertical-align:top;padding:.04em .08em .16em;margin:-.04em -.08em -.16em}
+.i{display:inline-block}
+.mask{overflow:hidden}
+.full{position:absolute;left:0;right:0;top:0;text-align:center}
+.cap{text-transform:uppercase;letter-spacing:.16em}
+.cu{color:var(--cu)}
+em{font-style:italic;font-weight:500}
+.eb{position:absolute;font-size:18px;letter-spacing:.38em;text-transform:uppercase;color:var(--plat);font-weight:500;white-space:nowrap}
+.eb .rule{display:inline-block;width:46px;height:1px;background:rgba(201,202,206,.6);vertical-align:middle;margin-right:22px;transform-origin:0 50%}
+.piece{position:absolute;left:210px;top:131px;width:1500px;height:818px;transform-origin:0 0}
+.piece .px{position:absolute;inset:0;background-size:1500px 818px}
+.cell{position:absolute;width:104px;height:104px;background:var(--onyx);transform-origin:50% 50%}
+.cell svg.bd{position:absolute;left:0;top:0;overflow:visible}
+.cell svg.ic{position:absolute;left:30px;top:30px;width:44px;height:44px}
+.nm{position:absolute;width:360px;text-align:center;font-size:19px;color:var(--plat)}
+.stl{position:absolute;width:420px;height:34px;line-height:34px;overflow:hidden;font-size:19px;letter-spacing:.1em;color:rgba(247,245,241,.78)}
+.imp{position:absolute;border:1px solid rgba(201,202,206,.32);background:rgba(201,202,206,.035);display:flex;align-items:center;
+  gap:44px;padding:0 34px;box-sizing:border-box;border-radius:2px}
+.imp .ih{font-size:18px;letter-spacing:.22em;text-transform:uppercase;color:var(--plat)}
+.imp .iv{font-size:28px;color:var(--bone)}
+.row3{position:absolute;left:880px;width:700px;height:58px;line-height:58px;font-size:32px;padding-left:26px;box-sizing:border-box}
+.chip{position:absolute;height:60px;line-height:60px;font-size:25px;padding:0 26px;box-sizing:border-box;border:1px solid rgba(201,202,206,.28);border-radius:2px;white-space:nowrap}
+.lia{position:absolute;width:420px}
+.lia .t{font-size:32px}
+.lia .d{font-size:20px;color:rgba(201,202,206,.85);font-weight:400;margin-top:8px;line-height:1.35}
+#cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+#obj{position:absolute}
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="fbObj" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur id="fbObjG" stdDeviation="0 0"/></filter>
+    <filter id="fbCur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur id="fbCurG" stdDeviation="0 0"/></filter>
+  </svg>
+  <div id="cam"></div>
+</div>
+<script>
+/* ============================================================
+   MineTrans — "The Mine" explainer, 30s. Every style is a pure function of t.
+   Copy: client/public/insurance-mine.html. Image: images/diagrams/mine-risk-assessment.webp
+   ============================================================ */
+const BPM = 120, BEAT = 60 / BPM, DUR = 30;
+const IMG = 'data:image/webp;base64,{{IMG}}';
+const SCENES = [
+  { id: 's1', t0: 0,  t1: 2  },   // hook
+  { id: 's2', t0: 2,  t1: 6  },   // the diagram assembles
+  { id: 's3', t0: 6,  t1: 10 },   // commercial assets
+  { id: 's4', t0: 10, t1: 14 },   // liability
+  { id: 's5', t0: 14, t1: 18 },   // business interruption
+  { id: 's6', t0: 18, t1: 22 },   // the three steps
+  { id: 's7', t0: 22, t1: 27 },   // cascade -> covered (payoff on 24s)
+  { id: 's8', t0: 27, t1: 30 },   // end card
+];
+
+/* ---------- easing, all functions of time ---------- */
+const TAU = Math.PI * 2;
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+function spr(x, f = 2.4, z = 0.78) {
+  if (x <= 0) return 0;
+  const w = TAU * f, wd = w * Math.sqrt(1 - z * z);
+  return 1 - Math.exp(-z * w * x) * (Math.cos(wd * x) + (z * w / wd) * Math.sin(wd * x));
+}
+function eio(u, k = 5) {
+  u = clamp(u, 0, 1);
+  const h = x => (Math.exp(k * x) - 1) / (Math.exp(k) - 1);
+  return u < 0.5 ? 0.5 * h(2 * u) : 1 - 0.5 * h(2 - 2 * u);
+}
+const bump = (x, k = 9, w = 13) => x <= 0 ? 0 : Math.exp(-k * x) * Math.sin(w * x) * 1.9;
+
+/* ---------- markup helpers ---------- */
+function words(str, tin, step = 0.06, tout = null, ostep = 0.03, cls = '') {
+  return str.split(' ').map((w, i) =>
+    `<span class="m"><span class="i r ${cls}" data-in="${(tin + i * step).toFixed(3)}"${tout != null ? ` data-out="${(tout + i * ostep).toFixed(3)}"` : ''}>${w}</span></span>`
+  ).join(' ');
+}
+const eyebrow = (txt, x, y, tin, tout) =>
+  `<div class="eb" style="left:${x}px;top:${y}px"><span class="rule gx" data-in="${tin}" data-out="${tout}" data-f="2.4"></span>${words(txt, tin + 0.06, 0.03, tout, 0.01)}</div>`;
+const anchor = (id, l, t, w, h) => `<div class="a" id="${id}" style="left:${l}px;top:${t}px;width:${w}px;height:${h}px"></div>`;
+
+const ICON = {
+  pit:   '<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/>',
+  mill:  '<circle cx="12" cy="12" r="7"/><path d="M12 5v3M12 16v3M5 12h3M16 12h3"/>',
+  plant: '<path d="M4 17l5-5 4 4 7-8"/><path d="M20 8v4h-4"/>',
+  port:  '<path d="M3 18h13l5-6-5-6H3"/><path d="M3 6v12"/>',
+};
+const COLS = [435, 785, 1135, 1485], LINE_Y = 600;
+const NAMES = ['Pit / Shaft', 'Primary Mill', 'Plant / Process', 'Rail / Port'];
+
+/* ---------- the diagram, cut into pieces (image px; panel is 1500 wide) ---------- */
+const PS = 1500 / 1408;
+const PIECES = [
+  { id: 'trL', poly: [[330, 600], [560, 520], [612, 545], [612, 702], [330, 702]] },
+  { id: 'trR', poly: [[830, 545], [940, 450], [940, 375], [1010, 365], [1312, 420], [1312, 565], [1180, 655], [950, 655]] },
+  { id: 'core', poly: [[560, 95], [850, 95], [850, 330], [942, 360], [942, 538], [705, 632], [468, 532], [468, 360], [560, 330]] },
+  { id: 'pd', poly: [[70, 285], [472, 285], [472, 588], [305, 684], [70, 566]],
+              rect: [[70, 285], [472, 285], [472, 684], [305, 684], [70, 684]] },
+  { id: 'bi', poly: [[960, 85], [1345, 85], [1345, 396], [1236, 404], [1110, 446], [968, 392]],
+              rect: [[960, 85], [1345, 85], [1345, 446], [1345, 446], [1110, 446], [960, 446]] },
+  { id: 'prod', poly: [[985, 456], [1180, 440], [1332, 520], [1332, 612], [1150, 684], [988, 606]],
+              rect: [[960, 446], [1345, 446], [1345, 446], [1345, 684], [1150, 684], [960, 684]] },
+  { id: 'asset', poly: [[70, 68], [478, 68], [478, 274], [70, 274]] },
+  { id: 'steps', poly: [[30, 698], [1380, 698], [1380, 760], [30, 760]] },
+];
+const bboxOf = poly => { const xs = poly.map(p => p[0]), ys = poly.map(p => p[1]); return { l: Math.min(...xs), t: Math.min(...ys), r: Math.max(...xs), b: Math.max(...ys) }; };
+// when each piece is on screen, and how it is revealed
+const PIECE_LIFE = {
+  core:  [{ tin: 2.0, tout: 6.0, dir: 'up' }],
+  trL:   [{ tin: 2.22, tout: 5.95, dir: 'r2l' }],
+  trR:   [{ tin: 2.22, tout: 5.95, dir: 'l2r' }],
+  pd:    [{ tin: 2.5, tout: 13.62, dir: 'up' }],
+  bi:    [{ tin: 3.0, tout: 6.0, dir: 'down' }, { tin: 14.0, tout: 17.6, dir: 'down' }],
+  prod:  [{ tin: 3.15, tout: 6.02, dir: 'up' }, { tin: 14.08, tout: 17.64, dir: 'up' }],
+  asset: [{ tin: 3.5, tout: 6.0, dir: 'l2r' }],
+  steps: [{ tin: 4.0, tout: 6.04, dir: 'l2r' }, { tin: 18.0, tout: 21.72, dir: 'l2r' }],
+};
+// where each piece goes (anchor ids measured in later scenes); 'home' = assembled diagram
+const PIECE_MOVES = {
+  pd:    [{ t: 6.0, to: 's3pd', f: 1.5, shape: 'rect' }, { t: 10.0, to: 's4pd', f: 1.6, shape: 'rect' }],
+  bi:    [{ t: 13.9, to: 's5bi', f: 60, shape: 'rect', box: [960, 85, 1345, 684] }],
+  prod:  [{ t: 13.9, to: 's5bi', f: 60, shape: 'rect', box: [960, 85, 1345, 684] }],
+  steps: [{ t: 17.9, to: 's6row', f: 60, box: [30, 698, 1380, 760] }],
+};
+
+function flowNodes(p, tin, tout, statuses) {
+  let h = '';
+  COLS.forEach((cx, k) => {
+    const ic = ['pit', 'mill', 'plant', 'port'][k];
+    h += `<div class="cell gy" id="${p}c${k}" data-in="${tin + k * 0.05}" data-out="${tout + k * 0.04}" data-f="2.6" style="left:${cx - 52}px;top:${LINE_Y - 52}px">
+      <svg class="bd" width="104" height="104"><rect id="${p}bd${k}" x=".75" y=".75" width="102.5" height="102.5" fill="none" stroke="rgba(201,202,206,.42)" stroke-width="1.5"/></svg>
+      <svg class="ic" id="${p}ic${k}" viewBox="0 0 24 24" fill="none" stroke="var(--plat)" stroke-width="1.3">${ICON[ic]}</svg></div>`;
+    h += `<div class="nm cap" style="left:${cx - 180}px;top:${LINE_Y + 72}px">${words(NAMES[k].toUpperCase(), tin + 0.12 + k * 0.04, 0.03, tout, 0.01)}</div>`;
+    h += `<div class="stl" style="left:${cx - 210}px;top:${LINE_Y + 108}px">`;
+    statuses[k].forEach(s => { h += `<div class="i r full" data-in="${s.tin}"${s.tout != null ? ` data-out="${s.tout}"` : ''} data-f="3">${s.txt}</div>`; });
+    h += `</div>`;
+  });
+  return h;
+}
+
+/* ---------- scene markup (screen space at each scene's reference time) ---------- */
+function buildScenes() {
+  const S = {};
+  // S1 — hook
+  S.s1b = ``;
+  S.s1f = `
+    <div class="a" style="left:0;width:1920px;top:440px;text-align:center;font-size:150px;line-height:1.08;letter-spacing:-.015em">
+      <span class="m"><span class="i r cu" data-in="0" data-out="1.56"><em>More</em></span></span> ${words('than the', 0.5, 0.07, 1.6, 0.04)}
+      <span id="hookWord" style="display:inline-block"><span class="m"><span class="i r" data-in="1.0" data-out="1.66">ground.</span></span></span><span id="hookDotA" style="display:inline-block;width:0;height:0"></span></div>`;
+
+  // S2 — the diagram assembles from its own pieces
+  let pcs = '';
+  PIECES.forEach(p => {
+    const poly = p.poly.map(([x, y]) => `${(x * PS).toFixed(1)}px ${(y * PS).toFixed(1)}px`).join(',');
+    pcs += `<div class="piece" id="pc_${p.id}"><div class="px" id="px_${p.id}" style="background-image:url(${IMG});clip-path:polygon(${poly})"></div></div>`;
+  });
+  S.s2b = `
+    <div class="a cl" id="s2panel" data-dir="c" data-in="2.0" data-out="5.96" data-f="2.0" style="left:210px;top:131px;width:1500px;height:818px;background:var(--img);border-radius:6px"></div>
+    ${pcs}`;
+  S.s2f = `
+    <div class="a" id="s2zoom" style="left:${960 - 34}px;top:${540 - 34}px;width:68px;height:68px;border-radius:50%;background:rgba(10,10,11,.72);border:1px solid rgba(201,202,206,.4);box-sizing:border-box;transform-origin:50% 50%">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--bone)" stroke-width="1.6" style="position:absolute;left:20px;top:20px"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>`;
+
+  // S3 — commercial assets
+  const items3 = ['Buildings &amp; Fixed Structures', 'Fixed Plant &amp; Infrastructure', 'Contents &amp; Stock', 'All-Risk &amp; Fire Cover'];
+  let rows3 = '';
+  items3.forEach((txt, k) => {
+    rows3 += `<div class="row3" id="s3row${k}" style="top:${492 + k * 66}px"><span class="m"><span class="i r" data-in="${6.5 + k * 0.5}" data-out="${9.6 + k * 0.02}" data-f="3">${txt}</span></span></div>`;
+  });
+  S.s3b = anchor('s3pd', 230, 262, 566, 562);
+  S.s3f = `
+    ${eyebrow('Commercial Assets', 880, 246, 6.15, 9.56)}
+    <div class="a" style="left:880px;top:290px;width:900px;font-size:64px;line-height:1.1">${words('Everything the mine', 6.25, 0.05, 9.58, 0.02)}<br>${words('owns and operates.', 6.4, 0.05, 9.6, 0.02, 'em')}</div>
+    ${rows3}
+    <div class="a" style="left:880px;top:790px;width:960px;font-size:33px">
+      ${words('Insured to', 8.5, 0.05, 9.64, 0.02)} <span id="s3key">${words('reinstatement value,', 8.6, 0.05, 9.66, 0.02, 'cu')}</span>
+      ${words('not', 8.8, 0.05, 9.68)} <span style="position:relative;display:inline-block">${words('book value.', 8.85, 0.05, 9.69, 0.02)}
+        <i class="a gx" data-in="9.02" data-out="9.62" data-f="2.4" style="left:0;right:0;top:58%;height:2px;background:var(--bone);transform-origin:0 50%"></i></span></div>`;
+
+  // S4 — liability: the boundary moves past the site
+  const lia = [
+    ['Public Liability', 'Third-party injury and property damage, including off-site impact.', 330, 400, 'right', 10.5],
+    ["Employers' Liability", "Claims by employees beyond statutory workmen's compensation.", 1170, 400, 'left', 11.0],
+    ['Environmental Liability', 'Pollution, contamination and rehabilitation exposure.', 330, 640, 'right', 11.5],
+    ["Directors' &amp; Officers' Liability", 'Protection for decision-makers against claims.', 1170, 640, 'left', 12.0],
+  ];
+  let l4 = '';
+  lia.forEach(([t, d, x, y, al, tin], k) => {
+    l4 += `<div class="lia" style="left:${x}px;top:${y}px;text-align:${al}"><div class="t">${words(t, tin, 0.05, 13.5 + k * 0.03, 0.01)}</div>
+      <div class="d">${words(d, tin + 0.14, 0.015, 13.52 + k * 0.03, 0.004)}</div></div>`;
+  });
+  S.s4b = anchor('s4pd', 790, 430, 340, 338);
+  S.s4f = `
+    ${eyebrow('Liability', 150, 136, 10.1, 13.46)}
+    <div class="a" style="left:150px;top:176px;width:1700px;font-size:58px">${words('Exposure that', 10.15, 0.05, 13.48, 0.02)} ${words('follows the operation,', 10.3, 0.05, 13.5, 0.02, 'cu')} ${words('not the incident.', 10.45, 0.05, 13.52, 0.02)}</div>
+    ${l4}
+    <div class="a" style="left:0;width:1920px;top:930px;text-align:center;font-size:25px;color:rgba(201,202,206,.85);font-weight:400">${words('Well beyond the site boundary — to the public, to employees, and to the environment.', 12.5, 0.02, 13.54, 0.005)}</div>`;
+
+  // S5 — business interruption
+  const chips = [['Gross profit', 180, 15.5], ['Standing charges', 410, 15.75], ['Increased cost of working', 700, 16.0]];
+  let c5 = '';
+  chips.forEach(([t, x, tin], k) => {
+    c5 += `<div class="chip cl" id="s5chip${k}" data-dir="l" data-in="${tin}" data-out="${17.5 + k * 0.03}" data-f="2.8" style="left:${x}px;top:640px"><span class="m"><span class="i r" data-in="${tin + 0.05}" data-out="${17.48 + k * 0.03}" data-f="3">${t}</span></span></div>`;
+  });
+  S.s5b = anchor('s5bi', 1200, 170, 490, 760);
+  S.s5f = `
+    ${eyebrow('Business Interruption', 180, 196, 14.12, 17.46)}
+    <div class="a" style="left:180px;top:238px;width:1000px;font-size:66px;line-height:1.1">${words('What happens when', 14.2, 0.05, 17.48, 0.02)}<br>${words('the mine', 14.35, 0.05, 17.5, 0.02)} <span class="m"><span class="i r cu" data-in="14.45" data-out="17.52"><em>stops?</em></span></span></div>
+    <div class="a" style="left:180px;top:440px;width:1000px;font-size:31px;color:var(--plat);font-weight:400">${words("Asset cover replaces what's damaged.", 14.5, 0.04, 17.5, 0.01)}</div>
+    <div class="a" style="left:180px;top:500px;width:1000px;font-size:31px">${words("BI cover replaces what's lost while it's being replaced.", 15.0, 0.04, 17.52, 0.01)}</div>
+    ${c5}
+    <div class="a" style="left:180px;top:770px;width:1000px;font-size:25px;color:rgba(201,202,206,.85);font-weight:400"><span id="s5line">${words('Quantified upfront in a dedicated BI document — not a claims-time estimate.', 16.5, 0.02, 17.54, 0.005)}</span></div>`;
+
+  // S6 — the diagram's three steps
+  const segs = ['Procurement', 'Shipping', 'Installation', 'Commissioning', 'Ramp-up'];
+  let sg = '';
+  segs.forEach((s, k) => {
+    const x0 = 300 + k * 264;
+    sg += `<div class="a gy" data-in="0" data-out="21.7" style="left:${x0}px;top:536px;width:1px;height:46px;background:rgba(201,202,206,.4);transform-origin:50% 50%" data-seg="${x0}"></div>`;
+    sg += `<div class="a" style="left:${x0 + 14}px;top:596px;font-size:22px;color:var(--plat);font-weight:400"><span class="m"><span class="i r" data-seg="${x0}" data-in="0" data-out="${21.68 + k * 0.01}" data-f="3">${s}</span></span></div>`;
+  });
+  S.s6b = anchor('s6row', 80, 150, 1760, 81) + anchor('s6bar0', 300, 552, 480, 16) + anchor('s6bar1', 300, 552, 1320, 16) +
+    `<div class="a gx" data-in="20.5" data-out="21.7" data-f="2" style="left:300px;top:559px;width:1320px;height:1.5px;background:rgba(201,202,206,.28);transform-origin:0 50%"></div>`;
+  S.s6f = `
+    <div class="a" style="left:300px;top:330px;font-size:66px">${words('Critical Asset Ranking', 18.08, 0.05, 18.94, 0.02)}</div>
+    <div class="a" style="left:300px;top:430px;width:1300px;font-size:31px;color:var(--plat);font-weight:400">${words('Evaluating primary crushers, SAG mills and substations as single points of failure.', 18.3, 0.025, 18.96, 0.006)}</div>
+    <div class="a" style="left:300px;top:330px;font-size:66px">${words('Gross Profit at Risk', 19.08, 0.05, 19.94, 0.02)}</div>
+    <div class="a" style="left:300px;top:450px;font-size:48px">
+      ${words('Turnover', 19.25, 0.05, 19.93)} <span class="m"><span class="i r" data-in="19.35" data-out="19.95" style="color:var(--plat)">−</span></span> ${words('uninsured costs', 19.42, 0.05, 19.94, 0.01)}
+      <span class="m"><span class="i r" data-in="19.55" data-out="19.96" style="color:var(--plat)">=</span></span> ${words('BI sum insured', 19.65, 0.05, 19.97, 0.01)}</div>
+    <div class="a" style="left:300px;top:330px;font-size:66px">${words('Indemnity Period Selection', 20.08, 0.05, 21.66, 0.02)}</div>
+    <div class="a gy" data-in="20.6" data-out="21.7" style="left:780px;top:528px;width:2px;height:62px;background:var(--bone);transform-origin:50% 50%"></div>
+    <div class="a" style="left:790px;top:470px;font-size:23px;color:var(--plat);font-weight:400">${words('Default: 12 months', 20.62, 0.04, 21.66, 0.01)}</div>
+    ${sg}
+    <div class="a" style="left:300px;top:690px;width:1400px;font-size:30px">${words('Long-lead items push the realistic period well beyond a year.', 21.2, 0.03, 21.7, 0.008)}</div>`;
+  // the diagram's own numerals, unchanged — remove the old typed rows in step 1/2 when we leave
+  // (they exit through their data-out above)
+
+  // S7 — cascade, then covered
+  const st = [
+    [{ txt: 'RUNNING', tin: 22.2, tout: 26.0 }],
+    [{ txt: 'RUNNING', tin: 22.24, tout: 22.5 }, { txt: 'FAILED', tin: 22.56, tout: 23.98 }, { txt: 'REBUILDING · COVERED', tin: 24.06, tout: 26.02 }],
+    [{ txt: 'RUNNING', tin: 22.28, tout: 23.0 }, { txt: 'STOPPED', tin: 23.06, tout: 24.0 }, { txt: 'CASH FLOW PROTECTED', tin: 24.1, tout: 26.04 }],
+    [{ txt: 'SHIPPING', tin: 22.32, tout: 23.5 }, { txt: 'IDLE', tin: 23.56, tout: 24.02 }, { txt: 'CASH FLOW PROTECTED', tin: 24.14, tout: 26.06 }],
+  ];
+  S.s7b = `
+    <div class="a cl" data-dir="v" data-in="22.0" data-out="26.06" data-f="2.2" style="left:200px;top:330px;width:1520px;height:690px;border:1px solid var(--line);border-radius:4px;box-sizing:border-box;background:rgba(30,29,32,.42)"></div>
+    <div class="a gx" id="s7line" data-in="22.0" data-f="2.6" data-out="25.98" data-fo="2.6" style="left:428px;top:${LINE_Y - 0.75}px;width:1064px;height:1.5px;background:rgba(201,202,206,.42);transform-origin:0 50%"></div>`;
+  S.s7f = `
+    <div class="a" style="left:200px;top:142px;font-size:60px">${words('One mill failure. A cascading loss —', 22.06, 0.05, 26.0, 0.02)}</div>
+    <div class="a" style="left:200px;top:218px;font-size:60px"><span class="m"><span class="i r cu" data-in="24.0" data-out="26.04" data-f="2.2"><em>unless it's covered.</em></span></span></div>
+    ${flowNodes('s7', 22.0, 25.98, st)}
+    <div class="imp cl" data-dir="l" data-in="23.5" data-out="23.92" data-f="3" data-fo="4" style="left:260px;top:842px;width:1400px;height:76px">
+      <span class="ih">${words('Impact — uninsured', 23.54, 0.03, 23.9, 0.005)}</span>
+      <span class="iv">${words('Production halted', 23.6, 0.03, 23.9, 0.005)}</span>
+      <span class="iv">${words('Fixed costs continue', 23.68, 0.03, 23.9, 0.005)}</span>
+      <span class="iv">${words('Payroll continues', 23.76, 0.03, 23.9, 0.005)}</span></div>
+    <div class="imp cl" data-dir="l" data-in="24.15" data-out="25.96" data-f="2.4" style="left:260px;top:842px;width:1400px;height:76px">
+      <span class="ih">${words('Impact —', 24.2, 0.04, 25.96, 0.01)} <span class="m"><span class="i r cu" data-in="24.26" data-out="25.97">covered</span></span></span>
+      <span class="iv">${words('Rebuild funded', 24.35, 0.04, 25.98, 0.01)}</span>
+      <span class="iv">${words('Fixed costs paid', 24.5, 0.04, 25.99, 0.01)}</span>
+      <span class="iv">${words('Cash flow protected', 24.65, 0.04, 26.0, 0.01)}</span></div>
+    <div class="a" style="left:262px;top:950px;font-size:20px;letter-spacing:.04em;color:var(--plat)">${words('BI cover carries fixed costs &amp; payroll', 25.0, 0.03, 26.0, 0.01)}</div>`;
+
+  // S8 — end card
+  S.s8b = ``;
+  S.s8f = `
+    <div class="a" style="left:0;top:250px;width:1920px;display:flex;justify-content:center;align-items:center;gap:70px">
+      <div id="s8badge" style="width:330px;height:236px;position:relative">
+        <div class="a mask" style="left:0;top:0;width:330px;height:236px;text-align:center">
+          <div class="i r" data-in="26.42" data-f="2.4" style="font-size:150px;line-height:236px;color:var(--cu);letter-spacing:-.02em;padding-left:6px">MT</div></div>
+      </div>
+      <div style="width:820px">
+        <div class="cl" data-dir="l" data-in="26.62" data-f="1.7" style="font-size:118px;line-height:1;letter-spacing:.075em;font-weight:400;white-space:nowrap">MINETRANS</div>
+        <div style="margin-top:26px;font-size:43px;letter-spacing:.255em;font-weight:400;white-space:nowrap">${words('INSURANCE BROKERS', 27.0, 0.06)}</div>
+      </div>
+    </div>
+    <div class="a" style="left:0;width:1920px;top:640px;text-align:center;font-size:38px;color:var(--plat);font-weight:400">
+      ${words('See how your current cover maps to assets, liability and BI.', 27.5, 0.035)}</div>
+    <div class="a cl" id="s8btn" data-dir="l" data-in="28.0" data-f="2.4" style="left:780px;top:760px;width:360px;height:78px;border:1px solid rgba(201,202,206,.42);border-radius:2px;box-sizing:border-box">
+      <div class="a cl" id="s8fill" data-dir="l" data-in="29.02" data-f="2.6" style="left:-1px;top:-1px;right:-1px;bottom:-1px;background:var(--cu);border-radius:2px"></div>
+      <div class="a mask" style="left:0;top:0;width:358px;height:76px">
+        <div class="i r full" id="s8label" data-in="28.1" data-f="3" style="line-height:76px;font-size:20px;letter-spacing:.28em">REQUEST A REVIEW</div></div>
+    </div>
+    <div class="a" style="left:0;width:1920px;top:930px;text-align:center;font-size:20px;color:rgba(201,202,206,.6);font-weight:400">${words('MineTrans is a division of Donaldson Group (Pty) Ltd, an authorised financial services provider, FSP No. 53166.', 28.3, 0.012)}</div>`;
+  return S;
+}
+
+/* ---------- build DOM ---------- */
+const cam = document.getElementById('cam');
+const LAYERS = {};
+function buildDOM() {
+  const S = buildScenes();
+  const order = [];
+  SCENES.forEach(s => order.push(s.id + 'b'));
+  order.push('OBJ');
+  SCENES.forEach(s => order.push(s.id + 'f'));
+  order.push('CURSOR');
+  order.forEach(k => {
+    if (k === 'OBJ') { cam.insertAdjacentHTML('beforeend', '<div id="obj" style="filter:url(#fbObj)"></div>'); return; }
+    if (k === 'CURSOR') {
+      cam.insertAdjacentHTML('beforeend', `<svg id="cursor" width="30" height="44" viewBox="0 0 30 44" style="filter:url(#fbCur);overflow:visible">
+        <path d="M2 2 L2 34 L10 26.5 L15.5 39 L21 36.6 L15.6 24.4 L26 24.4 Z" fill="#F7F5F1" stroke="#0A0A0B" stroke-width="2" stroke-linejoin="round"/></svg>`);
+      return;
+    }
+    const d = document.createElement('div');
+    d.className = 'layer'; d.id = 'L' + k; d.innerHTML = S[k];
+    cam.appendChild(d); LAYERS[k] = d;
+  });
+}
+
+/* ---------- camera ---------- */
+let KF = [];
+function pushAt(t) {
+  for (let i = 0; i < SCENES.length; i++) {
+    const s = SCENES[i];
+    if (t < s.t1 || i === SCENES.length - 1) return Math.pow(1.04, i + clamp((t - s.t0) / (s.t1 - s.t0), 0, 1));
+  }
+}
+function camAt(t) {
+  let a = KF[0], b = KF[0];
+  if (t >= KF[KF.length - 1].t) a = b = KF[KF.length - 1];
+  else for (let i = 0; i < KF.length - 1; i++) if (t >= KF[i].t && t < KF[i + 1].t) { a = KF[i]; b = KF[i + 1]; break; }
+  const u = a === b ? 0 : eio((t - a.t) / (b.t - a.t), 4.5);
+  const z = Math.exp(lerp(Math.log(a.z), Math.log(b.z), u)) * pushAt(t);
+  return { cx: lerp(a.cx, b.cx, u), cy: lerp(a.cy, b.cy, u), z };
+}
+const CAMK = {
+  s1: [{ t: 1.5 }],
+  s2: [{ t: 4.3 }, { t: 4.9, el: 'pc_core', rel: 1.04, b: 0.1, rect: [470, 95, 942, 632] }, { t: 5.5, el: 'pc_core', rel: 1.3, b: 0.8, rect: [470, 95, 942, 632] }, { t: 5.9, el: 'pc_core', rel: 1.31, b: 0.8, rect: [470, 95, 942, 632] }],
+  s3: [{ t: 7.2, el: 's3row1', rel: 1.03, b: 0.05 }, { t: 9.2, el: 's3key', rel: 1.07, b: 0.12 }],
+  s4: [{ t: 12.6, el: 's4pd', rel: 1.05, b: 0.1 }],
+  s5: [{ t: 15.0, el: 's5chip0', rel: 1.03, b: 0.05 }, { t: 16.6, el: 's5chip1', rel: 1.06, b: 0.1 }],
+  s6: [{ t: 18.8, el: 's6row', rel: 1.03, b: 0.06 }, { t: 21.3, el: 's6bar1', rel: 1.08, b: 0.18 }],
+  s7: [{ t: 22.9, el: 's7c1', rel: 1.22, b: 0.4 }, { t: 24.2, el: 's7line', rel: 1.06, b: 0.1 }, { t: 25.4, el: 's7c1', rel: 1.14, b: 0.3 }, { t: 26.62, el: 's7c1', rel: 1.4, b: 0.95 }],
+  s8: [{ t: 30 }],
+};
+
+/* ---------- measurement (world coordinates) ---------- */
+const $ = id => document.getElementById(id);
+function wr(id) { const r = $(id).getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, w: r.width, h: r.height, cx: r.left + r.width / 2, cy: r.top + r.height / 2 }; }
+const WRAP = {};
+let A = {}, PANEL;
+// image px -> world, for the assembled diagram
+const iw = (x, y) => ({ x: PANEL.l + x * PS * WRAP.s2.s, y: PANEL.t + y * PS * WRAP.s2.s });
+const irect = ([l, t, r, b]) => { const p = iw(l, t), q = iw(r, b); return { l: p.x, t: p.y, r: q.x, b: q.y, cx: (p.x + q.x) / 2, cy: (p.y + q.y) / 2 }; };
+
+function resolve() {
+  cam.style.transform = 'none';
+  KF = [{ t: 0, cx: 960, cy: 540, z: 1 }];
+  SCENES.forEach((sc, i) => {
+    const ref = KF[KF.length - 1];
+    if (i > 0) KF.push({ t: sc.t0, cx: ref.cx, cy: ref.cy, z: ref.z });
+    const c = camAt(sc.t0);
+    const s = 1 / c.z, ox = c.cx - 960 * s, oy = c.cy - 540 * s;
+    WRAP[sc.id] = { ox, oy, s };
+    ['b', 'f'].forEach(k => LAYERS[sc.id + k].style.transform = `translate(${ox}px,${oy}px) scale(${s})`);
+    if (sc.id === 's2') PANEL = wr('s2panel');
+    const base = KF[KF.length - 1];
+    CAMK[sc.id].forEach(k => {
+      if (!k.el) { KF.push({ t: k.t, cx: base.cx, cy: base.cy, z: base.z }); return; }
+      const r = k.rect ? irect(k.rect) : wr(k.el);
+      KF.push({ t: k.t, cx: lerp(base.cx, r.cx, k.b), cy: lerp(base.cy, r.cy, k.b), z: base.z * k.rel });
+    });
+  });
+  const sc = id => WRAP[id].s;
+
+  // through-line anchors
+  const hw = wr('hookWord'), hd = wr('hookDotA');
+  A.hookFrame = { l: hw.l - 26, t: hw.t + 6, r: hw.r + 26, b: hw.b - 4 };
+  A.hookDot = { x: hd.l + 4, y: hw.b - 52 };
+  A.panel = PANEL;
+  A.core = irect([548, 88, 862, 452]);
+  A.pd3 = wr('s3pd');
+  A.rows3 = [0, 1, 2, 3].map(k => wr('s3row' + k));
+  A.key3 = wr('s3key');
+  A.pd4 = wr('s4pd');
+  A.bi5 = wr('s5bi');
+  A.chips = [0, 1, 2].map(k => wr('s5chip' + k));
+  A.line5 = wr('s5line');
+  A.row6 = wr('s6row');
+  const rowMap = (x0, y0, x1, y1) => {   // a rect in image px, inside the enlarged footer row
+    const R = A.row6, fx = v => R.l + (v - 30) / 1350 * R.w, fy = v => R.t + (v - 698) / 62 * R.h;
+    return { l: fx(x0), t: fy(y0), r: fx(x1), b: fy(y1) };
+  };
+  A.box6 = [rowMap(39, 706, 70, 745), rowMap(488, 706, 519, 745), rowMap(928, 706, 959, 745)];
+  A.bar0 = wr('s6bar0'); A.bar1 = wr('s6bar1');
+  const c0 = wr('s7c0'), c1 = wr('s7c1'), ln = wr('s7line');
+  A.d7 = 15 * sc('s7'); A.lineY = ln.cy;
+  A.pitR = { x: c0.r + A.d7 * 1.1, y: c0.cy }; A.millL = { x: c1.l - A.d7 * 1.7, y: c1.cy };
+  A.mill = { l: c1.l, t: c1.t, r: c1.r, b: c1.b };
+  A.badge = wr('s8badge'); A.btn = wr('s8btn');
+  A.zoom = wr('s2zoom');
+
+  // piece motion targets (in the S2 layer's own px)
+  const s2 = WRAP.s2;
+  const toLocal = r => ({ l: (r.l - s2.ox) / s2.s, t: (r.t - s2.oy) / s2.s, r: (r.r - s2.ox) / s2.s, b: (r.b - s2.oy) / s2.s });
+  PIECES.forEach(p => {
+    p.bb = bboxOf(p.rect ? p.poly.concat(p.rect) : p.poly);
+    p.moves = (PIECE_MOVES[p.id] || []).map(m => {
+      const box = m.box ? { l: m.box[0], t: m.box[1], r: m.box[2], b: m.box[3] } : p.bb;
+      const dst = toLocal(wr(m.to));
+      const k = (dst.r - dst.l) / ((box.r - box.l) * PS);
+      return { t: m.t, f: m.f, shape: m.shape, k, tx: dst.l - 210 - box.l * PS * k, ty: dst.t - 131 - box.t * PS * k };
+    });
+    p.life = PIECE_LIFE[p.id] || [];
+    p.el = $('pc_' + p.id); p.px = $('px_' + p.id);
+  });
+  // stroke widths in world px
+  A.sw = { s1: 3, s2: 2.4 * sc('s2'), s3: 2.4 * sc('s3'), s4: 2.4 * sc('s4'), s5: 2.4 * sc('s5'), s6: 2.4 * sc('s6'), s7: 2.2 * sc('s7'), s8: 6 * sc('s8') };
+  A.r8 = 44 * sc('s8');
+
+  // S6 segment ticks + labels reveal as the dragged bar passes them
+  const bt = t => objAt(t).r;
+  document.querySelectorAll('[data-seg]').forEach(el => {
+    const x0 = +el.dataset.seg, wx = WRAP.s6.ox + x0 * WRAP.s6.s;
+    let tin = 20.62;
+    for (let t = 20.5; t < 21.6; t += 0.005) if (bt(t) >= wx + 2) { tin = Math.max(20.62, t); break; }
+    el.dataset.in = tin.toFixed(3);
+  });
+
+  // hide the S7 mill outline while the object is the mill
+  DECL = [...document.querySelectorAll('[data-in]')].map(el => ({
+    el, tin: +el.dataset.in, tout: el.dataset.out != null ? +el.dataset.out : null,
+    f: +(el.dataset.f || 2.6), fo: +(el.dataset.fo || 3), dir: el.dataset.dir,
+    kind: el.classList.contains('r') ? 'r' : el.classList.contains('gx') ? 'gx' : el.classList.contains('gy') ? 'gy' : el.classList.contains('cl') ? 'cl' : null,
+  })).filter(d => d.kind);
+  buildCursorPath();
+}
+let DECL = [];
+
+/* ---------- through-line object: the copper frame ---------- */
+const dot = (x, y, d) => ({ l: x - d / 2, t: y - d / 2, r: x + d / 2, b: y + d / 2, rad: d / 2, hole: 0, sw: 2 });
+const box = (r, o = {}) => Object.assign({ l: r.l, t: r.t, r: r.r, b: r.b, rad: 2, hole: 1, sw: 2 }, o);
+const pad = (r, px, py = px) => ({ l: r.l - px, t: r.t - py, r: r.r + px, b: r.b + py });
+function mixS(a, b, k) {
+  const kk = typeof k === 'number' ? { l: k, r: k, t: k, b: k, o: k } : k;
+  return { l: lerp(a.l, b.l, kk.l), r: lerp(a.r, b.r, kk.r), t: lerp(a.t, b.t, kk.t), b: lerp(a.b, b.b, kk.b),
+    rad: lerp(a.rad, b.rad, kk.o), hole: lerp(a.hole, b.hole, kk.o), sw: lerp(a.sw, b.sw, kk.o) };
+}
+const S2 = (t, t0, f1 = 2.2, f2 = 2.0) => ({ l: spr(t - t0, f1), r: spr(t - t0, f2), t: spr(t - t0, f2), b: spr(t - t0, f1), o: spr(t - t0, 2.4) });
+function objAt(t) {
+  const W = A.sw;
+  // hook: a dot at the full stop unfolds into a frame round "ground."
+  let s = dot(A.hookDot.x, A.hookDot.y, 26 * clamp(spr(t - 1.02, 3), 0, 1.02));
+  s = mixS(s, box(A.hookFrame, { sw: W.s1, rad: 6 }), S2(t, 1.18, 2.6, 2.4));
+  if (t >= 1.62) s = mixS(s, box(A.panel, { sw: W.s2, rad: 6 * WRAP.s2.s }), S2(t, 1.62, 1.8, 1.6));
+  if (t >= 5.0) s = mixS(s, box(A.core, { sw: W.s2, rad: 6 * WRAP.s2.s }), S2(t, 5.0, 1.9, 1.7));
+  // commercial assets
+  if (t >= 6.0) s = mixS(s, box(pad(A.pd3, 0), { sw: W.s3, rad: 6 * WRAP.s3.s }), S2(t, 6.0, 1.5, 1.45));
+  [6.5, 7.0, 7.5, 8.0].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.rows3[k], { sw: W.s3 }), S2(t, tt, 3.2, 3.0)); });
+  if (t >= 8.6) s = mixS(s, box({ l: A.key3.l + 4, r: A.key3.r - 8, t: A.key3.b + 2, b: A.key3.b + 2 + 4 * WRAP.s3.s }, { hole: 0, rad: 0 }), S2(t, 8.6, 2.6, 2.2));
+  // liability: the site boundary moves outward
+  if (t >= 10.0) s = mixS(s, box(pad(A.pd4, 26 * WRAP.s4.s), { sw: W.s4, rad: 6 * WRAP.s4.s }), S2(t, 10.0, 1.7, 1.6));
+  const wide = (px, py) => { const s4 = WRAP.s4; return { l: s4.ox + px[0] * s4.s, r: s4.ox + px[1] * s4.s, t: s4.oy + py[0] * s4.s, b: s4.oy + py[1] * s4.s }; };
+  [[10.5, [290, 1630], [360, 830]], [11.0, [270, 1650], [350, 845]], [11.5, [250, 1670], [340, 860]], [12.0, [230, 1690], [330, 875]]].forEach(([tt, px, py]) => {
+    if (t >= tt) s = mixS(s, box(wide(px, py), { sw: W.s4, rad: 6 * WRAP.s4.s }), S2(t, tt, 2.0, 1.9));
+  });
+  // business interruption
+  if (t >= 14.0) s = mixS(s, box(A.bi5, { sw: W.s5, rad: 6 * WRAP.s5.s }), S2(t, 14.0, 1.6, 1.5));
+  [15.5, 15.75, 16.0].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.chips[k], { sw: W.s5 }), S2(t, tt, 3.6, 3.4)); });
+  if (t >= 16.5) s = mixS(s, box({ l: A.line5.l, r: A.line5.r, t: A.line5.b + 4, b: A.line5.b + 4 + 3 * WRAP.s5.s }, { hole: 0, rad: 0 }), S2(t, 16.5, 2.4, 2.0));
+  // the three steps: the diagram's own numbered boxes
+  [18.0, 19.0, 20.0].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.box6[k], { sw: W.s6, rad: 3 * WRAP.s6.s }), S2(t, tt, k ? 2.8 : 1.6, k ? 2.6 : 1.5)); });
+  if (t >= 20.5) s = mixS(s, box(A.bar0, { hole: 0, rad: 1 }), S2(t, 20.5, 2.6, 2.6));
+  if (t >= 20.62) {   // dragged out past the default
+    const u = eio((t - 20.62) / 0.8, 3.4);
+    s = { ...s, r: lerp(s.r, A.bar1.r, u) };
+  }
+  // cascade: the bar becomes the production pulse
+  if (t >= 21.74) s = mixS(s, dot(A.pitR.x, A.pitR.y, A.d7), S2(t, 21.74, 2.4, 2.2));
+  if (t >= 22.06) {
+    const u = eio((t - 22.06) / 0.44, 2.6), q = bump(t - 22.5) * 0.5;
+    const cx = lerp(A.pitR.x, A.millL.x, u), w = A.d7 * (1 - q * 0.5), h = A.d7 * (1 + q * 0.7);
+    s = { l: cx - w / 2, r: cx + w / 2, t: A.lineY - h / 2, b: A.lineY + h / 2, rad: A.d7 / 2, hole: 0, sw: 2 };
+  }
+  // the payoff: the stuck pulse becomes the restored mill
+  if (t >= 24.0) s = mixS(s, box(A.mill, { sw: W.s7, rad: 1 }), S2(t, 24.0, 2.2, 2.0));
+  if (t >= 26.1) s = mixS(s, box(A.badge, { sw: W.s8, rad: A.r8 }), S2(t, 26.1, 1.6, 1.7));
+  return s;
+}
+
+/* ---------- cursor ---------- */
+let CP = [], PRESS = [];
+function buildCursorPath() {
+  const z = A.zoom, s2 = WRAP.s2.s, s6 = WRAP.s6.s, s8 = WRAP.s8.s;
+  const barEnd0 = { x: A.bar0.r, y: A.bar0.cy }, barEnd1 = { x: A.bar1.r, y: A.bar1.cy };
+  CP = [
+    { t: 0, x: z.cx + 700 * s2, y: z.cy + 560 * s2 },
+    { t: 4.25, x: z.cx + 700 * s2, y: z.cy + 560 * s2 },
+    { t: 4.68, x: z.cx + 6 * s2, y: z.cy + 6 * s2 },
+    { t: 4.86, x: z.cx + 6 * s2, y: z.cy + 6 * s2 },
+    { t: 5.5, x: z.cx + 600 * s2, y: z.cy + 520 * s2 },
+    { t: 20.2, x: barEnd0.x + 520 * s6, y: barEnd0.y + 420 * s6 },
+    { t: 20.55, x: barEnd0.x - 6 * s6, y: barEnd0.y + 4 * s6 },
+    { t: 20.62, x: barEnd0.x - 6 * s6, y: barEnd0.y + 4 * s6 },
+    { t: 21.42, x: barEnd1.x - 6 * s6, y: barEnd1.y + 4 * s6 },
+    { t: 21.55, x: barEnd1.x - 6 * s6, y: barEnd1.y + 4 * s6 },
+    { t: 22.2, x: barEnd1.x + 500 * s6, y: barEnd1.y + 520 * s6 },
+    { t: 28.3, x: A.btn.cx + 640 * s8, y: A.btn.cy + 380 * s8 },
+    { t: 28.92, x: A.btn.cx + 40 * s8, y: A.btn.cy + 10 * s8 },
+    { t: 30, x: A.btn.cx + 52 * s8, y: A.btn.cy + 18 * s8 },
+  ];
+  PRESS = [[4.72, 4.84], [20.56, 21.45], [28.98, 29.1]];
+}
+function cursorAt(t) {
+  let a = CP[0], b = CP[0];
+  for (let i = 0; i < CP.length - 1; i++) if (t >= CP[i].t && t < CP[i + 1].t) { a = CP[i]; b = CP[i + 1]; break; }
+  if (t >= CP[CP.length - 1].t) a = b = CP[CP.length - 1];
+  const u = a === b ? 0 : eio((t - a.t) / (b.t - a.t), 4);
+  const dx = b.x - a.x, dy = b.y - a.y, arc = Math.sin(Math.PI * u) * 0.08;
+  let p = 0; PRESS.forEach(([p0, p1]) => { p = Math.max(p, spr(t - p0, 6) * (1 - spr(t - p1, 6))); });
+  return { x: a.x + dx * u - dy * arc, y: a.y + dy * u + dx * arc, p };
+}
+
+/* ---------- per-frame ---------- */
+function setT(el, v) { if (el.__t !== v) { el.style.transform = v; el.__t = v; } }
+function mixCol(a, b, k) { return `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], clamp(k, 0, 1)))).join(',')})`; }
+const BONE = [247, 245, 241], ONYX = [10, 10, 11], CU = [201, 133, 79];
+
+function pieceAt(p, t) {
+  // transform: chained springs between targets
+  let k = 1, tx = 0, ty = 0, rect = 0;
+  for (const m of p.moves) if (t >= m.t) {
+    const e = spr(t - m.t, m.f);
+    k = lerp(k, m.k, e); tx = lerp(tx, m.tx, e); ty = lerp(ty, m.ty, e);
+    rect = m.shape === 'rect' ? lerp(rect, 1, e) : lerp(rect, 0, e);
+  }
+  // reveal: the visible window that applies now
+  let rv = 0, dir = 'up';
+  for (const L of p.life) { const v = Math.max(0, spr(t - L.tin, 2.4) * (1 - spr(t - L.tout, 3))); if (t >= L.tin - 0.001) { rv = v; dir = L.dir; } }
+  return { k, tx, ty, rect: clamp(rect, 0, 1), rv: clamp(rv, 0, 1), dir };
+}
+
+window.seek = function (t) {
+  t = clamp(t, 0, DUR);
+  const c = camAt(t);
+  setT(cam, `translate(${960 - c.cx * c.z}px,${540 - c.cy * c.z}px) scale(${c.z})`);
+
+  for (const d of DECL) {
+    const a = spr(t - d.tin, d.f), bo = d.tout != null ? spr(t - d.tout, d.fo) : 0;
+    if (d.kind === 'r') setT(d.el, `translateY(${((1 - a) * 130 - bo * 130).toFixed(2)}%)`);
+    else if (d.kind === 'gx') setT(d.el, `scaleX(${Math.max(0, a * (1 - bo)).toFixed(4)})`);
+    else if (d.kind === 'gy') d.gy = Math.max(0, a * (1 - bo));
+    else if (d.kind === 'cl') {
+      const p = Math.max(0, a * (1 - bo)), q = ((1 - p) * 100).toFixed(2), h = ((1 - p) * 50).toFixed(2);
+      const v = { l: `inset(0 ${q}% 0 0)`, r: `inset(0 0 0 ${q}%)`, t: `inset(0 0 ${q}% 0)`, v: `inset(${h}% 0 ${h}% 0)`, h: `inset(0 ${h}% 0 ${h}%)`, c: `inset(${h}% ${h}% ${h}% ${h}% round 6px)` }[d.dir];
+      if (d.el.__c !== v) { d.el.style.clipPath = v; d.el.__c = v; }
+    }
+  }
+  for (const d of DECL) if (d.kind === 'gy') {
+    let sc = 1;
+    if (d.el.id === 's7c1') sc = 1 + 0.18 * spr(t - 22.5, 2.6) - 0.18 * spr(t - 24.0, 2.2);
+    setT(d.el, `scale(${sc.toFixed(4)},${(d.gy * sc).toFixed(4)})`);
+  }
+
+  // diagram pieces
+  for (const p of PIECES) {
+    const st = pieceAt(p, t), bb = p.bb;
+    setT(p.el, `translate(${st.tx.toFixed(2)}px,${st.ty.toFixed(2)}px) scale(${st.k.toFixed(5)})`);
+    const L = bb.l * PS, T = bb.t * PS, R = 1500 - bb.r * PS, B = 818 - bb.b * PS, w = (bb.r - bb.l) * PS, h = (bb.b - bb.t) * PS, q = 1 - st.rv;
+    const ins = { up: [T + q * h, R, B, L], down: [T, R, B + q * h, L], l2r: [T, R + q * w, B, L], r2l: [T, R, B, L + q * w] }[st.dir];
+    p.el.style.clipPath = `inset(${ins.map(v => v.toFixed(1) + 'px').join(' ')})`;
+    p.el.style.visibility = st.rv > 0.001 ? 'visible' : 'hidden';
+    if (p.rect) {
+      const pts = p.poly.map((pt, i) => `${(lerp(pt[0], p.rect[i][0], st.rect) * PS).toFixed(1)}px ${(lerp(pt[1], p.rect[i][1], st.rect) * PS).toFixed(1)}px`).join(',');
+      p.px.style.clipPath = `polygon(${pts})`;
+    }
+  }
+  // the page's zoom-in affordance on hover, then the click enlarges
+  { const zv = Math.max(0, spr(t - 4.5, 3) * (1 - spr(t - 4.86, 3.4))); setT($('s2zoom'), `scale(${zv.toFixed(4)})`); }
+
+  // cascade: the mill fails, the downstream nodes dim, then recover under cover
+  {
+    const per = 4 * 102.5, gap = per * 0.22 * clamp(spr(t - 22.52, 2.0) * (1 - spr(t - 24.0, 3)), 0, 1.1);
+    const bd = $('s7bd1');
+    bd.setAttribute('stroke-dasharray', `${(per - gap).toFixed(2)} ${gap.toFixed(2)}`);
+    bd.setAttribute('stroke-dashoffset', (-per * 0.06 + gap * 0.5).toFixed(2));
+    bd.setAttribute('stroke', t < 24.0 ? mixCol([150, 151, 154], BONE, spr(t - 22.5, 3)) : 'rgba(0,0,0,0)');
+    const ang = t < 22.5 ? 150 * (t - 22.0) : 75 + 34 * spr(t - 22.5, 2.2);
+    setT($('s7ic1'), `rotate(${ang.toFixed(2)}deg)`);
+    $('s7ic1').setAttribute('stroke', mixCol([201, 202, 206], CU, spr(t - 24.0, 2.6)));
+    [2, 3].forEach((k, j) => { $('s7c' + k).style.opacity = (1 - 0.55 * clamp(spr(t - 23.0 - j * 0.5, 2.6) * (1 - spr(t - 24.0, 2.6)), 0, 1)).toFixed(3); });
+  }
+  // end card CTA: the click fills the button
+  $('s8label').style.color = mixCol(BONE, ONYX, spr(t - 29.05, 3));
+
+  // the copper frame
+  const o = objAt(t);
+  {
+    const ob = $('obj'), w = o.r - o.l, h = o.b - o.t;
+    ob.style.left = o.l + 'px'; ob.style.top = o.t + 'px';
+    ob.style.width = Math.max(0, w) + 'px'; ob.style.height = Math.max(0, h) + 'px';
+    const rad = Math.max(0, Math.min(o.rad, w / 2, h / 2));
+    ob.style.borderRadius = rad + 'px';
+    const half = Math.min(w, h) / 2 + 1, sw = lerp(half, o.sw, clamp(o.hole, 0, 1));
+    ob.style.boxShadow = `inset 0 0 0 ${Math.max(0, sw).toFixed(2)}px rgb(201,133,79)`;
+    const p = objAt(t - 1 / 240);
+    const vx = (((o.l + o.r) - (p.l + p.r)) / 2) * 240 * c.z, vy = (((o.t + o.b) - (p.t + p.b)) / 2) * 240 * c.z;
+    $('fbObjG').setAttribute('stdDeviation', `${(clamp(Math.abs(vx) * 0.0028, 0, 14) / c.z).toFixed(2)} ${(clamp(Math.abs(vy) * 0.0028, 0, 14) / c.z).toFixed(2)}`);
+  }
+  // cursor
+  {
+    const cu = cursorAt(t), pv = cursorAt(t - 1 / 240), el = $('cursor');
+    const size = 1.15 / Math.pow(c.z, 0.72);
+    setT(el, `translate(${cu.x}px,${cu.y}px) scale(${(size * (1 - 0.16 * cu.p)).toFixed(4)})`);
+    const vx = (cu.x - pv.x) * 240 * c.z, vy = (cu.y - pv.y) * 240 * c.z;
+    $('fbCurG').setAttribute('stdDeviation', `${(clamp(Math.abs(vx) * 0.0022, 0, 9) / (size * c.z)).toFixed(2)} ${(clamp(Math.abs(vy) * 0.0022, 0, 9) / (size * c.z)).toFixed(2)}`);
+  }
+  return t;
+};
+
+/* ---------- soundtrack: Web Audio, rendered offline ---------- */
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+window.renderAudio = async function () {
+  const sr = 48000, ctx = new OfflineAudioContext(2, Math.round(sr * DUR), sr), rnd = mulberry32(53166);
+  const noiseBuf = sec => { const b = ctx.createBuffer(1, Math.round(sr * sec), sr), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = rnd() * 2 - 1; return b; };
+  const master = ctx.createGain(); master.gain.setValueAtTime(0.62, 0); master.gain.setValueAtTime(0.62, DUR - 0.5); master.gain.linearRampToValueAtTime(0, DUR);
+  const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -12; comp.ratio.value = 3.5; comp.attack.value = 0.004; comp.release.value = 0.16;
+  master.connect(comp); comp.connect(ctx.destination);
+  const ir = ctx.createBuffer(2, sr * 2.2, sr);
+  for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < d.length; i++) d[i] = (rnd() * 2 - 1) * Math.pow(1 - i / d.length, 3.2); }
+  const verb = ctx.createConvolver(); verb.buffer = ir; const vg = ctx.createGain(); vg.gain.value = 0.22; verb.connect(vg); vg.connect(master);
+  const send = (node, amt) => { const g = ctx.createGain(); g.gain.value = amt; node.connect(g); g.connect(verb); };
+  const B = BEAT, NB = DUR / B;
+  const duck = ctx.createGain(); duck.connect(master);
+  for (let b = 0; b < NB; b++) { const t = b * B; duck.gain.setValueAtTime(0.35, t); duck.gain.setTargetAtTime(1, t + 0.02, 0.09); }
+  function kick(t, amp) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(155, t); o.frequency.exponentialRampToValueAtTime(44, t + 0.13);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(amp, t + 0.004); g.gain.exponentialRampToValueAtTime(0.001, t + 0.48);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.5);
+    const n = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), ng = ctx.createGain();
+    n.buffer = noiseBuf(0.03); hp.type = 'highpass'; hp.frequency.value = 2500; ng.gain.setValueAtTime(0.18 * amp, t); ng.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+    n.connect(hp); hp.connect(ng); ng.connect(master); n.start(t);
+  }
+  function hat(t, amp) {
+    const n = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), g = ctx.createGain();
+    n.buffer = noiseBuf(0.08); hp.type = 'highpass'; hp.frequency.value = 7800;
+    g.gain.setValueAtTime(amp, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.055);
+    n.connect(hp); hp.connect(g); g.connect(master); n.start(t);
+  }
+  function tone(t, f, dur, amp, type = 'triangle', dest = duck, cutoff = 1800) {
+    const o = ctx.createOscillator(), g = ctx.createGain(), lp = ctx.createBiquadFilter();
+    o.type = type; o.frequency.value = f; lp.type = 'lowpass'; lp.frequency.value = cutoff;
+    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(amp, t + Math.min(0.08, dur * 0.3)); g.gain.setTargetAtTime(0, t + dur * 0.7, dur * 0.25);
+    o.connect(lp); lp.connect(g); g.connect(dest); o.start(t); o.stop(t + dur + 1);
+  }
+  function hit(t, big) {
+    const s = big ? 1.5 : 1;
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(70, t); o.frequency.exponentialRampToValueAtTime(38, t + 0.6);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.55 * s, t + 0.01); g.gain.exponentialRampToValueAtTime(0.001, t + (big ? 1.6 : 0.9));
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + 2);
+    const n = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), ng = ctx.createGain();
+    n.buffer = noiseBuf(1.2); bp.type = 'bandpass'; bp.Q.value = 0.8;
+    bp.frequency.setValueAtTime(2400, t); bp.frequency.exponentialRampToValueAtTime(260, t + 0.5);
+    ng.gain.setValueAtTime(0.3 * s, t); ng.gain.exponentialRampToValueAtTime(0.001, t + (big ? 0.9 : 0.45));
+    n.connect(bp); bp.connect(ng); ng.connect(master); send(ng, 0.6); n.start(t);
+    [1046.5, 1611.9, 2797.2, 4120].forEach((f, i) => {
+      const p = ctx.createOscillator(), pg = ctx.createGain();
+      p.type = 'sine'; p.frequency.value = f;
+      pg.gain.setValueAtTime(0.0001, t); pg.gain.exponentialRampToValueAtTime((0.05 / (i + 1)) * s, t + 0.005); pg.gain.exponentialRampToValueAtTime(0.0001, t + (big ? 2.4 : 1.3) / (1 + i * 0.4));
+      p.connect(pg); pg.connect(master); send(pg, 0.8); p.start(t); p.stop(t + 3);
+    });
+  }
+  function tick(t, f, amp) {
+    const o = ctx.createOscillator(), g = ctx.createGain(), lp = ctx.createBiquadFilter();
+    o.type = 'square'; o.frequency.value = f; lp.type = 'lowpass'; lp.frequency.value = 5000;
+    g.gain.setValueAtTime(amp, t); g.gain.exponentialRampToValueAtTime(0.0005, t + 0.025);
+    o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t + 0.05);
+  }
+  const NOTE = n => 440 * Math.pow(2, (n - 69) / 12);
+  const Am = [57, 60, 64], F = [53, 57, 60], G = [55, 59, 62], C = [60, 64, 67], Em = [52, 55, 59];
+  // 15 bars: the payoff (bar 12, 24s) lifts to C major
+  const CH = [Am, Am, F, G, Am, F, C, G, Am, F, Em, G, C, F, C];
+  const ROOT = [33, 33, 29, 31, 33, 29, 36, 31, 33, 29, 28, 31, 36, 29, 36];
+  for (let bar = 0; bar < 15; bar++) {
+    const t = bar * 4 * B, len = Math.min(4 * B, DUR - t);
+    CH[bar].forEach(n => tone(t, NOTE(n), len + 0.2, bar < 1 ? 0.035 : 0.05, 'triangle', duck, 1500));
+    CH[bar].forEach(n => tone(t, NOTE(n) * 1.004, len + 0.2, 0.02, 'sawtooth', duck, 900));
+    for (let e = 0; e < 8 && t + e * B / 2 < DUR - 0.05; e++) {
+      if (bar === 0 && e < 6) continue;
+      if (e % 2 === 1) tone(t + e * B / 2, NOTE(ROOT[bar]), 0.22, 0.16, 'sawtooth', duck, 420);
+    }
+  }
+  for (let b = 0; b < NB; b++) {
+    kick(b * B, b === 48 ? 1 : (b % 4 === 0 ? 0.92 : 0.8));
+    if (b >= 4) hat(b * B + B / 2, b >= 48 ? 0.07 : 0.05);
+    if (b >= 8 && b < 56) hat(b * B + B / 4 * 3, 0.022);
+  }
+  [2, 6, 10, 14, 18, 22, 27].forEach(t => hit(t, false)); hit(24, true);
+  { const n = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain(), t0 = 22.9, t1 = 24.0;
+    n.buffer = noiseBuf(1.5); bp.type = 'bandpass'; bp.Q.value = 2; bp.frequency.setValueAtTime(400, t0); bp.frequency.exponentialRampToValueAtTime(7000, t1);
+    g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.14, t1 - 0.02); g.gain.linearRampToValueAtTime(0, t1);
+    n.connect(bp); bp.connect(g); g.connect(master); n.start(t0); n.stop(t1); }
+  tick(4.73, 2600, 0.08); tick(20.56, 2400, 0.07); tick(21.45, 2000, 0.06); tick(28.99, 2600, 0.08);
+  [6.5, 7.0, 7.5, 8.0, 15.5, 15.75, 16.0, 19.0, 20.0].forEach(t => tick(t, 1800, 0.03));
+  [22.5, 23.0, 23.5].forEach((t, i) => tick(t, 900 - i * 120, 0.05));
+  const buf = await ctx.startRendering();
+  const ch = [buf.getChannelData(0), buf.getChannelData(1)], N = buf.length;
+  let peak = 0; ch.forEach(c => { for (let i = 0; i < c.length; i++) peak = Math.max(peak, Math.abs(c[i])); });
+  const norm = 0.89 / Math.max(peak, 1e-6);
+  const ab = new ArrayBuffer(44 + N * 4), dv = new DataView(ab);
+  const ws = (o, s) => { for (let i = 0; i < s.length; i++) dv.setUint8(o + i, s.charCodeAt(i)); };
+  ws(0, 'RIFF'); dv.setUint32(4, 36 + N * 4, true); ws(8, 'WAVE'); ws(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 2, true);
+  dv.setUint32(24, sr, true); dv.setUint32(28, sr * 4, true); dv.setUint16(32, 4, true); dv.setUint16(34, 16, true); ws(36, 'data'); dv.setUint32(40, N * 4, true);
+  let o = 44; for (let i = 0; i < N; i++) for (let c = 0; c < 2; c++) { dv.setInt16(o, clamp(ch[c][i] * norm, -1, 1) * 32767, true); o += 2; }
+  let bin = ''; const u8 = new Uint8Array(ab); for (let i = 0; i < u8.length; i += 32768) bin += String.fromCharCode.apply(null, u8.subarray(i, i + 32768));
+  return btoa(bin);
+};
+window.DURATION = DUR;
+
+/* ---------- boot ---------- */
+buildDOM();
+const imgReady = new Promise((res, rej) => { const im = new Image(); im.onload = res; im.onerror = () => rej(new Error('diagram failed to load')); im.src = IMG; });
+Promise.all([document.fonts.ready, imgReady]).then(() => { resolve(); window.seek(0); window.__ready = true; })
+  .catch(e => { window.__error = e.message; });
+</script>
+</body>
+</html>

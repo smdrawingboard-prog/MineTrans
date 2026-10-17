@@ -1,12 +1,21 @@
-"""Inline the Playfair Display fonts into reel.src.html -> ../minetrans-showreel.html."""
+"""Inline fonts (and the diagram) into each reel source.
+
+reel.src.html   -> ../minetrans-showreel.html
+mine30.src.html -> ../minetrans-the-mine-30s.html
+"""
 import base64, pathlib, sys
 
 here = pathlib.Path(__file__).resolve().parent
+REELS = {"reel.src.html": "minetrans-showreel.html", "mine30.src.html": "minetrans-the-mine-30s.html"}
+ASSETS = {"{{PF_N}}": "fonts/pf-normal.woff2", "{{PF_I}}": "fonts/pf-italic.woff2", "{{IMG}}": "mine-risk-assessment.webp"}
+
 try:
-    src = (here / "reel.src.html").read_text(encoding="utf-8")
-    for key, name in [("{{PF_N}}", "pf-normal.woff2"), ("{{PF_I}}", "pf-italic.woff2")]:
-        src = src.replace(key, base64.b64encode((here / "fonts" / name).read_bytes()).decode())
-    (here.parent / "minetrans-showreel.html").write_text(src, encoding="utf-8")
+    data = {k: base64.b64encode((here / f).read_bytes()).decode() for k, f in ASSETS.items()}
+    for src, out in REELS.items():
+        s = (here / src).read_text(encoding="utf-8")
+        for k, v in data.items():
+            s = s.replace(k, v)
+        (here.parent / out).write_text(s, encoding="utf-8")
+        print("built", out)
 except OSError as e:
     sys.exit(f"build failed: {e}")
-print("built minetrans-showreel.html")
