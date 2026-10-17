@@ -14,18 +14,23 @@ function run(cmd, args, opts = {}) {
   const p = spawn(cmd, args, { stdio: ['pipe', 'inherit', 'inherit'], ...opts });
   const done = new Promise((res, rej) => {
     p.on('error', rej);
+    if (p.stdin) p.stdin.on('error', rej);   // EPIPE if ffmpeg exits early
     p.on('close', code => code === 0 ? res() : rej(new Error(`${cmd} exited with ${code}`)));
   });
+  done.catch(() => {});   // handled by whoever awaits it; stops an early failure crashing the process
   return { p, done };
 }
 
 async function openPage(browser) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-  page.on('pageerror', e => { throw e; });
+  const errors = [];
+  page.on('pageerror', e => errors.push(e));
+  page.assertHealthy = () => { if (errors.length) throw new Error('page error: ' + errors[0].message); };
   await page.goto(PAGE);
   await page.waitForFunction(() => window.__ready === true || !!window.__error, { timeout: 30000 });
   const err = await page.evaluate(() => window.__error);
   if (err) throw new Error(err);
+  page.assertHealthy();
   DUR = await page.evaluate(() => window.DURATION || 15);
   return page;
 }
@@ -36,6 +41,7 @@ async function stills(page) {
   for (let b = 0; b < DUR * 2; b++) {
     const t = b * 0.5 + 0.22;
     await page.evaluate(t => seek(t), t);
+    page.assertHealthy();
     await page.screenshot({ path: path.join(out, `beat${String(b).padStart(2, '0')}.png`) });
   }
   console.log('wrote', out);
@@ -51,8 +57,10 @@ async function video(page) {
   const N = FPS * DUR * SUB;
   for (let j = 0; j < N; j++) {
     await page.evaluate(t => seek(t), Math.max(0, (j - 1) / (FPS * SUB)));   // subframes centred on each frame
+    page.assertHealthy();
     const buf = await page.screenshot({ type: 'jpeg', quality: 94 });
-    if (!ff.p.stdin.write(buf)) await new Promise(r => ff.p.stdin.once('drain', r));
+    // if ffmpeg dies mid-stream, `done` rejects instead of waiting on a drain that never comes
+    if (!ff.p.stdin.write(buf)) await Promise.race([new Promise(r => ff.p.stdin.once('drain', r)), ff.done]);
     if (j % 300 === 0) console.log(`frame ${j}/${N}`);
   }
   ff.p.stdin.end();
