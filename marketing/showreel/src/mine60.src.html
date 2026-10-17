@@ -631,7 +631,7 @@ window.seek = function (treal) {
       el.setAttribute('stroke-dashoffset', (f.len * (1 - k)).toFixed(2));
       continue;
     }
-    const M = f.els.length, travel = (f.len + BEAD) / FLOW_SPEED;
+    const M = f.els.length;
     f.els.forEach((el, j) => {
       // latest bead in this slot: spawns at from + n*every with n = j (mod M)
       let n = Math.floor((t - f.from) / f.every);
