@@ -1,37 +1,45 @@
 {
-  "updatedAt": "2026-10-16T03:56:39.646Z",
+  "updatedAt": "2026-10-17T15:17:04.433Z",
   "articles": [
     {
-      "headline": "Greta Garbo is back – starring in SKF’s initiative to overcome friction",
-      "excerpt": "More than a century after her first campaign promoting SKF, one of the most iconic figures of our time is once again the face of the company. Using artificial intelligence&hellip;",
+      "headline": "More than a decade in the making: Johnathan Kalula takes over as MD at VEGA Controls SA",
+      "excerpt": "More than a decade after he first walked through the door as an intern, Johnathan Kalula has been appointed managing director of VEGA Controls South Africa. A career shaped by&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/technology/greta-garbo-is-back-starring-in-skfs-initiative-to-overcome-friction/",
-      "publishedAt": "2026-10-16T03:56:37.653Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/press-release/more-than-a-decade-in-the-making-johnathan-kalula-takes-over-as-md-at-vega-controls-sa/",
+      "publishedAt": "2026-10-17T15:17:03.196Z",
       "category": "General"
     },
     {
-      "headline": "Why the factory isn&#8217;t where South Africa wins in the mining tyre value chain",
-      "excerpt": "Giant mining tyres are made in a handful of plants worldwide. That is not a South African failure – and it points to where a mining economy should actually be&hellip;",
+      "headline": "Energy security and sustainability: A shared opportunity for SA’s mining sector",
+      "excerpt": "South Africa’s energy transition is a shared opportunity to strengthen energy security and sustainability while supporting growth and cutting emissions. At the Joburg Indaba, Kearney partner Frances Phillips said the&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/why-the-factory-isnt-where-south-africa-wins-in-the-mining-tyre-value-chain/",
-      "publishedAt": "2026-10-16T03:56:37.653Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/renewables/energy-security-and-sustainability-a-shared-opportunity-for-sas-mining-sector/",
+      "publishedAt": "2026-10-17T15:17:03.196Z",
+      "category": "Power & Water"
+    },
+    {
+      "headline": "BME 2026 Technical Summit to place connected mining under the spotlight",
+      "excerpt": "BME, a division of the Omnia Group, will once again host its Technical Summit on 28 October 2026 at the CSIR in Pretoria, under the theme “Connected Mining: Turning Intelligence&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/bme-2026-technical-summit-to-place-connected-mining-under-the-spotlight/",
+      "publishedAt": "2026-10-17T15:17:03.196Z",
       "category": "General"
     },
     {
-      "headline": "New heights in sight as Zambia targets new phase of mining growth",
-      "excerpt": "Zambia is positioning itself for a major expansion of its mining industry, underpinned by an ambitious copper production target supported by regulatory reform, renewed exploration and a broader strategy to&hellip;",
+      "headline": "Wits Mining Institute brings industry leaders together to shape mining’s future",
+      "excerpt": "South Africa’s mining future depends on more than its mineral wealth. The industry must address the environmental, social, skills and economic challenges inherited from generations of mining while building a&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/minerals/new-heights-in-sight-as-zambia-targets-new-phase-of-mining-growth/",
-      "publishedAt": "2026-10-16T03:56:37.653Z",
-      "category": "Commodity Prices"
+      "sourceUrl": "https://www.africanminingnews.co.za/press-release/wits-mining-institute-brings-industry-leaders-together-to-shape-minings-future/",
+      "publishedAt": "2026-10-17T15:17:03.196Z",
+      "category": "Tailings Risk"
     },
     {
-      "headline": "Freight & Logistics",
-      "excerpt": "We partner growth of our select clients through our comprehensive and competitive integrated international logistics, trade finance and information...",
-      "publication": "Mining Weekly",
-      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6528",
-      "publishedAt": "2026-10-16T03:56:36.764Z",
-      "category": "Supply Chain"
+      "headline": "AFC eyes iron ore and uranium investments in Africa",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/afc-eyes-iron-ore-and-uranium-investments-in-africa/",
+      "publishedAt": "2026-10-16T14:42:46.000Z",
+      "category": "General"
     },
     {
       "headline": "Deaths prompt South African miners&#8217; safety review, minerals council CEO says",
@@ -64,14 +72,6 @@
       "sourceUrl": "https://www.mining.com/web/south-africa-seeks-partners-for-2-7-billion-manganese-corridor/",
       "publishedAt": "2026-09-25T19:34:22.000Z",
       "category": "General"
-    },
-    {
-      "headline": "Western miners can match China’s speed if African governments cut red tape, KoBold president says",
-      "excerpt": "",
-      "publication": "Mining.com",
-      "sourceUrl": "https://www.mining.com/web/western-miners-can-match-chinas-speed-if-african-governments-cut-red-tape-kobold-president-says/",
-      "publishedAt": "2026-09-25T16:23:58.000Z",
-      "category": "Regulation"
     }
   ]
 }
