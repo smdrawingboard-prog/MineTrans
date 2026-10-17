@@ -2,11 +2,13 @@
 
 reel.src.html   -> ../minetrans-showreel.html
 mine30.src.html -> ../minetrans-the-mine-30s.html
+mine60.src.html -> ../minetrans-the-mine-60s.html
 """
 import base64, pathlib, sys
 
 here = pathlib.Path(__file__).resolve().parent
-REELS = {"reel.src.html": "minetrans-showreel.html", "mine30.src.html": "minetrans-the-mine-30s.html"}
+REELS = {"reel.src.html": "minetrans-showreel.html", "mine30.src.html": "minetrans-the-mine-30s.html",
+         "mine60.src.html": "minetrans-the-mine-60s.html"}
 ASSETS = {"{{PF_N}}": "fonts/pf-normal.woff2", "{{PF_I}}": "fonts/pf-italic.woff2", "{{IMG}}": "mine-risk-assessment.webp"}
 
 try:

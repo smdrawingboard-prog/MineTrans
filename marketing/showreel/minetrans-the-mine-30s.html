@@ -259,7 +259,8 @@ function buildScenes() {
   ];
   S.s7b = `
     <div class="a cl" data-dir="v" data-in="22.0" data-out="26.06" data-f="2.2" style="left:200px;top:330px;width:1520px;height:690px;border:1px solid var(--line);border-radius:4px;box-sizing:border-box;background:rgba(30,29,32,.42)"></div>
-    <div class="a gx" id="s7line" data-in="22.0" data-f="2.6" data-out="25.98" data-fo="2.6" style="left:428px;top:${LINE_Y - 0.75}px;width:1064px;height:1.5px;background:rgba(201,202,206,.42);transform-origin:0 50%"></div>`;
+    <div class="a gx" id="s7line" data-in="22.0" data-f="2.6" data-out="25.98" data-fo="2.6" style="left:428px;top:${LINE_Y - 0.75}px;width:1064px;height:1.5px;background:rgba(201,202,206,.42);transform-origin:0 50%"></div>
+    <div class="a gy" id="s7cb1" data-in="22.05" data-out="26.02" data-f="2.6" style="left:${COLS[1] - 52}px;top:${LINE_Y - 52}px;width:104px;height:104px;background:var(--onyx);transform-origin:50% 50%"></div>`;
   S.s7f = `
     <div class="a" style="left:200px;top:142px;font-size:60px">${words('One mill failure. A cascading loss —', 22.06, 0.05, 26.0, 0.02)}</div>
     <div class="a" style="left:200px;top:218px;font-size:60px"><span class="m"><span class="i r cu" data-in="24.0" data-out="26.04" data-f="2.2"><em>unless it's covered.</em></span></span></div>
@@ -404,6 +405,7 @@ function resolve() {
   A.pitR = { x: c0.r + A.d7 * 1.1, y: c0.cy }; A.millL = { x: c1.l - A.d7 * 1.7, y: c1.cy };
   A.mill = { l: c1.l, t: c1.t, r: c1.r, b: c1.b };
   A.badge = wr('s8badge'); A.btn = wr('s8btn');
+  $('s7c1').style.background = 'transparent';   // the copper frame shows through; s7cb1 masks the line behind it
   A.zoom = wr('s2zoom');
 
   // piece motion targets (in the S2 layer's own px)
@@ -564,7 +566,7 @@ window.seek = function (t) {
   }
   for (const d of DECL) if (d.kind === 'gy') {
     let sc = 1;
-    if (d.el.id === 's7c1') sc = 1 + 0.18 * spr(t - 22.5, 2.6) - 0.18 * spr(t - 24.0, 2.2);
+    if (d.el.id === 's7c1' || d.el.id === 's7cb1') sc = 1 + 0.18 * spr(t - 22.5, 2.6) - 0.18 * spr(t - 24.0, 2.2);
     setT(d.el, `scale(${sc.toFixed(4)},${(d.gy * sc).toFixed(4)})`);
   }
 
