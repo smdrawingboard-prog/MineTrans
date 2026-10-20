@@ -54,7 +54,7 @@ export const leadsRouter = router({
         if (leadId === null && !sheetsOk) {
           return {
             success: false,
-            message: "Your request could not be saved. Please try again or email jp@daginsure.co.za.",
+            message: "Your request could not be saved. Please try again or email jp@minetrans.co.za.",
           };
         }
 
