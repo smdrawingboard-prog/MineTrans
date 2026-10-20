@@ -3,6 +3,7 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { useAdminSession } from "@/hooks/useAdminSession";
 
 interface AnalyticsData {
   totalStudents: number;
@@ -28,7 +29,8 @@ export default function AnalyticsDashboard() {
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<"week" | "month" | "all">("month");
 
-  const studentsQuery = trpc.certification.getAllStudents.useQuery();
+  const { isAdmin } = useAdminSession();
+  const studentsQuery = trpc.certification.getAllStudents.useQuery(undefined, { enabled: isAdmin });
   const coursesQuery = trpc.certification.getCourses.useQuery();
 
   useEffect(() => {

@@ -3,6 +3,7 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import { adminLogout, useAdminSession } from "@/hooks/useAdminSession";
 
 interface Student {
   id: number;
@@ -33,34 +34,25 @@ interface QuizAttempt {
 }
 
 export default function AdminDashboard() {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { checking, isAdmin } = useAdminSession();
   const [students, setStudents] = useState<Student[]>([]);
   const [studentProgress, setStudentProgress] = useState<Map<number, StudentProgress>>(new Map());
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"overview" | "students" | "reports">("overview");
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
-  const studentsQuery = trpc.certification.getAllStudents.useQuery();
+  const studentsQuery = trpc.certification.getAllStudents.useQuery(undefined, { enabled: isAdmin });
 
   useEffect(() => {
-    // Check admin session
-    const adminSession = localStorage.getItem("adminSession");
-    if (!adminSession) {
-      window.location.href = "/certification/admin/login";
-      return;
-    }
-    setIsAdmin(true);
-
-    // Load students
+    if (!isAdmin) return;
     if (studentsQuery.data) {
       setStudents(studentsQuery.data);
     }
-    setLoading(false);
-  }, [studentsQuery.data]);
+    if (!studentsQuery.isLoading) setLoading(false);
+  }, [isAdmin, studentsQuery.data, studentsQuery.isLoading]);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminSession");
-    window.location.href = "/certification/admin/login";
+    void adminLogout();
   };
 
   const handleExportReport = () => {
@@ -92,7 +84,7 @@ export default function AdminDashboard() {
     toast.success("Report exported successfully!");
   };
 
-  if (loading) {
+  if (checking || loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <p className="text-slate-300">Loading admin dashboard...</p>

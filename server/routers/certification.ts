@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { adminSessionProcedure, publicProcedure, router } from "../_core/trpc";
 import * as certDb from "../services/certificationDb";
 import { generateCertificatePDF, generateCertificateNumber } from "../services/certificateGenerator";
 import { TRPCError } from "@trpc/server";
@@ -224,11 +224,11 @@ export const certificationRouter = router({
     }),
 
   // Admin functions
-  getAllStudents: publicProcedure.query(async () => {
+  getAllStudents: adminSessionProcedure.query(async () => {
     return await certDb.getAllStudents();
   }),
 
-  getStudentCourseProgress: publicProcedure
+  getStudentCourseProgress: adminSessionProcedure
     .input(z.object({ studentId: z.number(), courseId: z.number() }))
     .query(async ({ input }) => {
       return await certDb.getStudentCourseProgress(input.studentId, input.courseId);

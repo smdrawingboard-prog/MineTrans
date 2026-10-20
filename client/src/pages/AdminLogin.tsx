@@ -4,9 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "Roger@daginsure";
-
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,17 +13,24 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
 
-    // Validate credentials
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Store admin session
-      localStorage.setItem("adminSession", JSON.stringify({
-        username,
-        loginTime: new Date().toISOString(),
-      }));
-      toast.success("Admin login successful!");
-      window.location.href = "/certification/admin/dashboard";
-    } else {
-      toast.error("Invalid admin credentials");
+    // Credentials are checked on the server; it sets an HttpOnly session cookie.
+    try {
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (response.ok && data.success) {
+        toast.success("Admin login successful!");
+        window.location.href = "/certification/admin/dashboard";
+        return;
+      }
+      toast.error(data.message || "Invalid admin credentials");
+    } catch (error) {
+      console.error("[Admin] Login request failed:", error);
+      toast.error("Could not reach the server. Please try again.");
     }
 
     setLoading(false);
@@ -84,12 +88,6 @@ export default function AdminLogin() {
             </Button>
           </form>
 
-          {/* Info Message */}
-          <div className="mt-6 p-4 bg-slate-700/50 border border-slate-600 rounded text-sm text-slate-300">
-            <p className="font-semibold text-amber-600 mb-1">Demo Credentials:</p>
-            <p>Username: <code className="bg-slate-800 px-2 py-1 rounded">admin</code></p>
-            <p>Password: <code className="bg-slate-800 px-2 py-1 rounded">Roger@daginsure</code></p>
-          </div>
         </Card>
 
         {/* Back Link */}

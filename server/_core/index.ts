@@ -13,6 +13,7 @@ import { biAssessmentHandler } from "../handlers/biAssessment";
 import { biMethodologyLeadHandler } from "../handlers/biMethodologyLead";
 import { getLatestBlogPosts } from "../services/blogService";
 import { retryUnsyncedLeads } from "../services/leadStore";
+import { adminLoginHandler, adminLogoutHandler, adminSessionHandler } from "./adminSession";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -60,6 +61,9 @@ async function startServer() {
   app.post("/api/scheduled/refreshMiningNews", refreshMiningNewsHandler);
   app.post("/api/bi-assessment/generate", biAssessmentHandler);
   app.post("/api/leads/bi-methodology", biMethodologyLeadHandler);
+  app.post("/api/admin/login", adminLoginHandler);
+  app.post("/api/admin/logout", adminLogoutHandler);
+  app.get("/api/admin/session", adminSessionHandler);
   app.get("/api/blog/posts", async (_req, res) => {
     const posts = await getLatestBlogPosts(12);
     res.set("Cache-Control", "public, max-age=300");
