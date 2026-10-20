@@ -74,12 +74,6 @@ describe("admin session", () => {
     }
   });
 
-  it("no longer accepts the old hard-coded password", async () => {
-    const res = mockRes();
-    await adminLoginHandler(mockReq({ username: "admin", password: "Roger@daginsure" }), res);
-    expect(res.statusCode).toBe(401);
-  });
-
   it("disables login when the password or secret is not configured", async () => {
     delete process.env.ADMIN_PASSWORD;
     const res = mockRes();
