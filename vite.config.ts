@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { injectNewsIntoPage, setSitemapLastmod, type NewsFeed } from "./server/seo/prerenderNews";
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
@@ -232,6 +233,28 @@ function vitePluginCopyHtmlFiles(): Plugin {
         const filePath = path.join(publicDir, file);
         if (fs.existsSync(filePath)) {
           fs.copyFileSync(filePath, path.join(outDir, file));
+        }
+      }
+
+      // Write the current news feed into news.html so crawlers that don't run
+      // JavaScript see the articles, and date the sitemap entry to the feed.
+      // Best-effort: a bad feed file shouldn't fail the build — the page still
+      // loads the feed in the browser.
+      const feedPath = path.join(publicDir, "news-data.json");
+      if (fs.existsSync(feedPath)) {
+        try {
+          const feed: NewsFeed = JSON.parse(fs.readFileSync(feedPath, "utf-8"));
+          const newsPath = path.join(outDir, "news.html");
+          if (fs.existsSync(newsPath)) {
+            fs.writeFileSync(newsPath, injectNewsIntoPage(fs.readFileSync(newsPath, "utf-8"), feed));
+          }
+          const sitemapPath = path.join(outDir, "sitemap.xml");
+          if (fs.existsSync(sitemapPath)) {
+            const sitemap = fs.readFileSync(sitemapPath, "utf-8");
+            fs.writeFileSync(sitemapPath, setSitemapLastmod(sitemap, "https://www.minetrans.co.za/news.html", feed.updatedAt));
+          }
+        } catch (err) {
+          console.warn("[copy-html-files] Skipped news pre-render:", err);
         }
       }
     },
