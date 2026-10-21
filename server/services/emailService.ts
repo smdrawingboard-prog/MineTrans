@@ -6,10 +6,10 @@
  * Free/Trial/Hobby plans.
  *
  * Required env (Railway → MineTrans service → Variables):
- *   RESEND_API_KEY   – API key from resend.com (domain minetrans.co.za verified there)
+ *   RESEND_API_KEY   – API key from resend.com (sending domain mail.minetrans.co.za verified there)
  *   LEAD_NOTIFY_TO   – comma-separated recipients, e.g. "roger@minetrans.co.za,jp@minetrans.co.za"
  * Optional:
- *   LEAD_FROM_EMAIL  – defaults to "MineTrans Website <leads@minetrans.co.za>"
+ *   LEAD_FROM_EMAIL  – defaults to "MineTrans Website <enquiries@mail.minetrans.co.za>"
  *
  * This function never throws: the lead is already stored (DB / Google Sheets)
  * before it runs, so a mail failure must not turn a saved lead into an error
@@ -37,7 +37,7 @@ export interface LeadData {
 }
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const DEFAULT_FROM = "MineTrans Website <leads@minetrans.co.za>";
+const DEFAULT_FROM = "MineTrans Website <enquiries@mail.minetrans.co.za>";
 const REQUEST_TIMEOUT_MS = 10_000;
 
 const RISK_AREA_LABELS: Record<string, string> = {

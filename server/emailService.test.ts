@@ -58,7 +58,7 @@ describe("lead notification email", () => {
     const { auth, body } = received[0];
     expect(auth).toBe("Bearer re_test");
     expect(body.to).toEqual(["roger@minetrans.co.za", "jp@minetrans.co.za"]);
-    expect(body.from).toBe("MineTrans Website <leads@minetrans.co.za>");
+    expect(body.from).toBe("MineTrans Website <enquiries@mail.minetrans.co.za>");
     expect(body.reply_to).toBe("thandi@acme.example");
     expect(body.subject).toContain("BI Review request");
     expect(body.text).toContain("Business Interruption");
