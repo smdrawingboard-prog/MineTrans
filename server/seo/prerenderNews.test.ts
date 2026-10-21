@@ -57,6 +57,12 @@ describe("injectNewsIntoPage", () => {
     expect(out.match(/<article /g)).toHaveLength(25);
   });
 
+  it("inserts $ sequences in feed text literally", () => {
+    const out = injectNewsIntoPage(PAGE, { articles: [{ headline: "Gold $& copper $' rally $`" }] });
+    expect(out).toContain("<h4>Gold $&amp; copper $&#39; rally $`</h4>");
+    expect(out.match(/<section>/g)).toHaveLength(1);
+  });
+
   it("leaves a page without the placeholder unchanged", () => {
     const filled = '<div class="newsgrid" id="newsgrid"><article></article></div>';
     expect(injectNewsIntoPage(filled, { articles: [{ headline: "X" }] })).toBe(filled);

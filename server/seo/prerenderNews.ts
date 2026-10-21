@@ -110,9 +110,9 @@ export function injectNewsIntoPage(pageHtml: string, feed: NewsFeed): string {
   const updated = formatDate(feed.updatedAt, { dateStyle: "medium", timeStyle: "short" }) || "recently";
   const state = `<div class="newsstate show" id="newsstate"><span>Last updated ${escapeHtml(updated)} · ${articles.length} articles</span></div>`;
 
-  return pageHtml
-    .replace(STATE_EMPTY, state)
-    .replace(GRID_EMPTY, `<div class="newsgrid" id="newsgrid">${renderNewsCards(articles)}\n  </div>`);
+  const grid = `<div class="newsgrid" id="newsgrid">${renderNewsCards(articles)}\n  </div>`;
+  // Function replacers, so "$&", "$'" etc. in feed text are inserted literally.
+  return pageHtml.replace(STATE_EMPTY, () => state).replace(GRID_EMPTY, () => grid);
 }
 
 /** Sets <lastmod> for one sitemap <loc> to the given YYYY-MM-DD date. */
