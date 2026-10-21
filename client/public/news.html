@@ -674,7 +674,10 @@ function setState(msg,busy){
   state.innerHTML=(busy?'<span class="spin"></span>':'')+'<span>'+msg+'</span>';
 }
 async function loadMiningNews(){
-  setState('Loading mining news…',true);
+  // The build pre-renders the feed into the grid; only show the spinner (and
+  // fall back to source links) when there is nothing on the page yet.
+  const prerendered=grid.children.length>0;
+  if(!prerendered)setState('Loading mining news…',true);
   try{
     const r=await fetch('news-data.json',{cache:'no-store'});
     if(!r.ok)throw new Error('news-data.json unavailable: '+r.status);
@@ -694,6 +697,7 @@ async function loadMiningNews(){
     const updated=data.updatedAt?new Date(data.updatedAt).toLocaleString('en-ZA',{dateStyle:'medium',timeStyle:'short'}):'recently';
     setState('Last updated '+updated+' · '+articles.length+' articles',false);
   }catch(e){
+    if(prerendered)return;
     setState('Mining news feed unavailable right now. Showing publication links below.',false);
     grid.innerHTML=SOURCES.map(s=>`
       <article class="ncard">
