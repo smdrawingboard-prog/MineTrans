@@ -7,7 +7,8 @@
   if (!video || !toggle || !status) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const connection = navigator.connection;
-  let userActed = false;
+  let userPaused = false;
+  let userRequestedPlayback = false;
   let visible = true;
   let pending = false;
   let generation = 0;
@@ -24,6 +25,7 @@
     label();
   }
   async function play() {
+    if (pending || !video.paused) return;
     const attempt = ++generation;
     pending = true;
     status.hidden = true;
@@ -33,7 +35,7 @@
     try {
       await video.play();
     } catch (error) {
-      if (attempt === generation && userActed && error.name !== 'AbortError') {
+      if (attempt === generation && userRequestedPlayback && error.name !== 'AbortError') {
         status.textContent = 'Video unavailable. The MineTrans image and all website services remain available.';
         status.hidden = false;
       }
@@ -42,8 +44,14 @@
     }
   }
   toggle.addEventListener('click', () => {
-    userActed = true;
-    if (pending || !video.paused) stop(); else play();
+    if (pending || !video.paused) {
+      userPaused = true;
+      stop();
+    } else {
+      userPaused = false;
+      userRequestedPlayback = true;
+      play();
+    }
   });
   video.addEventListener('playing', () => { video.classList.add('has-frame'); pending = false; label(); });
   ['pause', 'ended'].forEach(event => video.addEventListener(event, label));
@@ -51,22 +59,24 @@
   function constrained() {
     return reduced.matches || (connection && (connection.saveData || /(^|-)2g$|^3g$/.test(connection.effectiveType)));
   }
-  function policyChanged() { if (constrained()) stop(); }
+  function reconcile() {
+    if (userPaused || document.hidden || !visible || (constrained() && !userRequestedPlayback)) stop();
+    else play();
+  }
+  function policyChanged() {
+    if (constrained()) userRequestedPlayback = false;
+    reconcile();
+  }
   reduced.addEventListener('change', policyChanged);
   if (connection && connection.addEventListener) connection.addEventListener('change', policyChanged);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+  document.addEventListener('visibilitychange', reconcile);
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting;
-      if (!visible) stop();
+      reconcile();
     }).observe(video);
   }
-  // Loop silently after page loading and a paint opportunity; never delay navigation.
-  function schedule() {
-    window.setTimeout(() => {
-      if (!userActed && !constrained() && !document.hidden && visible) play();
-    }, 300);
-  }
-  if (document.readyState === 'complete') schedule();
-  else window.addEventListener('load', schedule, { once: true });
+  // This deferred script runs after parsing: do not wait for unrelated images,
+  // fonts or analytics to finish loading before attempting the silent intro.
+  window.setTimeout(reconcile, 300);
 })();
