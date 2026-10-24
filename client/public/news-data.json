@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-10-24T10:37:30.994Z",
+  "updatedAt": "2026-10-24T15:40:21.309Z",
   "articles": [
     {
       "headline": "More than a decade in the making: Johnathan Kalula takes over as MD at VEGA Controls SA",
       "excerpt": "More than a decade after he first walked through the door as an intern, Johnathan Kalula has been appointed managing director of VEGA Controls South Africa. A career shaped by&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/more-than-a-decade-in-the-making-johnathan-kalula-takes-over-as-md-at-vega-controls-sa/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
+      "publishedAt": "2026-10-24T15:40:20.304Z",
       "category": "General"
     },
     {
@@ -14,7 +14,7 @@
       "excerpt": "South Africa’s energy transition is a shared opportunity to strengthen energy security and sustainability while supporting growth and cutting emissions. At the Joburg Indaba, Kearney partner Frances Phillips said the&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/renewables/energy-security-and-sustainability-a-shared-opportunity-for-sas-mining-sector/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
+      "publishedAt": "2026-10-24T15:40:20.304Z",
       "category": "Power & Water"
     },
     {
@@ -22,7 +22,7 @@
       "excerpt": "BME, a division of the Omnia Group, will once again host its Technical Summit on 28 October 2026 at the CSIR in Pretoria, under the theme “Connected Mining: Turning Intelligence&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/technology/bme-2026-technical-summit-to-place-connected-mining-under-the-spotlight/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
+      "publishedAt": "2026-10-24T15:40:20.304Z",
       "category": "General"
     },
     {
@@ -30,15 +30,23 @@
       "excerpt": "South Africa’s mining future depends on more than its mineral wealth. The industry must address the environmental, social, skills and economic challenges inherited from generations of mining while building a&hellip;",
       "publication": "African Mining News",
       "sourceUrl": "https://www.africanminingnews.co.za/press-release/wits-mining-institute-brings-industry-leaders-together-to-shape-minings-future/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
+      "publishedAt": "2026-10-24T15:40:20.304Z",
       "category": "Tailings Risk"
+    },
+    {
+      "headline": "Thermoplastic Pipeline Systems",
+      "excerpt": "Astore Keymak is one of South Africa’s leading suppliers of high-quality Thermoplastic Pipeline Systems, with branches in the major provinces.",
+      "publication": "Mining Weekly",
+      "sourceUrl": "https://www.creamermedia.co.za/page/showroom/event:creamer-media-showroom-2020-06-10/category:6474",
+      "publishedAt": "2026-10-24T15:40:18.573Z",
+      "category": "General"
     },
     {
       "headline": "Mining pilots: the graveyard of good ideas and great technology",
       "excerpt": "By Keagan Keyser|2026-10-23T06:10:45+00:00October 23rd, 2026|News|",
       "publication": "African Mining",
       "sourceUrl": "https://www.africanmining.co.za/2026/04/01/mining-pilots-the-graveyard-of-good-ideas-and-great-technology/",
-      "publishedAt": "2026-10-24T10:37:21.206Z",
+      "publishedAt": "2026-10-24T15:40:18.036Z",
       "category": "General"
     },
     {
@@ -46,7 +54,7 @@
       "excerpt": "Cold Link Africa RACA Journal African Mines Handbook / Online Mining and Technical Exhibitions (MTE) Equipment and Hire Plumbing Africa SA Affordable Housing Timber iQ",
       "publication": "African Mining",
       "sourceUrl": "https://www.africanmining.co.za/2026/02/01/sew-eurodrive-powers-progress-setting-the-pace-for-african-mining-operations/",
-      "publishedAt": "2026-10-24T10:37:21.206Z",
+      "publishedAt": "2026-10-24T15:40:18.036Z",
       "category": "Power & Water"
     },
     {
@@ -54,7 +62,23 @@
       "excerpt": "African Mines Handbook Print Media Pack 2026",
       "publication": "African Mining",
       "sourceUrl": "https://www.africanmining.co.za/wp-content/uploads/AM_PRINT_MediaPack2026.pdf",
-      "publishedAt": "2026-10-24T10:37:21.206Z",
+      "publishedAt": "2026-10-24T15:40:18.036Z",
+      "category": "General"
+    },
+    {
+      "headline": "Lithium Africa weighs $60M offer for Springbok lithium project",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/lithium-africa-weighs-60m-offer-for-springbok-lithium-project/",
+      "publishedAt": "2026-10-20T16:37:18.000Z",
+      "category": "General"
+    },
+    {
+      "headline": "AFC eyes iron ore and uranium investments in Africa",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/afc-eyes-iron-ore-and-uranium-investments-in-africa/",
+      "publishedAt": "2026-10-16T14:42:46.000Z",
       "category": "General"
     }
   ]
