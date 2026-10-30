@@ -6,7 +6,7 @@
 <style>
 @font-face{font-family:PF;src:url(data:font/woff2;base64,{{PF_N}}) format('woff2');font-weight:400 900;font-style:normal}
 @font-face{font-family:PF;src:url(data:font/woff2;base64,{{PF_I}}) format('woff2');font-weight:400 900;font-style:italic}
-:root{--onyx:#0A0A0B;--char:#1E1D20;--plat:#C9CACE;--bone:#F7F5F1;--cu:#C9854F;--line:rgba(201,202,206,.16);--img:#2B3337}
+:root{--onyx:#0A0A0B;--char:#1E1D20;--plat:#C9CACE;--bone:#F7F5F1;--cu:#C9854F;--line:rgba(201,202,206,.18);--img:#2B3337}
 html,body{margin:0;padding:0;background:var(--onyx);overflow:hidden}
 #stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;background:var(--onyx);
   font-family:PF,serif;color:var(--bone);font-weight:500;-webkit-font-smoothing:antialiased}
@@ -16,27 +16,28 @@ html,body{margin:0;padding:0;background:var(--onyx);overflow:hidden}
 .i{display:inline-block}
 .mask{overflow:hidden}
 .full{position:absolute;left:0;right:0;top:0;text-align:center}
-.cap{text-transform:uppercase;letter-spacing:.16em}
+.cap{text-transform:uppercase;letter-spacing:.12em}
 .cu{color:var(--cu)}
 em{font-style:italic;font-weight:500}
-.eb{position:absolute;font-size:18px;letter-spacing:.38em;text-transform:uppercase;color:var(--plat);font-weight:500;white-space:nowrap}
-.eb .rule{display:inline-block;width:46px;height:1px;background:rgba(201,202,206,.6);vertical-align:middle;margin-right:22px;transform-origin:0 50%}
-.piece{position:absolute;left:210px;top:131px;width:1500px;height:818px;transform-origin:0 0}
-.piece .px{position:absolute;inset:0;background-size:1500px 818px}
-.cell{position:absolute;width:104px;height:104px;background:var(--onyx);transform-origin:50% 50%}
+/* phone-first type: nothing that carries meaning is under 30px on the 1920 frame */
+.eb{position:absolute;font-size:30px;letter-spacing:.26em;text-transform:uppercase;color:var(--plat);font-weight:500;white-space:nowrap}
+.eb .rule{display:inline-block;width:56px;height:2px;background:rgba(201,202,206,.6);vertical-align:middle;margin-right:24px;transform-origin:0 50%}
+.h1{position:absolute;font-size:84px;line-height:1.08;letter-spacing:-.01em}
+.h2{position:absolute;font-size:76px;line-height:1.1;letter-spacing:-.01em}
+.body{position:absolute;font-size:46px;line-height:1.3;font-weight:400}
+.piece{position:absolute;transform-origin:0 0}
+.piece .px{position:absolute;inset:0}
+.cell{position:absolute;background:var(--onyx);transform-origin:50% 50%}
 .cell svg.bd{position:absolute;left:0;top:0;overflow:visible}
-.cell svg.ic{position:absolute;left:30px;top:30px;width:44px;height:44px}
-.nm{position:absolute;width:360px;text-align:center;font-size:19px;color:var(--plat)}
-.stl{position:absolute;width:420px;height:34px;line-height:34px;overflow:hidden;font-size:19px;letter-spacing:.1em;color:rgba(247,245,241,.78)}
-.imp{position:absolute;border:1px solid rgba(201,202,206,.32);background:rgba(201,202,206,.035);display:flex;align-items:center;
-  gap:44px;padding:0 34px;box-sizing:border-box;border-radius:2px}
-.imp .ih{font-size:18px;letter-spacing:.22em;text-transform:uppercase;color:var(--plat)}
-.imp .iv{font-size:28px;color:var(--bone)}
-.row3{position:absolute;left:880px;width:700px;height:58px;line-height:58px;font-size:32px;padding-left:26px;box-sizing:border-box}
-.chip{position:absolute;height:60px;line-height:60px;font-size:25px;padding:0 26px;box-sizing:border-box;border:1px solid rgba(201,202,206,.28);border-radius:2px;white-space:nowrap}
-.lia{position:absolute;width:420px}
-.lia .t{font-size:32px}
-.lia .d{font-size:20px;color:rgba(201,202,206,.85);font-weight:400;margin-top:8px;line-height:1.35}
+.cell svg.ic{position:absolute}
+.nm{position:absolute;width:420px;text-align:center;font-size:34px;color:var(--plat)}
+.stl{position:absolute;width:420px;height:48px;line-height:48px;overflow:hidden;font-size:36px;letter-spacing:.06em;color:var(--bone)}
+.imp{position:absolute;border:1px solid rgba(201,202,206,.32);background:rgba(201,202,206,.04);box-sizing:border-box;border-radius:2px;padding:20px 40px}
+.imp .ih{font-size:30px;letter-spacing:.2em;text-transform:uppercase;color:var(--plat)}
+.imp .row{display:flex;gap:64px;margin-top:14px}
+.imp .iv{font-size:48px;color:var(--bone)}
+.lia{position:absolute;width:520px;font-size:46px;line-height:1.15}
+.box{position:absolute;width:104px;height:104px;border:2px solid rgba(201,202,206,.3);box-sizing:border-box;border-radius:4px;text-align:center;line-height:100px;font-size:60px;color:var(--plat)}
 #cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
 #obj{position:absolute}
 </style>
@@ -51,19 +52,21 @@ em{font-style:italic;font-weight:500}
 </div>
 <script>
 /* ============================================================
-   MineTrans — "The Mine" explainer, 30s. Every style is a pure function of t.
+   MineTrans — "The Mine" explainer, 30s at 120 BPM. Every style is a pure function of t.
+   Opens on the operational consequence (one mill failure), then the connected exposures.
    Copy: client/public/insurance-mine.html. Image: images/diagrams/mine-risk-assessment.webp
+   Insurance wording is qualified: cover responds subject to the policy's trigger, terms and indemnity period.
    ============================================================ */
 const BPM = 120, BEAT = 60 / BPM, DUR = 30;
 const IMG = 'data:image/webp;base64,{{IMG}}';
 const SCENES = [
-  { id: 's1', t0: 0,  t1: 2  },   // hook
-  { id: 's2', t0: 2,  t1: 6  },   // the diagram assembles
-  { id: 's3', t0: 6,  t1: 10 },   // commercial assets
-  { id: 's4', t0: 10, t1: 14 },   // liability
-  { id: 's5', t0: 14, t1: 18 },   // business interruption
-  { id: 's6', t0: 18, t1: 22 },   // the three steps
-  { id: 's7', t0: 22, t1: 27 },   // cascade -> covered (payoff on 24s)
+  { id: 's1', t0: 0,  t1: 5  },   // cold open: one mill failure
+  { id: 's2', t0: 5,  t1: 8  },   // the connected exposures, on the diagram
+  { id: 's3', t0: 8,  t1: 12 },   // assets
+  { id: 's4', t0: 12, t1: 16 },   // liability
+  { id: 's5', t0: 16, t1: 21 },   // business interruption, qualified
+  { id: 's6', t0: 21, t1: 24 },   // quantified upfront
+  { id: 's7', t0: 24, t1: 27 },   // unless it's covered (payoff on 24s)
   { id: 's8', t0: 27, t1: 30 },   // end card
 ];
 
@@ -99,11 +102,12 @@ const ICON = {
   plant: '<path d="M4 17l5-5 4 4 7-8"/><path d="M20 8v4h-4"/>',
   port:  '<path d="M3 18h13l5-6-5-6H3"/><path d="M3 6v12"/>',
 };
-const COLS = [435, 785, 1135, 1485], LINE_Y = 600;
+// the cascade, sized for a phone: 150px nodes across a 1640px frame
+const COLS = [345, 755, 1165, 1575], LINE_Y = 560, CS = 150;
 const NAMES = ['Pit / Shaft', 'Primary Mill', 'Plant / Process', 'Rail / Port'];
 
-/* ---------- the diagram, cut into pieces (image px; panel is 1500 wide) ---------- */
-const PS = 1500 / 1408;
+/* ---------- the diagram, cut into pieces (image px) ---------- */
+const PX = 60, PY = 213, PW = 1200, PH = PW * 768 / 1408, PS = PW / 1408;
 const PIECES = [
   { id: 'trL', poly: [[330, 600], [560, 520], [612, 545], [612, 702], [330, 702]] },
   { id: 'trR', poly: [[830, 545], [940, 450], [940, 375], [1010, 365], [1312, 420], [1312, 565], [1180, 655], [950, 655]] },
@@ -114,38 +118,57 @@ const PIECES = [
               rect: [[960, 85], [1345, 85], [1345, 446], [1345, 446], [1110, 446], [960, 446]] },
   { id: 'prod', poly: [[985, 456], [1180, 440], [1332, 520], [1332, 612], [1150, 684], [988, 606]],
               rect: [[960, 446], [1345, 446], [1345, 446], [1345, 684], [1150, 684], [960, 684]] },
-  { id: 'asset', poly: [[70, 68], [478, 68], [478, 274], [70, 274]] },
-  { id: 'steps', poly: [[30, 698], [1380, 698], [1380, 760], [30, 760]] },
 ];
 const bboxOf = poly => { const xs = poly.map(p => p[0]), ys = poly.map(p => p[1]); return { l: Math.min(...xs), t: Math.min(...ys), r: Math.max(...xs), b: Math.max(...ys) }; };
+// motion drawn on the diagram itself, in image px. 'pulse' = beads travelling a line, 'light' = the line drawn in light once
+const FLOWS = {
+  trL: [   // property damage -> the MineTrans core
+    { pts: [[339, 660], [386, 686], [440, 686], [539, 640], [539, 597], [597, 563]], kind: 'pulse', from: 5.4, to: 7.7, every: 0.3 },
+    { pts: [[350, 652], [391, 676], [442, 676], [527, 635], [527, 590], [587, 558]], kind: 'pulse', from: 5.5, to: 7.7, every: 0.3 },
+    { pts: [[457, 601], [480, 590], [480, 573], [547, 535]], kind: 'pulse', from: 5.45, to: 7.7, every: 0.26 },
+  ],
+  core: [  // actuarial, technical, technology — in turn
+    { pts: [[571, 212], [705, 292], [839, 212]], kind: 'light', at: 5.8 },
+    { pts: [[571, 275], [705, 355], [839, 275]], kind: 'light', at: 5.95 },
+    { pts: [[571, 347], [705, 425], [839, 347]], kind: 'light', at: 6.1 },
+  ],
+  trR: [   // the core -> business interruption and production
+    { pts: [[934, 452], [1030, 400]], kind: 'pulse', from: 6.2, to: 7.7, every: 0.22 },
+    { pts: [[930, 438], [1022, 390]], kind: 'pulse', from: 6.28, to: 7.7, every: 0.22 },
+    { pts: [[850, 532], [890, 560], [890, 628], [920, 650], [1010, 650], [1050, 628]], kind: 'pulse', from: 6.25, to: 7.7, every: 0.3 },
+  ],
+  pd:   [ { pts: [[84, 540], [285, 663], [450, 567]], kind: 'light', at: 6.45 },
+          { pts: [[84, 540], [285, 663], [450, 567]], kind: 'pulse', from: 8.4, to: 15.3, every: 0.7 } ],
+  bi:   [ { pts: [[980, 342], [1102, 428], [1230, 345]], kind: 'light', at: 6.6 } ],
+  prod: [ { pts: [[995, 590], [1104, 676], [1325, 543]], kind: 'light', at: 6.75 },
+          { pts: [[995, 590], [1104, 676], [1325, 543]], kind: 'pulse', from: 16.4, to: 20.4, every: 0.6 } ],
+};
+const FLOW_SPEED = 380, BEAD = 26;   // image px per second, bead length
 // when each piece is on screen, and how it is revealed
 const PIECE_LIFE = {
-  core:  [{ tin: 2.0, tout: 6.0, dir: 'up' }],
-  trL:   [{ tin: 2.22, tout: 5.95, dir: 'r2l' }],
-  trR:   [{ tin: 2.22, tout: 5.95, dir: 'l2r' }],
-  pd:    [{ tin: 2.5, tout: 13.62, dir: 'up' }],
-  bi:    [{ tin: 3.0, tout: 6.0, dir: 'down' }, { tin: 14.0, tout: 17.6, dir: 'down' }],
-  prod:  [{ tin: 3.15, tout: 6.02, dir: 'up' }, { tin: 14.08, tout: 17.64, dir: 'up' }],
-  asset: [{ tin: 3.5, tout: 6.0, dir: 'l2r' }],
-  steps: [{ tin: 4.0, tout: 6.04, dir: 'l2r' }, { tin: 18.0, tout: 21.72, dir: 'l2r' }],
+  core:  [{ tin: 5.0, tout: 7.9, dir: 'up' }],
+  trL:   [{ tin: 5.18, tout: 7.85, dir: 'r2l' }],
+  trR:   [{ tin: 5.18, tout: 7.85, dir: 'l2r' }],
+  pd:    [{ tin: 5.3, tout: 15.6, dir: 'up' }],
+  bi:    [{ tin: 5.42, tout: 7.9, dir: 'down' }, { tin: 16.0, tout: 20.6, dir: 'down' }],
+  prod:  [{ tin: 5.52, tout: 7.92, dir: 'up' }, { tin: 16.08, tout: 20.64, dir: 'up' }],
 };
-// where each piece goes (anchor ids measured in later scenes); 'home' = assembled diagram
 const PIECE_MOVES = {
-  pd:    [{ t: 6.0, to: 's3pd', f: 1.5, shape: 'rect' }, { t: 10.0, to: 's4pd', f: 1.6, shape: 'rect' }],
-  bi:    [{ t: 13.9, to: 's5bi', f: 60, shape: 'rect', box: [960, 85, 1345, 684] }],
-  prod:  [{ t: 13.9, to: 's5bi', f: 60, shape: 'rect', box: [960, 85, 1345, 684] }],
-  steps: [{ t: 17.9, to: 's6row', f: 60, box: [30, 698, 1380, 760] }],
+  pd:    [{ t: 8.0, to: 's3pd', f: 1.5, shape: 'rect' }, { t: 12.0, to: 's4pd', f: 1.6, shape: 'rect' }],
+  bi:    [{ t: 15.9, to: 's5bi', f: 60, shape: 'rect', box: [960, 85, 1345, 684] }],
+  prod:  [{ t: 15.9, to: 's5bi', f: 60, shape: 'rect', box: [960, 85, 1345, 684] }],
 };
 
 function flowNodes(p, tin, tout, statuses) {
   let h = '';
+  const ic = Math.round(CS * 0.42), io = (CS - ic) / 2;
   COLS.forEach((cx, k) => {
-    const ic = ['pit', 'mill', 'plant', 'port'][k];
-    h += `<div class="cell gy" id="${p}c${k}" data-in="${tin + k * 0.05}" data-out="${tout + k * 0.04}" data-f="2.6" style="left:${cx - 52}px;top:${LINE_Y - 52}px">
-      <svg class="bd" width="104" height="104"><rect id="${p}bd${k}" x=".75" y=".75" width="102.5" height="102.5" fill="none" stroke="rgba(201,202,206,.42)" stroke-width="1.5"/></svg>
-      <svg class="ic" id="${p}ic${k}" viewBox="0 0 24 24" fill="none" stroke="var(--plat)" stroke-width="1.3">${ICON[ic]}</svg></div>`;
-    h += `<div class="nm cap" style="left:${cx - 180}px;top:${LINE_Y + 72}px">${words(NAMES[k].toUpperCase(), tin + 0.12 + k * 0.04, 0.03, tout, 0.01)}</div>`;
-    h += `<div class="stl" style="left:${cx - 210}px;top:${LINE_Y + 108}px">`;
+    const name = ['pit', 'mill', 'plant', 'port'][k];
+    h += `<div class="cell gy" id="${p}c${k}" data-in="${tin + k * 0.05}" data-out="${tout + k * 0.04}" data-f="2.6" style="left:${cx - CS / 2}px;top:${LINE_Y - CS / 2}px;width:${CS}px;height:${CS}px">
+      <svg class="bd" width="${CS}" height="${CS}"><rect id="${p}bd${k}" x="1" y="1" width="${CS - 2}" height="${CS - 2}" fill="none" stroke="rgba(201,202,206,.45)" stroke-width="2"/></svg>
+      <svg class="ic" id="${p}ic${k}" style="left:${io}px;top:${io}px;width:${ic}px;height:${ic}px" viewBox="0 0 24 24" fill="none" stroke="var(--plat)" stroke-width="1.3">${ICON[name]}</svg></div>`;
+    h += `<div class="nm cap" style="left:${cx - 210}px;top:${LINE_Y + CS / 2 + 26}px">${words(NAMES[k].toUpperCase(), tin + 0.12 + k * 0.04, 0.03, tout, 0.01)}</div>`;
+    h += `<div class="stl" style="left:${cx - 210}px;top:${LINE_Y + CS / 2 + 74}px">`;
     statuses[k].forEach(s => { h += `<div class="i r full" data-in="${s.tin}"${s.tout != null ? ` data-out="${s.tout}"` : ''} data-f="3">${s.txt}</div>`; });
     h += `</div>`;
   });
@@ -155,132 +178,115 @@ function flowNodes(p, tin, tout, statuses) {
 /* ---------- scene markup (screen space at each scene's reference time) ---------- */
 function buildScenes() {
   const S = {};
-  // S1 — hook
-  S.s1b = ``;
-  S.s1f = `
-    <div class="a" style="left:0;width:1920px;top:440px;text-align:center;font-size:150px;line-height:1.08;letter-spacing:-.015em">
-      <span class="m"><span class="i r cu" data-in="0" data-out="1.56"><em>More</em></span></span> ${words('than the', 0.5, 0.07, 1.6, 0.04)}
-      <span id="hookWord" style="display:inline-block"><span class="m"><span class="i r" data-in="1.0" data-out="1.66">ground.</span></span></span><span id="hookDotA" style="display:inline-block;width:0;height:0"></span></div>`;
+  const line = (id, tin, tout) => `<div class="a gx" id="${id}" data-in="${tin}" data-f="2.6" data-out="${tout}" data-fo="2.6" style="left:${COLS[0]}px;top:${LINE_Y - 1}px;width:${COLS[3] - COLS[0]}px;height:2px;background:rgba(201,202,206,.42);transform-origin:0 50%"></div>`;
 
-  // S2 — the diagram assembles from its own pieces
+  // S1 — cold open: production runs into the mill, the mill fails, everything downstream stops
+  const st1 = [
+    [{ txt: 'RUNNING', tin: 0.2, tout: 4.7 }],
+    [{ txt: 'RUNNING', tin: 0.24, tout: 1.0 }, { txt: 'FAILED', tin: 1.06, tout: 4.72 }],
+    [{ txt: 'RUNNING', tin: 0.28, tout: 1.5 }, { txt: 'STOPPED', tin: 1.56, tout: 4.74 }],
+    [{ txt: 'SHIPPING', tin: 0.32, tout: 2.0 }, { txt: 'IDLE', tin: 2.06, tout: 4.76 }],
+  ];
+  S.s1b = line('s1line', 0.0, 4.72);
+  S.s1f = `
+    <div class="h1" style="left:140px;top:110px">${words('One mill failure.', 1.0, 0.06, 4.6, 0.02)}</div>
+    <div class="h1" style="left:140px;top:202px"><span class="m"><span class="i r cu" data-in="2.0" data-out="4.66" data-f="2.4"><em>A cascading loss.</em></span></span></div>
+    ${flowNodes('s1', 0.0, 4.7, st1)}
+    <div class="imp cl" id="s1imp" data-dir="l" data-in="2.5" data-out="4.6" data-f="2.6" style="left:140px;top:820px;width:1640px;height:150px">
+      <div class="ih">${words('Impact — uninsured', 2.56, 0.04, 4.58, 0.01)}</div>
+      <div class="row"><span class="iv">${words('Production halted', 3.0, 0.05, 4.58, 0.01)}</span>
+        <span class="iv">${words('Fixed costs continue', 3.5, 0.05, 4.6, 0.01)}</span>
+        <span class="iv">${words('Payroll continues', 4.0, 0.05, 4.62, 0.01)}</span></div></div>`;
+
+  // S2 — the connected exposures, on the diagram (with motion drawn on it)
   let pcs = '';
   PIECES.forEach(p => {
     const poly = p.poly.map(([x, y]) => `${(x * PS).toFixed(1)}px ${(y * PS).toFixed(1)}px`).join(',');
-    pcs += `<div class="piece" id="pc_${p.id}"><div class="px" id="px_${p.id}" style="background-image:url(${IMG});clip-path:polygon(${poly})"></div></div>`;
+    let ov = '';
+    (FLOWS[p.id] || []).forEach((f, j) => {
+      const d = 'M' + f.pts.map(q => q.join(' ')).join(' L');
+      const n = f.kind === 'pulse' ? 4 : 1;
+      for (let b = 0; b < n; b++)
+        ov += `<path id="fl_${p.id}_${j}_${b}" d="${d}" fill="none" stroke="${f.kind === 'pulse' ? '#FFF3E4' : '#FFF0DC'}" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" style="visibility:hidden"/>`;
+    });
+    pcs += `<div class="piece" id="pc_${p.id}" style="left:${PX}px;top:${PY}px;width:${PW}px;height:${PH}px"><div class="px" id="px_${p.id}" style="background-image:url(${IMG});background-size:${PW}px ${PH}px;clip-path:polygon(${poly})"></div>${ov ? `<svg viewBox="0 0 1408 768" width="${PW}" height="${PH}" style="position:absolute;left:0;top:0;overflow:visible">${ov}</svg>` : ''}</div>`;
   });
   S.s2b = `
-    <div class="a cl" id="s2panel" data-dir="c" data-in="2.0" data-out="5.96" data-f="2.0" style="left:210px;top:131px;width:1500px;height:818px;background:var(--img);border-radius:6px"></div>
+    <div class="a cl" id="s2panel" data-dir="c" data-in="5.0" data-out="7.92" data-f="2.2" style="left:${PX}px;top:${PY}px;width:${PW}px;height:${PH}px;background:var(--img);border-radius:6px"></div>
     ${pcs}`;
   S.s2f = `
-    <div class="a" id="s2zoom" style="left:${960 - 34}px;top:${540 - 34}px;width:68px;height:68px;border-radius:50%;background:rgba(10,10,11,.72);border:1px solid rgba(201,202,206,.4);box-sizing:border-box;transform-origin:50% 50%">
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--bone)" stroke-width="1.6" style="position:absolute;left:20px;top:20px"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>`;
+    ${eyebrow('Connected risks', 1330, 300, 5.3, 7.6)}
+    <div class="a" style="left:1330px;top:370px;width:560px;font-size:84px;line-height:1.12">
+      ${words('Assets,', 5.6, 0, 7.62)}<br>${words('liability', 6.0, 0, 7.64)}<br>${words('&amp; business', 6.4, 0.08, 7.66, 0.01)}<br>
+      <span class="m"><span class="i r cu" data-in="6.6" data-out="7.7"><em>interruption.</em></span></span></div>`;
 
-  // S3 — commercial assets
-  const items3 = ['Buildings &amp; Fixed Structures', 'Fixed Plant &amp; Infrastructure', 'Contents &amp; Stock', 'All-Risk &amp; Fire Cover'];
-  let rows3 = '';
-  items3.forEach((txt, k) => {
-    rows3 += `<div class="row3" id="s3row${k}" style="top:${492 + k * 66}px"><span class="m"><span class="i r" data-in="${6.5 + k * 0.5}" data-out="${9.6 + k * 0.02}" data-f="3">${txt}</span></span></div>`;
-  });
-  S.s3b = anchor('s3pd', 230, 262, 566, 562);
+  // S3 — assets
+  S.s3b = anchor('s3pd', 120, 220, 680, 675);
   S.s3f = `
-    ${eyebrow('Commercial Assets', 880, 246, 6.15, 9.56)}
-    <div class="a" style="left:880px;top:290px;width:900px;font-size:64px;line-height:1.1">${words('Everything the mine', 6.25, 0.05, 9.58, 0.02)}<br>${words('owns and operates.', 6.4, 0.05, 9.6, 0.02, 'em')}</div>
-    ${rows3}
-    <div class="a" style="left:880px;top:790px;width:960px;font-size:33px">
-      ${words('Insured to', 8.5, 0.05, 9.64, 0.02)} <span id="s3key">${words('reinstatement value,', 8.6, 0.05, 9.66, 0.02, 'cu')}</span>
-      ${words('not', 8.8, 0.05, 9.68)} <span style="position:relative;display:inline-block">${words('book value.', 8.85, 0.05, 9.69, 0.02)}
-        <i class="a gx" data-in="9.02" data-out="9.62" data-f="2.4" style="left:0;right:0;top:58%;height:2px;background:var(--bone);transform-origin:0 50%"></i></span></div>`;
+    ${eyebrow('Commercial assets', 900, 230, 8.15, 11.56)}
+    <div class="h2" style="left:900px;top:290px;width:960px">${words('Everything the mine', 8.25, 0.05, 11.58, 0.02)}<br>${words('owns and operates.', 8.4, 0.05, 11.6, 0.02, 'em')}</div>
+    <div class="body" style="left:900px;top:520px;width:940px;color:var(--plat)">${words('Buildings, fixed plant, contents and stock.', 9.0, 0.06, 11.62, 0.01)}</div>
+    <div class="body" style="left:900px;top:700px;width:960px">${words('Insured to', 10.0, 0.06, 11.64, 0.02)} <span id="s3key">${words('reinstatement value,', 10.12, 0.06, 11.66, 0.02, 'cu')}</span><br>
+      ${words('not', 10.5, 0, 11.68)} <span style="position:relative;display:inline-block">${words('book value.', 10.56, 0.06, 11.69, 0.02)}
+        <i class="a gx" data-in="10.85" data-out="11.62" data-f="2.4" style="left:0;right:0;top:56%;height:3px;background:var(--bone);transform-origin:0 50%"></i></span></div>`;
 
   // S4 — liability: the boundary moves past the site
   const lia = [
-    ['Public Liability', 'Third-party injury and property damage, including off-site impact.', 330, 400, 'right', 10.5],
-    ["Employers' Liability", "Claims by employees beyond statutory workmen's compensation.", 1170, 400, 'left', 11.0],
-    ['Environmental Liability', 'Pollution, contamination and rehabilitation exposure.', 330, 640, 'right', 11.5],
-    ["Directors' &amp; Officers' Liability", 'Protection for decision-makers against claims.', 1170, 640, 'left', 12.0],
+    ['Public liability', 230, 400, 'right', 12.6],
+    ["Employers' liability", 1190, 400, 'left', 13.2],
+    ['Environmental liability', 230, 610, 'right', 13.8],
+    ["Directors' &amp; officers' liability", 1190, 610, 'left', 14.4],
   ];
   let l4 = '';
-  lia.forEach(([t, d, x, y, al, tin], k) => {
-    l4 += `<div class="lia" style="left:${x}px;top:${y}px;text-align:${al}"><div class="t">${words(t, tin, 0.05, 13.5 + k * 0.03, 0.01)}</div>
-      <div class="d">${words(d, tin + 0.14, 0.015, 13.52 + k * 0.03, 0.004)}</div></div>`;
+  lia.forEach(([t, x, y, al, tin], k) => {
+    l4 += `<div class="lia" style="left:${x}px;top:${y}px;text-align:${al}">${words(t, tin, 0.06, 15.5 + k * 0.03, 0.01)}</div>`;
   });
-  S.s4b = anchor('s4pd', 790, 430, 340, 338);
+  S.s4b = anchor('s4pd', 780, 382, 360, 357);
   S.s4f = `
-    ${eyebrow('Liability', 150, 136, 10.1, 13.46)}
-    <div class="a" style="left:150px;top:176px;width:1700px;font-size:58px">${words('Exposure that', 10.15, 0.05, 13.48, 0.02)} ${words('follows the operation,', 10.3, 0.05, 13.5, 0.02, 'cu')} ${words('not the incident.', 10.45, 0.05, 13.52, 0.02)}</div>
+    <div class="h2" style="left:0;width:1920px;top:120px;text-align:center">${words('Exposure', 12.1, 0.05, 15.48, 0.02)} ${words('follows the operation.', 12.2, 0.05, 15.5, 0.02, 'cu')}</div>
     ${l4}
-    <div class="a" style="left:0;width:1920px;top:930px;text-align:center;font-size:25px;color:rgba(201,202,206,.85);font-weight:400">${words('Well beyond the site boundary — to the public, to employees, and to the environment.', 12.5, 0.02, 13.54, 0.005)}</div>`;
+    <div class="body" style="left:0;width:1920px;top:900px;text-align:center;color:var(--plat)">${words('Well beyond the site boundary.', 15.0, 0.06, 15.56, 0.01)}</div>`;
 
-  // S5 — business interruption
-  const chips = [['Gross profit', 180, 15.5], ['Standing charges', 410, 15.75], ['Increased cost of working', 700, 16.0]];
-  let c5 = '';
-  chips.forEach(([t, x, tin], k) => {
-    c5 += `<div class="chip cl" id="s5chip${k}" data-dir="l" data-in="${tin}" data-out="${17.5 + k * 0.03}" data-f="2.8" style="left:${x}px;top:640px"><span class="m"><span class="i r" data-in="${tin + 0.05}" data-out="${17.48 + k * 0.03}" data-f="3">${t}</span></span></div>`;
-  });
-  S.s5b = anchor('s5bi', 1200, 170, 490, 760);
+  // S5 — business interruption, with the conditions stated
+  S.s5b = anchor('s5bi', 1340, 166, 480, 747);
   S.s5f = `
-    ${eyebrow('Business Interruption', 180, 196, 14.12, 17.46)}
-    <div class="a" style="left:180px;top:238px;width:1000px;font-size:66px;line-height:1.1">${words('What happens when', 14.2, 0.05, 17.48, 0.02)}<br>${words('the mine', 14.35, 0.05, 17.5, 0.02)} <span class="m"><span class="i r cu" data-in="14.45" data-out="17.52"><em>stops?</em></span></span></div>
-    <div class="a" style="left:180px;top:440px;width:1000px;font-size:31px;color:var(--plat);font-weight:400">${words("Asset cover replaces what's damaged.", 14.5, 0.04, 17.5, 0.01)}</div>
-    <div class="a" style="left:180px;top:500px;width:1000px;font-size:31px">${words("BI cover replaces what's lost while it's being replaced.", 15.0, 0.04, 17.52, 0.01)}</div>
-    ${c5}
-    <div class="a" style="left:180px;top:770px;width:1000px;font-size:25px;color:rgba(201,202,206,.85);font-weight:400"><span id="s5line">${words('Quantified upfront in a dedicated BI document — not a claims-time estimate.', 16.5, 0.02, 17.54, 0.005)}</span></div>`;
+    ${eyebrow('Business interruption', 120, 160, 16.12, 20.46)}
+    <div class="h2" style="left:120px;top:214px;width:1160px">${words('What happens when', 16.2, 0.05, 20.48, 0.02)}<br>${words('the mine', 16.35, 0.05, 20.5, 0.02)} <span class="m"><span class="i r cu" data-in="16.45" data-out="20.52"><em>stops?</em></span></span></div>
+    <div class="body" style="left:120px;top:440px;width:1160px;color:var(--plat)">${words("Asset cover repairs or replaces what's damaged.", 16.9, 0.05, 20.5, 0.01)}</div>
+    <div class="body" style="left:120px;top:560px;width:1160px">${words("BI cover can pay lost gross profit and continuing costs while it's rebuilt —", 17.5, 0.05, 20.52, 0.01)}</div>
+    <div class="body" style="left:120px;top:740px;width:1160px"><span id="s5lineC">${words("subject to the policy's trigger, terms and indemnity period.", 18.4, 0.06, 20.54, 0.01, 'cu')}</span></div>`;
 
-  // S6 — the diagram's three steps
-  const segs = ['Procurement', 'Shipping', 'Installation', 'Commissioning', 'Ramp-up'];
-  let sg = '';
-  segs.forEach((s, k) => {
-    const x0 = 300 + k * 264;
-    sg += `<div class="a gy" data-in="0" data-out="21.7" style="left:${x0}px;top:536px;width:1px;height:46px;background:rgba(201,202,206,.4);transform-origin:50% 50%" data-seg="${x0}"></div>`;
-    sg += `<div class="a" style="left:${x0 + 14}px;top:596px;font-size:22px;color:var(--plat);font-weight:400"><span class="m"><span class="i r" data-seg="${x0}" data-in="0" data-out="${21.68 + k * 0.01}" data-f="3">${s}</span></span></div>`;
+  // S6 — quantified upfront: the diagram's three steps, set large
+  const steps = ['Critical asset ranking', 'Gross profit at risk', 'Indemnity period selection'];
+  let s6 = '';
+  steps.forEach((txt, k) => {
+    const y = 330 + k * 200, tin = 21.0 + k * 0.95;
+    s6 += `<div class="box cl" id="s6box${k}" data-dir="c" data-in="${tin}" data-out="23.7" style="left:200px;top:${y}px"><span class="m"><span class="i r" data-in="${tin + 0.05}" data-out="23.68">${k + 1}</span></span></div>`;
+    s6 += `<div class="a" style="left:350px;top:${y + 8}px;font-size:72px">${words(txt, tin + 0.08, 0.06, 23.66 + k * 0.02, 0.01)}</div>`;
   });
-  S.s6b = anchor('s6row', 80, 150, 1760, 81) + anchor('s6bar0', 300, 552, 480, 16) + anchor('s6bar1', 300, 552, 1320, 16) +
-    `<div class="a gx" data-in="20.5" data-out="21.7" data-f="2" style="left:300px;top:559px;width:1320px;height:1.5px;background:rgba(201,202,206,.28);transform-origin:0 50%"></div>`;
+  S.s6b = ``;
   S.s6f = `
-    <div class="a" style="left:300px;top:330px;font-size:66px">${words('Critical Asset Ranking', 18.08, 0.05, 18.94, 0.02)}</div>
-    <div class="a" style="left:300px;top:430px;width:1300px;font-size:31px;color:var(--plat);font-weight:400">${words('Evaluating primary crushers, SAG mills and substations as single points of failure.', 18.3, 0.025, 18.96, 0.006)}</div>
-    <div class="a" style="left:300px;top:330px;font-size:66px">${words('Gross Profit at Risk', 19.08, 0.05, 19.94, 0.02)}</div>
-    <div class="a" style="left:300px;top:450px;font-size:48px">
-      ${words('Turnover', 19.25, 0.05, 19.93)} <span class="m"><span class="i r" data-in="19.35" data-out="19.95" style="color:var(--plat)">−</span></span> ${words('uninsured costs', 19.42, 0.05, 19.94, 0.01)}
-      <span class="m"><span class="i r" data-in="19.55" data-out="19.96" style="color:var(--plat)">=</span></span> ${words('BI sum insured', 19.65, 0.05, 19.97, 0.01)}</div>
-    <div class="a" style="left:300px;top:330px;font-size:66px">${words('Indemnity Period Selection', 20.08, 0.05, 21.66, 0.02)}</div>
-    <div class="a gy" data-in="20.6" data-out="21.7" style="left:780px;top:528px;width:2px;height:62px;background:var(--bone);transform-origin:50% 50%"></div>
-    <div class="a" style="left:790px;top:470px;font-size:23px;color:var(--plat);font-weight:400">${words('Default: 12 months', 20.62, 0.04, 21.66, 0.01)}</div>
-    ${sg}
-    <div class="a" style="left:300px;top:690px;width:1400px;font-size:30px">${words('Long-lead items push the realistic period well beyond a year.', 21.2, 0.03, 21.7, 0.008)}</div>`;
-  // the diagram's own numerals, unchanged — remove the old typed rows in step 1/2 when we leave
-  // (they exit through their data-out above)
+    <div class="h2" style="left:200px;top:140px">${words('Quantified', 21.0, 0.05, 23.62)} ${words('upfront.', 21.06, 0.05, 23.64, 0.02, 'em')}</div>
+    ${s6}`;
 
-  // S7 — cascade, then covered
-  const st = [
-    [{ txt: 'RUNNING', tin: 22.2, tout: 26.0 }],
-    [{ txt: 'RUNNING', tin: 22.24, tout: 22.5 }, { txt: 'FAILED', tin: 22.56, tout: 23.98 }, { txt: 'REBUILDING · COVERED', tin: 24.06, tout: 26.02 }],
-    [{ txt: 'RUNNING', tin: 22.28, tout: 23.0 }, { txt: 'STOPPED', tin: 23.06, tout: 24.0 }, { txt: 'CASH FLOW PROTECTED', tin: 24.1, tout: 26.04 }],
-    [{ txt: 'SHIPPING', tin: 22.32, tout: 23.5 }, { txt: 'IDLE', tin: 23.56, tout: 24.02 }, { txt: 'CASH FLOW PROTECTED', tin: 24.14, tout: 26.06 }],
-  ];
-  S.s7b = `
-    <div class="a cl" data-dir="v" data-in="22.0" data-out="26.06" data-f="2.2" style="left:200px;top:330px;width:1520px;height:690px;border:1px solid var(--line);border-radius:4px;box-sizing:border-box;background:rgba(30,29,32,.42)"></div>
-    <div class="a gx" id="s7line" data-in="22.0" data-f="2.6" data-out="25.98" data-fo="2.6" style="left:428px;top:${LINE_Y - 0.75}px;width:1064px;height:1.5px;background:rgba(201,202,206,.42);transform-origin:0 50%"></div>
-    <div class="a gy" id="s7cb1" data-in="22.05" data-out="26.02" data-f="2.6" style="left:${COLS[1] - 52}px;top:${LINE_Y - 52}px;width:104px;height:104px;background:var(--onyx);transform-origin:50% 50%"></div>`;
+  // S7 — unless it's covered, with the conditions stated
+  const st7 = [[], [{ txt: 'REBUILDING', tin: 24.1, tout: 26.0 }], [], []];
+  S.s7b = line('s7line', 24.0, 25.98) +
+    `<div class="a gy" id="s7cb1" data-in="24.05" data-out="26.02" data-f="2.6" style="left:${COLS[1] - CS / 2}px;top:${LINE_Y - CS / 2}px;width:${CS}px;height:${CS}px;background:var(--onyx);transform-origin:50% 50%"></div>`;
   S.s7f = `
-    <div class="a" style="left:200px;top:142px;font-size:60px">${words('One mill failure. A cascading loss —', 22.06, 0.05, 26.0, 0.02)}</div>
-    <div class="a" style="left:200px;top:218px;font-size:60px"><span class="m"><span class="i r cu" data-in="24.0" data-out="26.04" data-f="2.2"><em>unless it's covered.</em></span></span></div>
-    ${flowNodes('s7', 22.0, 25.98, st)}
-    <div class="imp cl" data-dir="l" data-in="23.5" data-out="23.92" data-f="3" data-fo="4" style="left:260px;top:842px;width:1400px;height:76px">
-      <span class="ih">${words('Impact — uninsured', 23.54, 0.03, 23.9, 0.005)}</span>
-      <span class="iv">${words('Production halted', 23.6, 0.03, 23.9, 0.005)}</span>
-      <span class="iv">${words('Fixed costs continue', 23.68, 0.03, 23.9, 0.005)}</span>
-      <span class="iv">${words('Payroll continues', 23.76, 0.03, 23.9, 0.005)}</span></div>
-    <div class="imp cl" data-dir="l" data-in="24.15" data-out="25.96" data-f="2.4" style="left:260px;top:842px;width:1400px;height:76px">
-      <span class="ih">${words('Impact —', 24.2, 0.04, 25.96, 0.01)} <span class="m"><span class="i r cu" data-in="24.26" data-out="25.97">covered</span></span></span>
-      <span class="iv">${words('Rebuild funded', 24.35, 0.04, 25.98, 0.01)}</span>
-      <span class="iv">${words('Fixed costs paid', 24.5, 0.04, 25.99, 0.01)}</span>
-      <span class="iv">${words('Cash flow protected', 24.65, 0.04, 26.0, 0.01)}</span></div>
-    <div class="a" style="left:262px;top:950px;font-size:20px;letter-spacing:.04em;color:var(--plat)">${words('BI cover carries fixed costs &amp; payroll', 25.0, 0.03, 26.0, 0.01)}</div>`;
+    <div class="h1" style="left:140px;top:150px"><span class="m"><span class="i r" data-in="24.0" data-out="26.0" data-f="2.2"><em>Unless it's</em></span></span> <span class="m"><span class="i r cu" data-in="24.08" data-out="26.02" data-f="2.2"><em>covered.</em></span></span></div>
+    ${flowNodes('s7', 24.0, 25.98, st7)}
+    <div class="imp cl" id="s7imp" data-dir="l" data-in="24.4" data-out="25.96" data-f="2.4" style="left:140px;top:800px;width:1640px;height:150px">
+      <div class="ih">${words('Impact —', 24.45, 0.04, 25.96, 0.01)} <span class="m"><span class="i r cu" data-in="24.5" data-out="25.97">covered</span></span></div>
+      <div class="row"><span class="iv">${words('Rebuild funded', 24.6, 0.05, 25.98, 0.01)}</span>
+        <span class="iv">${words('Fixed costs paid', 24.8, 0.05, 25.99, 0.01)}</span>
+        <span class="iv">${words('Cash flow protected', 25.0, 0.05, 26.0, 0.01)}</span></div></div>
+    <div class="a" style="left:140px;top:966px;font-size:42px;color:var(--plat);font-weight:400">${words("Subject to the policy's trigger, terms and indemnity period.", 25.2, 0.03, 26.0, 0.005)}</div>`;
 
   // S8 — end card
   S.s8b = ``;
   S.s8f = `
-    <div class="a" style="left:0;top:250px;width:1920px;display:flex;justify-content:center;align-items:center;gap:70px">
+    <div class="a" style="left:0;top:210px;width:1920px;display:flex;justify-content:center;align-items:center;gap:70px">
       <div id="s8badge" style="width:330px;height:236px;position:relative">
         <div class="a mask" style="left:0;top:0;width:330px;height:236px;text-align:center">
           <div class="i r" data-in="26.42" data-f="2.4" style="font-size:150px;line-height:236px;color:var(--cu);letter-spacing:-.02em;padding-left:6px">MT</div></div>
@@ -290,14 +296,14 @@ function buildScenes() {
         <div style="margin-top:26px;font-size:43px;letter-spacing:.255em;font-weight:400;white-space:nowrap">${words('INSURANCE BROKERS', 27.0, 0.06)}</div>
       </div>
     </div>
-    <div class="a" style="left:0;width:1920px;top:640px;text-align:center;font-size:38px;color:var(--plat);font-weight:400">
-      ${words('See how your current cover maps to assets, liability and BI.', 27.5, 0.035)}</div>
-    <div class="a cl" id="s8btn" data-dir="l" data-in="28.0" data-f="2.4" style="left:780px;top:760px;width:360px;height:78px;border:1px solid rgba(201,202,206,.42);border-radius:2px;box-sizing:border-box">
-      <div class="a cl" id="s8fill" data-dir="l" data-in="29.02" data-f="2.6" style="left:-1px;top:-1px;right:-1px;bottom:-1px;background:var(--cu);border-radius:2px"></div>
-      <div class="a mask" style="left:0;top:0;width:358px;height:76px">
-        <div class="i r full" id="s8label" data-in="28.1" data-f="3" style="line-height:76px;font-size:20px;letter-spacing:.28em">REQUEST A REVIEW</div></div>
+    <div class="body" style="left:0;width:1920px;top:600px;text-align:center;color:var(--plat)">
+      ${words('See how your current cover maps', 27.5, 0.05)}<br>${words('to assets, liability and BI.', 27.7, 0.05)}</div>
+    <div class="a cl" id="s8btn" data-dir="l" data-in="28.0" data-f="2.4" style="left:720px;top:800px;width:480px;height:100px;border:2px solid rgba(201,202,206,.5);border-radius:2px;box-sizing:border-box">
+      <div class="a cl" id="s8fill" data-dir="l" data-in="29.02" data-f="2.6" style="left:-2px;top:-2px;right:-2px;bottom:-2px;background:var(--cu);border-radius:2px"></div>
+      <div class="a mask" style="left:0;top:0;width:476px;height:96px">
+        <div class="i r full" id="s8label" data-in="28.1" data-f="3" style="line-height:96px;font-size:30px;letter-spacing:.24em">REQUEST A REVIEW</div></div>
     </div>
-    <div class="a" style="left:0;width:1920px;top:930px;text-align:center;font-size:20px;color:rgba(201,202,206,.6);font-weight:400">${words('MineTrans is a division of Donaldson Group (Pty) Ltd, an authorised financial services provider, FSP No. 53166.', 28.3, 0.012)}</div>`;
+    <div class="a" style="left:0;width:1920px;top:960px;text-align:center;font-size:32px;color:rgba(201,202,206,.75);font-weight:400">${words('A division of Donaldson Group (Pty) Ltd · FSP No. 53166', 28.3, 0.02)}</div>`;
   return S;
 }
 
@@ -340,14 +346,15 @@ function camAt(t) {
   const z = Math.exp(lerp(Math.log(a.z), Math.log(b.z), u)) * pushAt(t);
   return { cx: lerp(a.cx, b.cx, u), cy: lerp(a.cy, b.cy, u), z };
 }
+// gentle: the text has to stay inside a phone-sized frame
 const CAMK = {
-  s1: [{ t: 1.5 }],
-  s2: [{ t: 4.3 }, { t: 4.9, el: 'pc_core', rel: 1.04, b: 0.1, rect: [470, 95, 942, 632] }, { t: 5.5, el: 'pc_core', rel: 1.3, b: 0.8, rect: [470, 95, 942, 632] }, { t: 5.9, el: 'pc_core', rel: 1.31, b: 0.8, rect: [470, 95, 942, 632] }],
-  s3: [{ t: 7.2, el: 's3row1', rel: 1.03, b: 0.05 }, { t: 9.2, el: 's3key', rel: 1.07, b: 0.12 }],
-  s4: [{ t: 12.6, el: 's4pd', rel: 1.05, b: 0.1 }],
-  s5: [{ t: 15.0, el: 's5chip0', rel: 1.03, b: 0.05 }, { t: 16.6, el: 's5chip1', rel: 1.06, b: 0.1 }],
-  s6: [{ t: 18.8, el: 's6row', rel: 1.03, b: 0.06 }, { t: 21.3, el: 's6bar1', rel: 1.08, b: 0.18 }],
-  s7: [{ t: 22.9, el: 's7c1', rel: 1.22, b: 0.4 }, { t: 24.2, el: 's7line', rel: 1.06, b: 0.1 }, { t: 25.4, el: 's7c1', rel: 1.14, b: 0.3 }, { t: 26.62, el: 's7c1', rel: 1.4, b: 0.95 }],
+  s1: [{ t: 1.05, el: 's1c1', rel: 1.03, b: 0.08 }, { t: 2.3, el: 's1c2', rel: 1.0, b: 0.04 }, { t: 4.2, el: 's1imp', rel: 1.03, b: 0.08 }, { t: 4.9, el: 's1c1', rel: 1.06, b: 0.15 }],
+  s2: [{ t: 7.7 }],
+  s3: [{ t: 11.6, el: 's3key', rel: 1.04, b: 0.06 }],
+  s4: [{ t: 15.5, el: 's4pd', rel: 1.03, b: 0.04 }],
+  s5: [{ t: 20.5, el: 's5lineC', rel: 1.04, b: 0.06 }],
+  s6: [{ t: 23.7, el: 's6box1', rel: 1.03, b: 0.05 }],
+  s7: [{ t: 25.6, el: 's7imp', rel: 1.02, b: 0.04 }, { t: 26.62, el: 's7c1', rel: 1.35, b: 0.95 }],
   s8: [{ t: 30 }],
 };
 
@@ -355,10 +362,7 @@ const CAMK = {
 const $ = id => document.getElementById(id);
 function wr(id) { const r = $(id).getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, w: r.width, h: r.height, cx: r.left + r.width / 2, cy: r.top + r.height / 2 }; }
 const WRAP = {};
-let A = {}, PANEL;
-// image px -> world, for the assembled diagram
-const iw = (x, y) => ({ x: PANEL.l + x * PS * WRAP.s2.s, y: PANEL.t + y * PS * WRAP.s2.s });
-const irect = ([l, t, r, b]) => { const p = iw(l, t), q = iw(r, b); return { l: p.x, t: p.y, r: q.x, b: q.y, cx: (p.x + q.x) / 2, cy: (p.y + q.y) / 2 }; };
+let A = {};
 
 function resolve() {
   cam.style.transform = 'none';
@@ -370,43 +374,27 @@ function resolve() {
     const s = 1 / c.z, ox = c.cx - 960 * s, oy = c.cy - 540 * s;
     WRAP[sc.id] = { ox, oy, s };
     ['b', 'f'].forEach(k => LAYERS[sc.id + k].style.transform = `translate(${ox}px,${oy}px) scale(${s})`);
-    if (sc.id === 's2') PANEL = wr('s2panel');
     const base = KF[KF.length - 1];
     CAMK[sc.id].forEach(k => {
       if (!k.el) { KF.push({ t: k.t, cx: base.cx, cy: base.cy, z: base.z }); return; }
-      const r = k.rect ? irect(k.rect) : wr(k.el);
+      const r = wr(k.el);
       KF.push({ t: k.t, cx: lerp(base.cx, r.cx, k.b), cy: lerp(base.cy, r.cy, k.b), z: base.z * k.rel });
     });
   });
   const sc = id => WRAP[id].s;
 
-  // through-line anchors
-  const hw = wr('hookWord'), hd = wr('hookDotA');
-  A.hookFrame = { l: hw.l - 26, t: hw.t + 6, r: hw.r + 26, b: hw.b - 4 };
-  A.hookDot = { x: hd.l + 4, y: hw.b - 52 };
-  A.panel = PANEL;
-  A.core = irect([548, 88, 862, 452]);
-  A.pd3 = wr('s3pd');
-  A.rows3 = [0, 1, 2, 3].map(k => wr('s3row' + k));
-  A.key3 = wr('s3key');
+  // through-line anchors: the production pulse becomes the copper frame
+  const c0 = wr('s1c0'), c1 = wr('s1c1'), ln = wr('s1line');
+  A.d1 = 22 * sc('s1'); A.lineY = ln.cy;
+  A.pitR = { x: c0.r + A.d1 * 1.1, y: c0.cy }; A.millL = { x: c1.l - A.d1 * 1.8, y: c1.cy };
+  A.panel = wr('s2panel');
+  A.pd3 = wr('s3pd'); A.key3 = wr('s3key');
   A.pd4 = wr('s4pd');
-  A.bi5 = wr('s5bi');
-  A.chips = [0, 1, 2].map(k => wr('s5chip' + k));
-  A.line5 = wr('s5line');
-  A.row6 = wr('s6row');
-  const rowMap = (x0, y0, x1, y1) => {   // a rect in image px, inside the enlarged footer row
-    const R = A.row6, fx = v => R.l + (v - 30) / 1350 * R.w, fy = v => R.t + (v - 698) / 62 * R.h;
-    return { l: fx(x0), t: fy(y0), r: fx(x1), b: fy(y1) };
-  };
-  A.box6 = [rowMap(39, 706, 70, 745), rowMap(488, 706, 519, 745), rowMap(928, 706, 959, 745)];
-  A.bar0 = wr('s6bar0'); A.bar1 = wr('s6bar1');
-  const c0 = wr('s7c0'), c1 = wr('s7c1'), ln = wr('s7line');
-  A.d7 = 15 * sc('s7'); A.lineY = ln.cy;
-  A.pitR = { x: c0.r + A.d7 * 1.1, y: c0.cy }; A.millL = { x: c1.l - A.d7 * 1.7, y: c1.cy };
-  A.mill = { l: c1.l, t: c1.t, r: c1.r, b: c1.b };
+  A.bi5 = wr('s5bi'); A.lineC = wr('s5lineC');
+  A.box6 = [0, 1, 2].map(k => wr('s6box' + k));
+  const m7 = wr('s7c1'); A.mill = { l: m7.l, t: m7.t, r: m7.r, b: m7.b };
   A.badge = wr('s8badge'); A.btn = wr('s8btn');
   $('s7c1').style.background = 'transparent';   // the copper frame shows through; s7cb1 masks the line behind it
-  A.zoom = wr('s2zoom');
 
   // piece motion targets (in the S2 layer's own px)
   const s2 = WRAP.s2;
@@ -417,25 +405,19 @@ function resolve() {
       const box = m.box ? { l: m.box[0], t: m.box[1], r: m.box[2], b: m.box[3] } : p.bb;
       const dst = toLocal(wr(m.to));
       const k = (dst.r - dst.l) / ((box.r - box.l) * PS);
-      return { t: m.t, f: m.f, shape: m.shape, k, tx: dst.l - 210 - box.l * PS * k, ty: dst.t - 131 - box.t * PS * k };
+      return { t: m.t, f: m.f, shape: m.shape, k, tx: dst.l - PX - box.l * PS * k, ty: dst.t - PY - box.t * PS * k };
     });
     p.life = PIECE_LIFE[p.id] || [];
+    p.flows = (FLOWS[p.id] || []).map((f, j) => {
+      const els = [0, 1, 2, 3].map(b => $(`fl_${p.id}_${j}_${b}`)).filter(Boolean);
+      return { ...f, els, len: els[0].getTotalLength() };
+    });
     p.el = $('pc_' + p.id); p.px = $('px_' + p.id);
   });
-  // stroke widths in world px
-  A.sw = { s1: 3, s2: 2.4 * sc('s2'), s3: 2.4 * sc('s3'), s4: 2.4 * sc('s4'), s5: 2.4 * sc('s5'), s6: 2.4 * sc('s6'), s7: 2.2 * sc('s7'), s8: 6 * sc('s8') };
+  A.sw = { s2: 3 * sc('s2'), s3: 3 * sc('s3'), s4: 3 * sc('s4'), s5: 3 * sc('s5'), s6: 3 * sc('s6'), s7: 3 * sc('s7'), s8: 6 * sc('s8') };
   A.r8 = 44 * sc('s8');
+  A.s4 = WRAP.s4;
 
-  // S6 segment ticks + labels reveal as the dragged bar passes them
-  const bt = t => objAt(t).r;
-  document.querySelectorAll('[data-seg]').forEach(el => {
-    const x0 = +el.dataset.seg, wx = WRAP.s6.ox + x0 * WRAP.s6.s;
-    let tin = 20.62;
-    for (let t = 20.5; t < 21.6; t += 0.005) if (bt(t) >= wx + 2) { tin = Math.max(20.62, t); break; }
-    el.dataset.in = tin.toFixed(3);
-  });
-
-  // hide the S7 mill outline while the object is the mill
   DECL = [...document.querySelectorAll('[data-in]')].map(el => ({
     el, tin: +el.dataset.in, tout: el.dataset.out != null ? +el.dataset.out : null,
     f: +(el.dataset.f || 2.6), fo: +(el.dataset.fo || 3), dir: el.dataset.dir,
@@ -445,7 +427,7 @@ function resolve() {
 }
 let DECL = [];
 
-/* ---------- through-line object: the copper frame ---------- */
+/* ---------- through-line object: the production pulse, then the copper frame ---------- */
 const dot = (x, y, d) => ({ l: x - d / 2, t: y - d / 2, r: x + d / 2, b: y + d / 2, rad: d / 2, hole: 0, sw: 2 });
 const box = (r, o = {}) => Object.assign({ l: r.l, t: r.t, r: r.r, b: r.b, rad: 2, hole: 1, sw: 2 }, o);
 const pad = (r, px, py = px) => ({ l: r.l - px, t: r.t - py, r: r.r + px, b: r.b + py });
@@ -454,70 +436,50 @@ function mixS(a, b, k) {
   return { l: lerp(a.l, b.l, kk.l), r: lerp(a.r, b.r, kk.r), t: lerp(a.t, b.t, kk.t), b: lerp(a.b, b.b, kk.b),
     rad: lerp(a.rad, b.rad, kk.o), hole: lerp(a.hole, b.hole, kk.o), sw: lerp(a.sw, b.sw, kk.o) };
 }
-const S2 = (t, t0, f1 = 2.2, f2 = 2.0) => ({ l: spr(t - t0, f1), r: spr(t - t0, f2), t: spr(t - t0, f2), b: spr(t - t0, f1), o: spr(t - t0, 2.4) });
+const S2 = (t, t0, f1 = 2.2, f2 = 2.0, od = 0) => ({ l: spr(t - t0, f1), r: spr(t - t0, f2), t: spr(t - t0, f2), b: spr(t - t0, f1), o: spr(t - t0 - od, 2.4) });
+const FILL_DELAY = 0.28;   // a frame that becomes an underline stays an outline until it has shrunk, so it never covers the text
 function objAt(t) {
   const W = A.sw;
-  // hook: a dot at the full stop unfolds into a frame round "ground."
-  let s = dot(A.hookDot.x, A.hookDot.y, 26 * clamp(spr(t - 1.02, 3), 0, 1.02));
-  s = mixS(s, box(A.hookFrame, { sw: W.s1, rad: 6 }), S2(t, 1.18, 2.6, 2.4));
-  if (t >= 1.62) s = mixS(s, box(A.panel, { sw: W.s2, rad: 6 * WRAP.s2.s }), S2(t, 1.62, 1.8, 1.6));
-  if (t >= 5.0) s = mixS(s, box(A.core, { sw: W.s2, rad: 6 * WRAP.s2.s }), S2(t, 5.0, 1.9, 1.7));
-  // commercial assets
-  if (t >= 6.0) s = mixS(s, box(pad(A.pd3, 0), { sw: W.s3, rad: 6 * WRAP.s3.s }), S2(t, 6.0, 1.5, 1.45));
-  [6.5, 7.0, 7.5, 8.0].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.rows3[k], { sw: W.s3 }), S2(t, tt, 3.2, 3.0)); });
-  if (t >= 8.6) s = mixS(s, box({ l: A.key3.l + 4, r: A.key3.r - 8, t: A.key3.b + 2, b: A.key3.b + 2 + 4 * WRAP.s3.s }, { hole: 0, rad: 0 }), S2(t, 8.6, 2.6, 2.2));
+  // cold open: the pulse appears at the pit, runs to the mill and stalls there
+  let s = dot(A.pitR.x, A.lineY, A.d1 * clamp(spr(t - 0.05, 3), 0, 1.02));
+  if (t >= 0.4) {
+    const u = eio((t - 0.4) / 0.6, 2.6), q = bump(t - 1.0) * 0.5;
+    const cx = lerp(A.pitR.x, A.millL.x, u), w = A.d1 * (1 - q * 0.5), h = A.d1 * (1 + q * 0.7);
+    s = { l: cx - w / 2, r: cx + w / 2, t: A.lineY - h / 2, b: A.lineY + h / 2, rad: A.d1 / 2, hole: 0, sw: 2 };
+  }
+  // the stalled pulse opens into the frame round the whole site
+  if (t >= 4.7) s = mixS(s, box(A.panel, { sw: W.s2, rad: 6 * WRAP.s2.s }), S2(t, 4.7, 1.7, 1.6));
+  // assets
+  if (t >= 7.9) s = mixS(s, box(A.pd3, { sw: W.s3, rad: 6 * WRAP.s3.s }), S2(t, 7.9, 1.5, 1.45));
+  if (t >= 10.3) s = mixS(s, box({ l: A.key3.l + 4, r: A.key3.r - 10, t: A.key3.b + 2, b: A.key3.b + 2 + 5 * WRAP.s3.s }, { hole: 0, rad: 0 }), S2(t, 10.3, 2.6, 2.2, FILL_DELAY));
   // liability: the site boundary moves outward
-  if (t >= 10.0) s = mixS(s, box(pad(A.pd4, 26 * WRAP.s4.s), { sw: W.s4, rad: 6 * WRAP.s4.s }), S2(t, 10.0, 1.7, 1.6));
-  const wide = (px, py) => { const s4 = WRAP.s4; return { l: s4.ox + px[0] * s4.s, r: s4.ox + px[1] * s4.s, t: s4.oy + py[0] * s4.s, b: s4.oy + py[1] * s4.s }; };
-  [[10.5, [290, 1630], [360, 830]], [11.0, [270, 1650], [350, 845]], [11.5, [250, 1670], [340, 860]], [12.0, [230, 1690], [330, 875]]].forEach(([tt, px, py]) => {
-    if (t >= tt) s = mixS(s, box(wide(px, py), { sw: W.s4, rad: 6 * WRAP.s4.s }), S2(t, tt, 2.0, 1.9));
+  const s4 = A.s4, wide = (px, py) => ({ l: s4.ox + px[0] * s4.s, r: s4.ox + px[1] * s4.s, t: s4.oy + py[0] * s4.s, b: s4.oy + py[1] * s4.s });
+  if (t >= 11.9) s = mixS(s, box(pad(A.pd4, 30 * s4.s), { sw: W.s4, rad: 6 * s4.s }), S2(t, 11.9, 1.7, 1.6));
+  [[12.6, [200, 1720], [350, 790]], [13.2, [185, 1735], [342, 800]], [13.8, [170, 1750], [334, 810]], [14.4, [155, 1765], [326, 820]]].forEach(([tt, px, py]) => {
+    if (t >= tt) s = mixS(s, box(wide(px, py), { sw: W.s4, rad: 6 * s4.s }), S2(t, tt, 2.0, 1.9));
   });
-  // business interruption
-  if (t >= 14.0) s = mixS(s, box(A.bi5, { sw: W.s5, rad: 6 * WRAP.s5.s }), S2(t, 14.0, 1.6, 1.5));
-  [15.5, 15.75, 16.0].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.chips[k], { sw: W.s5 }), S2(t, tt, 3.6, 3.4)); });
-  if (t >= 16.5) s = mixS(s, box({ l: A.line5.l, r: A.line5.r, t: A.line5.b + 4, b: A.line5.b + 4 + 3 * WRAP.s5.s }, { hole: 0, rad: 0 }), S2(t, 16.5, 2.4, 2.0));
-  // the three steps: the diagram's own numbered boxes
-  [18.0, 19.0, 20.0].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.box6[k], { sw: W.s6, rad: 3 * WRAP.s6.s }), S2(t, tt, k ? 2.8 : 1.6, k ? 2.6 : 1.5)); });
-  if (t >= 20.5) s = mixS(s, box(A.bar0, { hole: 0, rad: 1 }), S2(t, 20.5, 2.6, 2.6));
-  if (t >= 20.62) {   // dragged out past the default
-    const u = eio((t - 20.62) / 0.8, 3.4);
-    s = { ...s, r: lerp(s.r, A.bar1.r, u) };
-  }
-  // cascade: the bar becomes the production pulse
-  if (t >= 21.74) s = mixS(s, dot(A.pitR.x, A.pitR.y, A.d7), S2(t, 21.74, 2.4, 2.2));
-  if (t >= 22.06) {
-    const u = eio((t - 22.06) / 0.44, 2.6), q = bump(t - 22.5) * 0.5;
-    const cx = lerp(A.pitR.x, A.millL.x, u), w = A.d7 * (1 - q * 0.5), h = A.d7 * (1 + q * 0.7);
-    s = { l: cx - w / 2, r: cx + w / 2, t: A.lineY - h / 2, b: A.lineY + h / 2, rad: A.d7 / 2, hole: 0, sw: 2 };
-  }
-  // the payoff: the stuck pulse becomes the restored mill
-  if (t >= 24.0) s = mixS(s, box(A.mill, { sw: W.s7, rad: 1 }), S2(t, 24.0, 2.2, 2.0));
+  // business interruption: frame the islands, then underline the conditions
+  if (t >= 15.85) s = mixS(s, box(A.bi5, { sw: W.s5, rad: 6 * WRAP.s5.s }), S2(t, 15.85, 1.6, 1.5));
+  if (t >= 19.0) s = mixS(s, box({ l: A.lineC.l + 4, r: A.lineC.r - 10, t: A.lineC.b + 4, b: A.lineC.b + 4 + 5 * WRAP.s5.s }, { hole: 0, rad: 0 }), S2(t, 19.0, 2.2, 1.8, FILL_DELAY));
+  // quantified upfront: the numbered boxes in turn
+  [20.95, 21.95, 22.9].forEach((tt, k) => { if (t >= tt) s = mixS(s, box(A.box6[k], { sw: W.s6, rad: 4 * WRAP.s6.s }), S2(t, tt, k ? 2.8 : 1.8, k ? 2.6 : 1.7)); });
+  // the payoff: the restored mill, then the badge
+  if (t >= 23.6) s = mixS(s, box(A.mill, { sw: W.s7, rad: 1 }), S2(t, 23.6, 2.2, 2.0));
   if (t >= 26.1) s = mixS(s, box(A.badge, { sw: W.s8, rad: A.r8 }), S2(t, 26.1, 1.6, 1.7));
   return s;
 }
 
-/* ---------- cursor ---------- */
+/* ---------- cursor: one click, on the call to action ---------- */
 let CP = [], PRESS = [];
 function buildCursorPath() {
-  const z = A.zoom, s2 = WRAP.s2.s, s6 = WRAP.s6.s, s8 = WRAP.s8.s;
-  const barEnd0 = { x: A.bar0.r, y: A.bar0.cy }, barEnd1 = { x: A.bar1.r, y: A.bar1.cy };
+  const s8 = WRAP.s8.s;
   CP = [
-    { t: 0, x: z.cx + 700 * s2, y: z.cy + 560 * s2 },
-    { t: 4.25, x: z.cx + 700 * s2, y: z.cy + 560 * s2 },
-    { t: 4.68, x: z.cx + 6 * s2, y: z.cy + 6 * s2 },
-    { t: 4.86, x: z.cx + 6 * s2, y: z.cy + 6 * s2 },
-    { t: 5.5, x: z.cx + 600 * s2, y: z.cy + 520 * s2 },
-    { t: 20.2, x: barEnd0.x + 520 * s6, y: barEnd0.y + 420 * s6 },
-    { t: 20.55, x: barEnd0.x - 6 * s6, y: barEnd0.y + 4 * s6 },
-    { t: 20.62, x: barEnd0.x - 6 * s6, y: barEnd0.y + 4 * s6 },
-    { t: 21.42, x: barEnd1.x - 6 * s6, y: barEnd1.y + 4 * s6 },
-    { t: 21.55, x: barEnd1.x - 6 * s6, y: barEnd1.y + 4 * s6 },
-    { t: 22.2, x: barEnd1.x + 500 * s6, y: barEnd1.y + 520 * s6 },
-    { t: 28.3, x: A.btn.cx + 640 * s8, y: A.btn.cy + 380 * s8 },
-    { t: 28.92, x: A.btn.cx + 40 * s8, y: A.btn.cy + 10 * s8 },
-    { t: 30, x: A.btn.cx + 52 * s8, y: A.btn.cy + 18 * s8 },
+    { t: 0, x: A.btn.cx + 640 * s8, y: A.btn.cy + 380 * s8 },
+    { t: 28.25, x: A.btn.cx + 640 * s8, y: A.btn.cy + 380 * s8 },
+    { t: 28.88, x: A.btn.cx + 40 * s8, y: A.btn.cy + 12 * s8 },
+    { t: 30, x: A.btn.cx + 52 * s8, y: A.btn.cy + 20 * s8 },
   ];
-  PRESS = [[4.72, 4.84], [20.56, 21.45], [28.98, 29.1]];
+  PRESS = [[28.96, 29.08]];
 }
 function cursorAt(t) {
   let a = CP[0], b = CP[0];
@@ -535,14 +497,12 @@ function mixCol(a, b, k) { return `rgb(${a.map((v, i) => Math.round(lerp(v, b[i]
 const BONE = [247, 245, 241], ONYX = [10, 10, 11], CU = [201, 133, 79];
 
 function pieceAt(p, t) {
-  // transform: chained springs between targets
   let k = 1, tx = 0, ty = 0, rect = 0;
   for (const m of p.moves) if (t >= m.t) {
     const e = spr(t - m.t, m.f);
     k = lerp(k, m.k, e); tx = lerp(tx, m.tx, e); ty = lerp(ty, m.ty, e);
     rect = m.shape === 'rect' ? lerp(rect, 1, e) : lerp(rect, 0, e);
   }
-  // reveal: the visible window that applies now
   let rv = 0, dir = 'up';
   for (const L of p.life) { const v = Math.max(0, spr(t - L.tin, 2.4) * (1 - spr(t - L.tout, 3))); if (t >= L.tin - 0.001) { rv = v; dir = L.dir; } }
   return { k, tx, ty, rect: clamp(rect, 0, 1), rv: clamp(rv, 0, 1), dir };
@@ -565,8 +525,7 @@ window.seek = function (t) {
     }
   }
   for (const d of DECL) if (d.kind === 'gy') {
-    let sc = 1;
-    if (d.el.id === 's7c1' || d.el.id === 's7cb1') sc = 1 + 0.18 * spr(t - 22.5, 2.6) - 0.18 * spr(t - 24.0, 2.2);
+    const sc = d.el.id === 's1c1' ? 1 + 0.16 * spr(t - 1.0, 2.6) : 1;
     setT(d.el, `scale(${sc.toFixed(4)},${(d.gy * sc).toFixed(4)})`);
   }
 
@@ -574,7 +533,7 @@ window.seek = function (t) {
   for (const p of PIECES) {
     const st = pieceAt(p, t), bb = p.bb;
     setT(p.el, `translate(${st.tx.toFixed(2)}px,${st.ty.toFixed(2)}px) scale(${st.k.toFixed(5)})`);
-    const L = bb.l * PS, T = bb.t * PS, R = 1500 - bb.r * PS, B = 818 - bb.b * PS, w = (bb.r - bb.l) * PS, h = (bb.b - bb.t) * PS, q = 1 - st.rv;
+    const L = bb.l * PS, T = bb.t * PS, R = PW - bb.r * PS, B = PH - bb.b * PS, w = (bb.r - bb.l) * PS, h = (bb.b - bb.t) * PS, q = 1 - st.rv;
     const ins = { up: [T + q * h, R, B, L], down: [T, R, B + q * h, L], l2r: [T, R + q * w, B, L], r2l: [T, R, B, L + q * w] }[st.dir];
     p.el.style.clipPath = `inset(${ins.map(v => v.toFixed(1) + 'px').join(' ')})`;
     p.el.style.visibility = st.rv > 0.001 ? 'visible' : 'hidden';
@@ -583,25 +542,45 @@ window.seek = function (t) {
       p.px.style.clipPath = `polygon(${pts})`;
     }
   }
-  // the page's zoom-in affordance on hover, then the click enlarges
-  { const zv = Math.max(0, spr(t - 4.5, 3) * (1 - spr(t - 4.86, 3.4))); setT($('s2zoom'), `scale(${zv.toFixed(4)})`); }
+  // motion on the diagram: beads travel the circuit lines, layers and island edges light in turn
+  for (const p of PIECES) for (const f of p.flows) {
+    if (f.kind === 'light') {
+      const k = clamp(spr(t - f.at, 1.4), 0, 1), el = f.els[0];
+      el.style.visibility = k > 0.001 ? 'visible' : 'hidden';
+      el.setAttribute('stroke-dasharray', `${f.len} ${f.len}`);
+      el.setAttribute('stroke-dashoffset', (f.len * (1 - k)).toFixed(2));
+      continue;
+    }
+    const M = f.els.length;
+    f.els.forEach((el, j) => {
+      let n = Math.floor((t - f.from) / f.every);
+      n -= ((n - j) % M + M) % M;   // latest bead in this slot
+      const spawn = f.from + n * f.every, s = (t - spawn) * FLOW_SPEED;
+      const on = n >= 0 && spawn <= f.to && s > 0 && s < f.len + BEAD;
+      el.style.visibility = on ? 'visible' : 'hidden';
+      if (on) {
+        el.setAttribute('stroke-dasharray', `${BEAD} ${f.len + BEAD * 2}`);
+        el.setAttribute('stroke-dashoffset', (BEAD - s).toFixed(2));
+      }
+    });
+  }
 
-  // cascade: the mill fails, the downstream nodes dim, then recover under cover
+  // cold open: the mill fails, the downstream nodes dim; the payoff mill takes the copper frame
   {
-    const per = 4 * 102.5, gap = per * 0.22 * clamp(spr(t - 22.52, 2.0) * (1 - spr(t - 24.0, 3)), 0, 1.1);
-    const bd = $('s7bd1');
+    const per = 4 * (CS - 2), gap = per * 0.2 * clamp(spr(t - 1.02, 2.0), 0, 1.1);
+    const bd = $('s1bd1');
     bd.setAttribute('stroke-dasharray', `${(per - gap).toFixed(2)} ${gap.toFixed(2)}`);
     bd.setAttribute('stroke-dashoffset', (-per * 0.06 + gap * 0.5).toFixed(2));
-    bd.setAttribute('stroke', t < 24.0 ? mixCol([150, 151, 154], BONE, spr(t - 22.5, 3)) : 'rgba(0,0,0,0)');
-    const ang = t < 22.5 ? 150 * (t - 22.0) : 75 + 34 * spr(t - 22.5, 2.2);
-    setT($('s7ic1'), `rotate(${ang.toFixed(2)}deg)`);
+    bd.setAttribute('stroke', mixCol([150, 151, 154], BONE, spr(t - 1.0, 3)));
+    setT($('s1ic1'), `rotate(${(t < 1.0 ? 150 * t : 150 + 34 * spr(t - 1.0, 2.2)).toFixed(2)}deg)`);
+    [2, 3].forEach((k, j) => { $('s1c' + k).style.opacity = (1 - 0.55 * clamp(spr(t - 1.5 - j * 0.5, 2.6), 0, 1)).toFixed(3); });
+    $('s7bd1').setAttribute('stroke', 'rgba(0,0,0,0)');
     $('s7ic1').setAttribute('stroke', mixCol([201, 202, 206], CU, spr(t - 24.0, 2.6)));
-    [2, 3].forEach((k, j) => { $('s7c' + k).style.opacity = (1 - 0.55 * clamp(spr(t - 23.0 - j * 0.5, 2.6) * (1 - spr(t - 24.0, 2.6)), 0, 1)).toFixed(3); });
+    setT($('s7ic1'), `scale(${(1 - spr(t - 26.1, 3)).toFixed(4)})`);
   }
-  // end card CTA: the click fills the button
   $('s8label').style.color = mixCol(BONE, ONYX, spr(t - 29.05, 3));
 
-  // the copper frame
+  // the through-line object
   const o = objAt(t);
   {
     const ob = $('obj'), w = o.r - o.l, h = o.b - o.t;
@@ -615,18 +594,18 @@ window.seek = function (t) {
     const vx = (((o.l + o.r) - (p.l + p.r)) / 2) * 240 * c.z, vy = (((o.t + o.b) - (p.t + p.b)) / 2) * 240 * c.z;
     $('fbObjG').setAttribute('stdDeviation', `${(clamp(Math.abs(vx) * 0.0028, 0, 14) / c.z).toFixed(2)} ${(clamp(Math.abs(vy) * 0.0028, 0, 14) / c.z).toFixed(2)}`);
   }
-  // cursor
   {
     const cu = cursorAt(t), pv = cursorAt(t - 1 / 240), el = $('cursor');
-    const size = 1.15 / Math.pow(c.z, 0.72);
+    const size = 1.5 / Math.pow(c.z, 0.72);
     setT(el, `translate(${cu.x}px,${cu.y}px) scale(${(size * (1 - 0.16 * cu.p)).toFixed(4)})`);
+    el.style.visibility = t >= 28.2 ? 'visible' : 'hidden';   // it enters from off-frame for the call to action
     const vx = (cu.x - pv.x) * 240 * c.z, vy = (cu.y - pv.y) * 240 * c.z;
     $('fbCurG').setAttribute('stdDeviation', `${(clamp(Math.abs(vx) * 0.0022, 0, 9) / (size * c.z)).toFixed(2)} ${(clamp(Math.abs(vy) * 0.0022, 0, 9) / (size * c.z)).toFixed(2)}`);
   }
   return t;
 };
 
-/* ---------- soundtrack: Web Audio, rendered offline ---------- */
+/* ---------- soundtrack: 120 BPM, Web Audio, rendered offline ---------- */
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 window.renderAudio = async function () {
   const sr = 48000, ctx = new OfflineAudioContext(2, Math.round(sr * DUR), sr), rnd = mulberry32(53166);
@@ -687,32 +666,29 @@ window.renderAudio = async function () {
     o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t + 0.05);
   }
   const NOTE = n => 440 * Math.pow(2, (n - 69) / 12);
-  const Am = [57, 60, 64], F = [53, 57, 60], G = [55, 59, 62], C = [60, 64, 67], Em = [52, 55, 59];
-  // 15 bars: the payoff (bar 12, 24s) lifts to C major
-  const CH = [Am, Am, F, G, Am, F, C, G, Am, F, Em, G, C, F, C];
-  const ROOT = [33, 33, 29, 31, 33, 29, 36, 31, 33, 29, 28, 31, 36, 29, 36];
+  const Am = [57, 60, 64], F = [53, 57, 60], G = [55, 59, 62], C = [60, 64, 67], Em = [52, 55, 59], Dm = [50, 53, 57];
+  // 15 bars: a tense open in A minor; the payoff (bar 12, 24s) lifts to C major
+  const CH = [Am, Am, Dm, Am, F, G, Am, F, Em, G, Am, G, C, F, C];
+  const ROOT = [33, 33, 26, 33, 29, 31, 33, 29, 28, 31, 33, 31, 36, 29, 36];
   for (let bar = 0; bar < 15; bar++) {
     const t = bar * 4 * B, len = Math.min(4 * B, DUR - t);
-    CH[bar].forEach(n => tone(t, NOTE(n), len + 0.2, bar < 1 ? 0.035 : 0.05, 'triangle', duck, 1500));
+    CH[bar].forEach(n => tone(t, NOTE(n), len + 0.2, 0.05, 'triangle', duck, 1500));
     CH[bar].forEach(n => tone(t, NOTE(n) * 1.004, len + 0.2, 0.02, 'sawtooth', duck, 900));
-    for (let e = 0; e < 8 && t + e * B / 2 < DUR - 0.05; e++) {
-      if (bar === 0 && e < 6) continue;
-      if (e % 2 === 1) tone(t + e * B / 2, NOTE(ROOT[bar]), 0.22, 0.16, 'sawtooth', duck, 420);
-    }
+    for (let e = 0; e < 8 && t + e * B / 2 < DUR - 0.05; e++) if (e % 2 === 1) tone(t + e * B / 2, NOTE(ROOT[bar]), 0.22, 0.16, 'sawtooth', duck, 420);
   }
   for (let b = 0; b < NB; b++) {
     kick(b * B, b === 48 ? 1 : (b % 4 === 0 ? 0.92 : 0.8));
-    if (b >= 4) hat(b * B + B / 2, b >= 48 ? 0.07 : 0.05);
-    if (b >= 8 && b < 56) hat(b * B + B / 4 * 3, 0.022);
+    if (b >= 2) hat(b * B + B / 2, b >= 48 ? 0.07 : 0.05);
+    if (b >= 10 && b < 56) hat(b * B + B / 4 * 3, 0.022);
   }
-  [2, 6, 10, 14, 18, 22, 27].forEach(t => hit(t, false)); hit(24, true);
-  { const n = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain(), t0 = 22.9, t1 = 24.0;
+  [1, 5, 8, 12, 16, 21, 27].forEach(t => hit(t, false)); hit(24, true);
+  { const n = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain(), t0 = 23.0, t1 = 24.0;
     n.buffer = noiseBuf(1.5); bp.type = 'bandpass'; bp.Q.value = 2; bp.frequency.setValueAtTime(400, t0); bp.frequency.exponentialRampToValueAtTime(7000, t1);
     g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.14, t1 - 0.02); g.gain.linearRampToValueAtTime(0, t1);
     n.connect(bp); bp.connect(g); g.connect(master); n.start(t0); n.stop(t1); }
-  tick(4.73, 2600, 0.08); tick(20.56, 2400, 0.07); tick(21.45, 2000, 0.06); tick(28.99, 2600, 0.08);
-  [6.5, 7.0, 7.5, 8.0, 15.5, 15.75, 16.0, 19.0, 20.0].forEach(t => tick(t, 1800, 0.03));
-  [22.5, 23.0, 23.5].forEach((t, i) => tick(t, 900 - i * 120, 0.05));
+  [1.5, 2.0].forEach((t, i) => tick(t, 820 - i * 120, 0.05));
+  [3.0, 3.5, 4.0, 12.6, 13.2, 13.8, 14.4, 21.0, 21.95, 22.9].forEach(t => tick(t, 1800, 0.03));
+  tick(28.97, 2600, 0.08);
   const buf = await ctx.startRendering();
   const ch = [buf.getChannelData(0), buf.getChannelData(1)], N = buf.length;
   let peak = 0; ch.forEach(c => { for (let i = 0; i < c.length; i++) peak = Math.max(peak, Math.abs(c[i])); });
