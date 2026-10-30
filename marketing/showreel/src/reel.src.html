@@ -636,7 +636,11 @@ window.renderAudio = async function () {
 window.DURATION = DUR;
 /* ---------- boot ---------- */
 buildDOM();
-document.fonts.ready.then(() => { resolve(); window.seek(0); window.__ready = true; });
+const fontFail = () => { throw new Error('Playfair Display failed to load'); };
+Promise.all([document.fonts.load('500 40px PF').catch(fontFail), document.fonts.load('italic 500 40px PF').catch(fontFail)]).then(() => {
+  if (!document.fonts.check('500 40px PF') || !document.fonts.check('italic 500 40px PF')) throw new Error('Playfair Display failed to load');
+  resolve(); window.seek(0); window.__ready = true;
+}).catch(e => { window.__error = e.message; });
 </script>
 </body>
 </html>
