@@ -1,61 +1,77 @@
 {
-  "updatedAt": "2026-10-24T10:37:30.994Z",
+  "updatedAt": "2026-10-31T21:14:29.173Z",
   "articles": [
     {
-      "headline": "More than a decade in the making: Johnathan Kalula takes over as MD at VEGA Controls SA",
-      "excerpt": "More than a decade after he first walked through the door as an intern, Johnathan Kalula has been appointed managing director of VEGA Controls South Africa. A career shaped by&hellip;",
+      "headline": "Large-scale belt filtration to reduce water loss and reliance on conventional tailings storage",
+      "excerpt": "East Rand–based, privately owned mining house Upward Spiral 1471 has introduced new belt filter technology at its East Rand Proprietary Mines (ERPM) operation in Benoni – a move expected to&hellip;",
       "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/more-than-a-decade-in-the-making-johnathan-kalula-takes-over-as-md-at-vega-controls-sa/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
-      "category": "General"
-    },
-    {
-      "headline": "Energy security and sustainability: A shared opportunity for SA’s mining sector",
-      "excerpt": "South Africa’s energy transition is a shared opportunity to strengthen energy security and sustainability while supporting growth and cutting emissions. At the Joburg Indaba, Kearney partner Frances Phillips said the&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/renewables/energy-security-and-sustainability-a-shared-opportunity-for-sas-mining-sector/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
-      "category": "Power & Water"
-    },
-    {
-      "headline": "BME 2026 Technical Summit to place connected mining under the spotlight",
-      "excerpt": "BME, a division of the Omnia Group, will once again host its Technical Summit on 28 October 2026 at the CSIR in Pretoria, under the theme “Connected Mining: Turning Intelligence&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/technology/bme-2026-technical-summit-to-place-connected-mining-under-the-spotlight/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
-      "category": "General"
-    },
-    {
-      "headline": "Wits Mining Institute brings industry leaders together to shape mining’s future",
-      "excerpt": "South Africa’s mining future depends on more than its mineral wealth. The industry must address the environmental, social, skills and economic challenges inherited from generations of mining while building a&hellip;",
-      "publication": "African Mining News",
-      "sourceUrl": "https://www.africanminingnews.co.za/press-release/wits-mining-institute-brings-industry-leaders-together-to-shape-minings-future/",
-      "publishedAt": "2026-10-24T10:37:23.127Z",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/large-scale-belt-filtration-to-reduce-water-loss-and-reliance-on-conventional-tailings-storage/",
+      "publishedAt": "2026-10-31T21:14:26.425Z",
       "category": "Tailings Risk"
     },
     {
-      "headline": "Mining pilots: the graveyard of good ideas and great technology",
-      "excerpt": "By Keagan Keyser|2026-10-23T06:10:45+00:00October 23rd, 2026|News|",
-      "publication": "African Mining",
-      "sourceUrl": "https://www.africanmining.co.za/2026/04/01/mining-pilots-the-graveyard-of-good-ideas-and-great-technology/",
-      "publishedAt": "2026-10-24T10:37:21.206Z",
+      "headline": "Beyond the source: How mines can investigate downstream process impacts",
+      "excerpt": "Mining companies are increasingly recognising that decisions made upstream can influence performance much further downstream. The challenge is determining whether those impacts are occurring within a particular operation, where they&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/water/beyond-the-source-how-mines-can-investigate-downstream-process-impacts/",
+      "publishedAt": "2026-10-31T21:14:26.425Z",
       "category": "General"
     },
     {
-      "headline": "SEW-EURODRIVE powers progress, setting the pace for African mining operations",
-      "excerpt": "Cold Link Africa RACA Journal African Mines Handbook / Online Mining and Technical Exhibitions (MTE) Equipment and Hire Plumbing Africa SA Affordable Housing Timber iQ",
-      "publication": "African Mining",
-      "sourceUrl": "https://www.africanmining.co.za/2026/02/01/sew-eurodrive-powers-progress-setting-the-pace-for-african-mining-operations/",
-      "publishedAt": "2026-10-24T10:37:21.206Z",
-      "category": "Power & Water"
+      "headline": "AI is transforming South African mining – but who owns the invention?",
+      "excerpt": "South Africa&#8217;s mining industry is at a precipice. As mines pursue greater depths, they face ageing infrastructure, skills shortages and mounting pressure to improve safety. Sustainability and productivity are forcing&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/ai-is-transforming-south-african-mining-but-who-owns-the-invention/",
+      "publishedAt": "2026-10-31T21:14:26.425Z",
+      "category": "Safety"
     },
     {
-      "headline": "Print Media Pack 2026",
-      "excerpt": "African Mines Handbook Print Media Pack 2026",
-      "publication": "African Mining",
-      "sourceUrl": "https://www.africanmining.co.za/wp-content/uploads/AM_PRINT_MediaPack2026.pdf",
-      "publishedAt": "2026-10-24T10:37:21.206Z",
+      "headline": "Keeping South Africa’s mines moving: The role of robotic welding",
+      "excerpt": "South Africa’s mining industry depends on the reliability of the equipment and infrastructure that keep operations running. From conveyor systems and chutes to hoppers and heavy-duty processing equipment, these assets&hellip;",
+      "publication": "African Mining News",
+      "sourceUrl": "https://www.africanminingnews.co.za/technology/keeping-south-africas-mines-moving-the-role-of-robotic-welding/",
+      "publishedAt": "2026-10-31T21:14:26.425Z",
       "category": "General"
+    },
+    {
+      "headline": "Appian targets about $2 billion for Africa but warns policy risk is driving capital away",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/appian-targets-about-2-billion-for-africa-but-warns-policy-risk-is-driving-capital-away/",
+      "publishedAt": "2026-10-28T14:01:55.000Z",
+      "category": "Regulation"
+    },
+    {
+      "headline": "Webuild, Odebrecht in line to build key African copper rail line",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/webuild-odebrecht-in-line-to-build-key-african-copper-rail-line/",
+      "publishedAt": "2026-10-27T23:12:56.000Z",
+      "category": "Commodity Prices"
+    },
+    {
+      "headline": "Lithium Africa weighs $60M offer for Springbok lithium project",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/lithium-africa-weighs-60m-offer-for-springbok-lithium-project/",
+      "publishedAt": "2026-10-20T16:37:18.000Z",
+      "category": "General"
+    },
+    {
+      "headline": "AFC eyes iron ore and uranium investments in Africa",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/afc-eyes-iron-ore-and-uranium-investments-in-africa/",
+      "publishedAt": "2026-10-16T14:42:46.000Z",
+      "category": "General"
+    },
+    {
+      "headline": "Deaths prompt South African miners&#8217; safety review, minerals council CEO says",
+      "excerpt": "",
+      "publication": "Mining.com",
+      "sourceUrl": "https://www.mining.com/web/deaths-prompt-south-african-miners-safety-review-minerals-council-ceo-says/",
+      "publishedAt": "2026-10-14T16:39:28.000Z",
+      "category": "Safety"
     }
   ]
 }
